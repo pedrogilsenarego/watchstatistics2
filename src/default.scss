@@ -1,0 +1,41 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  color: rgb(250, 250, 250);
+  // background-color: #000000;
+  line-height: 1;
+  display: block;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+*,
+::before,
+::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.anim {
+  width: 100vw;
+  height: 100vh;
+  background-color: #36454f;
+}
+
+@media only screen and (max-width: 980px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: local("MyFont"), url(./styles/fonts/MyFont.woff) format("woff");
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
