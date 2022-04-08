@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container } from "@mui/material";
+import { Container, useMediaQuery, useTheme } from "@mui/material";
 import MenuTables from "./MenuTables";
 import WatchesCards from "./WatchesCards";
 import UsersTable from "./UsersTable";
@@ -15,8 +15,11 @@ const Browse = () => {
     typeTable,
     setTypeTable,
   };
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" disableGutters={isMatch ? true : false}>
       <MenuTables {...configMenuTables} />
       {table === "watches" && typeTable === "cards" && <WatchesCards />}
       {table === "watches" && typeTable === "table" && <WatchesTable />}

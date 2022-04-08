@@ -3,7 +3,8 @@ import { Grid as MuiGrid } from "@mui/material";
 
 export const Box = styled(MuiBox)(({ theme }) => ({
   background: theme.palette.box.primary,
-  marginTop: "20vh",
+  [theme.breakpoints.down("sm")]: { marginTop: "12vh" },
+  [theme.breakpoints.up("sm")]: { marginTop: "20vh" },
 }));
 
 export const Grid = styled(MuiGrid)(() => ({

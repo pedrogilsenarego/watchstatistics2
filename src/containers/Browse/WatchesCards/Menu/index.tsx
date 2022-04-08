@@ -65,116 +65,218 @@ const Menu = ({
     label: "Prices Bracket",
   };
 
+  const renderLaptop = () => {
+    return (
+      <>
+        <Grid item xs={0.7}></Grid>
+        <Grid item xs={11.3}>
+          <Styled.Paper>
+            <Grid container alignItems="center">
+              <Grid
+                container
+                item
+                alignItems="center"
+                justifyContent="center"
+                columnSpacing={2.5}
+                rowSpacing={isMatch ? 2 : 0}
+                xs={12}
+              >
+                <Grid item container alignItems="center" xs={3}>
+                  <Grid item xs={11}>
+                    <Select {...configBrands} />
+                  </Grid>
+                  <Grid item xs={1}>
+                    {productBrands !== null && (
+                      <AiFillCloseSquare
+                        size="2em"
+                        color="lightGrey"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setProductBrands(null)}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+                <Grid item container alignItems="center" xs={3}>
+                  <Grid item xs={11}>
+                    <Select {...configCategory} />
+                  </Grid>
+                  <Grid item xs={1}>
+                    {productCategory !== null && (
+                      <AiFillCloseSquare
+                        size="2em"
+                        color="lightGrey"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setProductCategory(null)}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+                <Grid item container alignItems="center" xs={3}>
+                  <Grid item xs={11}>
+                    <Select {...configPricesBracket} />
+                  </Grid>
+                  <Grid item xs={1}>
+                    {productPrices !== null && (
+                      <AiFillCloseSquare
+                        size="2em"
+                        color="lightGrey"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setProductPrices(null)}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12} md={3}>
+                  <Box
+                    style={{
+                      fontSize: "15px",
+                      color: "#ffffff66",
+                      cursor: "pointer",
+                      borderBottom: "none",
+                    }}
+                  >
+                    <BsFileArrowDownFill
+                      onClick={() => setScore("desc")}
+                      size="3em"
+                      color={score === "desc" ? "orange" : "#ffffff66"}
+                    />
+                    <BsFileArrowUpFill
+                      onClick={() => setScore("asc")}
+                      size="3em"
+                      color={score === "asc" ? "orange" : "#ffffff66"}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+              <Grid container justifyContent="center" xs={3}></Grid>
+            </Grid>
+          </Styled.Paper>
+        </Grid>
+      </>
+    );
+  };
+
+  const renderMobile = () => {
+    return (
+      <>
+        <Grid item xs={0.7}></Grid>
+        <Grid item xs={11.3}>
+          <Styled.Paper>
+            <Grid container alignItems="center">
+              <Grid
+                container
+                item
+                alignItems="center"
+                justifyContent="center"
+                columnSpacing={2.5}
+                rowSpacing={isMatch ? 2 : 0}
+                xs={9}
+                sm={12}
+              >
+                <Grid item container alignItems="center" xs={12} md={3}>
+                  <Grid item xs={11}>
+                    <Select {...configBrands} />
+                  </Grid>
+                  <Grid item xs={1}>
+                    {productBrands !== null && (
+                      <AiFillCloseSquare
+                        size="2em"
+                        color="lightGrey"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setProductBrands(null)}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+                <Grid item container alignItems="center" xs={12} md={3}>
+                  <Grid item xs={11}>
+                    <Select {...configCategory} />
+                  </Grid>
+                  <Grid item xs={1}>
+                    {productCategory !== null && (
+                      <AiFillCloseSquare
+                        size="2em"
+                        color="lightGrey"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setProductCategory(null)}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+                <Grid item container alignItems="center" xs={12} md={3}>
+                  <Grid item xs={11}>
+                    <Select {...configPricesBracket} />
+                  </Grid>
+                  <Grid item xs={1}>
+                    {productPrices !== null && (
+                      <AiFillCloseSquare
+                        size="2em"
+                        color="lightGrey"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setProductPrices(null)}
+                      />
+                    )}
+                  </Grid>
+                </Grid>
+                {!isMatch && (
+                  <Grid item xs={12} md={3}>
+                    <Box
+                      style={{
+                        fontSize: "15px",
+                        color: "#ffffff66",
+                        cursor: "pointer",
+                        borderBottom: "none",
+                      }}
+                    >
+                      <BsFileArrowDownFill
+                        onClick={() => setScore("desc")}
+                        size="3em"
+                        color={score === "desc" ? "orange" : "#ffffff66"}
+                      />
+                      <BsFileArrowUpFill
+                        onClick={() => setScore("asc")}
+                        size="3em"
+                        color={score === "asc" ? "orange" : "#ffffff66"}
+                      />
+                    </Box>
+                  </Grid>
+                )}
+              </Grid>
+              <Grid container justifyContent="center" xs={3}>
+                {isMatch && (
+                  <Box
+                    style={{
+                      fontSize: "15px",
+                      color: "#ffffff66",
+                      cursor: "pointer",
+                      borderBottom: "none",
+                    }}
+                  >
+                    <BsFileArrowDownFill
+                      onClick={() => setScore("desc")}
+                      size="3em"
+                      color={score === "desc" ? "orange" : "#ffffff66"}
+                    />
+                    <BsFileArrowUpFill
+                      onClick={() => setScore("asc")}
+                      size="3em"
+                      color={score === "asc" ? "orange" : "#ffffff66"}
+                    />
+                  </Box>
+                )}
+              </Grid>
+            </Grid>
+          </Styled.Paper>
+        </Grid>
+      </>
+    );
+  };
+
   return (
     <Grid container xs={12}>
-      <Grid item xs={0.7}></Grid>
-      <Grid item xs={11.3}>
-        <Styled.Paper>
-          <Grid
-            container
-            item
-            alignItems="center"
-            justifyContent="center"
-            columnSpacing={2.5}
-            rowSpacing={isMatch ? 2 : 0}
-            xs={9}
-            sm={12}
-          >
-            <Grid item container alignItems="center" xs={12} md={3}>
-              <Grid item xs={11}>
-                <Select {...configBrands} />
-              </Grid>
-              <Grid item xs={1}>
-                {productBrands !== null && (
-                  <AiFillCloseSquare
-                    size="2em"
-                    color="lightGrey"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setProductBrands(null)}
-                  />
-                )}
-              </Grid>
-            </Grid>
-            <Grid item container alignItems="center" xs={12} md={3}>
-              <Grid item xs={11}>
-                <Select {...configCategory} />
-              </Grid>
-              <Grid item xs={1}>
-                {productCategory !== null && (
-                  <AiFillCloseSquare
-                    size="2em"
-                    color="lightGrey"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setProductCategory(null)}
-                  />
-                )}
-              </Grid>
-            </Grid>
-            <Grid item container alignItems="center" xs={12} md={3}>
-              <Grid item xs={11}>
-                <Select {...configPricesBracket} />
-              </Grid>
-              <Grid item xs={1}>
-                {productPrices !== null && (
-                  <AiFillCloseSquare
-                    size="2em"
-                    color="lightGrey"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setProductPrices(null)}
-                  />
-                )}
-              </Grid>
-            </Grid>
-            {!isMatch && (
-              <Grid item xs={12} md={3}>
-                <Box
-                  style={{
-                    fontSize: "15px",
-                    color: "#ffffff66",
-                    cursor: "pointer",
-                    borderBottom: "none",
-                  }}
-                >
-                  <BsFileArrowDownFill
-                    onClick={() => setScore("desc")}
-                    size="3em"
-                    color={score === "desc" ? "orange" : "#ffffff66"}
-                  />
-                  <BsFileArrowUpFill
-                    onClick={() => setScore("asc")}
-                    size="3em"
-                    color={score === "asc" ? "orange" : "#ffffff66"}
-                  />
-                </Box>
-              </Grid>
-            )}
-          </Grid>
-          {isMatch && (
-            <Grid item container xs={3}>
-              {" "}
-              <Box
-                style={{
-                  fontSize: "15px",
-                  color: "#ffffff66",
-                  cursor: "pointer",
-                  borderBottom: "none",
-                }}
-              >
-                <BsFileArrowDownFill
-                  onClick={() => setScore("desc")}
-                  size="3em"
-                  color={score === "desc" ? "orange" : "#ffffff66"}
-                />
-                <BsFileArrowUpFill
-                  onClick={() => setScore("asc")}
-                  size="3em"
-                  color={score === "asc" ? "orange" : "#ffffff66"}
-                />
-              </Box>
-            </Grid>
-          )}
-        </Styled.Paper>
-      </Grid>
+      {!isMatch && renderLaptop()}
+      {isMatch && renderMobile()}
     </Grid>
   );
 };
