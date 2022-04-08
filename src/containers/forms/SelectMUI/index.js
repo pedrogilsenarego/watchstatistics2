@@ -49,11 +49,12 @@ const FormSelect = ({
 
   return (
     <Box className={classes.root2} sx={{ minWidth: 120 }}>
-      <FormControl size="small" className={classes.formSelect} fullWidth>
+      <FormControl className={classes.formSelect} fullWidth>
         <InputLabel id="demo-simple-select-label">{label}</InputLabel>
 
         <Select
           style={{ backgroundColor: "#04040680" }}
+          size="small"
           MenuProps={{
             sx: {
               "&& .Mui-selected": {
