@@ -3,7 +3,6 @@ import { Card, CardMedia, IconButton, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
-import { useTheme } from "@material-ui/core";
 
 const ImageMain = ({
   isMatch,
@@ -18,7 +17,6 @@ const ImageMain = ({
   compareWatches,
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
-  const theme = useTheme();
   const useStyles = makeStyles((theme) => ({
     filter: {},
 
@@ -97,7 +95,7 @@ const ImageMain = ({
               <Divider
                 style={{
                   width: "60%",
-                  background: theme.palette.text.faded3,
+                  background: "#ffffff66",
                   marginTop: "5px",
                 }}
               />

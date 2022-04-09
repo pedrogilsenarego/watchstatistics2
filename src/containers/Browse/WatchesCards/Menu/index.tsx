@@ -78,7 +78,6 @@ const Menu = ({
                 alignItems="center"
                 justifyContent="center"
                 columnSpacing={2.5}
-                rowSpacing={isMatch ? 2 : 0}
                 xs={12}
               >
                 <Grid item container alignItems="center" xs={3}>
@@ -160,8 +159,7 @@ const Menu = ({
   const renderMobile = () => {
     return (
       <>
-        <Grid item xs={0.7}></Grid>
-        <Grid item xs={11.3}>
+        <Grid item xs={12}>
           <Styled.Paper>
             <Grid container alignItems="center">
               <Grid
@@ -169,12 +167,10 @@ const Menu = ({
                 item
                 alignItems="center"
                 justifyContent="center"
-                columnSpacing={2.5}
-                rowSpacing={isMatch ? 2 : 0}
+                rowSpacing={2}
                 xs={9}
-                sm={12}
               >
-                <Grid item container alignItems="center" xs={12} md={3}>
+                <Grid item container alignItems="center" xs={12}>
                   <Grid item xs={11}>
                     <Select {...configBrands} />
                   </Grid>
@@ -189,7 +185,7 @@ const Menu = ({
                     )}
                   </Grid>
                 </Grid>
-                <Grid item container alignItems="center" xs={12} md={3}>
+                <Grid item container alignItems="center" xs={12}>
                   <Grid item xs={11}>
                     <Select {...configCategory} />
                   </Grid>
@@ -204,7 +200,7 @@ const Menu = ({
                     )}
                   </Grid>
                 </Grid>
-                <Grid item container alignItems="center" xs={12} md={3}>
+                <Grid item container alignItems="center" xs={12}>
                   <Grid item xs={11}>
                     <Select {...configPricesBracket} />
                   </Grid>
@@ -220,7 +216,7 @@ const Menu = ({
                   </Grid>
                 </Grid>
                 {!isMatch && (
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12}>
                     <Box
                       style={{
                         fontSize: "15px",

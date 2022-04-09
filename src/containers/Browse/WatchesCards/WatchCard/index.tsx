@@ -1,4 +1,11 @@
-import { Grid, CardMedia, Typography, Divider } from "@mui/material";
+import {
+  Grid,
+  CardMedia,
+  Typography,
+  Divider,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import * as Styled from "./styles";
 import CircularProgress from "./CircularProgress";
 import { useHistory } from "react-router-dom";
@@ -14,6 +21,8 @@ const WatchCard = ({
 }: any) => {
   const { userVotes } = currentUser ? currentUser : "null";
   const history = useHistory();
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const {
     productThumbnail,
     productName,
@@ -27,8 +36,8 @@ const WatchCard = ({
     numberVotesOwn,
   } = data;
 
-  return (
-    <Grid item container justifyContent="center" alignItems="center" xs={12}>
+  const renderLaptop = () => (
+    <>
       <Grid
         item
         container
@@ -174,6 +183,125 @@ const WatchCard = ({
           </Grid>
         </Styled.Paper>
       </Grid>
+    </>
+  );
+
+  const renderMobile = () => (
+    <>
+      <Grid item xs={12}>
+        <Typography
+          style={{ fontSize: "14px", color: "#ffffff66", marginTop: "14px" }}
+        >
+          {productBrand} {productName} {reference}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Styled.PaperMobile>
+          <Grid container spacing={2}>
+            <Grid xs={4} item>
+              <CardMedia
+                style={{ borderRadius: "4px", cursor: "pointer" }}
+                component="img"
+                height="120"
+                image={productThumbnail[0]}
+                alt={reference}
+                onClick={() => {
+                  history.push(`/product/${documentID}`);
+                }}
+              />
+            </Grid>
+            <Grid item container xs={8}>
+              <Grid item container xs={12}>
+                <Grid item container xs={8} spacing={1}>
+                  <Grid item>
+                    <Typography>
+                      Votes: {numberVotesNotOwn + numberVotesOwn}
+                    </Typography>
+                  </Grid>
+
+                  <Grid item container spacing={1}>
+                    {!pCategory && (
+                      <Grid item>
+                        <Styled.ButtonMobile
+                          onClick={() => {
+                            setProductCategory(productCategory);
+                          }}
+                          style={{
+                            textTransform: "none",
+                            cursor: "pointer",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {productCategory}
+                        </Styled.ButtonMobile>
+                      </Grid>
+                    )}
+                    {!productPrices && (
+                      <Grid item>
+                        <Styled.ButtonMobile
+                          onClick={() => {
+                            setProductPrices(productPriceBrackets);
+                          }}
+                          style={{
+                            textTransform: "none",
+                            cursor: "pointer",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {productPriceBrackets}
+                        </Styled.ButtonMobile>
+                      </Grid>
+                    )}
+
+                    {currentUser &&
+                      userVotes &&
+                      userVotes.includes(documentID) && (
+                        <Grid item>
+                          <Styled.ButtonMobile
+                            bColor="green"
+                            style={{
+                              textTransform: "none",
+                              cursor: "pointer",
+                              fontSize: "12px",
+                            }}
+                          >
+                            AlreadyVoted
+                          </Styled.ButtonMobile>
+                        </Grid>
+                      )}
+                    {currentUser &&
+                      userVotes &&
+                      !userVotes.includes(documentID) && (
+                        <Grid item>
+                          <Styled.ButtonMobile
+                            bColor="red"
+                            style={{
+                              textTransform: "none",
+                              cursor: "pointer",
+                              fontSize: "12px",
+                            }}
+                          >
+                            Not voted
+                          </Styled.ButtonMobile>
+                        </Grid>
+                      )}
+                  </Grid>
+                </Grid>
+                <Grid item container xs={4} justifyContent="flex-end">
+                  <CircularProgress customSize={60} avgTotal={avgTotal} />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Styled.PaperMobile>
+      </Grid>
+    </>
+  );
+
+  return (
+    <Grid item container justifyContent="center" alignItems="center" xs={12}>
+      {!isMatch && renderLaptop()}
+      {isMatch && renderMobile()}
     </Grid>
   );
 };

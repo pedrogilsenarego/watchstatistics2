@@ -4,23 +4,28 @@ import {
   Typography,
 } from "@mui/material";
 
-const CircularProgress = ({ avgTotal }: any) => {
+const CircularProgress = ({ avgTotal, customSize }: any) => {
   return (
-    <Box component="div" sx={{ position: "relative", display: "inline-flex", alignItems: "center",
-    justifyContent: "center",  }}>
+    <Box
+      component="div"
+      sx={{
+        position: "relative",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <MuiCircularProgress
         variant="determinate"
         value={avgTotal * 10}
-        
-        size={80}
+        size={customSize ? customSize : 80}
         style={{ color: "orange", position: "relative", zIndex: 2 }}
       />
       <MuiCircularProgress
         variant="determinate"
         value={100}
-        
-        size={80}
-        style={{ color: "black", position: "absolute", zIndex:1 }}
+        size={customSize ? customSize : 80}
+        style={{ color: "black", position: "absolute", zIndex: 1 }}
       />
       <Box
         component="div"
