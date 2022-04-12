@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SideGraphPanel from "../../containers/ProductDetails/ProductSideGraph";
 import SideDescription from "../../containers/ProductDetails/ProductSideDescription";
 import ProductSideList from "../../containers/ProductDetails/ProductSideList";

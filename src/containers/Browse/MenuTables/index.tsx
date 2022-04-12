@@ -20,7 +20,10 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
       <Styled.Grid container>
         <Grid item container xs={6} alignItems="center">
           <Button
-            style={{ color: table === "watches" ? "orange" : "white" }}
+            style={{
+              color: table === "watches" ? "orange" : "white",
+              fontSize: "16px",
+            }}
             onClick={(e) => {
               setTable("watches");
             }}
@@ -29,7 +32,10 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
             Watches
           </Button>
           <Button
-            style={{ color: table === "users" ? "orange" : "white" }}
+            style={{
+              color: table === "users" ? "orange" : "white",
+              fontSize: "16px",
+            }}
             disableRipple
             onClick={(e) => {
               setTable("users");
@@ -48,7 +54,7 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
         >
           <Grid item>
             <VscListUnordered
-              size="1em"
+              size="1.5em"
               style={{
                 cursor: "pointer",
                 color: typeTable === "cards" ? "orange" : "white",
@@ -60,7 +66,7 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
           </Grid>
           <Grid item>
             <AiOutlineTable
-              size="1em"
+              size="1.5em"
               style={{ cursor: "pointer", color: "lightgray" }}
             />
           </Grid>
@@ -69,7 +75,7 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
               onClick={() => {
                 history.push("/browse/tiles");
               }}
-              size="1em"
+              size="1.5em"
               style={{ cursor: "pointer", color: "lightgray" }}
             />
           </Grid>

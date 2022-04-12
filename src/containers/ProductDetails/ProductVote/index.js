@@ -106,7 +106,7 @@ const ProductVote = ({
 
   const handleApplyVote = (e) => {
     e.preventDefault();
-    if (Object.values(categories).includes("")) {
+    if (Object.values(categories).includes("") || ownership === "") {
       setErrors(true);
       return;
     }
@@ -229,8 +229,12 @@ const ProductVote = ({
                   label="I do not own/experimented the watch"
                 />
               </RadioGroup>
+              {errors && ownership === "" && (
+                <Typography style={{ color: "red", fontSize: "15px" }}>
+                  You must choose if you own or just seen the watch
+                </Typography>
+              )}
             </Grid>
-
             <Grid
               item
               container

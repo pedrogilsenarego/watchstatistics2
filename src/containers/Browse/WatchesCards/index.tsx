@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsStart } from "../../../redux/Products/products.actions";
-import { Grid } from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import WatchCard from "./WatchCard";
 import * as Styled from "./styles";
 import Menu from "./Menu";
+import Button1 from "../../../components/Buttons/Button1";
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
@@ -20,6 +21,8 @@ const WatchesCards = () => {
   const [productBrands, setProductBrands] = useState<null | string>(null);
   const [score, setScore] = useState("desc");
   const pageSize = 5;
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(
     () => {
@@ -36,6 +39,22 @@ const WatchesCards = () => {
     // eslint-disable-next-line
     [score, productCategory, productPrices, productBrands]
   );
+
+  const handleLoadMore = () => {
+    if (!isLastPage) {
+      dispatch(
+        fetchProductsStart({
+          startAfterDoc: queryDoc,
+          pageSize,
+          productCategory,
+          productPrices,
+          productBrands,
+          sort: score,
+          persistProducts: data,
+        })
+      );
+    }
+  };
 
   const configWatchCard = {
     currentUser,
@@ -58,17 +77,20 @@ const WatchesCards = () => {
   };
 
   return (
-    <Styled.Grid container>
+    <Styled.Grid mobile={isMatch} container>
       <Grid item xs={12}>
         <Menu {...configMenu} />
       </Grid>
-      <Grid item container rowSpacing={1} xs={12}>
+      <Grid item container style={{ marginTop: "10px" }} rowSpacing={1} xs={12}>
         {data?.map((watchData: any, index: number) => {
           return (
             <WatchCard key={index} data={watchData} {...configWatchCard} />
           );
         })}
       </Grid>
+      <Styled.ButtonGrid container justifyContent="center" item xs={12}>
+        <Button1 title="Load More" onClick={handleLoadMore} />
+      </Styled.ButtonGrid>
     </Styled.Grid>
   );
 };

@@ -7,8 +7,8 @@ import {
   useTheme,
 } from "@mui/material";
 import * as Styled from "./styles";
-import CircularProgress from "./CircularProgress";
 import { useHistory } from "react-router-dom";
+import CircularVotes from "../../../../components/CircularVotes";
 
 const WatchCard = ({
   data,
@@ -41,16 +41,16 @@ const WatchCard = ({
       <Grid
         item
         container
-        xs={0.7}
+        xs={0.5}
         justifyContent="center"
         alignItems="center"
         style={{
-          height: "150px",
+          height: "120px",
         }}
       >
         <Typography
           style={{
-            fontSize: "30px",
+            fontSize: "25px",
             fontWeight: 500,
             color: "#ffffff66",
             transform: "rotate(-90deg)",
@@ -62,7 +62,7 @@ const WatchCard = ({
           {productBrand.slice(0, 8)}
         </Typography>
       </Grid>
-      <Grid item xs={11.3}>
+      <Grid item xs={11.5}>
         <Styled.Paper>
           <Grid container spacing={2}>
             <Grid xs={4} item>
@@ -167,7 +167,7 @@ const WatchCard = ({
                   </Grid>
                 </Grid>
                 <Grid item container xs={4} justifyContent="flex-end">
-                  <CircularProgress avgTotal={avgTotal} />
+                  <CircularVotes avgTotal={avgTotal} />
                 </Grid>
               </Grid>
               <Grid item xs={12}>
@@ -190,7 +190,12 @@ const WatchCard = ({
     <>
       <Grid item xs={12}>
         <Typography
-          style={{ fontSize: "14px", color: "#ffffff66", marginTop: "14px" }}
+          style={{
+            fontSize: "14px",
+            color: "#ffffff66",
+            marginBottom: "2px",
+            fontWeight: 550,
+          }}
         >
           {productBrand} {productName} {reference}
         </Typography>
@@ -288,7 +293,7 @@ const WatchCard = ({
                   </Grid>
                 </Grid>
                 <Grid item container xs={4} justifyContent="flex-end">
-                  <CircularProgress customSize={60} avgTotal={avgTotal} />
+                  <CircularVotes customSize={60} avgTotal={avgTotal} />
                 </Grid>
               </Grid>
             </Grid>

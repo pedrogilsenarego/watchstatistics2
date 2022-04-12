@@ -4,7 +4,12 @@ import {
   Typography,
 } from "@mui/material";
 
-const CircularProgress = ({ avgTotal, customSize }: any) => {
+interface Props {
+  avgTotal: number;
+  customSize?: number;
+}
+
+const CircularVotes = ({ avgTotal, customSize }: Props) => {
   return (
     <Box
       component="div"
@@ -53,4 +58,4 @@ const CircularProgress = ({ avgTotal, customSize }: any) => {
   );
 };
 
-export default CircularProgress;
+export default CircularVotes;
