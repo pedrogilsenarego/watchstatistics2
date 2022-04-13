@@ -45,7 +45,7 @@ const WatchCard = ({
         justifyContent="center"
         alignItems="center"
         style={{
-          height: "120px",
+          height: "130px",
         }}
       >
         <Typography
