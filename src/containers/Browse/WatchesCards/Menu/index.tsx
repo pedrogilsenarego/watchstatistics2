@@ -12,6 +12,7 @@ import {
   BsSliders,
 } from "react-icons/bs";
 import { AiFillCloseSquare } from "react-icons/ai";
+import DrawerMine from "../../../../components/Drawer";
 
 interface Props {
   productBrands: any;
@@ -177,21 +178,24 @@ const Menu = ({
     return (
       <>
         {!filtersVisible && (
-          <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              spacing={2}
-            >
-              <Grid item>
-                <Styled.FiltersTypography>Filters</Styled.FiltersTypography>
+          <>
+            <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
+              <Grid
+                container
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+              >
+                <Grid item>
+                  <Styled.FiltersTypography>Filters</Styled.FiltersTypography>
+                </Grid>
+                <Grid item>
+                  <BsSliders size="2em" />
+                </Grid>
               </Grid>
-              <Grid item>
-                <BsSliders size="2em" />
-              </Grid>
-            </Grid>
-          </Styled.FiltersBox>
+            </Styled.FiltersBox>
+            <DrawerMine />
+          </>
         )}
         {filtersVisible && (
           <Styled.Paper>

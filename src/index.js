@@ -6,29 +6,17 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/createStore";
 
 import App from "./App";
-import { hydrate, render } from "react-dom";
+import { render } from "react-dom";
 
 const rootElement = document.getElementById("root");
-if (rootElement.hasChildNodes()) {
-  hydrate(
-    <Provider store={store}>
-      <BrowserRouter>
-        <PersistGate persistor={persistor}>
-          <App />
-        </PersistGate>
-      </BrowserRouter>
-    </Provider>,
-    rootElement
-  );
-} else {
-  render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <PersistGate persistor={persistor}>
-          <App />
-        </PersistGate>
-      </BrowserRouter>
-    </Provider>,
-    rootElement
-  );
-}
+
+render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
+    </BrowserRouter>
+  </Provider>,
+  rootElement
+);
