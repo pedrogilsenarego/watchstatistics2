@@ -4,45 +4,34 @@ import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 
 type Anchor = "top" | "left" | "bottom" | "right";
+type Props = {
+  position: Anchor;
+  anchor: boolean;
+  setAnchor: (anchor: boolean) => void;
+};
 
-const DrawerMine = () => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+const DrawerMine = ({ position, anchor, setAnchor }: Props) => {
+  const [state, setState] = React.useState(false);
 
-  const toggleDrawer = (anchor: Anchor, open: boolean) => () => {
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor: Anchor) => (
+  const list = () => (
     <Box
       component="div"
       sx={{ width: "auto" }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      onClick={() => setState(false)}
+      onKeyDown={() => setState(false)}
     >
       Teste
     </Box>
   );
+  console.log("anchor", anchor);
 
   return (
     <div>
-      {(["left", "right", "top", "bottom"] as const).map((anchor) => (
-        <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      <Button onClick={() => setState(true)}>{position}</Button>
+      <Drawer anchor={position} open={state} onClose={() => setState(false)}>
+        {list()}
+      </Drawer>
     </div>
   );
 };

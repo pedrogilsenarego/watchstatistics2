@@ -42,6 +42,8 @@ const Menu = ({
     setProductBrands(e.target.value);
   };
 
+  console.log("filters", filtersVisible);
+
   const handleFilterCategory = (e: any) => {
     setProductCategory(e.target.value);
   };
@@ -194,7 +196,11 @@ const Menu = ({
                 </Grid>
               </Grid>
             </Styled.FiltersBox>
-            <DrawerMine />
+            <DrawerMine
+              position="left"
+              anchor={filtersVisible}
+              setAnchor={setFiltersVisible}
+            />
           </>
         )}
         {filtersVisible && (
