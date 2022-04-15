@@ -27,10 +27,10 @@ const WatchesCards = () => {
 
   useEffect(
     () => {
-      handleFetchProducts();
+      if (!filtersVisible) handleFetchProducts();
     },
     // eslint-disable-next-line
-    []
+    [productBrands, productCategory, productPrices]
   );
 
   const handleFetchProducts = () => {
