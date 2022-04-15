@@ -90,7 +90,6 @@ const Menu = ({
   };
 
   const configFiltersMobile = {
-    filtersVisible,
     setFiltersVisible,
   };
 
