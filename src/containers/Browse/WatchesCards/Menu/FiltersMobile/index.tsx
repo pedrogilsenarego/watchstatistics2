@@ -4,12 +4,19 @@ import * as Styled from "./styles";
 
 interface Props {
   setFiltersVisible: (filtersVisible: boolean) => void;
+  handleClearFilters: () => void;
 }
 
-const FiltersMobile = ({ setFiltersVisible }: Props) => {
+const FiltersMobile = ({ setFiltersVisible, handleClearFilters }: Props) => {
   return (
     <Grid container>
-      <Grid container item xs={12}>
+      <Grid
+        container
+        item
+        xs={12}
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Grid item>
           <AiFillCloseSquare
             onClick={() => setFiltersVisible(false)}
@@ -18,7 +25,7 @@ const FiltersMobile = ({ setFiltersVisible }: Props) => {
           />
         </Grid>
         <Grid item>
-          <Styled.TypographyClearFilters>
+          <Styled.TypographyClearFilters onClick={handleClearFilters}>
             Clear Filters
           </Styled.TypographyClearFilters>
         </Grid>

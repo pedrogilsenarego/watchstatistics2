@@ -91,6 +91,7 @@ const Menu = ({
 
   const configFiltersMobile = {
     setFiltersVisible,
+    handleClearFilters,
   };
 
   const renderLaptop = () => {
@@ -212,22 +213,6 @@ const Menu = ({
               </Grid>
               <Grid item>
                 <BsSliders size="2em" />
-              </Grid>
-            </Grid>
-          </Styled.FiltersBox>
-        </Grid>
-        <Grid item>
-          <Styled.FiltersBox onClick={handleClearFilters}>
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              spacing={2}
-            >
-              <Grid item>
-                <Styled.FiltersTypography>
-                  Clear All filters
-                </Styled.FiltersTypography>
               </Grid>
             </Grid>
           </Styled.FiltersBox>
