@@ -18,6 +18,7 @@ import {
 } from "react-icons/bs";
 import { AiFillCloseSquare } from "react-icons/ai";
 import DrawerMine from "../../../../components/Drawer";
+import FiltersMobile from "./FiltersMobile";
 
 interface Props {
   productBrands: any;
@@ -86,6 +87,11 @@ const Menu = ({
     setProductCategory(null);
     setProductPrices(null);
     handleFetchProducts();
+  };
+
+  const configFiltersMobile = {
+    filtersVisible,
+    setFiltersVisible,
   };
 
   const renderLaptop = () => {
@@ -243,6 +249,7 @@ const Menu = ({
           openDrawer={filtersVisible}
           setOpenDrawer={setFiltersVisible}
         >
+          <FiltersMobile {...configFiltersMobile} />
           <Grid container alignItems="center">
             <Grid
               container
@@ -252,7 +259,6 @@ const Menu = ({
               rowSpacing={2}
               xs={9}
             >
-              <Button onClick={() => setFiltersVisible(false)}>Close</Button>
               <Grid item container alignItems="center" xs={12}>
                 <Grid item xs={12}>
                   <Select

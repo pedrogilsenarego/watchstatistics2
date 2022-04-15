@@ -19,7 +19,12 @@ const DrawerMine = ({
   const list = () => (
     <Box
       component="div"
-      sx={{ width: "auto", height: "100vh", backgroundColor: "#18161E" }}
+      sx={{
+        width: "auto",
+        height: "100vh",
+        backgroundColor: "#18161E",
+        padding: "10px",
+      }}
       role="presentation"
     >
       {children}
