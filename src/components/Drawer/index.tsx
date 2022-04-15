@@ -1,35 +1,41 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 type Props = {
   position: Anchor;
-  anchor: boolean;
-  setAnchor: (anchor: boolean) => void;
+  openDrawer: boolean;
+  setOpenDrawer: (openDrawer: boolean) => void;
+  children: any;
 };
 
-const DrawerMine = ({ position, anchor, setAnchor }: Props) => {
-  const [state, setState] = React.useState(false);
-
+const DrawerMine = ({
+  position,
+  openDrawer,
+  setOpenDrawer,
+  children,
+}: Props) => {
   const list = () => (
     <Box
       component="div"
-      sx={{ width: "auto" }}
+      sx={{ width: "auto", height: "100vh", backgroundColor: "#18161E" }}
       role="presentation"
-      onClick={() => setState(false)}
-      onKeyDown={() => setState(false)}
+      onClick={() => setOpenDrawer(false)}
+      onKeyDown={() => setOpenDrawer(false)}
     >
-      Teste
+      {children}
     </Box>
   );
-  console.log("anchor", anchor);
+  console.log("anchor", openDrawer);
 
   return (
     <div>
-      <Button onClick={() => setState(true)}>{position}</Button>
-      <Drawer anchor={position} open={state} onClose={() => setState(false)}>
+      <Drawer
+        anchor={position}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+      >
         {list()}
       </Drawer>
     </div>
