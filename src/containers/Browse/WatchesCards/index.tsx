@@ -20,25 +20,30 @@ const WatchesCards = () => {
   const [productPrices, setProductPrices] = useState(null);
   const [productBrands, setProductBrands] = useState<null | string>(null);
   const [score, setScore] = useState("desc");
+  const [filtersVisible, setFiltersVisible] = useState(false);
   const pageSize = 5;
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(
     () => {
-      dispatch(
-        fetchProductsStart({
-          pageSize,
-          sort: score,
-          productCategory,
-          productPrices,
-          productBrands,
-        })
-      );
+      if (!filtersVisible) handleFetchProducts();
     },
     // eslint-disable-next-line
-    [score, productCategory, productPrices, productBrands]
+    [productBrands, productCategory, productPrices]
   );
+
+  const handleFetchProducts = () => {
+    dispatch(
+      fetchProductsStart({
+        pageSize,
+        sort: score,
+        productCategory,
+        productPrices,
+        productBrands,
+      })
+    );
+  };
 
   const handleLoadMore = () => {
     if (!isLastPage) {
@@ -74,6 +79,9 @@ const WatchesCards = () => {
     setProductPrices,
     score,
     setScore,
+    handleFetchProducts,
+    filtersVisible,
+    setFiltersVisible,
   };
 
   return (

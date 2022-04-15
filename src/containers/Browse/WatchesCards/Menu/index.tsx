@@ -1,6 +1,11 @@
-import { useState } from "react";
 import * as Styled from "./styles";
-import { Grid, useMediaQuery, useTheme, InputAdornment } from "@mui/material";
+import {
+  Grid,
+  useMediaQuery,
+  useTheme,
+  InputAdornment,
+  Button,
+} from "@mui/material";
 import { Box } from "@material-ui/core";
 import Select from "../../../forms/SelectMUI";
 import watchBrands from "../../../../assets/data/watchBrands.json";
@@ -23,6 +28,9 @@ interface Props {
   setProductPrices: (productPrices: any) => void;
   score: string;
   setScore: (score: string) => void;
+  handleFetchProducts: () => void;
+  filtersVisible: boolean;
+  setFiltersVisible: (filtersVisible: boolean) => void;
 }
 
 const Menu = ({
@@ -34,15 +42,15 @@ const Menu = ({
   setProductPrices,
   score,
   setScore,
+  handleFetchProducts,
+  filtersVisible,
+  setFiltersVisible,
 }: Props) => {
-  const [filtersVisible, setFiltersVisible] = useState(false);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const handleFilterBrands = (e: any) => {
     setProductBrands(e.target.value);
   };
-
-  console.log("filters", filtersVisible);
 
   const handleFilterCategory = (e: any) => {
     setProductCategory(e.target.value);
@@ -77,6 +85,7 @@ const Menu = ({
     setProductBrands(null);
     setProductCategory(null);
     setProductPrices(null);
+    handleFetchProducts();
   };
 
   const renderLaptop = () => {
@@ -243,6 +252,7 @@ const Menu = ({
               rowSpacing={2}
               xs={9}
             >
+              <Button onClick={() => setFiltersVisible(false)}>Close</Button>
               <Grid item container alignItems="center" xs={12}>
                 <Grid item xs={12}>
                   <Select
@@ -322,6 +332,14 @@ const Menu = ({
                 />
               </Box>
             </Grid>
+            <Button
+              onClick={() => {
+                handleFetchProducts();
+                setFiltersVisible(false);
+              }}
+            >
+              Load Watches
+            </Button>
           </Grid>
         </DrawerMine>
       )}

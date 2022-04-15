@@ -21,13 +21,10 @@ const DrawerMine = ({
       component="div"
       sx={{ width: "auto", height: "100vh", backgroundColor: "#18161E" }}
       role="presentation"
-      onClick={() => setOpenDrawer(false)}
-      onKeyDown={() => setOpenDrawer(false)}
     >
       {children}
     </Box>
   );
-  console.log("anchor", openDrawer);
 
   return (
     <div>
