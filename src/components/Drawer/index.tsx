@@ -8,19 +8,21 @@ type Props = {
   openDrawer: boolean;
   setOpenDrawer: (openDrawer: boolean) => void;
   children: any;
+  fullWidth?: boolean;
 };
 
 const DrawerMine = ({
   position,
   openDrawer,
   setOpenDrawer,
+  fullWidth,
   children,
 }: Props) => {
   const list = () => (
     <Box
       component="div"
       sx={{
-        width: "auto",
+        width: fullWidth ? "100vw" : "auto",
         height: "100vh",
         backgroundColor: "#18161E",
         padding: "10px",

@@ -2,6 +2,8 @@ import { Grid } from "@mui/material";
 import { AiFillCloseSquare } from "react-icons/ai";
 import * as Styled from "./styles";
 import ButtonFilters from "../../../../../components/Buttons/ButtonFilters";
+import watchTypes from "src/assets/data/watchTypes.json";
+import watchBrands from "src/assets/data/watchBrands.json";
 
 interface Props {
   setFiltersVisible: (filtersVisible: boolean) => void;
@@ -40,7 +42,13 @@ const FiltersMobile = ({ setFiltersVisible, handleClearFilters }: Props) => {
         </Styled.TypographyClearFilters>
       </Styled.CategoriesGrid>
       <Grid item xs={12} style={{ marginTop: "5px" }}>
-        <ButtonFilters />
+        <ButtonFilters list={watchTypes.options} />
+      </Grid>
+      <Styled.CategoriesGrid item xs={12}>
+        <Styled.TypographyClearFilters>Brands</Styled.TypographyClearFilters>
+      </Styled.CategoriesGrid>
+      <Grid item xs={12} style={{ marginTop: "5px" }}>
+        <ButtonFilters list={watchBrands.options} />
       </Grid>
     </Grid>
   );
