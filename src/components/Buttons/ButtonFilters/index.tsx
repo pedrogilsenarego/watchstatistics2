@@ -6,9 +6,10 @@ import DrawerMine from "src/components/Drawer";
 
 interface Props {
   list: any;
+  value: string | null;
 }
 
-const ButtonFilters = ({ list }: Props) => {
+const ButtonFilters = ({ list, value }: Props) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -21,7 +22,8 @@ const ButtonFilters = ({ list }: Props) => {
       >
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid>
-            <Styled.Typography>Choose</Styled.Typography>
+            {!value && <Styled.Typography>Choose</Styled.Typography>}
+            {value && <Styled.Typography>{value}</Styled.Typography>}
           </Grid>
           <Grid>
             <MdArrowForwardIos size="2em" />

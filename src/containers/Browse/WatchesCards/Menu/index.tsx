@@ -92,6 +92,12 @@ const Menu = ({
   const configFiltersMobile = {
     setFiltersVisible,
     handleClearFilters,
+    productCategory,
+    setProductCategory,
+    productBrands,
+    setProductBrands,
+    productPrices,
+    setProductPrices,
   };
 
   const renderLaptop = () => {
