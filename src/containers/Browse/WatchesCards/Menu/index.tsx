@@ -248,65 +248,7 @@ const Menu = ({
               justifyContent="center"
               rowSpacing={2}
               xs={9}
-            >
-              <Grid item container alignItems="center" xs={12}>
-                <Grid item xs={12}>
-                  <Select
-                    {...configBrands}
-                    endAdornment={
-                      productBrands !== null && (
-                        <InputAdornment position="end">
-                          <AiFillCloseSquare
-                            size="2em"
-                            color="lightGrey"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => setProductBrands(null)}
-                          />
-                        </InputAdornment>
-                      )
-                    }
-                  />
-                </Grid>
-              </Grid>
-              <Grid item container alignItems="center" xs={12}>
-                <Grid item xs={12}>
-                  <Select
-                    {...configCategory}
-                    endAdornment={
-                      productCategory !== null && (
-                        <InputAdornment position="end">
-                          <AiFillCloseSquare
-                            size="2em"
-                            color="lightGrey"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => setProductCategory(null)}
-                          />
-                        </InputAdornment>
-                      )
-                    }
-                  />
-                </Grid>
-              </Grid>
-              <Grid item container alignItems="center" xs={12}>
-                <Grid item xs={12}>
-                  <Select
-                    {...configPricesBracket}
-                    endAdornment={
-                      productPrices !== null && (
-                        <InputAdornment position="end">
-                          <AiFillCloseSquare
-                            size="2em"
-                            color="lightGrey"
-                            style={{ cursor: "pointer" }}
-                            onClick={() => setProductPrices(null)}
-                          />
-                        </InputAdornment>
-                      )
-                    }
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
+            ></Grid>
             <Grid container justifyContent="center" xs={3}>
               <Box
                 style={{

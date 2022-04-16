@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { AiFillCloseSquare } from "react-icons/ai";
+import { RiCloseFill } from "react-icons/ri";
 import * as Styled from "./styles";
 import ButtonFilters from "../../../../../components/Buttons/ButtonFilters";
 import watchTypes from "src/assets/data/watchTypes.json";
@@ -9,12 +9,12 @@ import pricesBracket from "src/assets/data/pricesBracket.json";
 interface Props {
   setFiltersVisible: (filtersVisible: boolean) => void;
   handleClearFilters: () => void;
-  productCategory: string;
-  setProductCategory: (productsCategory: string) => void;
-  productBrands: string;
-  setProductBrands: (productsBrands: string) => void;
-  productPrices: string;
-  setProductPrices: (productsPrices: string) => void;
+  productCategory: string | null;
+  setProductCategory: (productsCategory: string | null) => void;
+  productBrands: string | null;
+  setProductBrands: (productsBrands: string | null) => void;
+  productPrices: string | null;
+  setProductPrices: (productsPrices: string | null) => void;
 }
 
 const FiltersMobile = ({
@@ -37,9 +37,9 @@ const FiltersMobile = ({
         justifyContent="space-between"
       >
         <Grid item>
-          <AiFillCloseSquare
+          <RiCloseFill
             onClick={() => setFiltersVisible(false)}
-            size="2em"
+            size="2.5em"
             color="lightGrey"
           />
         </Grid>
@@ -58,19 +58,31 @@ const FiltersMobile = ({
         </Styled.TypographyClearFilters>
       </Styled.CategoriesGrid>
       <Grid item xs={12} style={{ marginTop: "2px" }}>
-        <ButtonFilters value={productCategory} list={watchTypes.options} />
+        <ButtonFilters
+          value={productCategory}
+          setValue={setProductCategory}
+          list={watchTypes.options}
+        />
       </Grid>
       <Grid item xs={12} style={{ marginTop: "5px" }}>
         <Styled.TypographyClearFilters>Brands</Styled.TypographyClearFilters>
       </Grid>
       <Grid item xs={12} style={{ marginTop: "2px" }}>
-        <ButtonFilters value={productBrands} list={watchBrands.options} />
+        <ButtonFilters
+          value={productBrands}
+          setValue={setProductBrands}
+          list={watchBrands.options}
+        />
       </Grid>
       <Grid item xs={12} style={{ marginTop: "5px" }}>
         <Styled.TypographyClearFilters>Prices</Styled.TypographyClearFilters>
       </Grid>
       <Grid item xs={12} style={{ marginTop: "2px" }}>
-        <ButtonFilters value={productPrices} list={pricesBracket.options} />
+        <ButtonFilters
+          value={productPrices}
+          setValue={setProductPrices}
+          list={pricesBracket.options}
+        />
       </Grid>
     </Grid>
   );
