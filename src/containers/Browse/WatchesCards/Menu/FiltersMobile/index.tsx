@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import { AiFillCloseSquare } from "react-icons/ai";
 import * as Styled from "./styles";
+import ButtonFilters from "../../../../../components/Buttons/ButtonFilters";
 
 interface Props {
   setFiltersVisible: (filtersVisible: boolean) => void;
@@ -32,6 +33,14 @@ const FiltersMobile = ({ setFiltersVisible, handleClearFilters }: Props) => {
       </Grid>
       <Grid item xs={12}>
         <Styled.TypographyTitle>Filters</Styled.TypographyTitle>
+      </Grid>
+      <Styled.CategoriesGrid item xs={12}>
+        <Styled.TypographyClearFilters>
+          Categories
+        </Styled.TypographyClearFilters>
+      </Styled.CategoriesGrid>
+      <Grid item xs={12} style={{ marginTop: "5px" }}>
+        <ButtonFilters />
       </Grid>
     </Grid>
   );

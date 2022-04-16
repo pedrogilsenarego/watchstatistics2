@@ -1,4 +1,4 @@
-import { Typography as MuiTypography, styled } from "@material-ui/core";
+import { Typography as MuiTypography, styled, Grid } from "@material-ui/core";
 
 export const TypographyClearFilters = styled(MuiTypography)(() => ({
   color: "lightGrey",
@@ -10,4 +10,8 @@ export const TypographyTitle = styled(MuiTypography)(() => ({
   color: "lightGrey",
   fontSize: "30px",
   fontWeight: 600,
+}));
+
+export const CategoriesGrid = styled(Grid)(() => ({
+  marginTop: "20px",
 }));
