@@ -27,8 +27,8 @@ interface Props {
   setProductCategory: (productCategory: any) => void;
   productPrices: any;
   setProductPrices: (productPrices: any) => void;
-  score: string;
-  setScore: (score: string) => void;
+  score: "asc" | "desc";
+  setScore: (score: "asc" | "desc") => void;
   handleFetchProducts: () => void;
   filtersVisible: boolean;
   setFiltersVisible: (filtersVisible: boolean) => void;
@@ -98,6 +98,8 @@ const Menu = ({
     setProductBrands,
     productPrices,
     setProductPrices,
+    score,
+    setScore,
   };
 
   const renderLaptop = () => {
@@ -249,27 +251,7 @@ const Menu = ({
               rowSpacing={2}
               xs={9}
             ></Grid>
-            <Grid container justifyContent="center" xs={3}>
-              <Box
-                style={{
-                  fontSize: "15px",
-                  color: "#ffffff66",
-                  cursor: "pointer",
-                  borderBottom: "none",
-                }}
-              >
-                <BsFileArrowDownFill
-                  onClick={() => setScore("desc")}
-                  size="3em"
-                  color={score === "desc" ? "orange" : "#ffffff66"}
-                />
-                <BsFileArrowUpFill
-                  onClick={() => setScore("asc")}
-                  size="3em"
-                  color={score === "asc" ? "orange" : "#ffffff66"}
-                />
-              </Box>
-            </Grid>
+
             <Button
               onClick={() => {
                 handleFetchProducts();

@@ -19,7 +19,7 @@ const WatchesCards = () => {
   const [productCategory, setProductCategory] = useState<null | string>(null);
   const [productPrices, setProductPrices] = useState(null);
   const [productBrands, setProductBrands] = useState<null | string>(null);
-  const [score, setScore] = useState("desc");
+  const [score, setScore] = useState<"desc" | "asc">("desc");
   const [filtersVisible, setFiltersVisible] = useState(false);
   const pageSize = 5;
   const theme = useTheme();
@@ -30,7 +30,7 @@ const WatchesCards = () => {
       if (!filtersVisible) handleFetchProducts();
     },
     // eslint-disable-next-line
-    [productBrands, productCategory, productPrices]
+    [productBrands, productCategory, productPrices, score]
   );
 
   const handleFetchProducts = () => {

@@ -5,6 +5,7 @@ import ButtonFilters from "../../../../../components/Buttons/ButtonFilters";
 import watchTypes from "src/assets/data/watchTypes.json";
 import watchBrands from "src/assets/data/watchBrands.json";
 import pricesBracket from "src/assets/data/pricesBracket.json";
+import { BsFileArrowUpFill, BsFileArrowDownFill } from "react-icons/bs";
 
 interface Props {
   setFiltersVisible: (filtersVisible: boolean) => void;
@@ -15,6 +16,8 @@ interface Props {
   setProductBrands: (productsBrands: string | null) => void;
   productPrices: string | null;
   setProductPrices: (productsPrices: string | null) => void;
+  score: "desc" | "asc";
+  setScore: (score: "desc" | "asc") => void;
 }
 
 const FiltersMobile = ({
@@ -26,6 +29,8 @@ const FiltersMobile = ({
   setProductBrands,
   productPrices,
   setProductPrices,
+  score,
+  setScore,
 }: Props) => {
   return (
     <Grid container>
@@ -82,6 +87,23 @@ const FiltersMobile = ({
           value={productPrices}
           setValue={setProductPrices}
           list={pricesBracket.options}
+        />
+      </Grid>
+      <Grid item xs={12} style={{ marginTop: "5px" }}>
+        <Styled.TypographyClearFilters>
+          Sort Score
+        </Styled.TypographyClearFilters>
+      </Grid>
+      <Grid item xs={12} style={{ marginLeft: "-5px" }}>
+        <BsFileArrowDownFill
+          onClick={() => setScore("desc")}
+          size="4em"
+          color={score === "desc" ? "orange" : "#ffffff66"}
+        />
+        <BsFileArrowUpFill
+          onClick={() => setScore("asc")}
+          size="4em"
+          color={score === "asc" ? "orange" : "#ffffff66"}
         />
       </Grid>
     </Grid>
