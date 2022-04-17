@@ -1,11 +1,5 @@
 import * as Styled from "./styles";
-import {
-  Grid,
-  useMediaQuery,
-  useTheme,
-  InputAdornment,
-  Button,
-} from "@mui/material";
+import { Grid, useMediaQuery, useTheme, InputAdornment } from "@mui/material";
 import { Box } from "@material-ui/core";
 import Select from "../../../forms/SelectMUI";
 import watchBrands from "../../../../assets/data/watchBrands.json";
@@ -100,6 +94,7 @@ const Menu = ({
     setProductPrices,
     score,
     setScore,
+    handleFetchProducts,
   };
 
   const renderLaptop = () => {
@@ -242,25 +237,6 @@ const Menu = ({
           setOpenDrawer={setFiltersVisible}
         >
           <FiltersMobile {...configFiltersMobile} />
-          <Grid container alignItems="center">
-            <Grid
-              container
-              item
-              alignItems="center"
-              justifyContent="center"
-              rowSpacing={2}
-              xs={9}
-            ></Grid>
-
-            <Button
-              onClick={() => {
-                handleFetchProducts();
-                setFiltersVisible(false);
-              }}
-            >
-              Load Watches
-            </Button>
-          </Grid>
         </DrawerMine>
       )}
     </>

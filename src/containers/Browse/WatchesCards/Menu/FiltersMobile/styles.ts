@@ -8,7 +8,7 @@ export const TypographyClearFilters = styled(MuiTypography)(() => ({
 
 export const TypographyTitle = styled(MuiTypography)(() => ({
   color: "lightGrey",
-  fontSize: "30px",
+  fontSize: "35px",
   fontWeight: 600,
 }));
 
