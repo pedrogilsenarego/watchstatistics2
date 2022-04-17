@@ -37,14 +37,23 @@ const ButtonFilters = ({ list, value, setValue }: Props) => {
           </Grid>
         )}
         {value && (
-          <Grid container justifyContent="space-between" alignItems="center">
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="center"
+            onClick={handleChooseValue}
+          >
             <Grid>
-              <Styled.Typography onClick={handleChooseValue}>
-                {value}
-              </Styled.Typography>
+              <Styled.Typography>{value}</Styled.Typography>
             </Grid>
             <Grid>
-              <RiCloseFill size="2.5em" onClick={() => setValue(null)} />
+              <RiCloseFill
+                size="2.5em"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setValue(null);
+                }}
+              />
             </Grid>
           </Grid>
         )}

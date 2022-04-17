@@ -23,9 +23,10 @@ const DrawerMine = ({
       component="div"
       sx={{
         width: fullWidth ? "100vw" : "auto",
-        height: "100vh",
+        minHeight: "100vh",
         backgroundColor: "#18161E",
         padding: "10px",
+        overflowY: "auto",
       }}
       role="presentation"
     >
