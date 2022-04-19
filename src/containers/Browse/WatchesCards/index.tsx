@@ -20,10 +20,37 @@ const WatchesCards = () => {
   const [productPrices, setProductPrices] = useState(null);
   const [productBrands, setProductBrands] = useState<null | string>(null);
   const [score, setScore] = useState<"desc" | "asc">("desc");
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollGap, setScrollGap] = useState(0);
   const [filtersVisible, setFiltersVisible] = useState(false);
-  const pageSize = 5;
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  const pageSize = 5;
+
+  const logit = () => {
+    setScrollY(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    function watchScroll() {
+      window.addEventListener("scroll", logit);
+    }
+    watchScroll();
+    return () => {
+      window.removeEventListener("scroll", logit);
+    };
+  });
+
+  useEffect(
+    () => {
+      if (scrollY - scrollGap >= window.innerHeight / (isMatch ? 1 : 2)) {
+        setScrollGap(scrollGap + window.innerHeight / (isMatch ? 1 : 2));
+        handleLoadMore();
+      }
+    },
+    // eslint-disable-next-line
+    [scrollY]
+  );
 
   useEffect(
     () => {
@@ -34,6 +61,7 @@ const WatchesCards = () => {
   );
 
   const handleFetchProducts = () => {
+    setScrollGap(0);
     dispatch(
       fetchProductsStart({
         pageSize,
@@ -97,7 +125,7 @@ const WatchesCards = () => {
         })}
       </Grid>
       <Styled.ButtonGrid container justifyContent="center" item xs={12}>
-        <Button1 title="Load More" onClick={handleLoadMore} />
+        <Button1 title="There are no more Results" />
       </Styled.ButtonGrid>
     </Styled.Grid>
   );
