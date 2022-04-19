@@ -21,7 +21,9 @@ const DrawerMine = ({
 }: Props) => {
   useBackBrowser(() => {
     setOpenDrawer(false);
-  });
+  }, openDrawer);
+
+  console.log(position, openDrawer);
 
   const list = () => (
     <Box

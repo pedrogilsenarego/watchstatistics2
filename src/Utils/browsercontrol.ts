@@ -30,8 +30,3 @@ export const useBackNeutralized = (callback: Function) => {
     callback();
   };
 };
-
-export const useRevivalBack = () => {
-  window.onpopstate = null;
-  window.history.back();
-};

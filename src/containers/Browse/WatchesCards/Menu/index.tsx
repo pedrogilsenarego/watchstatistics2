@@ -44,6 +44,7 @@ const Menu = ({
 }: Props) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
   const handleFilterBrands = (e: any) => {
     setProductBrands(e.target.value);
   };
