@@ -9,14 +9,16 @@ const Browse = () => {
   const [table, setTable] = useState("watches");
   const [typeTable, setTypeTable] = useState("cards");
 
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+
   const configMenuTables = {
     table,
     setTable,
     typeTable,
     setTypeTable,
+    isMatch,
   };
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Container maxWidth="lg" disableGutters={isMatch ? true : false}>

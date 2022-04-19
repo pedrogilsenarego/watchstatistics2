@@ -10,9 +10,16 @@ type Props = {
   setTable: (table: string) => void;
   typeTable: string;
   setTypeTable: (typeTable: string) => void;
+  isMatch: boolean;
 };
 
-const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
+const MenuTables = ({
+  table,
+  setTable,
+  typeTable,
+  setTypeTable,
+  isMatch,
+}: Props) => {
   const history = useHistory();
 
   return (
@@ -22,7 +29,7 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
           <Button
             style={{
               color: table === "watches" ? "orange" : "white",
-              fontSize: "16px",
+              fontSize: isMatch ? "14px" : "16px",
             }}
             onClick={(e) => {
               setTable("watches");
@@ -34,7 +41,7 @@ const MenuTables = ({ table, setTable, typeTable, setTypeTable }: Props) => {
           <Button
             style={{
               color: table === "users" ? "orange" : "white",
-              fontSize: "16px",
+              fontSize: isMatch ? "14px" : "16px",
             }}
             disableRipple
             onClick={(e) => {

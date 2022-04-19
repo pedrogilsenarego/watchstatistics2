@@ -13,6 +13,7 @@ import {
 import { AiFillCloseSquare } from "react-icons/ai";
 import DrawerMine from "../../../../components/Drawer";
 import FiltersMobile from "./FiltersMobile";
+import Chip1 from "src/components/Chips/Chip1";
 
 interface Props {
   productBrands: any;
@@ -203,7 +204,7 @@ const Menu = ({
   const renderMobile = () => {
     return (
       <Grid container spacing={1}>
-        <Grid item>
+        <Grid item xs={4}>
           <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
             <Grid
               container
@@ -219,6 +220,32 @@ const Menu = ({
               </Grid>
             </Grid>
           </Styled.FiltersBox>
+        </Grid>
+        <Grid item container spacing={1} xs={8}>
+          <Grid item>
+            {productCategory && (
+              <Chip1
+                title={productCategory}
+                onClick={() => setProductCategory(null)}
+              />
+            )}
+          </Grid>
+          <Grid item>
+            {productPrices && (
+              <Chip1
+                title={productPrices}
+                onClick={() => setProductPrices(null)}
+              />
+            )}
+          </Grid>
+          <Grid item>
+            {productBrands && (
+              <Chip1
+                title={productBrands}
+                onClick={() => setProductBrands(null)}
+              />
+            )}
+          </Grid>
         </Grid>
       </Grid>
     );

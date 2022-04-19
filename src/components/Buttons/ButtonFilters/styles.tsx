@@ -8,6 +8,7 @@ export const Box = styled(MuiBox)(() => ({
   backgroundColor: "lightgray",
   padding: "10px",
   borderRadius: "5px",
+  cursor: "pointer",
 }));
 
 export const Typography = styled(MuiTypography)(() => ({
@@ -19,6 +20,7 @@ export const BoxList = styled(MuiBox)(() => ({
   backgroundColor: "lightgray",
   padding: "10px",
   borderRadius: "5px",
+  cursor: "pointer",
 }));
 
 export const TypographyList = styled(MuiTypography)(() => ({
