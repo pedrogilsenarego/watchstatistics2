@@ -43,8 +43,14 @@ const WatchesCards = () => {
 
   useEffect(
     () => {
-      if (scrollY - scrollGap >= window.innerHeight / (isMatch ? 1 : 2)) {
-        setScrollGap(scrollGap + window.innerHeight / (isMatch ? 1 : 2));
+      if (
+        scrollY - scrollGap >=
+        window.innerHeight / (isMatch ? 1 : scrollGap > 0 ? 1.3 : 2)
+      ) {
+        setScrollGap(
+          scrollGap +
+            window.innerHeight / (isMatch ? 1 : scrollGap > 0 ? 1.3 : 2)
+        );
         handleLoadMore();
       }
     },

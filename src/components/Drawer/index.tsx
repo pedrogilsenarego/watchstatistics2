@@ -1,6 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
+import { useBackNeutralized } from "src/Utils/browsercontrol";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 type Props = {
@@ -18,6 +19,10 @@ const DrawerMine = ({
   fullWidth,
   children,
 }: Props) => {
+  useBackNeutralized(() => {
+    setOpenDrawer(false);
+  });
+
   const list = () => (
     <Box
       component="div"
@@ -34,13 +39,13 @@ const DrawerMine = ({
     </Box>
   );
 
+  const handleClose = () => {
+    setOpenDrawer(false);
+  };
+
   return (
     <div>
-      <Drawer
-        anchor={position}
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-      >
+      <Drawer anchor={position} open={openDrawer} onClose={handleClose}>
         {list()}
       </Drawer>
     </div>

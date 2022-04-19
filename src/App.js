@@ -73,7 +73,7 @@ const App = () => {
         }
       >
         <CssBaseline />
-        <CookiePolicy />
+
         <div className="App">
           <Switch>
             <Route
