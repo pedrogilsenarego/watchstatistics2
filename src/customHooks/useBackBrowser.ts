@@ -4,12 +4,13 @@ const useBackBrowser = (callback: Function, openDrawer: boolean) => {
     window.onpopstate = () => {
       window.history.pushState(null, "", window.location.href);
       callback();
+      // then turn on back again
+      window.onpopstate = () => {
+        window.onpopstate = () => {};
+        window.history.back();
+      };
     };
   } else {
-    window.onpopstate = (e) => {
-      window.onpopstate = () => {};
-      window.history.back();
-    };
   }
 };
 
