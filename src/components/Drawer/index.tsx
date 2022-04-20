@@ -28,17 +28,10 @@ const DrawerMine = ({
     user: user,
   });
   const { user } = useSelector(mapState);
-  const modId = user.modalId;
 
-  useBackBrowser(
-    (e: any) => {
-      setOpenDrawer(false);
-    },
-    openDrawer,
-    id
-  );
-
-  console.log(id, modId, position);
+  useBackBrowser(() => {
+    setOpenDrawer(false);
+  }, openDrawer);
 
   React.useEffect(() => {
     dispatch(modalId(openDrawer ? id : id - 1));
