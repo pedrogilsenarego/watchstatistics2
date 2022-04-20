@@ -2,6 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import { useBackBrowser } from "src/customHooks";
+import { useDispatch, useSelector } from "react-redux";
+import { modalId } from "src/redux/User/user.actions";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 type Props = {
@@ -21,16 +23,27 @@ const DrawerMine = ({
   children,
   id,
 }: Props) => {
+  const dispatch = useDispatch();
+  const mapState = ({ user }: any) => ({
+    user: user,
+  });
+  const { user } = useSelector(mapState);
   useBackBrowser(
     (e: any) => {
-      console.log("callback", position, e.state.id);
-      if (e.state.id === id) {
+      if (id === user.modalId) {
         setOpenDrawer(false);
       }
     },
     openDrawer,
     id
   );
+
+  console.log(user.modalId);
+
+  React.useEffect(() => {
+    if (openDrawer) dispatch(modalId(id));
+    if (!openDrawer) dispatch(modalId(id - 1));
+  }, [openDrawer]);
 
   const list = () => (
     <Box

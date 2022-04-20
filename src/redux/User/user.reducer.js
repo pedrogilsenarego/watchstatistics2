@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   userErr: [],
   users: [],
   cookiePolicy: false,
+  modalId: -1,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -66,6 +67,11 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+    case userTypes.MODAL_ID:
+      return {
+        ...state,
+        modalId: action.payload,
       };
     default:
       return state;

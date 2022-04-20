@@ -9,8 +9,8 @@ const useBackBrowser = (
   useEffect(() => {
     if (ref.current) {
       if (openDrawer) {
-        window.history.pushState({ id }, "", window.location.href);
-        window.history.pushState({ id }, "", window.location.href);
+        window.history.pushState({ id }, "");
+        window.history.pushState({ id }, "");
         window.addEventListener("popstate", callback);
       } else {
         window.removeEventListener("popstate", callback);

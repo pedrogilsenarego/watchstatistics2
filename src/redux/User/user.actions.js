@@ -89,3 +89,8 @@ export const removeMessage = (message) => ({
   type: userTypes.REMOVE_MESSAGE,
   payload: message,
 });
+
+export const modalId = (id) => ({
+  type: userTypes.MODAL_ID,
+  payload: id,
+});

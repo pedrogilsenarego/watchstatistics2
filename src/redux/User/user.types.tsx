@@ -19,6 +19,7 @@ const userTypes = {
   UPDATE_SELLER_STATE: "UPDATE_SELLER_STATE",
   CLEAR_MESSAGES: "CLEAR_MESSAGES",
   REMOVE_MESSAGE: "REMOVE_MESSAGE",
+  MODAL_ID: "MODAL_ID",
 };
 
 export default userTypes;
