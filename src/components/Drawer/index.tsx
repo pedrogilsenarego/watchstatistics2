@@ -41,8 +41,7 @@ const DrawerMine = ({
   console.log(user.modalId);
 
   React.useEffect(() => {
-    if (openDrawer) dispatch(modalId(id));
-    if (!openDrawer) dispatch(modalId(id - 1));
+    dispatch(modalId(openDrawer ? id : id - 1));
   }, [openDrawer]);
 
   const list = () => (
