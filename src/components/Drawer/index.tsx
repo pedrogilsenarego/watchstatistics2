@@ -32,7 +32,7 @@ const DrawerMine = ({
 
   useBackBrowser(
     (e: any) => {
-      setOpenDrawer(false);
+      if (id === modId + 1) setOpenDrawer(false);
     },
     openDrawer,
     id,
