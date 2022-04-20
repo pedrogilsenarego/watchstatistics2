@@ -32,11 +32,10 @@ const DrawerMine = ({
 
   useBackBrowser(
     (e: any) => {
-      if (id === modId + 1) setOpenDrawer(false);
+      setOpenDrawer(false);
     },
     openDrawer,
-    id,
-    modId
+    id
   );
 
   console.log(id, modId, position);
