@@ -20,27 +20,27 @@ const ButtonFilters = ({ list, value, setValue }: Props) => {
 
   return (
     <>
-      <Styled.Box component="div">
+      <Styled.Box component='div'>
         {!value && (
           <Grid
             container
-            justifyContent="space-between"
-            alignItems="center"
+            justifyContent='space-between'
+            alignItems='center'
             onClick={handleChooseValue}
           >
             <Grid>
               <Styled.Typography>Choose</Styled.Typography>
             </Grid>
             <Grid>
-              <MdArrowForwardIos size="2em" />
+              <MdArrowForwardIos size='2em' />
             </Grid>
           </Grid>
         )}
         {value && (
           <Grid
             container
-            justifyContent="space-between"
-            alignItems="center"
+            justifyContent='space-between'
+            alignItems='center'
             onClick={handleChooseValue}
           >
             <Grid>
@@ -48,7 +48,7 @@ const ButtonFilters = ({ list, value, setValue }: Props) => {
             </Grid>
             <Grid>
               <RiCloseFill
-                size="2.5em"
+                size='2.5em'
                 onClick={(e) => {
                   e.stopPropagation();
                   setValue(null);
@@ -58,38 +58,38 @@ const ButtonFilters = ({ list, value, setValue }: Props) => {
           </Grid>
         )}
       </Styled.Box>
-      {drawerOpen && (
-        <DrawerMine
-          position="bottom"
-          openDrawer={drawerOpen}
-          setOpenDrawer={setDrawerOpen}
-          fullWidth
-        >
-          <MdArrowBackIosNew
-            size="2em"
-            color="lightGrey"
-            onClick={() => setDrawerOpen(false)}
-          />
-          <Grid container rowSpacing={2} style={{ marginTop: "10px" }}>
-            {list.map((item: any, pos: number) => {
-              return (
-                <Grid
-                  item
-                  xs={12}
-                  key={pos}
-                  onClick={() => {
-                    setDrawerOpen(false);
-                  }}
-                >
-                  <Styled.BoxList onClick={() => setValue(item.value)}>
-                    <Styled.TypographyList>{item.name}</Styled.TypographyList>
-                  </Styled.BoxList>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </DrawerMine>
-      )}
+      (
+      <DrawerMine
+        id={1}
+        position='top'
+        openDrawer={drawerOpen}
+        setOpenDrawer={setDrawerOpen}
+        fullWidth
+      >
+        <MdArrowBackIosNew
+          size='2em'
+          color='lightGrey'
+          onClick={() => setDrawerOpen(false)}
+        />
+        <Grid container rowSpacing={2} style={{ marginTop: "10px" }}>
+          {list.map((item: any, pos: number) => {
+            return (
+              <Grid
+                item
+                xs={12}
+                key={pos}
+                onClick={() => {
+                  setDrawerOpen(false);
+                }}
+              >
+                <Styled.BoxList onClick={() => setValue(item.value)}>
+                  <Styled.TypographyList>{item.name}</Styled.TypographyList>
+                </Styled.BoxList>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </DrawerMine>
     </>
   );
 };

@@ -105,24 +105,24 @@ const Menu = ({
         <Grid item xs={0.5}></Grid>
         <Grid item xs={11.5}>
           <Styled.Paper>
-            <Grid container alignItems="center">
+            <Grid container alignItems='center'>
               <Grid
                 container
                 item
-                alignItems="center"
-                justifyContent="center"
+                alignItems='center'
+                justifyContent='center'
                 columnSpacing={2.5}
                 xs={12}
               >
-                <Grid item container alignItems="center" xs={3}>
+                <Grid item container alignItems='center' xs={3}>
                   <Grid item xs={12}>
                     <Select
                       endAdornment={
                         productBrands !== null && (
-                          <InputAdornment position="end">
+                          <InputAdornment position='end'>
                             <AiFillCloseSquare
-                              size="2em"
-                              color="lightGrey"
+                              size='2em'
+                              color='lightGrey'
                               style={{ cursor: "pointer" }}
                               onClick={() => setProductBrands(null)}
                             />
@@ -133,16 +133,16 @@ const Menu = ({
                     />
                   </Grid>
                 </Grid>
-                <Grid item container alignItems="center" xs={3}>
+                <Grid item container alignItems='center' xs={3}>
                   <Grid item xs={12}>
                     <Select
                       {...configCategory}
                       endAdornment={
                         productCategory !== null && (
-                          <InputAdornment position="end">
+                          <InputAdornment position='end'>
                             <AiFillCloseSquare
-                              size="2em"
-                              color="lightGrey"
+                              size='2em'
+                              color='lightGrey'
                               style={{ cursor: "pointer" }}
                               onClick={() => setProductCategory(null)}
                             />
@@ -152,16 +152,16 @@ const Menu = ({
                     />
                   </Grid>
                 </Grid>
-                <Grid item container alignItems="center" xs={3}>
+                <Grid item container alignItems='center' xs={3}>
                   <Grid item xs={12}>
                     <Select
                       {...configPricesBracket}
                       endAdornment={
                         productPrices !== null && (
-                          <InputAdornment position="end">
+                          <InputAdornment position='end'>
                             <AiFillCloseSquare
-                              size="2em"
-                              color="lightGrey"
+                              size='2em'
+                              color='lightGrey'
                               style={{ cursor: "pointer" }}
                               onClick={() => setProductPrices(null)}
                             />
@@ -183,18 +183,18 @@ const Menu = ({
                   >
                     <BsFileArrowDownFill
                       onClick={() => setScore("desc")}
-                      size="3em"
+                      size='3em'
                       color={score === "desc" ? "orange" : "#ffffff66"}
                     />
                     <BsFileArrowUpFill
                       onClick={() => setScore("asc")}
-                      size="3em"
+                      size='3em'
                       color={score === "asc" ? "orange" : "#ffffff66"}
                     />
                   </Box>
                 </Grid>
               </Grid>
-              <Grid container justifyContent="center" xs={3}></Grid>
+              <Grid container justifyContent='center' xs={3}></Grid>
             </Grid>
           </Styled.Paper>
         </Grid>
@@ -209,15 +209,15 @@ const Menu = ({
           <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
             <Grid
               container
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               spacing={2}
             >
               <Grid item>
                 <Styled.FiltersTypography>Filters</Styled.FiltersTypography>
               </Grid>
               <Grid item>
-                <BsSliders size="2em" />
+                <BsSliders size='2em' />
               </Grid>
             </Grid>
           </Styled.FiltersBox>
@@ -260,7 +260,8 @@ const Menu = ({
       </Grid>
       {isMatch && (
         <DrawerMine
-          position="bottom"
+          id={0}
+          position='bottom'
           openDrawer={filtersVisible}
           setOpenDrawer={setFiltersVisible}
         >

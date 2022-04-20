@@ -1,17 +1,24 @@
-const useBackBrowser = (callback: Function, openDrawer: boolean) => {
-  if (openDrawer) {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = () => {
-      window.history.pushState(null, "", window.location.href);
-      callback();
-      // then turn on back again
-      window.onpopstate = () => {
-        window.onpopstate = () => {};
+import { useEffect, useRef } from "react";
+
+const useBackBrowser = (
+  callback: (e: any) => void,
+  openDrawer: boolean,
+  id: number
+) => {
+  const ref = useRef(false);
+  useEffect(() => {
+    if (ref.current) {
+      if (openDrawer) {
+        window.history.pushState({ id }, "", window.location.href);
+        window.history.pushState({ id }, "", window.location.href);
+        window.addEventListener("popstate", callback);
+      } else {
+        window.removeEventListener("popstate", callback);
         window.history.back();
-      };
-    };
-  } else {
-  }
+      }
+    }
+    ref.current = true;
+  }, [openDrawer]);
 };
 
 export default useBackBrowser;

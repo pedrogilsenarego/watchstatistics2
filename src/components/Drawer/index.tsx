@@ -10,6 +10,7 @@ type Props = {
   setOpenDrawer: (openDrawer: boolean) => void;
   children: any;
   fullWidth?: boolean;
+  id: number;
 };
 
 const DrawerMine = ({
@@ -18,16 +19,22 @@ const DrawerMine = ({
   setOpenDrawer,
   fullWidth,
   children,
+  id,
 }: Props) => {
-  useBackBrowser(() => {
-    setOpenDrawer(false);
-  }, openDrawer);
-
-  console.log(position, openDrawer);
+  useBackBrowser(
+    (e: any) => {
+      console.log("callback", position, e.state.id);
+      if (e.state.id === id) {
+        setOpenDrawer(false);
+      }
+    },
+    openDrawer,
+    id
+  );
 
   const list = () => (
     <Box
-      component="div"
+      component='div'
       sx={{
         width: fullWidth ? "100vw" : "auto",
         minHeight: "100vh",
@@ -35,7 +42,7 @@ const DrawerMine = ({
         padding: "10px",
         overflowY: "auto",
       }}
-      role="presentation"
+      role='presentation'
     >
       {children}
     </Box>
