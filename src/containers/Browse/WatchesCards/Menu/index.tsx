@@ -16,6 +16,8 @@ import FiltersMobile from "./FiltersMobile";
 import Chip1 from "src/components/Chips/Chip1";
 
 interface Props {
+  dummyProductBrands: any;
+  setDummyProductBrands: (productBrands: any) => void;
   productBrands: any;
   setProductBrands: (productBrands: any) => void;
   productCategory: any;
@@ -26,6 +28,8 @@ interface Props {
   setDummyProductPrices: (productPrices: any) => void;
   productPrices: any;
   setProductPrices: (productPrices: any) => void;
+  dummyScore: "asc" | "desc";
+  setDummyScore: (score: "asc" | "desc") => void;
   score: "asc" | "desc";
   setScore: (score: "asc" | "desc") => void;
   handleFetchProducts: () => void;
@@ -34,6 +38,8 @@ interface Props {
 }
 
 const Menu = ({
+  dummyProductBrands,
+  setDummyProductBrands,
   setProductBrands,
   productBrands,
   productCategory,
@@ -44,6 +50,8 @@ const Menu = ({
   setDummyProductPrices,
   productPrices,
   setProductPrices,
+  dummyScore,
+  setDummyScore,
   score,
   setScore,
   handleFetchProducts,
@@ -87,10 +95,12 @@ const Menu = ({
   };
 
   const handleClearFilters = () => {
+    setDummyProductBrands(null);
     setProductBrands(null);
     setDummyProductCategory(null);
     setProductPrices(null);
     setDummyProductPrices(null);
+    setDummyScore("desc");
     handleFetchProducts();
   };
 
@@ -101,12 +111,16 @@ const Menu = ({
     dummyProductCategory,
     setProductCategory,
     setDummyProductCategory,
+    dummyProductBrands,
+    setDummyProductBrands,
     productBrands,
     setProductBrands,
     dummyProductPrices,
     setDummyProductPrices,
     productPrices,
     setProductPrices,
+    dummyScore,
+    setDummyScore,
     score,
     setScore,
     handleFetchProducts,
@@ -262,7 +276,10 @@ const Menu = ({
             {productBrands && (
               <Chip1
                 title={productBrands}
-                onClick={() => setProductBrands(null)}
+                onClick={() => {
+                  setProductBrands(null);
+                  setDummyProductBrands(null);
+                }}
               />
             )}
           </Grid>

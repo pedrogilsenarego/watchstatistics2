@@ -23,6 +23,10 @@ const WatchesCards = () => {
   const [productPrices, setProductPrices] = useState(null);
   const [dummyProductPrices, setDummyProductPrices] = useState(null);
   const [productBrands, setProductBrands] = useState<null | string>(null);
+  const [dummyProductBrands, setDummyProductBrands] = useState<null | string>(
+    null
+  );
+  const [dummyScore, setDummyScore] = useState<"desc" | "asc">("desc");
   const [score, setScore] = useState<"desc" | "asc">("desc");
   const [scrollY, setScrollY] = useState(0);
   const [scrollGap, setScrollGap] = useState(0);
@@ -113,6 +117,8 @@ const WatchesCards = () => {
   };
 
   const configMenu = {
+    dummyProductBrands,
+    setDummyProductBrands,
     setProductBrands,
     productBrands,
     dummyProductCategory,
@@ -123,6 +129,8 @@ const WatchesCards = () => {
     setDummyProductPrices,
     productPrices,
     setProductPrices,
+    dummyScore,
+    setDummyScore,
     score,
     setScore,
     handleFetchProducts,

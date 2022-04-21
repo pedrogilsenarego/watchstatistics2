@@ -15,12 +15,16 @@ interface Props {
   setProductCategory: (productsCategory: string | null) => void;
   dummyProductCategory: any;
   setDummyProductCategory: (dummyProductCategory: any) => void;
+  dummyProductBrands: string | null;
+  setDummyProductBrands: (productsBrands: string | null) => void;
   productBrands: string | null;
   setProductBrands: (productsBrands: string | null) => void;
   dummyProductPrices: string | null;
   setDummyProductPrices: (productsPrices: string | null) => void;
   productPrices: string | null;
   setProductPrices: (productsPrices: string | null) => void;
+  dummyScore: "desc" | "asc";
+  setDummyScore: (score: "desc" | "asc") => void;
   score: "desc" | "asc";
   setScore: (score: "desc" | "asc") => void;
   handleFetchProducts: () => void;
@@ -29,16 +33,17 @@ interface Props {
 const FiltersMobile = ({
   setFiltersVisible,
   handleClearFilters,
-  productCategory,
   dummyProductCategory,
   setProductCategory,
   setDummyProductCategory,
-  productBrands,
+  dummyProductBrands,
+  setDummyProductBrands,
   setProductBrands,
   dummyProductPrices,
-  productPrices,
   setDummyProductPrices,
   setProductPrices,
+  dummyScore,
+  setDummyScore,
   score,
   setScore,
   handleFetchProducts,
@@ -85,8 +90,8 @@ const FiltersMobile = ({
       </Grid>
       <Grid item xs={12} style={{ marginTop: "2px" }}>
         <ButtonFilters
-          value={productBrands}
-          setValue={setProductBrands}
+          value={dummyProductBrands}
+          setValue={setDummyProductBrands}
           list={watchBrands.options}
         />
       </Grid>
@@ -107,14 +112,14 @@ const FiltersMobile = ({
       </Grid>
       <Grid item xs={12} style={{ marginLeft: "-6px" }}>
         <BsFileArrowDownFill
-          onClick={() => setScore("desc")}
+          onClick={() => setDummyScore("desc")}
           size='4em'
-          color={score === "desc" ? "orange" : "#ffffff66"}
+          color={dummyScore === "desc" ? "orange" : "#ffffff66"}
         />
         <BsFileArrowUpFill
-          onClick={() => setScore("asc")}
+          onClick={() => setDummyScore("asc")}
           size='4em'
-          color={score === "asc" ? "orange" : "#ffffff66"}
+          color={dummyScore === "asc" ? "orange" : "#ffffff66"}
         />
       </Grid>
       <Grid item xs={12} textAlign='center' style={{ marginTop: "40px" }}>
@@ -123,6 +128,8 @@ const FiltersMobile = ({
           onClick={() => {
             setProductCategory(dummyProductCategory);
             setProductPrices(dummyProductPrices);
+            setProductBrands(dummyProductBrands);
+            setScore(dummyScore);
             handleFetchProducts();
             setFiltersVisible(false);
           }}
