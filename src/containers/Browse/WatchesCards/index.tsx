@@ -66,11 +66,13 @@ const WatchesCards = () => {
     [scrollY]
   );
 
-  console.log(dummyProductCategory);
-
   useEffect(
     () => {
       if (!filtersVisible) handleFetchProducts();
+      setDummyProductBrands(productBrands);
+      setDummyProductCategory(productCategory);
+      setDummyProductPrices(productPrices);
+      setDummyScore(score);
     },
     // eslint-disable-next-line
     [productBrands, productCategory, productPrices, score]
@@ -109,10 +111,10 @@ const WatchesCards = () => {
     currentUser,
     setProductBrands,
     setProductCategory,
-    setDummyProductCategory,
+
     pCategory: productCategory,
     productPrices,
-    setDummyProductPrices,
+
     setProductPrices,
   };
 

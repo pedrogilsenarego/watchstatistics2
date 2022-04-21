@@ -15,8 +15,7 @@ const WatchCard = ({
   currentUser,
   setProductBrands,
   setProductCategory,
-  setDummyProductCategory,
-  setDummyProductPrices,
+
   setProductPrices,
   pCategory,
   productPrices,
@@ -106,7 +105,6 @@ const WatchCard = ({
                         <Styled.Button
                           onClick={() => {
                             setProductCategory(productCategory);
-                            setDummyProductCategory(productCategory);
                           }}
                           style={{
                             textTransform: "none",
@@ -123,7 +121,6 @@ const WatchCard = ({
                         <Styled.Button
                           onClick={() => {
                             setProductPrices(productPriceBrackets);
-                            setDummyProductPrices(productPriceBrackets);
                           }}
                           style={{
                             textTransform: "none",
