@@ -28,13 +28,19 @@ const DrawerMine = ({
     user: user,
   });
   const { user } = useSelector(mapState);
+  const modId = user.modalId;
 
-  useBackBrowser(() => {
-    setOpenDrawer(false);
-  }, openDrawer);
+  useBackBrowser(
+    () => {
+      setOpenDrawer(false);
+    },
+    openDrawer,
+    modId
+  );
 
   React.useEffect(() => {
     dispatch(modalId(openDrawer ? id : id - 1));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openDrawer]);
 
   const list = () => (
