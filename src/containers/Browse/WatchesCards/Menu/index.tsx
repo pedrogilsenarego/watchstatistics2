@@ -20,6 +20,10 @@ interface Props {
   setProductBrands: (productBrands: any) => void;
   productCategory: any;
   setProductCategory: (productCategory: any) => void;
+  dummyProductCategory: any;
+  setDummyProductCategory: (dummyProductCategory: any) => void;
+  dummyProductPrices: any;
+  setDummyProductPrices: (productPrices: any) => void;
   productPrices: any;
   setProductPrices: (productPrices: any) => void;
   score: "asc" | "desc";
@@ -33,7 +37,11 @@ const Menu = ({
   setProductBrands,
   productBrands,
   productCategory,
+  dummyProductCategory,
   setProductCategory,
+  setDummyProductCategory,
+  dummyProductPrices,
+  setDummyProductPrices,
   productPrices,
   setProductPrices,
   score,
@@ -80,8 +88,9 @@ const Menu = ({
 
   const handleClearFilters = () => {
     setProductBrands(null);
-    setProductCategory(null);
+    setDummyProductCategory(null);
     setProductPrices(null);
+    setDummyProductPrices(null);
     handleFetchProducts();
   };
 
@@ -89,9 +98,13 @@ const Menu = ({
     setFiltersVisible,
     handleClearFilters,
     productCategory,
+    dummyProductCategory,
     setProductCategory,
+    setDummyProductCategory,
     productBrands,
     setProductBrands,
+    dummyProductPrices,
+    setDummyProductPrices,
     productPrices,
     setProductPrices,
     score,
@@ -227,7 +240,10 @@ const Menu = ({
             {productCategory && (
               <Chip1
                 title={productCategory}
-                onClick={() => setProductCategory(null)}
+                onClick={() => {
+                  setProductCategory(null);
+                  setDummyProductCategory(null);
+                }}
               />
             )}
           </Grid>
@@ -235,7 +251,10 @@ const Menu = ({
             {productPrices && (
               <Chip1
                 title={productPrices}
-                onClick={() => setProductPrices(null)}
+                onClick={() => {
+                  setProductPrices(null);
+                  setDummyProductPrices(null);
+                }}
               />
             )}
           </Grid>

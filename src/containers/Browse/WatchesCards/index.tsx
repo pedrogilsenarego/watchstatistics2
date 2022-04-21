@@ -17,7 +17,11 @@ const WatchesCards = () => {
   const { products, currentUser } = useSelector(mapState);
   const { data, isLastPage, queryDoc } = products;
   const [productCategory, setProductCategory] = useState<null | string>(null);
+  const [dummyProductCategory, setDummyProductCategory] = useState<
+    null | string
+  >(null);
   const [productPrices, setProductPrices] = useState(null);
+  const [dummyProductPrices, setDummyProductPrices] = useState(null);
   const [productBrands, setProductBrands] = useState<null | string>(null);
   const [score, setScore] = useState<"desc" | "asc">("desc");
   const [scrollY, setScrollY] = useState(0);
@@ -57,6 +61,8 @@ const WatchesCards = () => {
     // eslint-disable-next-line
     [scrollY]
   );
+
+  console.log(dummyProductCategory);
 
   useEffect(
     () => {
@@ -99,16 +105,22 @@ const WatchesCards = () => {
     currentUser,
     setProductBrands,
     setProductCategory,
+    setDummyProductCategory,
     pCategory: productCategory,
     productPrices,
+    setDummyProductPrices,
     setProductPrices,
   };
 
   const configMenu = {
     setProductBrands,
     productBrands,
+    dummyProductCategory,
+    setDummyProductCategory,
     setProductCategory,
     productCategory,
+    dummyProductPrices,
+    setDummyProductPrices,
     productPrices,
     setProductPrices,
     score,
@@ -130,8 +142,8 @@ const WatchesCards = () => {
           );
         })}
       </Grid>
-      <Styled.ButtonGrid container justifyContent="center" item xs={12}>
-        <Button1 title="There are no more Results" />
+      <Styled.ButtonGrid container justifyContent='center' item xs={12}>
+        <Button1 title='There are no more Results' />
       </Styled.ButtonGrid>
     </Styled.Grid>
   );

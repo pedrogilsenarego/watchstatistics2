@@ -15,6 +15,8 @@ const WatchCard = ({
   currentUser,
   setProductBrands,
   setProductCategory,
+  setDummyProductCategory,
+  setDummyProductPrices,
   setProductPrices,
   pCategory,
   productPrices,
@@ -42,8 +44,8 @@ const WatchCard = ({
         item
         container
         xs={0.5}
-        justifyContent="center"
-        alignItems="center"
+        justifyContent='center'
+        alignItems='center'
         style={{
           height: "130px",
         }}
@@ -68,8 +70,8 @@ const WatchCard = ({
             <Grid xs={4} item>
               <CardMedia
                 style={{ borderRadius: "4px", cursor: "pointer" }}
-                component="img"
-                height="120"
+                component='img'
+                height='120'
                 image={productThumbnail[0]}
                 alt={reference}
                 onClick={() => {
@@ -104,6 +106,7 @@ const WatchCard = ({
                         <Styled.Button
                           onClick={() => {
                             setProductCategory(productCategory);
+                            setDummyProductCategory(productCategory);
                           }}
                           style={{
                             textTransform: "none",
@@ -120,6 +123,7 @@ const WatchCard = ({
                         <Styled.Button
                           onClick={() => {
                             setProductPrices(productPriceBrackets);
+                            setDummyProductPrices(productPriceBrackets);
                           }}
                           style={{
                             textTransform: "none",
@@ -137,7 +141,7 @@ const WatchCard = ({
                       userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.Button
-                            bColor="green"
+                            bColor='green'
                             style={{
                               textTransform: "none",
                               cursor: "pointer",
@@ -153,7 +157,7 @@ const WatchCard = ({
                       !userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.Button
-                            bColor="red"
+                            bColor='red'
                             style={{
                               textTransform: "none",
                               cursor: "pointer",
@@ -166,7 +170,7 @@ const WatchCard = ({
                       )}
                   </Grid>
                 </Grid>
-                <Grid item container xs={4} justifyContent="flex-end">
+                <Grid item container xs={4} justifyContent='flex-end'>
                   <CircularVotes avgTotal={avgTotal} />
                 </Grid>
               </Grid>
@@ -206,8 +210,8 @@ const WatchCard = ({
             <Grid xs={4} item>
               <CardMedia
                 style={{ borderRadius: "4px", cursor: "pointer" }}
-                component="img"
-                height="120"
+                component='img'
+                height='120'
                 image={productThumbnail[0]}
                 alt={reference}
                 onClick={() => {
@@ -263,7 +267,7 @@ const WatchCard = ({
                       userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.ButtonMobile
-                            bColor="green"
+                            bColor='green'
                             style={{
                               textTransform: "none",
                               cursor: "pointer",
@@ -279,7 +283,7 @@ const WatchCard = ({
                       !userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.ButtonMobile
-                            bColor="red"
+                            bColor='red'
                             style={{
                               textTransform: "none",
                               cursor: "pointer",
@@ -292,7 +296,7 @@ const WatchCard = ({
                       )}
                   </Grid>
                 </Grid>
-                <Grid item container xs={4} justifyContent="flex-end">
+                <Grid item container xs={4} justifyContent='flex-end'>
                   <CircularVotes customSize={60} avgTotal={avgTotal} />
                 </Grid>
               </Grid>
@@ -304,7 +308,7 @@ const WatchCard = ({
   );
 
   return (
-    <Grid item container justifyContent="center" alignItems="center" xs={12}>
+    <Grid item container justifyContent='center' alignItems='center' xs={12}>
       {!isMatch && renderLaptop()}
       {isMatch && renderMobile()}
     </Grid>

@@ -13,8 +13,12 @@ interface Props {
   handleClearFilters: () => void;
   productCategory: string | null;
   setProductCategory: (productsCategory: string | null) => void;
+  dummyProductCategory: any;
+  setDummyProductCategory: (dummyProductCategory: any) => void;
   productBrands: string | null;
   setProductBrands: (productsBrands: string | null) => void;
+  dummyProductPrices: string | null;
+  setDummyProductPrices: (productsPrices: string | null) => void;
   productPrices: string | null;
   setProductPrices: (productsPrices: string | null) => void;
   score: "desc" | "asc";
@@ -26,10 +30,14 @@ const FiltersMobile = ({
   setFiltersVisible,
   handleClearFilters,
   productCategory,
+  dummyProductCategory,
   setProductCategory,
+  setDummyProductCategory,
   productBrands,
   setProductBrands,
+  dummyProductPrices,
   productPrices,
+  setDummyProductPrices,
   setProductPrices,
   score,
   setScore,
@@ -41,14 +49,14 @@ const FiltersMobile = ({
         container
         item
         xs={12}
-        alignItems="center"
-        justifyContent="space-between"
+        alignItems='center'
+        justifyContent='space-between'
       >
         <Grid item>
           <RiCloseFill
             onClick={() => setFiltersVisible(false)}
-            size="2.5em"
-            color="lightGrey"
+            size='2.5em'
+            color='lightGrey'
           />
         </Grid>
         <Grid item>
@@ -67,8 +75,8 @@ const FiltersMobile = ({
       </Styled.CategoriesGrid>
       <Grid item xs={12} style={{ marginTop: "2px" }}>
         <ButtonFilters
-          value={productCategory}
-          setValue={setProductCategory}
+          value={dummyProductCategory}
+          setValue={setDummyProductCategory}
           list={watchTypes.options}
         />
       </Grid>
@@ -87,8 +95,8 @@ const FiltersMobile = ({
       </Grid>
       <Grid item xs={12} style={{ marginTop: "2px" }}>
         <ButtonFilters
-          value={productPrices}
-          setValue={setProductPrices}
+          value={dummyProductPrices}
+          setValue={setDummyProductPrices}
           list={pricesBracket.options}
         />
       </Grid>
@@ -100,19 +108,21 @@ const FiltersMobile = ({
       <Grid item xs={12} style={{ marginLeft: "-6px" }}>
         <BsFileArrowDownFill
           onClick={() => setScore("desc")}
-          size="4em"
+          size='4em'
           color={score === "desc" ? "orange" : "#ffffff66"}
         />
         <BsFileArrowUpFill
           onClick={() => setScore("asc")}
-          size="4em"
+          size='4em'
           color={score === "asc" ? "orange" : "#ffffff66"}
         />
       </Grid>
-      <Grid item xs={12} textAlign="center" style={{ marginTop: "40px" }}>
+      <Grid item xs={12} textAlign='center' style={{ marginTop: "40px" }}>
         <Button2
-          title="Load Watches"
+          title='Load Watches'
           onClick={() => {
+            setProductCategory(dummyProductCategory);
+            setProductPrices(dummyProductPrices);
             handleFetchProducts();
             setFiltersVisible(false);
           }}
