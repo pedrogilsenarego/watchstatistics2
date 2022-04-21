@@ -7,6 +7,7 @@ const mapState = (state: any) => ({
 
 const LoadingSpinner = () => {
   const { loading } = useSelector(mapState);
+
   if (loading)
     return (
       <>

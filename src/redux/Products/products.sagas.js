@@ -30,6 +30,7 @@ import {
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
+import { enableLoading, disableLoading } from "../general/general.actions";
 
 export function* addProduct({ payload }) {
   try {
@@ -57,10 +58,13 @@ export function* onAddProductStart() {
 
 export function* fetchProducts({ payload }) {
   try {
+    yield put(enableLoading());
     const products = yield handleFetchProducts(payload);
     yield put(setProducts(products));
   } catch (err) {
     // console.log(err);
+  } finally {
+    yield put(disableLoading());
   }
 }
 
