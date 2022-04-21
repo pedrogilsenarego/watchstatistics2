@@ -6,6 +6,7 @@ import WatchCard from "./WatchCard";
 import * as Styled from "./styles";
 import Menu from "./Menu";
 import Button1 from "../../../components/Buttons/Button1";
+import LoadingSpinner from "src/components/LoadingSpinner";
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
@@ -152,11 +153,15 @@ const WatchesCards = () => {
           );
         })}
       </Grid>
-      <Styled.ButtonGrid container justifyContent='center' item xs={12}>
-        <Button1 title='There are no more Results' />
-      </Styled.ButtonGrid>
+      <Grid xs={12} item textAlign='center'>
+        <LoadingSpinner />
+      </Grid>
     </Styled.Grid>
   );
 };
 
 export default WatchesCards;
+
+// <Styled.ButtonGrid container justifyContent='center' item xs={12}>
+//<Button1 title='There are no more Results' />
+//</Styled.ButtonGrid>
