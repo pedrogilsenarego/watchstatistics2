@@ -5,18 +5,18 @@ import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import WatchCard from "./WatchCard";
 import * as Styled from "./styles";
 import Menu from "./Menu";
-import Button1 from "../../../components/Buttons/Button1";
 import LoadingSpinner from "src/components/LoadingSpinner";
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
   products: state.productsData.products,
+  isLastPage: state.productsData.isLastPage
 });
 
 const WatchesCards = () => {
   const dispatch = useDispatch();
-  const { products, currentUser } = useSelector(mapState);
-  const { data, isLastPage, queryDoc } = products;
+  const { products, currentUser, isLastPage } = useSelector(mapState);
+  const { data, queryDoc } = products;
   const [productCategory, setProductCategory] = useState<null | string>(null);
   const [dummyProductCategory, setDummyProductCategory] = useState<
     null | string
@@ -54,11 +54,11 @@ const WatchesCards = () => {
     () => {
       if (
         scrollY - scrollGap >=
-        window.innerHeight / (isMatch ? 1 : scrollGap > 0 ? 1.3 : 2)
+        window.innerHeight / (isMatch ? 1.1 : scrollGap > 0 ? 1.3 : 2)
       ) {
         setScrollGap(
           scrollGap +
-            window.innerHeight / (isMatch ? 1 : scrollGap > 0 ? 1.3 : 2)
+            window.innerHeight / (isMatch ? 1.1 : scrollGap > 0 ? 1.3 : 2)
         );
         handleLoadMore();
       }
@@ -156,6 +156,11 @@ const WatchesCards = () => {
       <Grid xs={12} item textAlign='center'>
         <LoadingSpinner />
       </Grid>
+      
+      {!isLastPage && (<Grid xs={12} item textAlign='center'>
+        <Styled.NoMoreResultsTypography>There are no more results</Styled.NoMoreResultsTypography>
+      </Grid>)}
+      
     </Styled.Grid>
   );
 };

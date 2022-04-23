@@ -1,4 +1,4 @@
-import { Grid as MuiGrid, styled } from "@mui/material";
+import { Grid as MuiGrid, styled, Typography } from "@mui/material";
 
 interface GridProps {
   mobile: boolean;
@@ -13,3 +13,9 @@ export const Grid = styled(MuiGrid)(({ mobile }: GridProps) => ({
 export const ButtonGrid = styled(MuiGrid)(() => ({
   paddingTop: "40px",
 }));
+
+export const NoMoreResultsTypography = styled (Typography)(()=>({
+  fontSize: "22px",
+  color: "white",
+  marginTop: "50px"
+}))
