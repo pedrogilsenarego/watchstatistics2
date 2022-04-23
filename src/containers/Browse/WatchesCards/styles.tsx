@@ -19,3 +19,9 @@ export const NoMoreResultsTypography = styled (Typography)(()=>({
   color: "white",
   marginTop: "50px"
 }))
+
+export const NoMoreResults2Typography = styled (Typography)(()=>({
+  fontSize: "16px",
+  color: "#ffffff66",
+  
+}))

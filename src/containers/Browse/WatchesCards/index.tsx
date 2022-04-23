@@ -6,17 +6,18 @@ import WatchCard from "./WatchCard";
 import * as Styled from "./styles";
 import Menu from "./Menu";
 import LoadingSpinner from "src/components/LoadingSpinner";
+import { useHistory } from "react-router-dom";
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
   products: state.productsData.products,
-  isLastPage: state.productsData.isLastPage
 });
 
 const WatchesCards = () => {
   const dispatch = useDispatch();
-  const { products, currentUser, isLastPage } = useSelector(mapState);
-  const { data, queryDoc } = products;
+  const history = useHistory();
+  const { products, currentUser } = useSelector(mapState);
+  const { data, queryDoc, isLastPage } = products;
   const [productCategory, setProductCategory] = useState<null | string>(null);
   const [dummyProductCategory, setDummyProductCategory] = useState<
     null | string
@@ -156,17 +157,24 @@ const WatchesCards = () => {
       <Grid xs={12} item textAlign='center'>
         <LoadingSpinner />
       </Grid>
-      
-      {!isLastPage && (<Grid xs={12} item textAlign='center'>
-        <Styled.NoMoreResultsTypography>There are no more results</Styled.NoMoreResultsTypography>
-      </Grid>)}
-      
+
+      {isLastPage && (
+        <Grid
+          xs={12}
+          item
+          textAlign='center'
+          onClick={() => history.push(`/watchstatistics/addwatch`)}
+        >
+          <Styled.NoMoreResultsTypography>
+            There are no more results
+          </Styled.NoMoreResultsTypography>
+          <Styled.NoMoreResults2Typography>
+            Not finding the watch you want? add it here!
+          </Styled.NoMoreResults2Typography>
+        </Grid>
+      )}
     </Styled.Grid>
   );
 };
 
 export default WatchesCards;
-
-// <Styled.ButtonGrid container justifyContent='center' item xs={12}>
-//<Button1 title='There are no more Results' />
-//</Styled.ButtonGrid>
