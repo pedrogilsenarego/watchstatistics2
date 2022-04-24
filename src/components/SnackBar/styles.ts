@@ -1,8 +1,12 @@
 import { styled, Box as MuiBox } from "@mui/material";
 
-export const Box = styled(MuiBox)(() => ({
+interface Props {
+  bgColor: string;
+}
+
+export const Box = styled(MuiBox)(({ bgColor }: Props) => ({
   width: "100%",
-  backgroundColor: "darkGreen",
+  backgroundColor: bgColor ? bgColor : "darkGreen",
   padding: "10px",
   borderRadius: "4px",
   border: "solid 2px",
