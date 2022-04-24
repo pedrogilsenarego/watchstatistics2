@@ -1,8 +1,5 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-
 import Snackbar from "@mui/material/Snackbar";
-
 import { useSelector, useDispatch } from "react-redux";
 import { clearNotification } from "src/redux/general/general.actions";
 import { BiErrorCircle } from "react-icons/bi";
@@ -63,7 +60,7 @@ const DirectionSnackbar = () => {
   };
 
   React.useEffect(() => {
-    if (general.notificationType) {
+    if (general.notificationType !== null) {
       const { color, icon, bgcolor } = getSnackbarElements(general.type);
       setSnackbar({
         ...snackbar,
@@ -78,7 +75,7 @@ const DirectionSnackbar = () => {
   }, [general]);
 
   const handleClose = () => {
-    dispatch(clearNotification);
+    dispatch(clearNotification());
     setSnackbar({ ...INITIALSTATE });
   };
 

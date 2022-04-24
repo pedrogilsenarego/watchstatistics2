@@ -11,7 +11,10 @@ import { apiInstance } from "./../../Utils";
 import { useLocation } from "react-router";
 import Snackbar from "src/components/SnackBar";
 import { useDispatch } from "react-redux";
-import { updateSuccessNotification } from "src/redux/general/general.actions";
+import {
+  updateFailNotification,
+  updateSuccessNotification,
+} from "src/redux/general/general.actions";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -67,7 +70,7 @@ const SubmitFeedback = () => {
 
       dispatch(updateSuccessNotification("Message Sent"));
     } catch {
-      console.log("fail");
+      dispatch(updateFailNotification("Something Went Wrong"));
     }
   };
 
