@@ -34,6 +34,7 @@ import WatchLab from "./layouts/WatchLab";
 
 //components
 import CookiePolicy from "./components/CookiePolicy";
+import Snackbar from "src/components/SnackBar";
 
 import {
   StyledEngineProvider,
@@ -73,12 +74,12 @@ const App = () => {
         }
       >
         <CssBaseline />
-
-        <div className="App">
+        <Snackbar />
+        <div className='App'>
           <Switch>
             <Route
               exact
-              path="/"
+              path='/'
               render={() =>
                 currentUser ? (
                   <HomepageLayout>
@@ -94,7 +95,7 @@ const App = () => {
 
             <Route
               exact
-              path="/watchstatistics/comparewatches"
+              path='/watchstatistics/comparewatches'
               render={() => (
                 <MainLayout>
                   <CompareWatches />
@@ -103,7 +104,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/browse"
+              path='/browse'
               render={() => (
                 <MainLayout>
                   <Browse />
@@ -112,7 +113,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/watchstatistics/watchlaboratory"
+              path='/watchstatistics/watchlaboratory'
               render={() => (
                 <WithAuth>
                   <WatchLab>
@@ -123,7 +124,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/messages"
+              path='/messages'
               render={() => (
                 <WithAuth>
                   <MainLayout>
@@ -135,7 +136,7 @@ const App = () => {
 
             <Route
               exact
-              path="/watchstatistics/addwatch"
+              path='/watchstatistics/addwatch'
               render={() => (
                 <WithAuth>
                   <WatchLab>
@@ -146,7 +147,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/watchstatistics/market"
+              path='/watchstatistics/market'
               render={() => (
                 <WithAuth>
                   <MainLayout>
@@ -157,7 +158,7 @@ const App = () => {
             />
             <Route
               exact
-              path="/browse/tiles"
+              path='/browse/tiles'
               render={() => (
                 <WatchLab>
                   <Search />
@@ -165,7 +166,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/search/:filterType"
+              path='/search/:filterType'
               render={() => (
                 <WatchLab>
                   <Search />
@@ -173,7 +174,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/product/:productID"
+              path='/product/:productID'
               render={() => (
                 <MainLayout>
                   <ProductDetails />
@@ -181,7 +182,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/product/preview"
+              path='/product/preview'
               render={() => (
                 <WithAuth>
                   <MainLayout>
@@ -191,7 +192,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/FAQ"
+              path='/FAQ'
               render={() => (
                 <MainLayout>
                   <FAQ />
@@ -200,7 +201,7 @@ const App = () => {
             />
 
             <Route
-              path="/dashboard"
+              path='/dashboard'
               render={() => (
                 <WithAuth>
                   <MainLayout>
@@ -210,7 +211,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/mycollection"
+              path='/mycollection'
               render={() => (
                 <WithAuth>
                   <MainLayout>
@@ -220,7 +221,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/order/:orderID"
+              path='/order/:orderID'
               render={() => (
                 <WithAuth>
                   <DashBoardLayout>
@@ -230,7 +231,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/admin"
+              path='/admin'
               render={() => (
                 <WithAdminAuth>
                   <AdminLayout>
@@ -240,7 +241,7 @@ const App = () => {
               )}
             />
             <Route
-              path="/submitfeedback"
+              path='/submitfeedback'
               render={() => (
                 <WithAuth>
                   <MainLayout>

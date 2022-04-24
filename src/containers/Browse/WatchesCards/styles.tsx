@@ -14,14 +14,13 @@ export const ButtonGrid = styled(MuiGrid)(() => ({
   paddingTop: "40px",
 }));
 
-export const NoMoreResultsTypography = styled (Typography)(()=>({
+export const NoMoreResultsTypography = styled(Typography)(() => ({
   fontSize: "22px",
   color: "white",
-  marginTop: "50px"
-}))
+  marginTop: "70px",
+}));
 
-export const NoMoreResults2Typography = styled (Typography)(()=>({
+export const NoMoreResults2Typography = styled(Typography)(() => ({
   fontSize: "16px",
   color: "#ffffff66",
-  
-}))
+}));

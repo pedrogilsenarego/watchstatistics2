@@ -74,7 +74,7 @@ const SubmitFeedback = () => {
       container
       spacing={2}
       style={{ marginTop: "140px" }}
-      justifyContent="center"
+      justifyContent='center'
     >
       <Grid item xs={12} md={5}>
         <Container>
@@ -124,8 +124,8 @@ const SubmitFeedback = () => {
                   multiline
                   rows={6}
                   InputLabelProps={{ shrink: false }}
-                  name="message"
-                  placeholder="Put your message here*"
+                  name='message'
+                  placeholder='Put your message here*'
                 ></TextField>
               </Container>
               <ButtonMUI style={{ marginTop: "20px" }}>Submit</ButtonMUI>
