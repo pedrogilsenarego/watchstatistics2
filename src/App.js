@@ -34,7 +34,6 @@ import WatchLab from "./layouts/WatchLab";
 
 //components
 import CookiePolicy from "./components/CookiePolicy";
-import Snackbar from "src/components/SnackBar";
 
 import {
   StyledEngineProvider,
@@ -74,7 +73,7 @@ const App = () => {
         }
       >
         <CssBaseline />
-        <Snackbar />
+
         <div className='App'>
           <Switch>
             <Route

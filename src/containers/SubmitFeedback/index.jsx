@@ -9,6 +9,7 @@ import ButtonMUI from "../forms/ButtonMUI";
 import TextField from "../forms/InputMUI";
 import { apiInstance } from "./../../Utils";
 import { useHistory, useLocation } from "react-router";
+import Snackbar from "src/components/SnackBar";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -76,6 +77,7 @@ const SubmitFeedback = () => {
       style={{ marginTop: "140px" }}
       justifyContent='center'
     >
+      <Snackbar />
       <Grid item xs={12} md={5}>
         <Container>
           <Typography style={{ paddingTop: "20px" }}>

@@ -2,10 +2,13 @@ import generalTypes from "./general.types";
 
 const INITIAL_STATE = {
   loading: false,
+  notificationMessage: "",
+  notificationType: null,
 };
 
 interface Action {
   type: string;
+  payload: string;
 }
 
 const generalReducer = (state = INITIAL_STATE, action: Action) => {
@@ -19,6 +22,12 @@ const generalReducer = (state = INITIAL_STATE, action: Action) => {
       return {
         ...state,
         loading: false,
+      };
+    case generalTypes.UPDATE_SUCCESS_NOTIFICATION:
+      return {
+        ...state,
+        notificationMessage: action.payload,
+        notificationType: "sucess",
       };
     default:
       return state;

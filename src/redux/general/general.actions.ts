@@ -7,3 +7,8 @@ export const enableLoading = () => ({
 export const disableLoading = () => ({
   type: generalTypes.DISABLE_LOADING,
 });
+
+export const updateSuccessNotification = (message: string) => ({
+  type: generalTypes.UPDATE_SUCCESS_NOTIFICATION,
+  payload: message,
+});
