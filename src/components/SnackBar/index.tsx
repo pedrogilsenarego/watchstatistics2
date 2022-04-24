@@ -52,9 +52,9 @@ const DirectionSnackbar = () => {
         };
       default:
         return {
-          icon: <BiErrorCircle />,
-          color: "orange",
-          bgcolor: "rgba(93, 119, 252, 0.1)",
+          icon: <GiCheckMark />,
+          color: "white",
+          bgcolor: "darkGreen",
         };
     }
   };

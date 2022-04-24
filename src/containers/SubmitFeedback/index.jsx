@@ -66,11 +66,11 @@ const SubmitFeedback = () => {
       userEmail: currentUser.email,
     };
     try {
-      //apiInstance.post("/submitfeedback", body);
-
+      await apiInstance.post("/submitfeedback", body);
       dispatch(updateSuccessNotification("Message Sent"));
-    } catch {
-      dispatch(updateFailNotification("Something Went Wrong"));
+    } catch (err) {
+      console.log(err);
+      dispatch(updateFailNotification("Error: Your message was not sent!"));
     }
   };
 

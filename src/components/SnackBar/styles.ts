@@ -6,11 +6,9 @@ interface Props {
 
 export const Box = styled(MuiBox)(({ bgColor }: Props) => ({
   width: "100%",
-  backgroundColor: bgColor ? bgColor : "darkGreen",
+  backgroundColor: bgColor ? bgColor : "black",
   padding: "10px",
   borderRadius: "4px",
-  border: "solid 2px",
-  borderColor: "darkGreen",
   justifyContent: "center",
   alignItems: "center",
 }));
