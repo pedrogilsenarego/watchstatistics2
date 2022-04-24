@@ -1,11 +1,13 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Button";
+
 import Snackbar from "@mui/material/Snackbar";
-import Slide, { SlideProps } from "@mui/material/Slide";
+
 import { useSelector, useDispatch } from "react-redux";
 import { clearNotification } from "src/redux/general/general.actions";
 import { BiErrorCircle } from "react-icons/bi";
+import { GiCheckMark } from "react-icons/gi";
+import * as Styled from "./styles";
 
 interface SnackbarState {
   open: boolean;
@@ -33,6 +35,7 @@ const DirectionSnackbar = () => {
   const [snackbar, setSnackbar] = React.useState<SnackbarState>({
     ...INITIALSTATE,
   });
+
   const { general } = useSelector(mapState);
   const { notificationMessage, notificationType } = general;
 
@@ -46,9 +49,9 @@ const DirectionSnackbar = () => {
         };
       case "success":
         return {
-          icon: <BiErrorCircle />,
-          color: "darkGreen",
-          bgcolor: "#DFF9F1",
+          icon: <GiCheckMark />,
+          color: "white",
+          bgcolor: "darkGreen",
         };
       default:
         return {
@@ -60,51 +63,38 @@ const DirectionSnackbar = () => {
   };
 
   React.useEffect(() => {
-    const { color, icon, bgcolor } = getSnackbarElements(general.type);
-    setSnackbar({
-      ...snackbar,
-      open: true,
-      color: color,
-      bgcolor: bgcolor,
-      icon: icon,
-      message: general.notificationMessage,
-      type: general.notificationType,
-    });
+    if (general.notificationType) {
+      const { color, icon, bgcolor } = getSnackbarElements(general.type);
+      setSnackbar({
+        ...snackbar,
+        open: true,
+        color: color,
+        bgcolor: bgcolor,
+        icon: icon,
+        message: general.notificationMessage,
+        type: general.notificationType,
+      });
+    }
   }, [general]);
 
   const handleClose = () => {
-    setSnackbar({ ...INITIALSTATE });
     dispatch(clearNotification);
+    setSnackbar({ ...INITIALSTATE });
   };
 
   return (
-    <div>
-      <Button
-        onClick={() =>
-          setSnackbar({
-            ...snackbar,
-            open: true,
-            message: notificationMessage,
-            type: notificationType,
-          })
-        }
-      >
-        Right
-      </Button>
-
+    <>
       <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         open={snackbar.open}
         onClose={handleClose}
         autoHideDuration={3000}
       >
-        <Box>
-          {snackbar.icon}
-
-          <Box>{snackbar.message}</Box>
-        </Box>
+        <Styled.Box>
+          {snackbar.icon} {snackbar.message}
+        </Styled.Box>
       </Snackbar>
-    </div>
+    </>
   );
 };
 
