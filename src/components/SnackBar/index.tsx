@@ -60,16 +60,16 @@ const DirectionSnackbar = () => {
   };
 
   React.useEffect(() => {
-    if (general.notificationType !== null) {
-      const { color, icon, bgcolor } = getSnackbarElements(general.type);
+    if (notificationType !== null) {
+      const { color, icon, bgcolor } = getSnackbarElements(notificationType);
       setSnackbar({
         ...snackbar,
         open: true,
         color: color,
         bgcolor: bgcolor,
         icon: icon,
-        message: general.notificationMessage,
-        type: general.notificationType,
+        message: notificationMessage,
+        type: notificationType,
       });
     }
   }, [general]);
