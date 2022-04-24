@@ -29,6 +29,12 @@ const generalReducer = (state = INITIAL_STATE, action: Action) => {
         notificationMessage: action.payload,
         notificationType: "sucess",
       };
+    case generalTypes.CLEAR_NOTIFICATION:
+      return {
+        ...state,
+        notificationMessage: "",
+        notificationType: null,
+      };
     default:
       return state;
   }

@@ -8,8 +8,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import ButtonMUI from "../forms/ButtonMUI";
 import TextField from "../forms/InputMUI";
 import { apiInstance } from "./../../Utils";
-import { useHistory, useLocation } from "react-router";
+import { useLocation } from "react-router";
 import Snackbar from "src/components/SnackBar";
+import { useDispatch } from "react-redux";
+import { updateSuccessNotification } from "src/redux/general/general.actions";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -51,7 +53,8 @@ const SubmitFeedback = () => {
   const location = useLocation();
   const theme = useTheme();
   const classes = useStyles();
-  const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
     const body = {
@@ -61,7 +64,8 @@ const SubmitFeedback = () => {
     };
     try {
       apiInstance.post("/submitfeedback", body);
-      history.push(`/`);
+
+      dispatch(updateSuccessNotification("Message Sent"));
     } catch {
       console.log("fail");
     }
@@ -130,7 +134,9 @@ const SubmitFeedback = () => {
                   placeholder='Put your message here*'
                 ></TextField>
               </Container>
-              <ButtonMUI style={{ marginTop: "20px" }}>Submit</ButtonMUI>
+              <ButtonMUI style={{ marginTop: "20px", color: "orange" }}>
+                Submit
+              </ButtonMUI>
             </Form>
           </Formik>
         </Container>

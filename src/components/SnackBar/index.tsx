@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Slide, { SlideProps } from "@mui/material/Slide";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { useSelector } from "react-redux";
 
 type TransitionProps = Omit<SlideProps, "direction">;
 
@@ -18,7 +19,13 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const DirectionSnackbar = () => {
+  const mapState = (state: any) => ({
+    general: state.general,
+  });
+
   const [open, setOpen] = React.useState(false);
+  const { general } = useSelector(mapState);
+  const { notificationMessage, notificationType } = general;
   const [transition, setTransition] = React.useState<
     React.ComponentType<TransitionProps> | undefined
   >(undefined);
@@ -32,6 +39,10 @@ const DirectionSnackbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  React.useEffect(() => {
+    handleClick(TransitionLeft);
+  }, [notificationMessage, notificationType]);
 
   return (
     <div>
@@ -47,7 +58,7 @@ const DirectionSnackbar = () => {
         key={transition ? transition.name : ""}
       >
         <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
-          This is a success message!
+          {notificationMessage}
         </Alert>
       </Snackbar>
     </div>
