@@ -63,7 +63,7 @@ const SubmitFeedback = () => {
       userEmail: currentUser.email,
     };
     try {
-      apiInstance.post("/submitfeedback", body);
+      //apiInstance.post("/submitfeedback", body);
 
       dispatch(updateSuccessNotification("Message Sent"));
     } catch {

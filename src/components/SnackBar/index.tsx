@@ -1,31 +1,29 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Slide, { SlideProps } from "@mui/material/Slide";
-import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { useSelector, useDispatch } from "react-redux";
 import { clearNotification } from "src/redux/general/general.actions";
-
-type TransitionProps = Omit<SlideProps, "direction">;
-
-function TransitionLeft(props: TransitionProps) {
-  return <Slide {...props} direction='left' />;
-}
+import { BiErrorCircle } from "react-icons/bi";
 
 interface SnackbarState {
   open: boolean;
   message: string;
-  type: null | "success";
+  type: null | "success" | "fail";
   color: string;
   bgcolor: string;
+  icon: any;
 }
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref
-) {
-  return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
-});
+const INITIALSTATE = {
+  open: false,
+  message: "",
+  type: null,
+  icon: <BiErrorCircle />,
+  color: "",
+  bgcolor: "",
+};
 
 const DirectionSnackbar = () => {
   const mapState = (state: any) => ({
@@ -33,53 +31,78 @@ const DirectionSnackbar = () => {
   });
   const dispatch = useDispatch();
   const [snackbar, setSnackbar] = React.useState<SnackbarState>({
-    open: false,
-    message: "",
-    type: "success",
-    color: "",
-    bgcolor: "",
+    ...INITIALSTATE,
   });
   const { general } = useSelector(mapState);
   const { notificationMessage, notificationType } = general;
-  const [transition, setTransition] = React.useState<
-    React.ComponentType<TransitionProps> | undefined
-  >(undefined);
 
-  const handleClick =
-    (Transition: React.ComponentType<TransitionProps>) => () => {
-      setTransition(() => Transition);
-      setSnackbar({
-        ...snackbar,
-        open: true,
-        message: notificationMessage,
-        type: notificationType,
-      });
-    };
-
-  const handleClose = () => {
-    setSnackbar({ ...snackbar, open: false, message: "", type: null });
-    dispatch(clearNotification);
+  const getSnackbarElements = (type: string) => {
+    switch (type) {
+      case "fail":
+        return {
+          icon: <BiErrorCircle />,
+          color: "white",
+          bgcolor: "red",
+        };
+      case "success":
+        return {
+          icon: <BiErrorCircle />,
+          color: "darkGreen",
+          bgcolor: "#DFF9F1",
+        };
+      default:
+        return {
+          icon: <BiErrorCircle />,
+          color: "orange",
+          bgcolor: "rgba(93, 119, 252, 0.1)",
+        };
+    }
   };
 
   React.useEffect(() => {
-    handleClick(TransitionLeft);
-  }, [notificationMessage]);
+    const { color, icon, bgcolor } = getSnackbarElements(general.type);
+    setSnackbar({
+      ...snackbar,
+      open: true,
+      color: color,
+      bgcolor: bgcolor,
+      icon: icon,
+      message: general.notificationMessage,
+      type: general.notificationType,
+    });
+  }, [general]);
+
+  const handleClose = () => {
+    setSnackbar({ ...INITIALSTATE });
+    dispatch(clearNotification);
+  };
 
   return (
     <div>
-      <Button onClick={handleClick(TransitionLeft)}>Right</Button>
+      <Button
+        onClick={() =>
+          setSnackbar({
+            ...snackbar,
+            open: true,
+            message: notificationMessage,
+            type: notificationType,
+          })
+        }
+      >
+        Right
+      </Button>
 
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={snackbar.open}
         onClose={handleClose}
-        TransitionComponent={transition}
         autoHideDuration={3000}
-        key={transition ? transition.name : ""}
       >
-        <Alert onClose={handleClose} severity='success' sx={{ width: "100%" }}>
-          {notificationMessage}
-        </Alert>
+        <Box>
+          {snackbar.icon}
+
+          <Box>{snackbar.message}</Box>
+        </Box>
       </Snackbar>
     </div>
   );
