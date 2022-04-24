@@ -3,12 +3,21 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Slide, { SlideProps } from "@mui/material/Slide";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { clearNotification } from "src/redux/general/general.actions";
 
 type TransitionProps = Omit<SlideProps, "direction">;
 
 function TransitionLeft(props: TransitionProps) {
   return <Slide {...props} direction='left' />;
+}
+
+interface SnackbarState {
+  open: boolean;
+  message: string;
+  type: null | "success";
+  color: string;
+  bgcolor: string;
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -22,8 +31,14 @@ const DirectionSnackbar = () => {
   const mapState = (state: any) => ({
     general: state.general,
   });
-
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const [snackbar, setSnackbar] = React.useState<SnackbarState>({
+    open: false,
+    message: "",
+    type: "success",
+    color: "",
+    bgcolor: "",
+  });
   const { general } = useSelector(mapState);
   const { notificationMessage, notificationType } = general;
   const [transition, setTransition] = React.useState<
@@ -33,16 +48,22 @@ const DirectionSnackbar = () => {
   const handleClick =
     (Transition: React.ComponentType<TransitionProps>) => () => {
       setTransition(() => Transition);
-      setOpen(true);
+      setSnackbar({
+        ...snackbar,
+        open: true,
+        message: notificationMessage,
+        type: notificationType,
+      });
     };
 
   const handleClose = () => {
-    setOpen(false);
+    setSnackbar({ ...snackbar, open: false, message: "", type: null });
+    dispatch(clearNotification);
   };
 
   React.useEffect(() => {
     handleClick(TransitionLeft);
-  }, [notificationMessage, notificationType]);
+  }, [notificationMessage]);
 
   return (
     <div>
@@ -50,10 +71,9 @@ const DirectionSnackbar = () => {
 
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        open={open}
+        open={snackbar.open}
         onClose={handleClose}
         TransitionComponent={transition}
-        message='I love snacks'
         autoHideDuration={3000}
         key={transition ? transition.name : ""}
       >
