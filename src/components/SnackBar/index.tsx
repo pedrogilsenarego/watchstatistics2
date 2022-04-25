@@ -72,6 +72,7 @@ const DirectionSnackbar = () => {
         type: notificationType,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [general]);
 
   const handleClose = () => {
@@ -85,7 +86,7 @@ const DirectionSnackbar = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         open={snackbar.open}
         onClose={handleClose}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
       >
         <Styled.Box bgColor={snackbar.bgcolor}>
           {snackbar.icon} {snackbar.message}

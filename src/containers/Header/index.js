@@ -22,6 +22,8 @@ import { FiSearch } from "react-icons/fi";
 import { VscHome } from "react-icons/vsc";
 
 import SignIn from "../SignIn";
+import DrawerMine from "src/components/Drawer";
+import MobileMainDrawer from "./MobileMainDrawer";
 
 import RightIconsNoUser from "./RightIconsNoUser";
 import RightIconsUser from "./RightIconsUser";
@@ -86,6 +88,7 @@ const Header = (props) => {
   const [search, setSearch] = useState(false);
 
   const [watchstatistics, setWatchstatistics] = useState(true);
+  const [mobileDrawer, setMobileDrawer] = useState(false);
 
   //media
 
@@ -181,7 +184,7 @@ const Header = (props) => {
 
   return (
     <div>
-      <AppBar position="fixed" elevation={0} className={classes.appbar}>
+      <AppBar position='fixed' elevation={0} className={classes.appbar}>
         <Toolbar>
           {isMatch ? (
             <>
@@ -190,37 +193,37 @@ const Header = (props) => {
                   item
                   xs={search ? 12 : 6}
                   style={{ display: "flex" }}
-                  align="left"
+                  align='left'
                 >
                   {!search && (
                     <Button
-                      aria-controls="mediaMenu"
+                      aria-controls='mediaMenu'
                       disableRipple
                       className={classes.textBtn}
                       activestyle={activeStyle}
-                      onClick={(e) => {
-                        setAnchorMediaMenu(e.currentTarget);
+                      onClick={() => {
+                        setMobileDrawer(true);
                       }}
                     >
-                      <CgMenuGridO fontSize="2.5em" />
+                      <CgMenuGridO fontSize='2.5em' />
                     </Button>
                   )}
 
                   <Button
-                    aria-controls="search"
+                    aria-controls='search'
                     disableRipple
                     className={classes.textBtn}
                     activestyle={activeStyle}
                     onClick={() => setSearch(!search)}
                   >
-                    <FiSearch fontSize="2.5em" />
+                    <FiSearch fontSize='2.5em' />
                   </Button>
                   {search && <Search {...configSearch} />}
                 </Grid>
                 <Grid
                   item
                   xs={search ? 0 : 6}
-                  align="right"
+                  align='right'
                   style={{ marginTop: "3px" }}
                 >
                   {currentUser && <RightIconsUser {...configRightIconsUser} />}
@@ -232,10 +235,10 @@ const Header = (props) => {
             </>
           ) : (
             <>
-              <Grid item xs={12} md={7} className={classes.grid} align="left">
+              <Grid item xs={12} md={7} className={classes.grid} align='left'>
                 <LeftIcons {...configLeftIcons} />
               </Grid>
-              <Grid item xs={12} md={5} align="right">
+              <Grid item xs={12} md={5} align='right'>
                 {currentUser && <RightIconsBigUser {...configRightIconsUser} />}
                 {!currentUser && (
                   <RightIconsNoUser {...configRightIconsNoUser} />
@@ -245,11 +248,19 @@ const Header = (props) => {
           )}
         </Toolbar>
       </AppBar>
+      <DrawerMine
+        id={0}
+        position='left'
+        openDrawer={mobileDrawer}
+        setOpenDrawer={setMobileDrawer}
+      >
+        <MobileMainDrawer setMobileDrawer={setMobileDrawer} />
+      </DrawerMine>
       <Menu
         disableScrollLock
         className={classes.menu}
         style={{}}
-        id="messages"
+        id='messages'
         onClose={handleCloseMessagesMenu}
         anchorEl={anchorMessages}
         open={Boolean(anchorMessages)}
@@ -266,7 +277,7 @@ const Header = (props) => {
       <Menu
         disableScrollLock
         className={classes.menu}
-        id="watchstatistics"
+        id='watchstatistics'
         onClose={handleCloseWatchstatisticsMenu}
         anchorEl={anchorWatchStatistics}
         open={Boolean(anchorWatchStatistics)}
@@ -301,7 +312,7 @@ const Header = (props) => {
       <Menu
         disableScrollLock
         className={classes.menu}
-        id="support"
+        id='support'
         onClose={handleCloseSupportMenu}
         anchorEl={anchorSupport}
         open={Boolean(anchorSupport)}
@@ -328,7 +339,7 @@ const Header = (props) => {
       <Menu
         disableScrollLock
         className={classes.menu}
-        id="MyAccount"
+        id='MyAccount'
         onClose={handleCloseMyAccountMenu}
         anchorEl={anchorMyAccount}
         open={Boolean(anchorMyAccount)}
@@ -373,7 +384,7 @@ const Header = (props) => {
       <Menu
         disableScrollLock
         className={classes.menu}
-        id="mediaMenu"
+        id='mediaMenu'
         onClose={handleCloseMediaMenu}
         anchorEl={anchorMediaMenu}
         open={Boolean(anchorMediaMenu)}
@@ -383,10 +394,10 @@ const Header = (props) => {
           activestyle={activeStyle}
           component={NavLink}
           disableRipple
-          to="/"
+          to='/'
           exact
         >
-          <VscHome fontSize="1.5em" />
+          <VscHome fontSize='1.5em' />
           &nbsp;Home
         </MenuItem>
         <MenuItem
@@ -432,7 +443,7 @@ const Header = (props) => {
         ]}
 
         <MenuItem
-          aria-controls="support"
+          aria-controls='support'
           disableRipple
           className={classes.textBtn}
           activestyle={activeStyle}
@@ -440,7 +451,7 @@ const Header = (props) => {
             setAnchorSupport(e.currentTarget);
           }}
         >
-          <AiOutlineInfoCircle fontSize="1.5em" />
+          <AiOutlineInfoCircle fontSize='1.5em' />
           &nbsp; Ecosystem
         </MenuItem>
       </Menu>
@@ -448,11 +459,11 @@ const Header = (props) => {
       <Menu
         disableScrollLock
         className={classes.menu}
-        id="login"
+        id='login'
         onClose={handleCloseLoginMenu}
         anchorEl={anchorLogin}
         open={Boolean(anchorLogin)}
-        anchorReference="none"
+        anchorReference='none'
         PaperProps={{
           style: {
             left: "50%",
