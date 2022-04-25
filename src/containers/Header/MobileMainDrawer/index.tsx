@@ -9,6 +9,11 @@ interface Props {
 
 const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
   const history = useHistory();
+  function handleClickOption(url: string) {
+    setMobileDrawer(false);
+    history.push(url);
+    return;
+  }
   return (
     <>
       <Grid container>
@@ -27,29 +32,31 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             />
           </Grid>
         </Grid>
-        <Grid item xs={12} onClick={() => history.push(`/`)}>
+        <Grid item xs={12} onClick={() => handleClickOption("/")}>
           <Styled.TypographyTitle>Home</Styled.TypographyTitle>
         </Grid>
-        <Grid item xs={12} onClick={() => history.push(`/browse`)}>
+        <Grid item xs={12} onClick={() => handleClickOption(`/browse`)}>
           <Styled.TypographyTitle>Browse</Styled.TypographyTitle>
         </Grid>
         <Grid
           item
           xs={12}
-          onClick={() => history.push(`/watchstatistics/addwatch`)}
+          onClick={() => handleClickOption(`/watchstatistics/addwatch`)}
         >
           <Styled.TypographyTitle>Add Watch</Styled.TypographyTitle>
         </Grid>
         <Grid
           item
           xs={12}
-          onClick={() => history.push(`/watchstatistics/comparewatches`)}
+          onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
         >
           <Styled.TypographyTitle>Compare Watches</Styled.TypographyTitle>
         </Grid>
         <Grid item xs={12}>
           <Styled.TypographyTitle
-            onClick={() => history.push(`/watchstatistics/watchlaboratory`)}
+            onClick={() =>
+              handleClickOption(`/watchstatistics/watchlaboratory`)
+            }
           >
             Watch Laboratory
           </Styled.TypographyTitle>
@@ -57,7 +64,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          onClick={() => history.push(`/watchstatistics/market`)}
+          onClick={() => handleClickOption(`/watchstatistics/market`)}
         >
           <Styled.TypographyTitle>Market</Styled.TypographyTitle>
         </Grid>

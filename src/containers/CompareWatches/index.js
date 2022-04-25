@@ -206,22 +206,22 @@ const CompareWatches = () => {
           <Paper style={{ background: "#18161E" }}>
             {cartItems && cartItems.length > 0 && (
               <TableContainer>
-                <Table size="small" border="0" aria-label="simple table">
+                <Table size='small' border='0' aria-label='simple table'>
                   <TableHead>
                     <TableRow>
-                      <TableCell align="left" style={{ fontSize: "15px" }}>
+                      <TableCell align='left' style={{ fontSize: "15px" }}>
                         Image
                       </TableCell>
-                      <TableCell align="left" style={{ fontSize: "15px" }}>
+                      <TableCell align='left' style={{ fontSize: "15px" }}>
                         Description
                       </TableCell>
-                      <TableCell align="center" style={{ fontSize: "15px" }}>
+                      <TableCell align='center' style={{ fontSize: "15px" }}>
                         Label
                       </TableCell>
-                      <TableCell align="center" style={{ fontSize: "15px" }}>
+                      <TableCell align='center' style={{ fontSize: "15px" }}>
                         Hide
                       </TableCell>
-                      <TableCell align="center" style={{ fontSize: "15px" }}>
+                      <TableCell align='center' style={{ fontSize: "15px" }}>
                         Remove
                       </TableCell>
                     </TableRow>
@@ -252,7 +252,7 @@ const CompareWatches = () => {
               <Grid item xs={6}>
                 <Button
                   onClick={() => {
-                    history.push("/search");
+                    history.push("/browse");
                   }}
                 >
                   Search for Watches
