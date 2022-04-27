@@ -74,9 +74,9 @@ const Section4 = ({ isMatch }) => {
           <Typography>Additional Information</Typography>
           <Button disableRipple>
             <AiOutlineQuestionCircle
-              fontSize="1.5em"
+              fontSize='1.5em'
               onClick={() => setOpenTextWatchPopup(!openTextWatchPopup)}
-              color="white"
+              color='white'
               style={{ marginTop: "-3px" }}
             />
           </Button>
@@ -100,12 +100,12 @@ const Section4 = ({ isMatch }) => {
             }}
           >
             <TextField
-              name="productDesc"
+              name='productDesc'
               className={classes.textField}
               multiline
               InputLabelProps={{ shrink: false }}
               rows={6}
-              placeholder="Description from Watch*"
+              placeholder='Description from Watch'
             ></TextField>
           </Container>
         </Grid>
@@ -121,10 +121,10 @@ const Section4 = ({ isMatch }) => {
             }}
           >
             <TextField
-              size="small"
+              size='small'
               className={classes.textField}
-              name="additionalDataTitle"
-              placeholder="Title*  ex:Hodinkee"
+              name='additionalDataTitle'
+              placeholder='Title*  ex:Hodinkee'
             ></TextField>
           </Container>
         </Grid>
@@ -139,10 +139,10 @@ const Section4 = ({ isMatch }) => {
             }}
           >
             <TextField
-              size="small"
+              size='small'
               className={classes.textField}
-              name="additionalDataLink"
-              placeholder="Link*  ex:https://www.hodinkee.com/articles/..."
+              name='additionalDataLink'
+              placeholder='Link*  ex:https://www.hodinkee.com/articles/...'
             ></TextField>
           </Container>
         </Grid>
@@ -155,7 +155,7 @@ const Section4 = ({ isMatch }) => {
           }}
         />
         <Typography
-          variant="subheader1"
+          variant='subheader1'
           style={{ paddingLeft: "8px", marginTop: "10px" }}
         >
           * fields have to be filled
@@ -167,7 +167,7 @@ const Section4 = ({ isMatch }) => {
         setOpenPopup={setOpenDeleteWatchPopup}
       >
         <Grid item xs={12}>
-          <img style={{ width: "40vw" }} src={IMAGE_ADRESS} alt="" />
+          <img style={{ width: "40vw" }} src={IMAGE_ADRESS} alt='' />
           <Typography
             style={{ color: "black", fontSize: "12px", marginTop: "5px" }}
           >
