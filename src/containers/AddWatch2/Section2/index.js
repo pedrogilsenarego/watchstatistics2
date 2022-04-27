@@ -82,8 +82,8 @@ const Section2 = ({
           <Button disableRipple>
             <AiOutlineQuestionCircle
               onClick={() => setOpenDeleteWatchPopup(!openDeleteWatchPopup)}
-              fontSize="1.5em"
-              color="white"
+              fontSize='1.5em'
+              color='white'
               style={{ marginTop: "-3px" }}
             />
           </Button>
@@ -106,10 +106,10 @@ const Section2 = ({
             }}
           >
             <TextField
-              size="small"
+              size='small'
               className={classes.textField}
-              name="productThumbnail"
-              placeholder="Main Image*"
+              name='productThumbnail'
+              placeholder='Main Image*'
             ></TextField>
           </Container>
         </Grid>
@@ -126,10 +126,10 @@ const Section2 = ({
               }}
             >
               <TextField
-                size="small"
+                size='small'
                 className={classes.textField}
-                name="productThumbnail2"
-                placeholder="Image2"
+                name='productThumbnail2'
+                placeholder='Image2'
               ></TextField>
             </Container>
           </Grid>
@@ -146,10 +146,10 @@ const Section2 = ({
               }}
             >
               <TextField
-                size="small"
+                size='small'
                 className={classes.textField}
-                name="productThumbnail3"
-                label="Image 3"
+                name='productThumbnail3'
+                label='Image 3'
               ></TextField>
             </Container>
           </Grid>
@@ -166,10 +166,10 @@ const Section2 = ({
               }}
             >
               <TextField
-                size="small"
+                size='small'
                 className={classes.textField}
-                name="productThumbnail4"
-                label="Image 4"
+                name='productThumbnail4'
+                label='Image 4'
               ></TextField>
             </Container>
           </Grid>
@@ -186,10 +186,10 @@ const Section2 = ({
             }}
           >
             <TextField
-              size="small"
+              size='small'
               className={classes.textField}
-              name="productBackground"
-              placeholder="Background Image*"
+              name='productBackground'
+              placeholder='Background Image'
             ></TextField>
           </Container>
         </Grid>
@@ -219,7 +219,7 @@ const Section2 = ({
           }}
         />
         <Typography
-          variant="subheader1"
+          variant='subheader1'
           style={{ paddingLeft: "8px", marginTop: "10px" }}
         >
           * fields have to be filled
@@ -231,7 +231,7 @@ const Section2 = ({
         setOpenPopup={setOpenDeleteWatchPopup}
       >
         <Grid item xs={12}>
-          <img style={{ width: "40vw" }} src={IMAGE_ADRESS} alt="" />
+          <img style={{ width: "40vw" }} src={IMAGE_ADRESS} alt='' />
           <Typography
             style={{ color: "black", fontSize: "12px", marginTop: "5px" }}
           >

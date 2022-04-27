@@ -99,7 +99,7 @@ const UserPref = (props) => {
         <Form>
           <Container
             style={{
-              backgroundColor: theme.palette.textField.background,
+              backgroundColor: "white",
               height: "40px",
               padding: "0px",
               marginTop: "10px",
@@ -108,8 +108,8 @@ const UserPref = (props) => {
           >
             <TextField
               className={classes.textField}
-              size="small"
-              name="username"
+              size='small'
+              name='username'
               placeholder={currentUser.displayName}
               style={{ marginTop: "0px" }}
             ></TextField>
