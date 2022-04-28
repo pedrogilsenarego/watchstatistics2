@@ -124,7 +124,7 @@ const Section4 = ({ isMatch }) => {
               size='small'
               className={classes.textField}
               name='additionalDataTitle'
-              placeholder='Title*  ex:Hodinkee'
+              placeholder='Title  ex:Hodinkee'
             ></TextField>
           </Container>
         </Grid>
@@ -142,7 +142,7 @@ const Section4 = ({ isMatch }) => {
               size='small'
               className={classes.textField}
               name='additionalDataLink'
-              placeholder='Link*  ex:https://www.hodinkee.com/articles/...'
+              placeholder='Link  ex:https://www.hodinkee.com/articles/...'
             ></TextField>
           </Container>
         </Grid>

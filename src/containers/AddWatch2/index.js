@@ -59,14 +59,12 @@ const FORM_VALIDATION = Yup.object().shape({
     "Enter a valid URL!"
   ),
   productDesc: Yup.string(),
-  additionalDataTitle: Yup.string().required("Required"),
-  additionalDataLink: Yup.string()
-    .matches(
-      // eslint-disable-next-line
-      /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
-      "Enter a valid URL!"
-    )
-    .required("Please enter Image URL adress"),
+  additionalDataTitle: Yup.string(),
+  additionalDataLink: Yup.string().matches(
+    // eslint-disable-next-line
+    /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+    "Enter a valid URL!"
+  ),
   yearProductionStart: Yup.string().matches(/\b\d{4}\b/, {
     message: "Must be exactly 4 numbers",
     excludeEmptyString: true,
