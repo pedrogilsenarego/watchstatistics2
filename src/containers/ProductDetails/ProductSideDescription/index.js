@@ -3,8 +3,7 @@ import { Typography, Box, Button, Grid } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
-import Popup from "src/containers/controls/Popup";
-import AddDescriptionModal from "./AddDescriptionModal";
+import Multiline from "src/components/Inputs/Muitline";
 
 const useStyles = makeStyles((theme) => ({
   textBtn: {
@@ -26,7 +25,7 @@ const mapState = (state) => ({
 // eslint-disable-next-line
 const ProductSideDescription = ({}) => {
   const { product } = useSelector(mapState);
-  const [addDescriptionPopup, setAddDescriptionPopup] = useState(false);
+  const [addDescription, setAddDescription] = useState(false);
   const { productDesc, additionalData } = product;
   const classes = useStyles();
 
@@ -44,35 +43,26 @@ const ProductSideDescription = ({}) => {
         >
           Description
         </Typography>
-        <Box>
+        <Box style={{ padding: "10px" }}>
           {productDesc !== "" ? (
             <Typography
               dangerouslySetInnerHTML={{ __html: productDesc }}
               align='justify'
               style={{
                 marginTop: "5px",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                paddingBottom: "10px",
-
                 color: "#ffffffBF",
               }}
             />
-          ) : (
+          ) : !addDescription ? (
             <Typography
               style={{
-                marginTop: "5px",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                paddingBottom: "10px",
-
                 color: "#ffffffBF",
               }}
             >
               There is no description for this watch yet,{" "}
               <b
                 onClick={() => {
-                  setAddDescriptionPopup(true);
+                  setAddDescription(true);
                 }}
                 style={{ color: "orange", cursor: "pointer" }}
               >
@@ -80,6 +70,8 @@ const ProductSideDescription = ({}) => {
               </b>{" "}
               to add a description.
             </Typography>
+          ) : (
+            <Multiline />
           )}
         </Box>
       </Box>
@@ -109,13 +101,6 @@ const ProductSideDescription = ({}) => {
             })}
         </Grid>
       </Box>
-      <Popup
-        title='Add description'
-        openPopup={addDescriptionPopup}
-        setOpenPopup={setAddDescriptionPopup}
-      >
-        <AddDescriptionModal />
-      </Popup>
     </div>
   );
 };
