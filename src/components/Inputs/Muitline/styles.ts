@@ -1,20 +1,18 @@
 import { styled, TextField as MuiTextField } from "@mui/material";
 
 export const TextField = styled(MuiTextField)(() => ({
-  color: "white",
-  "& label.Mui-focused": {
-    color: "white",
-  },
+  backgroundColor: "white",
+  borderRadius: "4px",
 
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
       borderColor: "#ffffff66",
     },
     "&:hover fieldset": {
-      borderColor: "white",
+      borderColor: "orange",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "white",
+      borderColor: "orange",
     },
   },
 }));

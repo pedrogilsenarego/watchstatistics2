@@ -1,9 +1,18 @@
 import * as Styled from "./styles";
 
-const Multiline = () => {
+interface Props {
+  placeholder?: string;
+}
+
+const Multiline = ({ placeholder }: Props) => {
   return (
     <>
-      <Styled.TextField multiline fullWidth />
+      <Styled.TextField
+        multiline
+        fullWidth
+        rows={8}
+        placeholder={placeholder}
+      />
     </>
   );
 };
