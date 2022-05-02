@@ -7,6 +7,7 @@ export const content = {
         myCollection: "My Collection",
         dashboard: "Dashboard",
         logout: "Logout",
+        admin: "Admin",
       },
       drawer: {
         main: {

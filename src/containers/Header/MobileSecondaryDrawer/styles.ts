@@ -10,6 +10,12 @@ export const TypographyTitle = styled(MuiTypography)(() => ({
   fontWeight: "600 !important",
 }));
 
+export const TypographyTitleAdmin = styled(MuiTypography)(() => ({
+  color: "orange !important",
+  fontSize: "30px !important",
+  fontWeight: "600 !important",
+}));
+
 export const TypographyLanguage = styled(MuiTypography)(() => ({
   color: "lightGrey !important",
   fontSize: "20px !important",
@@ -18,7 +24,7 @@ export const TypographyLanguage = styled(MuiTypography)(() => ({
 
 export const Divider = styled(MuiDivider)(() => ({
   width: "50%",
-  height: "3px",
+  height: "2px",
   backgroundColor: "lightGrey !important",
   marginTop: "15px !important",
   marginBottom: "15px !important",
