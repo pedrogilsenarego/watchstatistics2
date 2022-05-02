@@ -24,6 +24,7 @@ import { VscHome } from "react-icons/vsc";
 import SignIn from "../SignIn";
 import DrawerMine from "src/components/Drawer";
 import MobileMainDrawer from "./MobileMainDrawer";
+import MobileSecondaryDrawer from "./MobileSecondaryDrawer";
 
 import RightIconsNoUser from "./RightIconsNoUser";
 import RightIconsUser from "./RightIconsUser";
@@ -89,6 +90,7 @@ const Header = (props) => {
 
   const [watchstatistics, setWatchstatistics] = useState(true);
   const [mobileDrawer, setMobileDrawer] = useState(false);
+  const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
 
   //media
 
@@ -117,6 +119,7 @@ const Header = (props) => {
     setAnchorMyAccount(e.currentTarget);
   };
   const configRightIconsUser = {
+    setMobileDrawerSecondary,
     handleMyAccountOpen,
     messageStatus,
     search,
@@ -255,6 +258,14 @@ const Header = (props) => {
         setOpenDrawer={setMobileDrawer}
       >
         <MobileMainDrawer setMobileDrawer={setMobileDrawer} />
+      </DrawerMine>
+      <DrawerMine
+        id={0}
+        position='right'
+        openDrawer={mobileDrawerSecondary}
+        setOpenDrawer={setMobileDrawerSecondary}
+      >
+        <MobileSecondaryDrawer setMobileDrawer={setMobileDrawerSecondary} />
       </DrawerMine>
       <Menu
         disableScrollLock

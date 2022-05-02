@@ -3,6 +3,8 @@ import { RiCloseFill } from "react-icons/ri";
 import * as Styled from "./styles";
 import { useHistory } from "react-router";
 import { i18n } from "src/translations/i18n";
+import { useDispatch } from "react-redux";
+import { signOutUserStart } from "src/redux/User/user.actions";
 
 interface Props {
   setMobileDrawer: (mobileDrawer: boolean) => void;
@@ -10,12 +12,17 @@ interface Props {
 
 const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
   const history = useHistory();
-
+  const dispatch = useDispatch();
   function handleClickOption(url: string) {
     setMobileDrawer(false);
     history.push(url);
     return;
   }
+
+  const handleSignOut = () => {
+    dispatch(signOutUserStart());
+  };
+
   return (
     <>
       <Grid container rowSpacing={1}>
@@ -31,27 +38,17 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          onClick={() => handleClickOption("/")}
+          onClick={() => handleClickOption("/mycollection")}
           style={{ marginTop: "30px" }}
         >
-          <Styled.TypographyTitle>Home</Styled.TypographyTitle>
+          <Styled.TypographyTitle>
+            {i18n.t("navigation.myCollection")}
+          </Styled.TypographyTitle>
         </Grid>
-        <Grid item xs={12} onClick={() => handleClickOption(`/browse`)}>
-          <Styled.TypographyTitle>Browse</Styled.TypographyTitle>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          onClick={() => handleClickOption(`/watchstatistics/addwatch`)}
-        >
-          <Styled.TypographyTitle>Add Watch</Styled.TypographyTitle>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
-        >
-          <Styled.TypographyTitle>Compare Watches</Styled.TypographyTitle>
+        <Grid item xs={12} onClick={() => handleClickOption(`/dashboard`)}>
+          <Styled.TypographyTitle>
+            {i18n.t("navigation.dashboard")}
+          </Styled.TypographyTitle>
         </Grid>
         <Grid item xs={12}>
           <Styled.Divider />
@@ -59,19 +56,13 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          onClick={() => handleClickOption(`/watchstatistics/watchlaboratory`)}
+          onClick={() => {
+            handleSignOut();
+            handleClickOption(`/`);
+          }}
         >
           <Styled.TypographyTitle>
-            {i18n.t("navigation.laboratory")}
-          </Styled.TypographyTitle>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          onClick={() => handleClickOption(`/watchstatistics/market`)}
-        >
-          <Styled.TypographyTitle>
-            {i18n.t("navigation.market")}
+            {i18n.t("navigation.logout")}
           </Styled.TypographyTitle>
         </Grid>
       </Grid>

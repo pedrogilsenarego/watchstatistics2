@@ -4,6 +4,14 @@ export const content = {
       navigation: {
         market: "Market",
         laboratory: "Laboratory",
+        myCollection: "My Collection",
+        dashboard: "Dashboard",
+        logout: "Logout",
+      },
+      drawer: {
+        main: {
+          loginNotification: "Login for more options",
+        },
       },
     },
   },

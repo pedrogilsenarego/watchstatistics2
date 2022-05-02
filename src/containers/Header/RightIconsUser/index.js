@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RightIconsUser = ({ handleMyAccountOpen, search }) => {
+const RightIconsUser = ({ search, setMobileDrawerSecondary }) => {
   const classes = useStyles();
   const activeStyle = { color: "#FFA500" };
 
@@ -27,11 +27,11 @@ const RightIconsUser = ({ handleMyAccountOpen, search }) => {
         <Button
           className={classes.textBtn}
           activestyle={activeStyle}
-          aria-controls="myAccount"
+          aria-controls='myAccount'
           disableRipple
-          onClick={(e) => handleMyAccountOpen(e)}
+          onClick={() => setMobileDrawerSecondary(true)}
         >
-          <VscAccount fontSize="1.5em" />
+          <VscAccount fontSize='1.5em' />
           &nbsp;
         </Button>
       )}
