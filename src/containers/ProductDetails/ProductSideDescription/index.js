@@ -3,9 +3,8 @@ import { Typography, Box, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
-import Multiline from "src/components/Inputs/Muitline";
-import Button1 from "src/components/Buttons/Button1";
 import { Grid } from "@mui/material";
+import AddDescription from "./AddDescription";
 
 const useStyles = makeStyles((theme) => ({
   textBtn: {
@@ -73,33 +72,7 @@ const ProductSideDescription = ({}) => {
               to add a description.
             </Typography>
           ) : (
-            <Grid container rowSpacing={1}>
-              <Grid item xs={12}>
-                <Multiline placeholder='Add Description' />
-              </Grid>
-              <Grid
-                item
-                container
-                xs={12}
-                justifyContent='flex-end'
-                columnSpacing={1}
-                style={{
-                  marginBottom: "5px",
-                }}
-              >
-                <Grid item>
-                  <Button1
-                    title='Cancel'
-                    onClick={() => {
-                      setAddDescription(false);
-                    }}
-                  />
-                </Grid>
-                <Grid item>
-                  <Button1 title='Submit' />
-                </Grid>
-              </Grid>
-            </Grid>
+            <AddDescription close={setAddDescription} />
           )}
         </Box>
       </Box>
