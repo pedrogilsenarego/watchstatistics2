@@ -55,6 +55,8 @@
 
   { "name": "Omega Chronostop 145.008", "id": "AoFcfGRUMcBI2SVXoCtm" },
 
+  { "name": "Isotope Hydrium Blue Night", "id": "ArlLBmcY4UQLKeMGRENA" },
+
   { "name": "Rolex Air-King 114200", "id": "Awx08LXvozo0na1Qqc0u" },
 
   {
@@ -87,6 +89,11 @@
   { "name": "Omega Missions to Mars SO33L100", "id": "EqIT0qOfSmGC1vzc8WjW" },
 
   { "name": "Casio F-91W N.A.", "id": "Fj0MH6BvT54y8596zFXU" },
+
+  {
+    "name": "Maurice de Mauriac L2 MDM.L2.BR.BK",
+    "id": "FoYo9FDGxaJFxEmIzTiX"
+  },
 
   { "name": "Dan Henry 1972 Black", "id": "FrsONAyxJYD4IaMd6G23" },
 
@@ -143,6 +150,8 @@
     "id": "UFK0pe0wIUd1kBjxEwuy"
   },
 
+  { "name": "Unimatic U4-A N.A.", "id": "V3LudgAKQ5Zolmh5jYW5" },
+
   {
     "name": "Cuervo y Sobrinos Historiador Landeron 3146.1N",
     "id": "ViBI9pvxcZ0M7PNL8zhs"
@@ -154,6 +163,8 @@
     "name": "Oris Big Crown Pointer Date 01 754 7741 4065-07 5 20 63",
     "id": "WHOrPMNCU5PtZiFVW9mI"
   },
+
+  { "name": "MB&F M.A.D.1 RED", "id": "WpRtsRqwfmNoZrfoOWsU" },
 
   {
     "name": "Maurice Lacroix Masterpiece Skeleton MP7138-SS001-030",
@@ -201,6 +212,8 @@
 
   { "name": "Sinn 556 I B 556.0104", "id": "gJfZ6PqaV3APFSmDzlkU" },
 
+  { "name": "Maurice de Mauriac L3 sees Red", "id": "ghAxtFstXlFl94tf2nrj" },
+
   { "name": "Piaget Altiplano G0A39111", "id": "hR17zQ4sAHA0pJ0bYR1A" },
 
   {
@@ -231,7 +244,7 @@
     "id": "kNWkgR1sNY292vQ6LKTS"
   },
 
-  { "name": "isotope GMT 0º ", "id": "kbA9sliVuOnknt60lhLq" },
+  { "name": "Isotope GMT 0º Blue", "id": "kbA9sliVuOnknt60lhLq" },
 
   {
     "name": "Longines Heritage Classic L2.830.4.93.0",
@@ -270,13 +283,18 @@
 
   { "name": "Victorinox Master 500 241561", "id": "tRKkPRi0oOqQuh221KQt" },
 
-  { "name": "hublot BigBen ", "id": "teu7yU9VkK89V5xrZD0H" },
+  { "name": "Hublot BigBen ", "id": "teu7yU9VkK89V5xrZD0H" },
 
   { "name": "Glycine Airman DC-4 GL0071", "id": "tfu3H83rh8ayQqybe6PO" },
 
   {
     "name": "Zenith El Primero 03.2150.400/69.M2150",
     "id": "uN0Gv8P0kGTMx25pUbck"
+  },
+
+  {
+    "name": "Nivada Grenchen broad Arrow 86007M",
+    "id": "uh1W1LOlNOpBP9YTplQR"
   },
 
   { "name": "Seiko 5 SKX007", "id": "ulgJqMRMtjojFERkj2vR" },
