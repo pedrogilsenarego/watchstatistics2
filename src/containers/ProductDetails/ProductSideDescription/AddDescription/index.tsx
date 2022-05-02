@@ -14,8 +14,9 @@ const AddDescription = ({ setOpen }: Props) => {
   const mapState = ({ user }: any) => ({
     currentUser: user.currentUser,
   });
-  const productID = useParams();
+  const params = useParams();
   const { currentUser } = useSelector(mapState);
+
   const dispatch = useDispatch();
   const [description, setDescription] = useState("");
 
@@ -23,7 +24,7 @@ const AddDescription = ({ setOpen }: Props) => {
     const payload = {
       description,
       currentUser,
-      productID,
+      productID: params,
     };
     dispatch(addProductDescription(payload));
     setOpen(false);

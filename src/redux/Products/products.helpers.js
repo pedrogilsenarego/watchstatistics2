@@ -492,11 +492,13 @@ export const handleGetCounters = () => {
   });
 };
 
-export const handleAddProductDescriptionAdmin = (description, productID) => {
+//update products
+export const handleAddProductDescriptionAdmin = (payload) => {
+  const { description, productID } = payload;
   return new Promise((resolve, reject) => {
     firestore
       .collection("products")
-      .doc(productID)
+      .doc(productID.productID)
       .update({ productDesc: description })
       .then(() => {
         resolve();

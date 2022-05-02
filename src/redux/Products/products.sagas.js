@@ -240,10 +240,10 @@ export function* onFetchCountersStart() {
 //Update Product
 
 function* sagaAddDescription({ payload }) {
-  const { description, currentUser, productID } = payload;
+  const { description, currentUser } = payload;
   try {
     if (checkUserIsAdmin(currentUser)) {
-      yield handleAddProductDescriptionAdmin(description, productID);
+      yield handleAddProductDescriptionAdmin(payload);
       yield put(setProductDescription(description));
       yield put(updateSuccessNotification("Product description added"));
     } else
@@ -253,7 +253,7 @@ function* sagaAddDescription({ payload }) {
   } catch (err) {
     yield put(
       updateFailNotification(
-        "This time it was not possible to add your description"
+        `It was not possible to add a description this time`
       )
     );
   }
