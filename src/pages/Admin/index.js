@@ -11,16 +11,15 @@ import {
   Paper,
   Button,
   Typography,
-  ButtonGroup,
 } from "@material-ui/core";
 import Button1 from "src/components/Buttons/Button1";
 import { fetchAllProductsStart } from "../../redux/Products/products.actions";
-
+import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchValidationProductsStart,
   addProductStart,
-  deleteProductStart,
+  deleteOrderStart,
   updateProductDetailsStart,
 } from "../../redux/Products/products.actions";
 
@@ -87,7 +86,10 @@ const Admin = ({}) => {
                     #
                   </TableCell>
                   <TableCell align='center' style={{ fontSize: "15px" }}>
-                    Watches
+                    Watch
+                  </TableCell>
+                  <TableCell align='center' style={{ fontSize: "15px" }}>
+                    Type of Update
                   </TableCell>
                   <TableCell align='center' style={{ fontSize: "15px" }}>
                     Options
@@ -96,7 +98,8 @@ const Admin = ({}) => {
               </TableHead>
               <TableBody>
                 {data.map((product, i) => {
-                  const { productID, productReference, type } = product;
+                  const { productID, productReference, type, documentID } =
+                    product;
                   product.admin = true;
                   const color = "#000000";
                   return (
@@ -117,38 +120,41 @@ const Admin = ({}) => {
                       >
                         {productReference}
                       </TableCell>
-
+                      <TableCell
+                        align='center'
+                        component='th'
+                        scope='row'
+                        style={{ color: color }}
+                      >
+                        {type}
+                      </TableCell>
                       <TableCell align='center' style={{ color: color }}>
-                        <ButtonGroup>
-                          {type === "newWatch" && (
-                            <Button
-                              onClick={() => {
-                                delete product.documentID;
-                                dispatch(addProductStart(product));
-                                dispatch(deleteProductStart(productID));
-                              }}
-                            >
-                              Approve New Watch
-                            </Button>
-                          )}
-                          {type !== "newWatch" && (
-                            <Button
-                              onClick={() => {
-                                dispatch(updateProductDetailsStart(product));
-                                dispatch(deleteProductStart(productID));
-                              }}
-                            >
-                              Approve Update Watch
-                            </Button>
-                          )}
+                        <Button>View</Button>
+                        {type === "newWatch" && (
                           <Button
-                            onClick={() =>
-                              dispatch(deleteProductStart(productID))
-                            }
+                            onClick={() => {
+                              delete product.documentID;
+                              dispatch(addProductStart(product));
+                              dispatch(deleteOrderStart(documentID));
+                            }}
                           >
-                            Delete
+                            Approve
                           </Button>
-                        </ButtonGroup>
+                        )}
+                        {type !== "newWatch" && (
+                          <Button
+                            onClick={() => {
+                              dispatch(updateProductDetailsStart(product));
+                              dispatch(deleteOrderStart(documentID));
+                            }}
+                          >
+                            Approve
+                          </Button>
+                        )}
+                        <MdDelete
+                          onClick={() => dispatch(deleteOrderStart(documentID))}
+                          size='2em'
+                        />
                       </TableCell>
                     </TableRow>
                   );

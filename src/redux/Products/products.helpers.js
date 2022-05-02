@@ -95,22 +95,6 @@ export const handleFetchProducts = ({
   });
 };
 
-export const handleDeleteProduct = (documentID) => {
-  return new Promise((resolve, reject) => {
-    firestore
-      .collection("orders")
-      .doc(documentID)
-      .delete()
-      .then(() => {
-        //console.log(documentID, 2);
-        resolve();
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
 export const handleFetchProduct = (productID) => {
   return new Promise((resolve, reject) => {
     firestore
@@ -520,6 +504,21 @@ export const handleAddProductDescriptionUser = (payload) => {
       .collection("orders")
       .doc()
       .set(order)
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const handleDeleteOrder = (documentID) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("orders")
+      .doc(documentID)
+      .delete()
       .then(() => {
         resolve();
       })

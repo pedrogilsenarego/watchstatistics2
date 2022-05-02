@@ -19,7 +19,7 @@ import {
   handleFetchLatestProducts,
   handleFetchValidationProducts,
   handleFetchProduct,
-  handleDeleteProduct,
+  handleDeleteOrder,
   handleUpdateVote,
   handleUpdateDetails,
   handleUserVote,
@@ -80,19 +80,6 @@ export function* fetchProducts({ payload }) {
 
 export function* onFetchProductsStart() {
   yield takeLatest(productsTypes.FETCH_PRODUCTS_START, fetchProducts);
-}
-
-export function* deleteProduct({ payload }) {
-  try {
-    yield handleDeleteProduct(payload);
-    yield put(fetchValidationProductsStart());
-  } catch (err) {
-    // console.log(err);
-  }
-}
-
-export function* onDeleteProductStart() {
-  yield takeLatest(productsTypes.DELETE_PRODUCT_START, deleteProduct);
 }
 
 export function* fetchProduct({ payload }) {
@@ -269,11 +256,24 @@ export function* onAddProductDescription() {
   yield takeLatest(productsTypes.ADD_PRODUCT_DESCRIPTION, sagaAddDescription);
 }
 
+export function* deleteOrder({ payload }) {
+  try {
+    yield handleDeleteOrder(payload);
+    yield put(fetchValidationProductsStart());
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+export function* onDeleteOrderStart() {
+  yield takeLatest(productsTypes.DELETE_ORDER_START, deleteOrder);
+}
+
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
     call(onFetchProductsStart),
-    call(onDeleteProductStart),
+    call(onDeleteOrderStart),
     call(onFetchProductStart),
     call(onUpdateProductVoteStart),
     call(onUpdateProductDetailsStart),
