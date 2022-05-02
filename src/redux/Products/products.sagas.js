@@ -29,6 +29,7 @@ import {
   handleFetchAllProducts,
   handleIncrementProductsCounter,
   handleGetCounters,
+  handleAddProductDescriptionAdmin,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -239,9 +240,10 @@ export function* onFetchCountersStart() {
 //Update Product
 
 function* sagaAddDescription({ payload }) {
-  const { description, currentUser } = payload;
+  const { description, currentUser, productID } = payload;
   try {
-    if (!checkUserIsAdmin(currentUser)) {
+    if (checkUserIsAdmin(currentUser)) {
+      yield handleAddProductDescriptionAdmin(description, productID);
       yield put(setProductDescription(description));
       yield put(updateSuccessNotification("Product description added"));
     } else

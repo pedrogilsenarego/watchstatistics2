@@ -4,6 +4,7 @@ import Multiline from "src/components/Inputs/Muitline";
 import Button1 from "src/components/Buttons/Button1";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDescription } from "src/redux/Products/products.actions";
+import { useParams } from "react-router-dom";
 
 interface Props {
   setOpen: (setClose: boolean) => void;
@@ -13,6 +14,7 @@ const AddDescription = ({ setOpen }: Props) => {
   const mapState = ({ user }: any) => ({
     currentUser: user.currentUser,
   });
+  const productID = useParams();
   const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const [description, setDescription] = useState("");
@@ -21,6 +23,7 @@ const AddDescription = ({ setOpen }: Props) => {
     const payload = {
       description,
       currentUser,
+      productID,
     };
     dispatch(addProductDescription(payload));
     setOpen(false);

@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Divider } from "@material-ui/core";
 import { Grid } from "@mui/material";
 import AddDescription from "./AddDescription";
+import { rewards } from "src/constants/gamification";
 
 const useStyles = makeStyles((theme) => ({
   textBtn: {
@@ -69,7 +70,9 @@ const ProductSideDescription = ({}) => {
               >
                 click here
               </b>{" "}
-              to add a description.
+              to add a description and win{" "}
+              <b style={{ color: "orange" }}>{rewards.PRODUCT_DESCRIPTION}</b>{" "}
+              point.
             </Typography>
           ) : (
             <AddDescription setOpen={setAddDescription} />

@@ -48,11 +48,11 @@ export const handleFetchProducts = ({
   persistProducts = [],
   productCategory,
   productPrices,
-  productBrands
+  productBrands,
 }) => {
   return new Promise((resolve, reject) => {
     const where = filter;
-    const sorting = sort ? sort : "desc"
+    const sorting = sort ? sort : "desc";
 
     let ref = firestore
       .collection("products")
@@ -61,9 +61,11 @@ export const handleFetchProducts = ({
     //old
     if (filterType) ref = ref.where(where, "==", filterType);
     //new
-    if (productCategory) ref = ref.where("productCategory", "==", productCategory)
-    if (productPrices) ref=ref.where("productPriceBrackets", "==", productPrices)
-    if (productBrands) ref=ref.where("productBrand", "==", productBrands)
+    if (productCategory)
+      ref = ref.where("productCategory", "==", productCategory);
+    if (productPrices)
+      ref = ref.where("productPriceBrackets", "==", productPrices);
+    if (productBrands) ref = ref.where("productBrand", "==", productBrands);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
     ref
@@ -483,6 +485,21 @@ export const handleGetCounters = () => {
         if (snapshot.exists) {
           resolve(snapshot.data());
         }
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const handleAddProductDescriptionAdmin = (description, productID) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("products")
+      .doc(productID)
+      .update({ productDesc: description })
+      .then(() => {
+        resolve();
       })
       .catch((err) => {
         reject(err);
