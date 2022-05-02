@@ -38,6 +38,12 @@ const DirectionSnackbar = () => {
 
   const getSnackbarElements = (type: string) => {
     switch (type) {
+      case "information":
+        return {
+          icon: <BiErrorCircle />,
+          color: "white",
+          bgcolor: "orange",
+        };
       case "fail":
         return {
           icon: <BiErrorCircle />,
@@ -54,7 +60,7 @@ const DirectionSnackbar = () => {
         return {
           icon: <GiCheckMark />,
           color: "white",
-          bgcolor: "darkGreen",
+          bgcolor: "orange",
         };
     }
   };

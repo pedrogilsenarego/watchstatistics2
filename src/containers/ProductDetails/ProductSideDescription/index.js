@@ -72,7 +72,7 @@ const ProductSideDescription = ({}) => {
               to add a description.
             </Typography>
           ) : (
-            <AddDescription close={setAddDescription} />
+            <AddDescription setOpen={setAddDescription} />
           )}
         </Box>
       </Box>

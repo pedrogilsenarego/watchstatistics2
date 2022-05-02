@@ -35,6 +35,12 @@ const generalReducer = (state = INITIAL_STATE, action: Action) => {
         notificationMessage: action.payload,
         notificationType: "fail",
       };
+    case generalTypes.UPDATE_INFORMATION_NOTIFICATION:
+      return {
+        ...state,
+        notificationMessage: action.payload,
+        notificationType: "information",
+      };
     case generalTypes.CLEAR_NOTIFICATION:
       return {
         ...state,

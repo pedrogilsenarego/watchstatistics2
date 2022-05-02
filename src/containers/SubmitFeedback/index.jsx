@@ -9,7 +9,6 @@ import ButtonMUI from "../forms/ButtonMUI";
 import TextField from "../forms/InputMUI";
 import { apiInstance } from "./../../Utils";
 import { useLocation } from "react-router";
-import Snackbar from "src/components/SnackBar";
 import { useDispatch } from "react-redux";
 import {
   updateFailNotification,
@@ -84,7 +83,6 @@ const SubmitFeedback = () => {
       style={{ marginTop: "140px" }}
       justifyContent='center'
     >
-      <Snackbar />
       <Grid item xs={12} md={5}>
         <Container>
           <Typography style={{ paddingTop: "20px" }}>

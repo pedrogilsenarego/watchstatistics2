@@ -18,6 +18,11 @@ export const updateFailNotification = (message: string) => ({
   payload: message,
 });
 
+export const updateInformationNotification = (message: string) => ({
+  type: generalTypes.UPDATE_INFORMATION_NOTIFICATION,
+  payload: message,
+});
+
 export const clearNotification = () => ({
   type: generalTypes.CLEAR_NOTIFICATION,
 });

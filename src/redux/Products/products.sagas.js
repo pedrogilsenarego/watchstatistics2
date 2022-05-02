@@ -1,5 +1,6 @@
 import { auth } from "./../../firebase/utils";
 import { takeLatest, put, all, call } from "redux-saga/effects";
+import { checkUserIsAdmin } from "src/Utils";
 import {
   setProducts,
   setLatestProducts,
@@ -10,6 +11,7 @@ import {
   fetchProductStart,
   setMyCollection,
   setCounters,
+  setProductDescription,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -30,7 +32,13 @@ import {
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
-import { enableLoading, disableLoading } from "../general/general.actions";
+import {
+  enableLoading,
+  disableLoading,
+  updateSuccessNotification,
+  updateInformationNotification,
+  updateFailNotification,
+} from "../general/general.actions";
 
 export function* addProduct({ payload }) {
   try {
@@ -164,7 +172,6 @@ export function* updateDetails({ payload }) {
 export function* onUpdateProductDetailsStart() {
   yield takeLatest(productsTypes.UPDATE_PRODUCT_DETAILS_START, updateDetails);
 }
-//newImplementations
 
 export function* fetchRandomProduct({ payload }) {
   try {
@@ -229,6 +236,30 @@ export function* onFetchCountersStart() {
   yield takeLatest(productsTypes.FETCH_COUNTERS_START, fetchCounters);
 }
 
+//Update Product
+
+function* sagaAddDescription({ payload }) {
+  const { description, currentUser } = payload;
+  try {
+    if (!checkUserIsAdmin(currentUser)) {
+      yield put(setProductDescription(description));
+      yield put(updateSuccessNotification("Product description added"));
+    } else
+      yield put(
+        updateInformationNotification("Product description sent for review")
+      );
+  } catch (err) {
+    yield put(
+      updateFailNotification(
+        "This time it was not possible to add your description"
+      )
+    );
+  }
+}
+export function* onAddProductDescription() {
+  yield takeLatest(productsTypes.ADD_PRODUCT_DESCRIPTION, sagaAddDescription);
+}
+
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
@@ -243,5 +274,6 @@ export default function* productsSagas() {
     call(onFetchMyCollectionStart),
     call(onFetchAllProductsStart),
     call(onFetchCountersStart),
+    call(onAddProductDescription),
   ]);
 }

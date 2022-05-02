@@ -44,6 +44,7 @@ import { darkTheme, lightTheme } from "./styles/MUITheme";
 import { useSelector } from "react-redux";
 import HomePage from "./pages/Homepage";
 import SubmitFeedback from "./pages/SubmitFeedback";
+import Snackbar from "./components/SnackBar";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -73,6 +74,7 @@ const App = () => {
         }
       >
         <CssBaseline />
+        <Snackbar />
         <CookiePolicy />
         <div className='App'>
           <Switch>

@@ -2,15 +2,30 @@ import { useState } from "react";
 import { Grid } from "@mui/material";
 import Multiline from "src/components/Inputs/Muitline";
 import Button1 from "src/components/Buttons/Button1";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductDescription } from "src/redux/Products/products.actions";
 
 interface Props {
-  close: (setClose: boolean) => void;
+  setOpen: (setClose: boolean) => void;
 }
 
-const AddDescription = ({ close }: Props) => {
+const AddDescription = ({ setOpen }: Props) => {
+  const mapState = ({ user }: any) => ({
+    currentUser: user.currentUser,
+  });
+  const { currentUser } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [description, setDescription] = useState("");
 
-  const handleSubmitDescription = () => {};
+  const handleSubmitDescription = () => {
+    const payload = {
+      description,
+      currentUser,
+    };
+    dispatch(addProductDescription(payload));
+    setOpen(false);
+  };
+
   return (
     <Grid container rowSpacing={1}>
       <Grid item xs={12}>
@@ -30,7 +45,7 @@ const AddDescription = ({ close }: Props) => {
           <Button1
             title='Cancel'
             onClick={() => {
-              close(false);
+              setOpen(false);
             }}
           />
         </Grid>

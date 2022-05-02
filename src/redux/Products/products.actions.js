@@ -92,3 +92,15 @@ export const setCounters = (counters) => ({
   type: productsTypes.SET_COUNTERS,
   payload: counters,
 });
+
+//Update Products
+
+export const addProductDescription = (payload) => ({
+  type: productsTypes.ADD_PRODUCT_DESCRIPTION,
+  payload,
+});
+
+export const setProductDescription = (description) => ({
+  type: productsTypes.SET_PRODUCT_DESCRIPTION,
+  payload: description,
+});

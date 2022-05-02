@@ -50,6 +50,14 @@ const productsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         counters: action.payload,
       };
+
+    //product upate
+    case productsTypes.SET_PRODUCT_DESCRIPTION:
+      return {
+        ...state,
+        product: { ...state.product, productDesc: action.payload },
+      };
+
     default:
       return state;
   }
