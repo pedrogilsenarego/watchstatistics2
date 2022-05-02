@@ -151,7 +151,7 @@ const ProductResults = ({}) => {
     >
       <Grid
         container
-        direction="row"
+        direction='row'
         style={{ display: "flex", paddingTop: "160px" }}
       >
         <Grid
@@ -272,7 +272,7 @@ const ProductResults = ({}) => {
                   }}
                   onClick={toggleDrawer(anchor, true)}
                 >
-                  <FiSearch fontSize="2em" />
+                  <FiSearch fontSize='2em' />
                 </Button>
               )}
 
@@ -310,7 +310,7 @@ const ProductResults = ({}) => {
                 }}
                 onClick={toggleDrawer(anchor, true)}
               >
-                <FiSearch fontSize="2em" />
+                <FiSearch fontSize='2em' />
               </Button>
             )}
 
@@ -349,7 +349,7 @@ const ProductResults = ({}) => {
           };
 
           return (
-            <Grid item xs="12" sm="6" md="3">
+            <Grid item xs='12' sm='6' md='3'>
               <motion.div layout>
                 <Product {...configProduct} />
               </motion.div>

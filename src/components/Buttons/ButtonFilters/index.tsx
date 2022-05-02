@@ -9,9 +9,10 @@ interface Props {
   list: any;
   value: string | null;
   setValue: (value: string | null) => void;
+  noReset?: boolean;
 }
 
-const ButtonFilters = ({ list, value, setValue }: Props) => {
+const ButtonFilters = ({ list, value, setValue, noReset }: Props) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleChooseValue = () => {
@@ -46,15 +47,22 @@ const ButtonFilters = ({ list, value, setValue }: Props) => {
             <Grid>
               <Styled.Typography>{value}</Styled.Typography>
             </Grid>
-            <Grid>
-              <RiCloseFill
-                size='2.5em'
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setValue(null);
-                }}
-              />
-            </Grid>
+            {noReset && (
+              <Grid>
+                <MdArrowForwardIos size='2em' />
+              </Grid>
+            )}
+            {!noReset && (
+              <Grid>
+                <RiCloseFill
+                  size='2.5em'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setValue(null);
+                  }}
+                />
+              </Grid>
+            )}
           </Grid>
         )}
       </Styled.Box>

@@ -27,6 +27,8 @@
     "firebase-tools": "^10.7.1",
     "formik": "^2.2.9",
     "framer-motion": "4.1.17",
+    "i18next": "^21.6.16",
+    "i18next-browser-languagedetector": "^6.1.4",
     "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",

@@ -1,10 +1,7 @@
-import { useState } from "react";
 import { Grid } from "@mui/material";
 import { RiCloseFill } from "react-icons/ri";
 import * as Styled from "./styles";
 import { useHistory } from "react-router";
-import ButtonFilters from "src/components/Buttons/ButtonFilters";
-import languages from "src/constants/languages.json";
 import { i18n } from "src/translations/i18n";
 
 interface Props {
@@ -13,7 +10,7 @@ interface Props {
 
 const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
   const history = useHistory();
-  const [language, setLanguage] = useState<string | null>("English");
+
   function handleClickOption(url: string) {
     setMobileDrawer(false);
     history.push(url);
@@ -76,14 +73,6 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
           <Styled.TypographyTitle>
             {i18n.t("navigation.market")}
           </Styled.TypographyTitle>
-        </Grid>
-        <Grid item xs={12} style={{ marginTop: "50px" }}>
-          <ButtonFilters
-            list={languages.options}
-            value={language}
-            setValue={setLanguage}
-            noReset
-          />
         </Grid>
       </Grid>
     </>

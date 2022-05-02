@@ -1,14 +1,14 @@
 import { Button as MuiButton, styled } from "@mui/material";
 
 export const Button = styled(MuiButton)(() => ({
-  color: "#FFFFFF !important",
+  color: "#ffffff66 !important",
   border: "solid 2px !important",
-  borderColor: "orange !important",
+  borderColor: "#ffffff66 !important",
   fontSize: "13px !important",
   borderRadius: "20px !important",
-  minWidth: "150px !important",
+
   "&:hover": {
-    color: "#FFA500 !important",
+    color: "white !important",
   },
   "&:active": {
     color: "#FFFFFF !important",

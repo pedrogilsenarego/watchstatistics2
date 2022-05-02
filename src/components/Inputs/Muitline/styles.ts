@@ -8,6 +8,8 @@ export const TextField = styled(MuiTextField)(() => ({
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
       borderColor: "#ffffff66",
+
+      borderWidth: "2px",
     },
     "&:hover fieldset": {
       borderColor: "orange",

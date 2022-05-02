@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Grid } from "@mui/material";
 import Multiline from "src/components/Inputs/Muitline";
 import Button1 from "src/components/Buttons/Button1";
+import Button2 from "src/components/Buttons/Button2";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDescription } from "src/redux/Products/products.actions";
 import { useParams } from "react-router-dom";
@@ -42,11 +43,12 @@ const AddDescription = ({ setOpen }: Props) => {
         justifyContent='flex-end'
         columnSpacing={1}
         style={{
+          marginTop: "5px",
           marginBottom: "5px",
         }}
       >
         <Grid item>
-          <Button1
+          <Button2
             title='Cancel'
             onClick={() => {
               setOpen(false);
