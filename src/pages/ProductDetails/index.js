@@ -104,7 +104,7 @@ const ProductDetails = ({}) => {
   return (
     <div>
       <Helmet>
-        <meta property="og:image" content={productThumbnail} />
+        <meta property='og:image' content={productThumbnail} />
       </Helmet>
 
       <Container
@@ -113,7 +113,7 @@ const ProductDetails = ({}) => {
       >
         <Typography
           style={{ marginTop: "90px", color: "#ffffff66", marginLeft: "10px" }}
-          variant="h6"
+          variant='h6'
         >
           {productBrand} {productName} - {reference}
         </Typography>

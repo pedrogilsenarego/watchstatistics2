@@ -1,6 +1,16 @@
 import { createTheme } from "@mui/material/styles";
 
 const darkTheme = createTheme({
+  overrides: {
+    MuiInput: {
+      input: {
+        "&::placeholder": {
+          color: "red !important",
+        },
+        color: "white",
+      },
+    },
+  },
   palette: {
     background: {
       default: "#000000",

@@ -1,9 +1,10 @@
 import { styled, TextField as MuiTextField } from "@mui/material";
 
 export const TextField = styled(MuiTextField)(() => ({
-  backgroundColor: "white",
   borderRadius: "4px",
-
+  "& .MuiInputBase-input": {
+    color: "whiteSmoke",
+  },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
       borderColor: "#ffffff66",
