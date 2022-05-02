@@ -242,13 +242,17 @@ export function* onFetchCountersStart() {
 
 function* sagaAddDescription({ payload }) {
   const { description, currentUser } = payload;
+  const timestamp = new Date();
   try {
     if (checkUserIsAdmin(currentUser)) {
       yield handleAddProductDescriptionAdmin(payload);
       yield put(setProductDescription(description));
       yield put(updateSuccessNotification("Product description added"));
     } else {
-      yield handleAddProductDescriptionUser(payload);
+      yield handleAddProductDescriptionUser({
+        ...payload,
+        createdDate: timestamp,
+      });
       yield put(
         updateInformationNotification("Product description sent for review")
       );

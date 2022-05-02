@@ -13,7 +13,7 @@ import {
   Typography,
   ButtonGroup,
 } from "@material-ui/core";
-
+import Button1 from "src/components/Buttons/Button1";
 import { fetchAllProductsStart } from "../../redux/Products/products.actions";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -56,9 +56,9 @@ const Admin = ({}) => {
 
   if (data.length < 1) {
     return (
-      <div>
+      <>
         <p>No search Results</p>
-        <Button onClick={() => handleGetWatches()}>Get Watches</Button>
+        <Button1 title='Get All Watches' onClick={() => handleGetWatches()} />
 
         {watchProducts.map((item, pos) => {
           return (
@@ -68,7 +68,7 @@ const Admin = ({}) => {
             </Typography>
           );
         })}
-      </div>
+      </>
     );
   }
 
@@ -78,66 +78,64 @@ const Admin = ({}) => {
         <Grid item xs={12}>
           <TableContainer
             component={Paper}
-            style={{ marginTop: "10px", backgroundColor: "#000000" }}
+            style={{ marginTop: "10px", backgroundColor: "#ffffff" }}
           >
-            <Table aria-label="simple table">
+            <Table aria-label='simple table'>
               <TableHead>
                 <TableRow>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <TableCell align='center' style={{ fontSize: "15px" }}>
                     #
                   </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <TableCell align='center' style={{ fontSize: "15px" }}>
                     Watches
                   </TableCell>
-                  <TableCell align="center" style={{ fontSize: "15px" }}>
+                  <TableCell align='center' style={{ fontSize: "15px" }}>
                     Options
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data.map((product, i) => {
-                  const { productName, productBrand, documentID, productDesc } =
-                    product;
+                  const { productID, productReference, type } = product;
                   product.admin = true;
-                  if (!productName) return null;
-                  const color = "#ffffff";
+                  const color = "#000000";
                   return (
                     <TableRow
-                      key={productName}
+                      key={i}
                       style={{ cursor: "pointer" }}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <TableCell align="center" style={{ color: color }}>
+                      <TableCell align='center' style={{ color: color }}>
                         {i + 1}
                       </TableCell>
                       <TableCell
-                        align="center"
-                        component="th"
-                        scope="row"
+                        align='center'
+                        component='th'
+                        scope='row'
                         style={{ color: color }}
-                        onClick={() => history.push(`/product/${documentID}`)}
+                        onClick={() => history.push(`/product/${productID}`)}
                       >
-                        {productBrand} - {productName}
+                        {productReference}
                       </TableCell>
 
-                      <TableCell align="center" style={{ color: color }}>
+                      <TableCell align='center' style={{ color: color }}>
                         <ButtonGroup>
-                          {productDesc && (
+                          {type === "newWatch" && (
                             <Button
                               onClick={() => {
                                 delete product.documentID;
                                 dispatch(addProductStart(product));
-                                dispatch(deleteProductStart(documentID));
+                                dispatch(deleteProductStart(productID));
                               }}
                             >
                               Approve New Watch
                             </Button>
                           )}
-                          {!productDesc && (
+                          {type !== "newWatch" && (
                             <Button
                               onClick={() => {
                                 dispatch(updateProductDetailsStart(product));
-                                dispatch(deleteProductStart(documentID));
+                                dispatch(deleteProductStart(productID));
                               }}
                             >
                               Approve Update Watch
@@ -145,7 +143,7 @@ const Admin = ({}) => {
                           )}
                           <Button
                             onClick={() =>
-                              dispatch(deleteProductStart(documentID))
+                              dispatch(deleteProductStart(productID))
                             }
                           >
                             Delete
@@ -160,7 +158,7 @@ const Admin = ({}) => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Button>Get Watches collection</Button>
+      <Button1 title='Get All Watches' onClick={() => handleGetWatches()} />
     </div>
   );
 };

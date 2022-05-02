@@ -12,20 +12,25 @@ interface Props {
 }
 
 const AddDescription = ({ setOpen }: Props) => {
-  const mapState = ({ user }: any) => ({
+  const mapState = ({ user, productsData }: any) => ({
     currentUser: user.currentUser,
+    product: productsData.product,
   });
   const params = useParams();
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, product } = useSelector(mapState);
 
   const dispatch = useDispatch();
   const [description, setDescription] = useState("");
+
+  const productReference =
+    product.productBrand + " " + product.productName + " " + product.reference;
 
   const handleSubmitDescription = () => {
     const payload = {
       description,
       currentUser,
       productID: params,
+      productReference,
     };
     dispatch(addProductDescription(payload));
     setOpen(false);

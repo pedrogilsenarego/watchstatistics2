@@ -229,21 +229,16 @@ export const handleFetchLatestProducts = ({
 
 //new implementations
 export const handleFetchValidationProducts = ({
-  filterType,
-  filter,
   pageSize,
   startAfterDoc,
   persistProducts = [],
 }) => {
   return new Promise((resolve, reject) => {
-    const where = filter;
-
     let ref = firestore
       .collection("orders")
       .orderBy("createdDate")
       .limit(pageSize);
 
-    if (filterType) ref = ref.where(where, "==", filterType);
     if (startAfterDoc) ref = ref.startAfter(startAfterDoc);
 
     ref
@@ -510,12 +505,15 @@ export const handleAddProductDescriptionAdmin = (payload) => {
 };
 
 export const handleAddProductDescriptionUser = (payload) => {
-  const { description, productID, currentUser } = payload;
+  const { description, productID, currentUser, createdDate, productReference } =
+    payload;
   const order = {
     description,
     productID: productID.productID,
     user: currentUser.id,
     type: "+productDescription",
+    createdDate,
+    productReference,
   };
   return new Promise((resolve, reject) => {
     firestore

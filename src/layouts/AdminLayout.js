@@ -4,7 +4,6 @@ const AdminLayout = (props) => {
   return (
     <>
       <Header {...props} />
-
       <div style={{ marginTop: "200px" }}>{props.children}</div>
     </>
   );
