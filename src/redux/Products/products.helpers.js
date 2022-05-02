@@ -508,3 +508,25 @@ export const handleAddProductDescriptionAdmin = (payload) => {
       });
   });
 };
+
+export const handleAddProductDescriptionUser = (payload) => {
+  const { description, productID, currentUser } = payload;
+  const order = {
+    description,
+    productID: productID.productID,
+    user: currentUser.id,
+    type: "+productDescription",
+  };
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("orders")
+      .doc()
+      .set(order)
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

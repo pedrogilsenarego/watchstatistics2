@@ -30,6 +30,7 @@ import {
   handleIncrementProductsCounter,
   handleGetCounters,
   handleAddProductDescriptionAdmin,
+  handleAddProductDescriptionUser,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -246,10 +247,12 @@ function* sagaAddDescription({ payload }) {
       yield handleAddProductDescriptionAdmin(payload);
       yield put(setProductDescription(description));
       yield put(updateSuccessNotification("Product description added"));
-    } else
+    } else {
+      yield handleAddProductDescriptionUser(payload);
       yield put(
         updateInformationNotification("Product description sent for review")
       );
+    }
   } catch (err) {
     yield put(
       updateFailNotification(
