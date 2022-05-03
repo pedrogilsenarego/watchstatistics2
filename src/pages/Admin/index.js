@@ -98,10 +98,21 @@ const Admin = ({}) => {
               </TableHead>
               <TableBody>
                 {data.map((product, i) => {
-                  const { productID, productReference, type, documentID } =
-                    product;
+                  const {
+                    productID,
+                    productReference,
+                    type,
+                    documentID,
+                    user,
+                  } = product;
                   product.admin = true;
                   const color = "#000000";
+                  const deletePayload = {
+                    type,
+                    user,
+                    documentID,
+                    productReference,
+                  };
                   return (
                     <TableRow
                       key={i}
@@ -135,7 +146,7 @@ const Admin = ({}) => {
                             onClick={() => {
                               delete product.documentID;
                               dispatch(addProductStart(product));
-                              dispatch(deleteOrderStart(documentID));
+                              dispatch(deleteOrderStart(deletePayload));
                             }}
                           >
                             Approve
@@ -145,14 +156,16 @@ const Admin = ({}) => {
                           <Button
                             onClick={() => {
                               dispatch(updateProductDetailsStart(product));
-                              dispatch(deleteOrderStart(documentID));
+                              dispatch(deleteOrderStart(deletePayload));
                             }}
                           >
                             Approve
                           </Button>
                         )}
                         <MdDelete
-                          onClick={() => dispatch(deleteOrderStart(documentID))}
+                          onClick={() =>
+                            dispatch(deleteOrderStart(deletePayload))
+                          }
                           size='2em'
                         />
                       </TableCell>

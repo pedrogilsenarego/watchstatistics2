@@ -33,7 +33,11 @@ import {
   handleAddProductDescriptionUser,
 } from "./products.helpers";
 import productsTypes from "./products.types";
-import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
+import {
+  addMessageStart,
+  checkUserSession,
+  updateCollectionStatus,
+} from "../User/user.actions";
 import {
   enableLoading,
   disableLoading,
@@ -41,6 +45,7 @@ import {
   updateInformationNotification,
   updateFailNotification,
 } from "../general/general.actions";
+import { i18n } from "src/translations/i18n";
 
 export function* addProduct({ payload }) {
   try {
@@ -257,11 +262,24 @@ export function* onAddProductDescription() {
 }
 
 export function* deleteOrder({ payload }) {
+  const { documentID, type, user, productReference } = payload;
   try {
-    yield handleDeleteOrder(payload);
+    yield handleDeleteOrder(documentID);
+    yield put(
+      updateSuccessNotification(i18n.t("notifications.success.orderDeleted"))
+    );
+    const deletePayload = {
+      userID: user,
+      messages: `${i18n.t(
+        "messages.admin.orderDeleted"
+      )}${type}, watch:${productReference}`,
+    };
+    yield put(addMessageStart(deletePayload));
     yield put(fetchValidationProductsStart());
   } catch (err) {
-    // console.log(err);
+    yield put(
+      updateFailNotification(i18n.t("notifications.fail.orderDeleted"))
+    );
   }
 }
 

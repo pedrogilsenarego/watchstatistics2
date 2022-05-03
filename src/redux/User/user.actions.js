@@ -80,6 +80,13 @@ export const updateSellerStatus = (newWatch) => ({
   type: userTypes.UPDATE_SELLER_STATE,
   payload: newWatch,
 });
+
+export const modalId = (id) => ({
+  type: userTypes.MODAL_ID,
+  payload: id,
+});
+
+///////////user messages////////////
 export const clearMessages = (userID) => ({
   type: userTypes.CLEAR_MESSAGES,
   payload: userID,
@@ -89,8 +96,8 @@ export const removeMessage = (message) => ({
   type: userTypes.REMOVE_MESSAGE,
   payload: message,
 });
-
-export const modalId = (id) => ({
-  type: userTypes.MODAL_ID,
-  payload: id,
+//payload messages, userID
+export const addMessageStart = (payload) => ({
+  type: userTypes.ADD_MESSAGE,
+  payload: payload,
 });
