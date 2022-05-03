@@ -137,11 +137,11 @@ const Admin = ({}) => {
                         scope='row'
                         style={{ color: color }}
                       >
-                        {type}
+                        {!type ? "newWatch" : type}
                       </TableCell>
                       <TableCell align='center' style={{ color: color }}>
                         <Button>View</Button>
-                        {type === "newWatch" && (
+                        {!type && (
                           <Button
                             onClick={() => {
                               delete product.documentID;
@@ -149,7 +149,7 @@ const Admin = ({}) => {
                               dispatch(deleteOrderStart(deletePayload));
                             }}
                           >
-                            Approve
+                            Approve NewWatch
                           </Button>
                         )}
                         {type !== "newWatch" && (
@@ -159,7 +159,7 @@ const Admin = ({}) => {
                               dispatch(deleteOrderStart(deletePayload));
                             }}
                           >
-                            Approve
+                            Approve Update
                           </Button>
                         )}
                         <MdDelete
