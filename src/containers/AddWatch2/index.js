@@ -187,9 +187,10 @@ const AddWatch2 = () => {
       reference,
       movement,
       productionYears,
-      additionalData: [
-        { title: additionalDataTitle, link: additionalDataLink },
-      ],
+      additionalData:
+        additionalDataLink === "" || additionalDataTitle === ""
+          ? []
+          : [{ title: additionalDataTitle, link: additionalDataLink }],
       avgTotal: 0,
       numberVotesNotOwn: 0,
       numberVotesOwn: 0,
