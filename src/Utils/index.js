@@ -8,6 +8,11 @@ export const checkUserIsAdmin = (currentUser) => {
   return false;
 };
 
+export const openWindowInNewTab = (url) => {
+  const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+  if (newWindow) newWindow.opener = null;
+};
+
 export const apiInstance = axios.create({
   //liveURL
   baseURL: "https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/api",

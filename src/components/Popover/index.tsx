@@ -14,12 +14,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface Iprops {
-  anchor: Element;
-  setAnchor: React.Dispatch<React.SetStateAction<Boolean>>;
-  message: string;
+  anchor: any;
+  setAnchor: any;
+  message?: string;
+  children?: JSX.Element;
 }
 
-const PopoverM = ({ anchor, setAnchor, message }: Iprops) => {
+const PopoverM = ({ anchor, setAnchor, message, children }: Iprops) => {
   const classes = useStyles();
 
   return (
@@ -40,8 +41,9 @@ const PopoverM = ({ anchor, setAnchor, message }: Iprops) => {
         horizontal: "center",
       }}
     >
-      <Typography style={{ margin: "5px", fontSize: "14px" }}>
+      <Typography style={{ margin: "5px", fontSize: "16px" }}>
         {message}
+        {children}
       </Typography>
     </Popover>
   );
