@@ -64,7 +64,8 @@ export function* onGetOrderDetailsStart() {
 }
 
 export function* deleteOrder({ payload }) {
-  const { documentID, type, user, productReference } = payload;
+  const { documentID, type, user, productName, productBrand, reference } =
+    payload;
   try {
     yield handleDeleteOrder(documentID);
     yield put(
@@ -74,7 +75,7 @@ export function* deleteOrder({ payload }) {
       userID: user,
       messages: {
         from: "Admin",
-        message: `We are sorry, but your update of the type: ${type} on the watch: ${productReference} was rejected`,
+        message: `We are sorry, but your update of the type: ${type} on the watch: ${productBrand} ${productName} ${reference} was rejected`,
       },
     };
     yield put(addMessageStart(deletePayload));

@@ -21,16 +21,16 @@ const AddDescription = ({ setOpen }: Props) => {
 
   const dispatch = useDispatch();
   const [description, setDescription] = useState("");
-
-  const productReference =
-    product.productBrand + " " + product.productName + " " + product.reference;
+  const { productBrand, productName, reference } = product;
 
   const handleSubmitDescription = () => {
     const payload = {
-      description,
+      productDesc: description,
       currentUser,
       productID: params,
-      productReference,
+      productBrand,
+      productName,
+      reference,
     };
     dispatch(addProductDescription(payload));
     setOpen(false);

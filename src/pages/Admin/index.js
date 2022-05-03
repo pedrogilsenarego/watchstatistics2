@@ -100,7 +100,9 @@ const Admin = ({}) => {
                 {data.map((product, i) => {
                   const {
                     productID,
-                    productReference,
+                    productBrand,
+                    productName,
+                    reference,
                     type,
                     documentID,
                     user,
@@ -111,7 +113,9 @@ const Admin = ({}) => {
                     type,
                     user,
                     documentID,
-                    productReference,
+                    productName,
+                    productBrand,
+                    reference,
                   };
                   return (
                     <TableRow
@@ -129,7 +133,7 @@ const Admin = ({}) => {
                         style={{ color: color }}
                         onClick={() => history.push(`/product/${productID}`)}
                       >
-                        {productReference}
+                        {productBrand} - {productName} {reference}
                       </TableCell>
                       <TableCell
                         align='center'

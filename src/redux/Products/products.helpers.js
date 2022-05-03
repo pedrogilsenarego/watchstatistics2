@@ -473,12 +473,12 @@ export const handleGetCounters = () => {
 
 //update products
 export const handleAddProductDescriptionAdmin = (payload) => {
-  const { description, productID } = payload;
+  const { productDesc, productID } = payload;
   return new Promise((resolve, reject) => {
     firestore
       .collection("products")
       .doc(productID.productID)
-      .update({ productDesc: description })
+      .update({ productDesc })
       .then(() => {
         resolve();
       })
@@ -489,15 +489,24 @@ export const handleAddProductDescriptionAdmin = (payload) => {
 };
 
 export const handleAddProductDescriptionUser = (payload) => {
-  const { description, productID, currentUser, createdDate, productReference } =
-    payload;
+  const {
+    productDesc,
+    productID,
+    currentUser,
+    createdDate,
+    productName,
+    productBrand,
+    reference,
+  } = payload;
   const order = {
-    description,
+    productDesc,
     productID: productID.productID,
     user: currentUser.id,
     type: "+watchDescription",
     createdDate,
-    productReference,
+    productName,
+    productBrand,
+    reference,
   };
   return new Promise((resolve, reject) => {
     firestore
