@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import * as Styled from "./styles";
 import { Grid } from "@mui/material";
 import Button1 from "src/components/Buttons/Button1";
@@ -15,10 +15,16 @@ const AdditionalData = ({ additionalData }: Props) => {
   const [addAdditionalData, setAddAdditionalData] = useState(false);
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
+  const numberReviews = useMemo(() => {
+    if (additionalData && additionalData !== undefined)
+      return 4 - additionalData.length;
+    else return 0;
+  }, [additionalData]);
+
   return (
     <Styled.Box>
       <Grid container>
-        {!addAdditionalData && additionalData.length > 0 && (
+        {additionalData.length > 0 && (
           <Grid item container columnSpacing={1} alignItems='center' xs={12}>
             {additionalData?.map((additionalData, pos: number) => {
               const { link, title } = additionalData;
@@ -31,7 +37,7 @@ const AdditionalData = ({ additionalData }: Props) => {
                 </Grid>
               );
             })}
-            {additionalData.length <= 4 && (
+            {!addAdditionalData && additionalData.length <= 4 && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {
@@ -44,6 +50,7 @@ const AdditionalData = ({ additionalData }: Props) => {
                   size='2em'
                   color='orange'
                   onClick={() => {
+                    setAnchorPopover(null);
                     setAddAdditionalData(true);
                   }}
                 />
@@ -76,7 +83,9 @@ const AdditionalData = ({ additionalData }: Props) => {
       <Popover
         anchor={anchorPopover}
         setAnchor={setAnchorPopover}
-        message='teste'
+        message={`Add up to ${numberReviews} reviews to win up to ${
+          Number(numberReviews) * rewards.PRODUCT_ADDITIONAL_DATA
+        } points`}
       />
     </Styled.Box>
   );
