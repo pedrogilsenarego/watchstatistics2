@@ -2,6 +2,7 @@ import * as Styled from "./styles";
 import { Grid } from "@mui/material";
 import Button1 from "src/components/Buttons/Button1";
 import { rewards } from "src/constants/gamification";
+import { MdAddCircle } from "react-icons/md";
 
 interface Props {
   additionalData: { title: string; link: string }[];
@@ -16,12 +17,12 @@ const AdditionalData = ({ additionalData }: Props) => {
   return (
     <Styled.Box>
       <Grid container>
-        <Grid item container xs={12}>
-          {additionalData.length > 0 &&
-            additionalData?.map((additionalData, pos: number) => {
+        {additionalData.length > 0 && (
+          <Grid item container columnSpacing={1} alignItems='center' xs={12}>
+            {additionalData?.map((additionalData, pos: number) => {
               const { link, title } = additionalData;
               return (
-                <Grid item xs={6} md={3} key={pos}>
+                <Grid item key={pos}>
                   <Button1
                     title={title}
                     onClick={() => openInNewTab(`${link}`)}
@@ -29,7 +30,13 @@ const AdditionalData = ({ additionalData }: Props) => {
                 </Grid>
               );
             })}
-        </Grid>
+            {additionalData.length <= 4 && (
+              <Grid item>
+                <MdAddCircle size='2em' color='orange' />
+              </Grid>
+            )}
+          </Grid>
+        )}
         <Grid item xs={12}>
           {additionalData.length <= 0 && (
             <Styled.Typography>

@@ -1,12 +1,18 @@
 import * as Styled from "./styles";
 
 interface Props {
-  title: string;
+  children?: JSX.Element;
+  title?: string;
   onClick?: () => void;
 }
 
-const Button1 = ({ title, onClick }: Props) => {
-  return <Styled.Button onClick={onClick}>{title}</Styled.Button>;
+const Button1 = ({ title, onClick, children }: Props) => {
+  return (
+    <Styled.Button onClick={onClick}>
+      {title}
+      {children}
+    </Styled.Button>
+  );
 };
 
 export default Button1;

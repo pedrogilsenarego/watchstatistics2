@@ -24,6 +24,7 @@ import Market from "./pages/Market";
 import Messages from "./pages/Messages";
 import Browse from "./containers/Browse";
 import Order from "./pages/Order";
+import Mapper from "./containers/Mapper";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -100,6 +101,15 @@ const App = () => {
               render={() => (
                 <MainLayout>
                   <CompareWatches />
+                </MainLayout>
+              )}
+            />
+            <Route
+              exact
+              path='/mapper'
+              render={() => (
+                <MainLayout>
+                  <Mapper />
                 </MainLayout>
               )}
             />

@@ -6,7 +6,7 @@ export const Button = styled(MuiButton)(() => ({
   borderColor: "orange !important",
   fontSize: "13px !important",
   borderRadius: "20px !important",
-  minWidth: "150px !important",
+
   "&:hover": {
     color: "#FFA500 !important",
   },

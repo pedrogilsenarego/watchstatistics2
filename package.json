@@ -29,6 +29,7 @@
     "framer-motion": "4.1.17",
     "i18next": "^21.6.16",
     "i18next-browser-languagedetector": "^6.1.4",
+    "leaflet": "^1.8.0",
     "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
@@ -38,6 +39,7 @@
     "react-draggable": "^4.4.4",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.2.0",
+    "react-leaflet": "^4.0.0",
     "react-parallax": "^3.3.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.1",
@@ -79,9 +81,7 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "defaults"
     ]
   }
 }
