@@ -495,7 +495,7 @@ export const handleAddProductDescriptionUser = (payload) => {
     description,
     productID: productID.productID,
     user: currentUser.id,
-    type: "+productDescription",
+    type: "+watchDescription",
     createdDate,
     productReference,
   };
@@ -504,21 +504,6 @@ export const handleAddProductDescriptionUser = (payload) => {
       .collection("orders")
       .doc()
       .set(order)
-      .then(() => {
-        resolve();
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const handleDeleteOrder = (documentID) => {
-  return new Promise((resolve, reject) => {
-    firestore
-      .collection("orders")
-      .doc(documentID)
-      .delete()
       .then(() => {
         resolve();
       })

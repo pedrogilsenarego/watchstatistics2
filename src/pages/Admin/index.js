@@ -19,9 +19,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchValidationProductsStart,
   addProductStart,
-  deleteOrderStart,
   updateProductDetailsStart,
 } from "../../redux/Products/products.actions";
+import { deleteOrderStart } from "src/redux/Orders/orders.actions";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,

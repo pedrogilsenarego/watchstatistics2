@@ -99,8 +99,3 @@ export const setProductDescription = (description) => ({
   type: productsTypes.SET_PRODUCT_DESCRIPTION,
   payload: description,
 });
-
-export const deleteOrderStart = (productID) => ({
-  type: productsTypes.DELETE_ORDER_START,
-  payload: productID,
-});

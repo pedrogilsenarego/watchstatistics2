@@ -22,7 +22,6 @@ const productsTypes = {
   //Update Products
   ADD_PRODUCT_DESCRIPTION: "ADD_PRODUCT_DESCRIPTION",
   SET_PRODUCT_DESCRIPTION: "SET_PRODUCT_DESCRIPTION",
-  DELETE_ORDER_START: "DELETE_ORDER_START",
 };
 
 export default productsTypes;

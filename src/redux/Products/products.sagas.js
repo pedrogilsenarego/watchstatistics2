@@ -7,7 +7,6 @@ import {
   setValidationProducts,
   setProduct,
   setRandomProduct,
-  fetchValidationProductsStart,
   fetchProductStart,
   setMyCollection,
   setCounters,
@@ -19,7 +18,6 @@ import {
   handleFetchLatestProducts,
   handleFetchValidationProducts,
   handleFetchProduct,
-  handleDeleteOrder,
   handleUpdateVote,
   handleUpdateDetails,
   handleUserVote,
@@ -33,11 +31,7 @@ import {
   handleAddProductDescriptionUser,
 } from "./products.helpers";
 import productsTypes from "./products.types";
-import {
-  addMessageStart,
-  checkUserSession,
-  updateCollectionStatus,
-} from "../User/user.actions";
+import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
 import {
   enableLoading,
   disableLoading,
@@ -45,7 +39,6 @@ import {
   updateInformationNotification,
   updateFailNotification,
 } from "../general/general.actions";
-import { i18n } from "src/translations/i18n";
 
 export function* addProduct({ payload }) {
   try {
@@ -261,38 +254,10 @@ export function* onAddProductDescription() {
   yield takeLatest(productsTypes.ADD_PRODUCT_DESCRIPTION, sagaAddDescription);
 }
 
-export function* deleteOrder({ payload }) {
-  const { documentID, type, user, productReference } = payload;
-  try {
-    yield handleDeleteOrder(documentID);
-    yield put(
-      updateSuccessNotification(i18n.t("notifications.success.orderDeleted"))
-    );
-    const deletePayload = {
-      userID: user,
-      messages: {
-        from: "admin",
-        message: `We are sorry, but your update of the type: ${type} on the watch: ${productReference} was rejected`,
-      },
-    };
-    yield put(addMessageStart(deletePayload));
-    yield put(fetchValidationProductsStart());
-  } catch (err) {
-    yield put(
-      updateFailNotification(i18n.t("notifications.fail.orderDeleted"))
-    );
-  }
-}
-
-export function* onDeleteOrderStart() {
-  yield takeLatest(productsTypes.DELETE_ORDER_START, deleteOrder);
-}
-
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
     call(onFetchProductsStart),
-    call(onDeleteOrderStart),
     call(onFetchProductStart),
     call(onUpdateProductVoteStart),
     call(onUpdateProductDetailsStart),
