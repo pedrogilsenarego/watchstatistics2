@@ -25,11 +25,11 @@ import {
   handleRemoveMessage,
   handleAddMessage,
 } from "./user.helpers";
-import {
-  updateSuccessNotification,
-  updateFailNotification,
-} from "../general/general.actions";
-import { i18n } from "src/translations/i18n";
+// import {
+//   updateSuccessNotification,
+//   updateFailNotification,
+// } from "../general/general.actions";
+// import { i18n } from "src/translations/i18n";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
@@ -249,12 +249,7 @@ export function* onRemoveMessage() {
 export function* addMessagesSaga({ payload }) {
   try {
     yield handleAddMessage({ ...payload });
-    yield put(
-      updateSuccessNotification(i18n.t("notifications.success.messageSent"))
-    );
-  } catch (err) {
-    yield put(updateFailNotification(i18n.t("notifications.fail.messageSent")));
-  }
+  } catch (err) {}
 }
 export function* onAddMessage() {
   yield takeLatest(userTypes.ADD_MESSAGE, addMessagesSaga);

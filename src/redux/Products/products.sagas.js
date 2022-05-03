@@ -270,9 +270,10 @@ export function* deleteOrder({ payload }) {
     );
     const deletePayload = {
       userID: user,
-      messages: `${i18n.t(
-        "messages.admin.orderDeleted"
-      )}${type}, watch:${productReference}`,
+      messages: {
+        from: "admin",
+        message: `We are sorry, but your update of the type: ${type} on the watch: ${productReference} was rejected`,
+      },
     };
     yield put(addMessageStart(deletePayload));
     yield put(fetchValidationProductsStart());

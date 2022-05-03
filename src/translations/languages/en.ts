@@ -24,12 +24,6 @@ export const content = {
           messageSent: "The message failed to be sent to the user",
         },
       },
-      messages: {
-        admin: {
-          orderDeleted:
-            "I'm sorry but your update on a product was rejected, type:",
-        },
-      },
     },
   },
 };
