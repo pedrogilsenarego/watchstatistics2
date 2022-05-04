@@ -6,6 +6,7 @@ import { rewards } from "src/constants/gamification";
 import { MdAddCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
 import { openWindowInNewTab } from "src/Utils";
+import AddAdditionalData from "./AddAditionalData";
 
 interface Props {
   additionalData: { title: string; link: string }[];
@@ -78,7 +79,7 @@ const AdditionalData = ({ additionalData }: Props) => {
             </Styled.Typography>
           </Grid>
         )}
-        {addAdditionalData && <>Teste</>}
+        {addAdditionalData && <AddAdditionalData />}
       </Grid>
       <Popover
         anchor={anchorPopover}

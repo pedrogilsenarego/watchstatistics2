@@ -24,6 +24,14 @@ export const content = {
           messageSent: "The message failed to be sent to the user",
         },
       },
+      placeholders: {
+        updateProduct: {
+          additionalData: {
+            title: "Title from the review",
+            link: "Url from the review",
+          },
+        },
+      },
     },
   },
 };
