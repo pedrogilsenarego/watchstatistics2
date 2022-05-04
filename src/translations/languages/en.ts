@@ -32,6 +32,10 @@ export const content = {
           },
         },
       },
+      buttons: {
+        submit: "Submit",
+        cancel: "Cancel",
+      },
     },
   },
 };

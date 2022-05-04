@@ -2,7 +2,7 @@ import * as Styled from "./styles";
 
 interface Props {
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button2 = ({ title, onClick }: Props) => {

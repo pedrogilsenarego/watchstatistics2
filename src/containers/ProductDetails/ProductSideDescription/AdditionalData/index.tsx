@@ -79,7 +79,9 @@ const AdditionalData = ({ additionalData }: Props) => {
             </Styled.Typography>
           </Grid>
         )}
-        {addAdditionalData && <AddAdditionalData />}
+        {addAdditionalData && (
+          <AddAdditionalData setAddAdditionalData={setAddAdditionalData} />
+        )}
       </Grid>
       <Popover
         anchor={anchorPopover}
