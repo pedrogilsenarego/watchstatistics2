@@ -1,11 +1,12 @@
-import { useState } from "react";
 import { Grid } from "@mui/material";
 import Multiline from "src/components/Inputs/Muitline";
-import Button1 from "src/components/Buttons/Button1";
+import Button1Form from "src/components/Buttons/Button1Form";
 import Button2 from "src/components/Buttons/Button2";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDescription } from "src/redux/Products/products.actions";
 import { useParams } from "react-router-dom";
+import { Form, Formik } from "formik";
+import { FORM_VALIDATION } from "./validation";
 
 interface Props {
   setOpen: (setClose: boolean) => void;
@@ -20,12 +21,13 @@ const AddDescription = ({ setOpen }: Props) => {
   const { currentUser, product } = useSelector(mapState);
 
   const dispatch = useDispatch();
-  const [description, setDescription] = useState("");
+
   const { productBrand, productName, reference } = product;
 
-  const handleSubmitDescription = () => {
+  const handleSubmit = (values: { productDesc: string }) => {
+    const { productDesc } = values;
     const payload = {
-      productDesc: description,
+      productDesc,
       currentUser,
       productID: params,
       productBrand,
@@ -37,34 +39,42 @@ const AddDescription = ({ setOpen }: Props) => {
   };
 
   return (
-    <Grid container rowSpacing={1}>
-      <Grid item xs={12}>
-        <Multiline placeholder='Add Description' onChange={setDescription} />
-      </Grid>
-      <Grid
-        item
-        container
-        xs={12}
-        justifyContent='flex-end'
-        columnSpacing={1}
-        style={{
-          marginTop: "5px",
-          marginBottom: "5px",
-        }}
-      >
-        <Grid item>
-          <Button2
-            title='Cancel'
-            onClick={() => {
-              setOpen(false);
+    <Formik
+      initialValues={{ productDesc: "" }}
+      validationSchema={FORM_VALIDATION}
+      onSubmit={(values) => handleSubmit(values)}
+    >
+      <Form>
+        <Grid container rowSpacing={1}>
+          <Grid item xs={12}>
+            <Multiline form name='productDesc' placeholder='Add Description' />
+          </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justifyContent='flex-end'
+            columnSpacing={1}
+            style={{
+              marginTop: "5px",
+              marginBottom: "5px",
             }}
-          />
+          >
+            <Grid item>
+              <Button2
+                title='Cancel'
+                onClick={() => {
+                  setOpen(false);
+                }}
+              />
+            </Grid>
+            <Grid item>
+              <Button1Form title='Submit' />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Button1 title='Submit' onClick={() => handleSubmitDescription()} />
-        </Grid>
-      </Grid>
-    </Grid>
+      </Form>
+    </Formik>
   );
 };
 
