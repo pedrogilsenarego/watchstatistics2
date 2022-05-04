@@ -1,7 +1,7 @@
 import { i18n } from "src/translations/i18n";
 import { Grid } from "@mui/material";
 import Textfield from "src/components/Inputs/Textfield";
-import Button1 from "src/components/Buttons/Button1";
+import Button1Form from "src/components/Buttons/Button1Form";
 import Button2 from "src/components/Buttons/Button2";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -93,7 +93,7 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
               />
             </Grid>
             <Grid item>
-              <Button1 form title={i18n.t("buttons.submit")} />
+              <Button1Form title={i18n.t("buttons.submit")} />
             </Grid>
           </Grid>
         </Grid>

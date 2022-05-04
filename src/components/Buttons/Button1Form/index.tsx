@@ -1,14 +1,16 @@
 import * as Styled from "./styles";
+import { useFormikContext } from "formik";
 
 interface Props {
   children?: JSX.Element;
   title?: string;
-  onClick?: () => void;
 }
 
-const Button1 = ({ title, onClick, children }: Props) => {
+const Button1 = ({ title, children }: Props) => {
+  const { submitForm } = useFormikContext();
+
   return (
-    <Styled.Button onClick={onClick}>
+    <Styled.Button onClick={() => submitForm()}>
       {title}
       {children}
     </Styled.Button>
