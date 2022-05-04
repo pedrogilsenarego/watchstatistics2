@@ -42,6 +42,11 @@ export const content = {
         submit: "Submit",
         cancel: "Cancel",
       },
+      validation: {
+        required: "Required",
+        maxCharacters: "Use less characters",
+        url: "Enter a valid Url",
+      },
     },
   },
 };
