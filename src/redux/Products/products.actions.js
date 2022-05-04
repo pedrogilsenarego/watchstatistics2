@@ -99,3 +99,13 @@ export const setProductDescription = (description) => ({
   type: productsTypes.SET_PRODUCT_DESCRIPTION,
   payload: description,
 });
+
+export const addProductAdditionalData = (payload) => ({
+  type: productsTypes.ADD_PRODUCT_ADDITIONAL_DATA,
+  payload,
+});
+
+export const setProductAdditionalData = (payload) => ({
+  type: productsTypes.SET_PRODUCT_ADDITIONAL_DATA,
+  payload,
+});

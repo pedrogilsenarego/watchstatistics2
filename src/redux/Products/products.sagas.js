@@ -11,6 +11,7 @@ import {
   setMyCollection,
   setCounters,
   setProductDescription,
+  setProductAdditionalData,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -29,6 +30,8 @@ import {
   handleGetCounters,
   handleAddProductDescriptionAdmin,
   handleAddProductDescriptionUser,
+  handleAddProductAdditionalDataAdmin,
+  handleAddProductAdditionalDataUser,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -39,6 +42,7 @@ import {
   updateInformationNotification,
   updateFailNotification,
 } from "../general/general.actions";
+import { i18n } from "src/translations/i18n";
 
 export function* addProduct({ payload }) {
   try {
@@ -223,7 +227,7 @@ export function* onFetchCountersStart() {
   yield takeLatest(productsTypes.FETCH_COUNTERS_START, fetchCounters);
 }
 
-//Update Product
+//!!!!!!!!!!!!Update Product!!!!!!!!!!!!!!!!!
 
 function* sagaAddDescription({ payload }) {
   const { productDesc, currentUser } = payload;
@@ -254,6 +258,44 @@ export function* onAddProductDescription() {
   yield takeLatest(productsTypes.ADD_PRODUCT_DESCRIPTION, sagaAddDescription);
 }
 
+function* sagaAddAdditionalData({ payload }) {
+  const { additionalData, currentUser } = payload;
+  const timestamp = new Date();
+  try {
+    if (checkUserIsAdmin(currentUser)) {
+      yield handleAddProductAdditionalDataAdmin(payload);
+      yield put(setProductAdditionalData(additionalData));
+      yield put(
+        updateSuccessNotification(
+          i18n.t("notifications.success.updateProductAdditionalData")
+        )
+      );
+    } else {
+      yield handleAddProductAdditionalDataUser({
+        ...payload,
+        createdDate: timestamp,
+      });
+      yield put(
+        updateInformationNotification(
+          i18n.t("notifications.information.updateProductAdditionalData")
+        )
+      );
+    }
+  } catch (err) {
+    yield put(
+      updateFailNotification(
+        i18n.t("notifications.fail.updateProductAdditionalData")
+      )
+    );
+  }
+}
+export function* onAddProductAdditionalData() {
+  yield takeLatest(
+    productsTypes.ADD_PRODUCT_ADDITIONAL_DATA,
+    sagaAddAdditionalData
+  );
+}
+
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
@@ -268,5 +310,6 @@ export default function* productsSagas() {
     call(onFetchAllProductsStart),
     call(onFetchCountersStart),
     call(onAddProductDescription),
+    call(onAddProductAdditionalData),
   ]);
 }

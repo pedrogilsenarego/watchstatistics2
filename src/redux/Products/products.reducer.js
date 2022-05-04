@@ -57,6 +57,14 @@ const productsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         product: { ...state.product, productDesc: action.payload },
       };
+    case productsTypes.SET_PRODUCT_ADDITIONAL_DATA:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          additionalData: [...state.product.additionalData, action.payload],
+        },
+      };
 
     default:
       return state;

@@ -521,3 +521,56 @@ export const handleAddProductDescriptionUser = (payload) => {
       });
   });
 };
+
+export const handleAddProductAdditionalDataAdmin = (payload) => {
+  const { additionalData, productID } = payload;
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("products")
+      .doc(productID.productID)
+      .update({
+        additionalData:
+          firebase.firestore.FieldValue.arrayUnion(additionalData),
+      })
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const handleAddProductAdditionalDataUser = (payload) => {
+  const {
+    additionalData,
+    productID,
+    currentUser,
+    createdDate,
+    productName,
+    productBrand,
+    reference,
+  } = payload;
+  const order = {
+    additionalData,
+    productID: productID.productID,
+    user: currentUser.id,
+    type: "+watchAdditionalData",
+    createdDate,
+    productName,
+    productBrand,
+    reference,
+  };
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("orders")
+      .doc()
+      .set(order)
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
