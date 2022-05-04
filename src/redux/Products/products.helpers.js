@@ -472,66 +472,19 @@ export const handleGetCounters = () => {
 };
 
 //update products
-export const handleAddProductDescriptionAdmin = (payload) => {
-  const { productDesc, productID } = payload;
+export const handleAddProductUpdateAdmin = (payload) => {
+  const { productDesc, productID, additionalData } = payload;
   return new Promise((resolve, reject) => {
-    firestore
-      .collection("products")
-      .doc(productID.productID)
-      .update({ productDesc })
-      .then(() => {
-        resolve();
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const handleAddProductDescriptionUser = (payload) => {
-  const {
-    productDesc,
-    productID,
-    currentUser,
-    createdDate,
-    productName,
-    productBrand,
-    reference,
-  } = payload;
-  const order = {
-    productDesc,
-    productID: productID.productID,
-    user: currentUser.id,
-    type: "+watchDescription",
-    createdDate,
-    productName,
-    productBrand,
-    reference,
-  };
-  return new Promise((resolve, reject) => {
-    firestore
-      .collection("orders")
-      .doc()
-      .set(order)
-      .then(() => {
-        resolve();
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
-};
-
-export const handleAddProductAdditionalDataAdmin = (payload) => {
-  const { additionalData, productID } = payload;
-  return new Promise((resolve, reject) => {
-    firestore
-      .collection("products")
-      .doc(productID.productID)
-      .update({
+    let ref = firestore.collection("products").doc(productID.productID);
+    if (productDesc) ref = ref.update({ productDesc });
+    if (additionalData) {
+      ref = ref.update({
         additionalData:
           firebase.firestore.FieldValue.arrayUnion(additionalData),
-      })
+      });
+    }
+
+    ref
       .then(() => {
         resolve();
       })
@@ -541,8 +494,9 @@ export const handleAddProductAdditionalDataAdmin = (payload) => {
   });
 };
 
-export const handleAddProductAdditionalDataUser = (payload) => {
+export const handleAddProductUpdateUser = (payload) => {
   const {
+    productDesc,
     additionalData,
     productID,
     currentUser,
@@ -551,16 +505,22 @@ export const handleAddProductAdditionalDataUser = (payload) => {
     productBrand,
     reference,
   } = payload;
+  const whichField = () => {
+    if (productDesc) return { productDesc, type: "+watchDescription" };
+    if (additionalData) return { additionalData, type: "+watchAdditionalData" };
+    return;
+  };
+
   const order = {
-    additionalData,
     productID: productID.productID,
     user: currentUser.id,
-    type: "+watchAdditionalData",
     createdDate,
     productName,
     productBrand,
     reference,
   };
+  Object.assign(order, whichField());
+
   return new Promise((resolve, reject) => {
     firestore
       .collection("orders")

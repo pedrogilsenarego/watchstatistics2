@@ -28,10 +28,8 @@ import {
   handleFetchAllProducts,
   handleIncrementProductsCounter,
   handleGetCounters,
-  handleAddProductDescriptionAdmin,
-  handleAddProductDescriptionUser,
-  handleAddProductAdditionalDataAdmin,
-  handleAddProductAdditionalDataUser,
+  handleAddProductUpdateAdmin,
+  handleAddProductUpdateUser,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -234,11 +232,11 @@ function* sagaAddDescription({ payload }) {
   const timestamp = new Date();
   try {
     if (checkUserIsAdmin(currentUser)) {
-      yield handleAddProductDescriptionAdmin(payload);
+      yield handleAddProductUpdateAdmin(payload);
       yield put(setProductDescription(productDesc));
       yield put(updateSuccessNotification("Product description added"));
     } else {
-      yield handleAddProductDescriptionUser({
+      yield handleAddProductUpdateUser({
         ...payload,
         createdDate: timestamp,
       });
@@ -263,7 +261,7 @@ function* sagaAddAdditionalData({ payload }) {
   const timestamp = new Date();
   try {
     if (checkUserIsAdmin(currentUser)) {
-      yield handleAddProductAdditionalDataAdmin(payload);
+      yield handleAddProductUpdateAdmin(payload);
       yield put(setProductAdditionalData(additionalData));
       yield put(
         updateSuccessNotification(
@@ -271,7 +269,7 @@ function* sagaAddAdditionalData({ payload }) {
         )
       );
     } else {
-      yield handleAddProductAdditionalDataUser({
+      yield handleAddProductUpdateUser({
         ...payload,
         createdDate: timestamp,
       });
