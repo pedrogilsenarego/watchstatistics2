@@ -55,11 +55,12 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
           xs={12}
           container
           alignItems='center'
+          justifyContent='center'
           columnSpacing={1}
-          rowSpacing={1}
-          style={{ marginTop: "10px", marginBottom: "10px" }}
+          rowSpacing={2}
+          style={{ marginBottom: "10px" }}
         >
-          <Grid item xs={6} md={4}>
+          <Grid textAlign='center' item xs={6} md={4}>
             <Textfield
               form
               name='title'
@@ -69,7 +70,7 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
             />
           </Grid>
 
-          <Grid item xs={6} md={4}>
+          <Grid item textAlign='center' xs={6} md={4}>
             <Textfield
               form
               name='link'

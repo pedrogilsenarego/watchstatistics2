@@ -66,7 +66,7 @@ const ProductDetails = ({}) => {
       };
     },
     // eslint-disable-next-line
-    []
+    [productID]
   );
 
   const {
