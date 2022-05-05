@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Card, CardMedia, IconButton, Grid } from "@material-ui/core";
+import { Card, CardMedia, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
+import ImageThumbs from "./ImageThumbs";
 
 const ImageMain = ({
   isMatch,
@@ -25,18 +26,6 @@ const ImageMain = ({
       paddingTop: "70vh",
       paddingRight: "5px",
       borderRadius: "4px",
-    },
-
-    textBtn: {
-      color: "#ffffff",
-      fontSize: "13px",
-
-      "&:hover": {
-        color: "#FFA500",
-      },
-      "&:active": {
-        color: "#FFFFFF",
-      },
     },
   }));
 
@@ -63,34 +52,17 @@ const ImageMain = ({
             image={mainImage ? mainImage : productThumbnail[0]}
           />
 
-          <Grid container alignItems="center" justifyContent="center">
-            <Grid xs={12} sm={8} item>
-              {productThumbnail.map((item, pos) => {
-                return (
-                  <IconButton
-                    key={pos}
-                    className={classes.textBtn}
-                    onClick={(e) => {
-                      setMainImage(item);
-                    }}
-                  >
-                    <CardMedia
-                      style={{
-                        cursor: "pointer",
-                        border:
-                          mainImage === item ? "solid 1.5px" : "solid 0px",
-                        borderRadius: "2px",
-                        borderColor: mainImage === item ? "orange" : "ffffff00",
-                      }}
-                      component="img"
-                      height="50px"
-                      image={item}
-                      alt=""
-                    />
-                  </IconButton>
-                );
-              })}
-            </Grid>
+          <Grid
+            container
+            alignItems='center'
+            justifyContent='center'
+            style={{ marginTop: "5px" }}
+          >
+            <ImageThumbs
+              setMainImage={setMainImage}
+              mainImage={mainImage}
+              productThumbnail={productThumbnail}
+            />
             {isMatch && (
               <Divider
                 style={{

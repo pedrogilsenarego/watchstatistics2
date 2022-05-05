@@ -25,7 +25,7 @@ const AdditionalData = ({ additionalData }: Props) => {
   return (
     <Styled.Box>
       <Grid container>
-        {additionalData.length > 0 && (
+        {additionalData?.length > 0 && (
           <Grid item container columnSpacing={1} alignItems='center' xs={12}>
             {additionalData?.map((additionalData, pos: number) => {
               const { link, title } = additionalData;
