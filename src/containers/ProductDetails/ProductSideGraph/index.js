@@ -283,7 +283,7 @@ const ProductSidePanel = ({ isMatch }) => {
   const memoRadarChart = useMemo(
     () => <Radar ref={radarRef} {...configRadarChart} />,
     // eslint-disable-next-line
-    [update]
+    [product, update]
   );
 
   const scrollToRef = (ref) => {
@@ -372,15 +372,15 @@ const ProductSidePanel = ({ isMatch }) => {
                 item
                 xs={12}
                 md={6}
-                alignItems="center"
-                justifyContent="center"
+                alignItems='center'
+                justifyContent='center'
                 container
               >
                 {currentUser && !currentUser.userVotes.includes(productID) && (
                   <Button
                     className={classes.textBtn}
                     style={{ width: "80%", borderColor: "orange" }}
-                    aria-controls="vote"
+                    aria-controls='vote'
                     onClick={(e) => {
                       handleVote();
                     }}
@@ -402,7 +402,7 @@ const ProductSidePanel = ({ isMatch }) => {
                   <Button
                     className={classes.textBtn}
                     style={{ width: "80%" }}
-                    aria-controls="vote"
+                    aria-controls='vote'
                     disableRipple
                     onClick={(e) => handleLoginOpen(e)}
                   >
@@ -420,11 +420,11 @@ const ProductSidePanel = ({ isMatch }) => {
       <Menu
         disableScrollLock
         className={classes.menu2}
-        id="login"
+        id='login'
         onClose={handleCloseLoginMenu}
         anchorEl={anchorLogin}
         open={Boolean(anchorLogin)}
-        anchorReference="none"
+        anchorReference='none'
         PaperProps={{
           style: {
             left: "50%",
