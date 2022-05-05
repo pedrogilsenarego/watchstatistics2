@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
+import * as Styled from "./styles";
 
-import { addProductAdditionalData } from "src/redux/Products/products.actions";
+import { addProductPicture } from "src/redux/Products/products.actions";
 
 interface Props {
   setAddAdditionalPicture: (addAdditionalPicture: boolean) => void;
@@ -16,7 +17,7 @@ interface Props {
 
 const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
   const INITIAL_FORM_STATE = {
-    image: "",
+    picture: "",
   };
 
   const mapState = ({ user, productsData }: any) => ({
@@ -29,16 +30,16 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
   const { productBrand, productName, reference } = product;
 
   const handleSubmit = (e: any) => {
-    const { image } = e;
+    const { picture } = e;
     const payload = {
-      productThumbnail: image,
+      productThumbnail: picture,
       currentUser,
       productID: params,
       productBrand,
       productName,
       reference,
     };
-    dispatch(addProductAdditionalData(payload));
+    dispatch(addProductPicture(payload));
     setAddAdditionalPicture(false);
   };
 
@@ -54,12 +55,20 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
           xs={12}
           container
           alignItems='center'
-          justifyContent='center'
           columnSpacing={1}
           rowSpacing={2}
-          style={{ marginBottom: "10px" }}
+          style={{
+            marginBottom: "20px",
+            marginLeft: "10px",
+            marginTop: "20px",
+          }}
         >
-          <Grid textAlign='center'>
+          <Grid xs={12}>
+            <Styled.Typography>
+              {i18n.t("forms.updateProduct.picture")}
+            </Styled.Typography>
+          </Grid>
+          <Grid textAlign='center' style={{ marginTop: "5px" }}>
             <Textfield
               form
               name='picture'
@@ -71,8 +80,9 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
             item
             container
             xs={12}
+            alignItems='center'
             md={4}
-            justifyContent='flex-end'
+            justifyContent='flex'
             columnSpacing={1}
           >
             <Grid item>

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
+import * as Styled from "./styles";
 
 import { addProductAdditionalData } from "src/redux/Products/products.actions";
 
@@ -55,12 +56,16 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
           xs={12}
           container
           alignItems='center'
-          justifyContent='center'
           columnSpacing={1}
-          rowSpacing={2}
-          style={{ marginBottom: "10px" }}
+          rowSpacing={1}
+          style={{ marginBottom: "10px", marginTop: "10px" }}
         >
-          <Grid textAlign='center' item xs={6} md={4}>
+          <Grid xs={12}>
+            <Styled.Typography>
+              {i18n.t("forms.updateProduct.review")}
+            </Styled.Typography>
+          </Grid>
+          <Grid item xs={6} md={4} style={{ paddingLeft: 0 }}>
             <Textfield
               form
               name='title'
@@ -70,7 +75,7 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
             />
           </Grid>
 
-          <Grid item textAlign='center' xs={6} md={4}>
+          <Grid item xs={6} md={4}>
             <Textfield
               form
               name='link'

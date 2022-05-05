@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
+import AddAdditionalPicture from "./ImageThumbs/AddAditionalPicture";
 
 const ImageMain = ({
   isMatch,
@@ -18,6 +19,7 @@ const ImageMain = ({
   compareWatches,
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
+  const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
   const useStyles = makeStyles((theme) => ({
     filter: {},
 
@@ -61,6 +63,8 @@ const ImageMain = ({
             <ImageThumbs
               setMainImage={setMainImage}
               mainImage={mainImage}
+              addAdditionalPictures={addAdditionalPictures}
+              setAddAdditionalPictures={setAddAdditionalPictures}
               productThumbnail={productThumbnail}
             />
             {isMatch && (
@@ -75,6 +79,13 @@ const ImageMain = ({
             <Grid xs={12} sm={4} item>
               <AvatarsControllers {...configAvatarControllers} />
             </Grid>
+            {addAdditionalPictures && (
+              <Grid xs={12} item>
+                <AddAdditionalPicture
+                  setAddAdditionalPicture={setAddAdditionalPictures}
+                />
+              </Grid>
+            )}
           </Grid>
         </Card>
       )}

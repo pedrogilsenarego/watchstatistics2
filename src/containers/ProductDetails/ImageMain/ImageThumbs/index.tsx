@@ -4,16 +4,22 @@ import { MdAddCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
 import * as Styled from "./styles";
 import { rewards } from "src/constants/gamification";
-import AddAdditionalPicture from "./AddAditionalPicture";
 
 interface Props {
   productThumbnail: "string"[];
   setMainImage: (mainImage: string) => void;
   mainImage: string;
+  addAdditionalPictures: Boolean;
+  setAddAdditionalPictures: (addAdditionalPictures: Boolean) => void;
 }
 
-const ImageThumbs = ({ productThumbnail, setMainImage, mainImage }: Props) => {
-  const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
+const ImageThumbs = ({
+  productThumbnail,
+  setMainImage,
+  mainImage,
+  addAdditionalPictures,
+  setAddAdditionalPictures,
+}: Props) => {
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
   const numberPictures = useMemo(() => {
@@ -92,11 +98,6 @@ const ImageThumbs = ({ productThumbnail, setMainImage, mainImage }: Props) => {
               points.
             </Styled.Typography>
           </Grid>
-        )}
-        {addAdditionalPictures && (
-          <AddAdditionalPicture
-            setAddAdditionalPicture={setAddAdditionalPictures}
-          />
         )}
       </Grid>
       <Popover

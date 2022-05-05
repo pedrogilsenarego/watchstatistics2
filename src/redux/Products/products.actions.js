@@ -109,3 +109,13 @@ export const setProductAdditionalData = (payload) => ({
   type: productsTypes.SET_PRODUCT_ADDITIONAL_DATA,
   payload,
 });
+
+export const addProductPicture = (payload) => ({
+  type: productsTypes.ADD_PRODUCT_PICTURE,
+  payload,
+});
+
+export const setProductPicture = (payload) => ({
+  type: productsTypes.SET_PRODUCT_PICTURE,
+  payload,
+});

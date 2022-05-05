@@ -19,15 +19,18 @@ export const content = {
           orderDeleted: "The order was successfully deleted",
           messageSent: "A message was sent to the user",
           updateProductAdditionalData: "The Review was added with success",
+          updateProductPicture: "The Picture was added with success",
         },
         fail: {
           orderDeleted: "The order was not possible to delete",
           messageSent: "The message failed to be sent to the user",
           updateProductAdditionalData:
             "The Review was not possible to be added",
+          updateProductPicture: "The Picture was not possible to be added",
         },
         information: {
           updateProductAdditionalData: "The Review was sent for review",
+          updateProductPicture: "The Picture was sent for review",
         },
       },
       placeholders: {
@@ -47,6 +50,12 @@ export const content = {
         required: "Required",
         maxCharacters: "Use less characters",
         url: "Enter a valid Url",
+      },
+      forms: {
+        updateProduct: {
+          picture: "New Picture",
+          review: "New Review",
+        },
       },
     },
   },

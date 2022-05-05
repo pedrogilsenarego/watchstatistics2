@@ -65,6 +65,14 @@ const productsReducer = (state = INITIAL_STATE, action) => {
           additionalData: [...state.product.additionalData, action.payload],
         },
       };
+    case productsTypes.SET_PRODUCT_PICTURE:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          productThumbnail: [...state.product.productThumbnail, action.payload],
+        },
+      };
 
     default:
       return state;

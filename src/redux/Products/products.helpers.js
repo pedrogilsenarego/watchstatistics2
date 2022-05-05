@@ -473,7 +473,7 @@ export const handleGetCounters = () => {
 
 //update products
 export const handleAddProductUpdateAdmin = (payload) => {
-  const { productDesc, productID, additionalData } = payload;
+  const { productDesc, productID, additionalData, productThumbnail } = payload;
   return new Promise((resolve, reject) => {
     let ref = firestore.collection("products").doc(productID.productID);
     if (productDesc) ref = ref.update({ productDesc });
@@ -481,6 +481,12 @@ export const handleAddProductUpdateAdmin = (payload) => {
       ref = ref.update({
         additionalData:
           firebase.firestore.FieldValue.arrayUnion(additionalData),
+      });
+    }
+    if (productThumbnail) {
+      ref = ref.update({
+        productThumbnail:
+          firebase.firestore.FieldValue.arrayUnion(productThumbnail),
       });
     }
 
@@ -497,6 +503,7 @@ export const handleAddProductUpdateAdmin = (payload) => {
 export const handleAddProductUpdateUser = (payload) => {
   const {
     productDesc,
+    productThumbnail,
     additionalData,
     productID,
     currentUser,
@@ -508,6 +515,7 @@ export const handleAddProductUpdateUser = (payload) => {
   const whichField = () => {
     if (productDesc) return { productDesc, type: "+watchDescription" };
     if (additionalData) return { additionalData, type: "+watchAdditionalData" };
+    if (productThumbnail) return { productThumbnail, type: "+watchPicture" };
     return;
   };
 
