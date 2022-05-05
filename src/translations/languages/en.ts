@@ -36,6 +36,7 @@ export const content = {
             title: "Title from the review",
             link: "Url from the review",
           },
+          picture: "Url from the new picture",
         },
       },
       buttons: {

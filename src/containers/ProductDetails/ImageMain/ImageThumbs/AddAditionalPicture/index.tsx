@@ -16,8 +16,7 @@ interface Props {
 
 const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
   const INITIAL_FORM_STATE = {
-    title: "",
-    link: "",
+    image: "",
   };
 
   const mapState = ({ user, productsData }: any) => ({
@@ -30,9 +29,9 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
   const { productBrand, productName, reference } = product;
 
   const handleSubmit = (e: any) => {
-    const { title, link } = e;
+    const { image } = e;
     const payload = {
-      additionalData: { title, link },
+      productThumbnail: image,
       currentUser,
       productID: params,
       productBrand,
@@ -60,25 +59,14 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
           rowSpacing={2}
           style={{ marginBottom: "10px" }}
         >
-          <Grid textAlign='center' item xs={6} md={4}>
+          <Grid textAlign='center'>
             <Textfield
               form
-              name='title'
-              placeholder={i18n.t(
-                "placeholders.updateProduct.additionalData.title"
-              )}
+              name='picture'
+              placeholder={i18n.t("placeholders.updateProduct.picture")}
             />
           </Grid>
 
-          <Grid item textAlign='center' xs={6} md={4}>
-            <Textfield
-              form
-              name='link'
-              placeholder={i18n.t(
-                "placeholders.updateProduct.additionalData.link"
-              )}
-            />
-          </Grid>
           <Grid
             item
             container

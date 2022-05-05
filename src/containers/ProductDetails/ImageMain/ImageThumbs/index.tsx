@@ -102,7 +102,7 @@ const ImageThumbs = ({ productThumbnail, setMainImage, mainImage }: Props) => {
       <Popover
         anchor={anchorPopover}
         setAnchor={setAnchorPopover}
-        message={`Add up to ${numberPictures} reviews to win up to ${
+        message={`Add up to ${numberPictures} pictures to win up to ${
           Number(numberPictures) * rewards.PRODUCT_PICTURE
         } points`}
       />
