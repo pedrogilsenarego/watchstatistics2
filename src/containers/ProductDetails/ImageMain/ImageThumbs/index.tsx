@@ -51,27 +51,28 @@ const ImageThumbs = ({ productThumbnail, setMainImage, mainImage }: Props) => {
                 </Grid>
               );
             })}
+            {!addAdditionalPictures && productThumbnail.length <= 4 && (
+              <Grid item>
+                <MdAddCircle
+                  onMouseOver={(e) => {
+                    setAnchorPopover(e.currentTarget);
+                  }}
+                  onMouseOut={() => {
+                    setAnchorPopover(null);
+                  }}
+                  style={{ cursor: "pointer" }}
+                  size='2em'
+                  color='orange'
+                  onClick={() => {
+                    setAnchorPopover(null);
+                    setAddAdditionalPictures(true);
+                  }}
+                />
+              </Grid>
+            )}
           </Grid>
         )}
-        {!addAdditionalPictures && productThumbnail.length <= 4 && (
-          <Grid item>
-            <MdAddCircle
-              onMouseOver={(e) => {
-                setAnchorPopover(e.currentTarget);
-              }}
-              onMouseOut={() => {
-                setAnchorPopover(null);
-              }}
-              style={{ cursor: "pointer" }}
-              size='2em'
-              color='orange'
-              onClick={() => {
-                setAnchorPopover(null);
-                setAddAdditionalPictures(true);
-              }}
-            />
-          </Grid>
-        )}
+
         {!addAdditionalPictures && productThumbnail.length <= 0 && (
           <Grid item xs={12}>
             <Styled.Typography>
