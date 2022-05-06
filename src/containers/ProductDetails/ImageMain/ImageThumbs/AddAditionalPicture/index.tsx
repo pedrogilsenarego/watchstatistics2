@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { i18n } from "src/translations/i18n";
 import { Grid, Divider } from "@mui/material";
 import Textfield from "src/components/Inputs/Textfield";
@@ -22,6 +22,7 @@ const AddAdditionalPicture = ({
   setMainImage,
 }: Props) => {
   const [readySubmit, setReadySubmit] = useState(false);
+
   const INITIAL_FORM_STATE = {
     picture: "",
   };
@@ -34,7 +35,6 @@ const AddAdditionalPicture = ({
   const dispatch = useDispatch();
   const params = useParams();
   const { productBrand, productName, reference } = product;
-  const formRef = useRef<any>();
 
   const handleSubmit = (e: any) => {
     const { picture } = e;
@@ -56,16 +56,9 @@ const AddAdditionalPicture = ({
     setReadySubmit(true);
   };
 
-  useEffect(() => {
-    if (formRef?.current?.values) console.log(formRef.current.values);
-    if (readySubmit && formRef?.current?.values) setReadySubmit(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formRef?.current?.values]);
-
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
-      innerRef={formRef}
       onSubmit={(values) => {
         if (readySubmit) {
           handleSubmit(values);
@@ -75,7 +68,11 @@ const AddAdditionalPicture = ({
       }}
       validationSchema={FORM_VALIDATION}
     >
-      <Form>
+      <Form
+        onChange={() => {
+          if (readySubmit) setReadySubmit(false);
+        }}
+      >
         <Grid
           item
           xs={12}
