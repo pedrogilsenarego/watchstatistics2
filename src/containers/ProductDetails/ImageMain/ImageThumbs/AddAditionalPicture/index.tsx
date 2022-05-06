@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { i18n } from "src/translations/i18n";
 import { Grid, Divider } from "@mui/material";
 import Textfield from "src/components/Inputs/Textfield";
@@ -10,7 +10,6 @@ import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
 import SugestedImages from "./SugestedImages";
-
 import { addProductPicture } from "src/redux/Products/products.actions";
 
 interface Props {
@@ -35,6 +34,7 @@ const AddAdditionalPicture = ({
   const dispatch = useDispatch();
   const params = useParams();
   const { productBrand, productName, reference } = product;
+  const formRef = useRef<any>();
 
   const handleSubmit = (e: any) => {
     const { picture } = e;
@@ -56,9 +56,16 @@ const AddAdditionalPicture = ({
     setReadySubmit(true);
   };
 
+  useEffect(() => {
+    if (formRef?.current?.values) console.log(formRef.current.values);
+    if (readySubmit && formRef?.current?.values) setReadySubmit(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formRef?.current?.values]);
+
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
+      innerRef={formRef}
       onSubmit={(values) => {
         if (readySubmit) {
           handleSubmit(values);
