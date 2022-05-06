@@ -83,6 +83,7 @@ const ImageMain = ({
               <Grid xs={12} item>
                 <AddAdditionalPicture
                   setAddAdditionalPicture={setAddAdditionalPictures}
+                  setMainImage={setMainImage}
                 />
               </Grid>
             )}

@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { i18n } from "src/translations/i18n";
-import { Grid } from "@mui/material";
+import { Grid, Divider } from "@mui/material";
 import Textfield from "src/components/Inputs/Textfield";
 import Button1Form from "src/components/Buttons/Button1Form";
 import Button2 from "src/components/Buttons/Button2";
@@ -14,9 +15,14 @@ import { addProductPicture } from "src/redux/Products/products.actions";
 
 interface Props {
   setAddAdditionalPicture: (addAdditionalPicture: boolean) => void;
+  setMainImage: any;
 }
 
-const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
+const AddAdditionalPicture = ({
+  setAddAdditionalPicture,
+  setMainImage,
+}: Props) => {
+  const [readySubmit, setReadySubmit] = useState(false);
   const INITIAL_FORM_STATE = {
     picture: "",
   };
@@ -44,10 +50,22 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
     setAddAdditionalPicture(false);
   };
 
+  const handleTestImage = (e: any) => {
+    const { picture } = e;
+    setMainImage(picture);
+    setReadySubmit(true);
+  };
+
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
-      onSubmit={(values) => handleSubmit(values)}
+      onSubmit={(values) => {
+        if (readySubmit) {
+          handleSubmit(values);
+        } else {
+          handleTestImage(values);
+        }
+      }}
       validationSchema={FORM_VALIDATION}
     >
       <Form>
@@ -61,9 +79,17 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
           style={{
             marginBottom: "20px",
             marginLeft: "10px",
-            marginTop: "20px",
           }}
         >
+          <Grid item xs={12}>
+            <Divider
+              style={{
+                width: "100%",
+                background: "#ffffff66",
+                marginBottom: "10px",
+              }}
+            />
+          </Grid>
           <Grid xs={12}>
             <Styled.Typography>
               {i18n.t("forms.updateProduct.picture")}
@@ -92,9 +118,15 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
                 onClick={() => setAddAdditionalPicture(false)}
               />
             </Grid>
-            <Grid item>
-              <Button1Form title={i18n.t("buttons.submit")} />
-            </Grid>
+            {readySubmit ? (
+              <Grid item>
+                <Button1Form title={i18n.t("buttons.submit")} />
+              </Grid>
+            ) : (
+              <Grid item>
+                <Button1Form title={i18n.t("buttons.testImage")} />
+              </Grid>
+            )}
           </Grid>
         </Grid>
         <SugestedImages product={product} />

@@ -45,6 +45,7 @@ export const content = {
       buttons: {
         submit: "Submit",
         cancel: "Cancel",
+        testImage: "Test Image",
       },
       validation: {
         required: "Required",
