@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const getImages = async (value, num) => {
+export const getImages = async (value) => {
   const options = {
     method: "GET",
-    url: `https://google-search3.p.rapidapi.com/api/v1/image/q=${value}&num=${num}`,
+    url: `https://google-search3.p.rapidapi.com/api/v1/image/q=${value}`,
     headers: {
       "X-User-Agent": "desktop",
       "X-Proxy-Location": "EU",
