@@ -8,6 +8,8 @@ import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
+import SugestedImages from "./SugestedImages"
+
 
 import { addProductPicture } from "src/redux/Products/products.actions";
 
@@ -96,6 +98,7 @@ const AddAdditionalPicture = ({ setAddAdditionalPicture }: Props) => {
             </Grid>
           </Grid>
         </Grid>
+        <SugestedImages/>
       </Form>
     </Formik>
   );
