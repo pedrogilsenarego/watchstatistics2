@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Card, CardMedia, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import { Card, Grid } from "@material-ui/core";
+import { Box } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
@@ -19,19 +19,9 @@ const ImageMain = ({
   compareWatches,
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
+  const [readySubmit, setReadySubmit] = useState(false);
+  const [errorImage, setErrorImage] = useState(false);
   const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
-  const useStyles = makeStyles((theme) => ({
-    filter: {},
-
-    media: {
-      textAlign: "right",
-      paddingTop: "70vh",
-      paddingRight: "5px",
-      borderRadius: "4px",
-    },
-  }));
-
-  const classes = useStyles();
 
   const configAvatarControllers = {
     product,
@@ -45,14 +35,44 @@ const ImageMain = ({
     compareWatches,
   };
 
+  const handleOnImgError = () => {
+    setReadySubmit(false);
+    setErrorImage(true);
+  };
+
+  useEffect(() => {
+    if (errorImage) setErrorImage(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mainImage]);
+
   return (
     <>
       {productThumbnail && (
         <Card style={{ backgroundColor: "#18161E" }}>
-          <CardMedia
-            className={classes.media}
-            image={mainImage ? mainImage : productThumbnail[0]}
-          />
+          {!errorImage && (
+            <img
+              onError={handleOnImgError}
+              style={{
+                width: "100%",
+                objectFit: "cover",
+                height: "70vh",
+              }}
+              src={mainImage ? mainImage : productThumbnail[0]}
+              alt=''
+            />
+          )}
+          {errorImage && (
+            <Box
+              style={{
+                height: "70vh",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "white",
+              }}
+            >
+              This image has issues
+            </Box>
+          )}
 
           <Grid
             container
@@ -82,6 +102,8 @@ const ImageMain = ({
             {addAdditionalPictures && (
               <Grid xs={12} item>
                 <AddAdditionalPicture
+                  readySubmit={readySubmit}
+                  setReadySubmit={setReadySubmit}
                   setAddAdditionalPicture={setAddAdditionalPictures}
                   setMainImage={setMainImage}
                 />

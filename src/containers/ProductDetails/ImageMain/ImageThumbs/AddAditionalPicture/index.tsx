@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { i18n } from "src/translations/i18n";
-import { Grid, Divider } from "@mui/material";
+import { Grid } from "@mui/material";
 import Textfield from "src/components/Inputs/Textfield";
 import Button1Form from "src/components/Buttons/Button1Form";
 import Button2 from "src/components/Buttons/Button2";
@@ -15,14 +14,16 @@ import { addProductPicture } from "src/redux/Products/products.actions";
 interface Props {
   setAddAdditionalPicture: (addAdditionalPicture: boolean) => void;
   setMainImage: any;
+  readySubmit: boolean;
+  setReadySubmit: (readySubmit: boolean) => void;
 }
 
 const AddAdditionalPicture = ({
   setAddAdditionalPicture,
   setMainImage,
+  readySubmit,
+  setReadySubmit,
 }: Props) => {
-  const [readySubmit, setReadySubmit] = useState(false);
-
   const INITIAL_FORM_STATE = {
     picture: "",
   };
@@ -85,15 +86,7 @@ const AddAdditionalPicture = ({
             marginLeft: "10px",
           }}
         >
-          <Grid item xs={12}>
-            <Divider
-              style={{
-                width: "100%",
-                background: "#ffffff66",
-                marginBottom: "10px",
-              }}
-            />
-          </Grid>
+          <Grid item xs={12}></Grid>
           <Grid xs={12}>
             <Styled.Typography>
               {i18n.t("forms.updateProduct.picture")}
