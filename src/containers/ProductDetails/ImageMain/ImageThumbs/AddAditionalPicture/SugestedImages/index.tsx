@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getImages } from "src/Api/googleSearch";
 import Button2 from "src/components/Buttons/Button2";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { openWindowInNewTab } from "src/Utils";
 
 const SugestedImages = ({ product }: any) => {
@@ -20,7 +20,7 @@ const SugestedImages = ({ product }: any) => {
   console.log(images);
 
   return (
-    <div>
+    <div style={{ maxHeight: "50vh", overflowY: "auto" }}>
       <Button2 title='teste' onClick={handleGetImages} />
       <Grid container justifyContent='space-evenly'>
         {images?.map((image: any, index: number) => {
