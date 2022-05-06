@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Card, Grid } from "@material-ui/core";
-import { Box } from "@mui/material";
+import { Card } from "@material-ui/core";
+import { Typography, Grid } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
 import AddAdditionalPicture from "./ImageThumbs/AddAditionalPicture";
+import { i18n } from "src/translations/i18n";
 
 const ImageMain = ({
   isMatch,
@@ -62,16 +63,21 @@ const ImageMain = ({
             />
           )}
           {errorImage && (
-            <Box
+            <Grid
+              container
+              justifyContent='center'
+              alignItems='center'
               style={{
                 height: "70vh",
-                justifyContent: "center",
-                alignItems: "center",
                 color: "white",
               }}
             >
-              This image has issues
-            </Box>
+              <Grid item xs={12} alignText='center'>
+                <Typography variant='h3'>
+                  {i18n.t("forms.imageCheck")}
+                </Typography>
+              </Grid>
+            </Grid>
           )}
 
           <Grid

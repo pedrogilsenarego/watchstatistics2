@@ -24,7 +24,7 @@ export const content = {
         fail: {
           orderDeleted: "The order was not possible to delete",
           messageSent: "The message failed to be sent to the user",
-          imageBad: "This image has some issue",
+
           updateProductAdditionalData:
             "The Review was not possible to be added",
           updateProductPicture: "The Picture was not possible to be added",
@@ -58,6 +58,7 @@ export const content = {
           picture: "New Picture",
           review: "New Review",
         },
+        imageCheck: "Something went wrong with this image",
       },
     },
   },
