@@ -57,7 +57,7 @@ const ImageThumbs = ({
                 </Grid>
               );
             })}
-            {!addAdditionalPictures && productThumbnail.length <= 4 && (
+            {!addAdditionalPictures && productThumbnail.length < 4 && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {

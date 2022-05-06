@@ -14,10 +14,10 @@ export const getImages = async (value) => {
   const response = await axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
+      return response.data;
     })
     .catch(function (error) {
       console.error(error);
     });
-  return response.data;
+  return response;
 };
