@@ -8,6 +8,10 @@ export const content = {
         dashboard: "Dashboard",
         logout: "Logout",
         admin: "Admin",
+        mobileBottomAppbar: {
+          vote: "Vote",
+          next: "Next Watch",
+        },
       },
       drawer: {
         main: {

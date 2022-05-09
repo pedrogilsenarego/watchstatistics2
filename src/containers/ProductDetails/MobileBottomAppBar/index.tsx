@@ -1,6 +1,8 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import { useSelector } from "react-redux";
+import * as Styled from "./styles";
+import { i18n } from "src/translations/i18n";
 
 interface Props {
   cartItems: any;
@@ -64,7 +66,16 @@ const MobileBottomAppBar = ({
         </Grid>
         <Grid item>
           {currentUser && !currentUser.userVotes.includes(productID) && (
-            <Typography onClick={() => setShowVote(!showVote)}>Vote</Typography>
+            <Styled.Typography onClick={() => setShowVote(!showVote)}>
+              {i18n.t("navigation.mobileBottomAppbar.vote")}
+            </Styled.Typography>
+          )}
+        </Grid>
+        <Grid item>
+          {currentUser && !currentUser.userVotes.includes(productID) && (
+            <Styled.Typography onClick={() => setShowVote(!showVote)}>
+              {i18n.t("navigation.mobileBottomAppbar.next")}
+            </Styled.Typography>
           )}
         </Grid>
       </Grid>
