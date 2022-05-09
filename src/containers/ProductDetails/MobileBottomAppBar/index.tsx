@@ -98,13 +98,15 @@ const MobileBottomAppBar = ({
             </Styled.Typography>
           )}
         </Grid>
-        <Grid item>
-          <MdArrowForwardIos
-            onClick={() => handleNextWatch()}
-            size='3em'
-            color='orange'
-          />
-        </Grid>
+        {currentLatest < 12 && (
+          <Grid item>
+            <MdArrowForwardIos
+              onClick={() => handleNextWatch()}
+              size='3em'
+              color='orange'
+            />
+          </Grid>
+        )}
       </Grid>
     </>
   );
