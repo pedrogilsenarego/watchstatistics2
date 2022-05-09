@@ -6,7 +6,6 @@ import * as Styled from "./styles";
 import { i18n } from "src/translations/i18n";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useHistory } from "react-router-dom";
-import { setLatestProducts } from "src/redux/Products/products.actions";
 
 interface Props {
   cartItems: any;
@@ -39,6 +38,7 @@ const MobileBottomAppBar = ({
   setShowVote,
 }: Props) => {
   const { currentUser, latestProducts } = useSelector(mapState);
+
   const history = useHistory();
   const [currentLatest, setCurrentLatest] = useState(0);
   const configAvatarControllers = {
@@ -58,15 +58,16 @@ const MobileBottomAppBar = ({
 
   const handleNextWatch = () => {
     if (currentLatest < 12) {
-      for (let i = currentLatest; i < 12; i++) {
-        const nextWatch = currentLatest.data[currentLatest].documentID;
-        if (!checkUserHasVoted(nextWatch)) {
+      let i = currentLatest;
+      while (i < 12) {
+        const nextWatch = latestProducts?.data[i].documentID;
+        if (!checkUserHasVoted(nextWatch) && productID !== nextWatch) {
+          setCurrentLatest(i);
+          history.push(`/product/${nextWatch}`);
           break;
         }
+        i++;
       }
-
-      history.push(`/product/${nextWatch}`);
-      setCurrentLatest(currentLatest + 1);
     }
   };
   return (
