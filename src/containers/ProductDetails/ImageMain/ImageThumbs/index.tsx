@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Grid, CardMedia } from "@mui/material";
+import { Grid, CardMedia, useMediaQuery, useTheme } from "@mui/material";
 import { MdAddCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
 import * as Styled from "./styles";
@@ -21,6 +21,8 @@ const ImageThumbs = ({
   setAddAdditionalPictures,
 }: Props) => {
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
+  const Theme = useTheme();
+  const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
 
   const numberPictures = useMemo(() => {
     if (productThumbnail && productThumbnail !== undefined)
@@ -32,7 +34,14 @@ const ImageThumbs = ({
     <>
       <Grid container xs={12} sm={8}>
         {productThumbnail?.length > 0 && (
-          <Grid item container columnSpacing={1} alignItems='center' xs={12}>
+          <Grid
+            item
+            container
+            columnSpacing={1}
+            alignItems='center'
+            justifyContent={mobile ? "center" : "flex-start"}
+            xs={12}
+          >
             {productThumbnail?.map((item, pos) => {
               return (
                 <Grid

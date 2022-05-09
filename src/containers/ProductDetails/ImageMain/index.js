@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "@material-ui/core";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, useMediaQuery, useTheme } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
@@ -23,6 +23,8 @@ const ImageMain = ({
   const [readySubmit, setReadySubmit] = useState(false);
   const [errorImage, setErrorImage] = useState(false);
   const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
+  const Theme = useTheme();
+  const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
 
   const configAvatarControllers = {
     product,
@@ -56,7 +58,7 @@ const ImageMain = ({
               style={{
                 width: "100%",
                 objectFit: "cover",
-                height: "70vh",
+                height: mobile ? "30vh" : "70vh",
               }}
               src={mainImage ? mainImage : productThumbnail[0]}
               alt=''

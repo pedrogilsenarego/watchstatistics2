@@ -112,7 +112,11 @@ const ProductDetails = ({}) => {
         style={{ marginTop: "40px" }}
       >
         <Typography
-          style={{ marginTop: "90px", color: "#ffffff66", marginLeft: "10px" }}
+          style={{
+            marginTop: isMatch ? "60px" : "90px",
+            color: "#ffffff66",
+            marginLeft: "10px",
+          }}
           variant='h6'
         >
           {productBrand} {productName} - {reference}
@@ -126,36 +130,73 @@ const ProductDetails = ({}) => {
               position: "relative",
             }}
           >
-            <Grid
-              container
-              spacing={1}
-              style={{
-                paddingLeft: "10px",
-                paddingRight: "10px",
-              }}
-            >
-              <Grid item xs={12} md={7}>
-                <ImageMain {...configImageMain} />
-                <Card style={{ backgroundColor: "#18161E", marginTop: "8px" }}>
-                  <SideDescription />
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={5}>
-                <SideGraphPanel isMatch={isMatch} />
+            {isMatch ? (
+              <Grid
+                container
+                spacing={1}
+                style={{
+                  paddingLeft: "5px",
+                  paddingRight: "5px",
+                }}
+              >
+                <Grid item xs={12}>
+                  <ImageMain {...configImageMain} />
+                  <Grid item xs={12} md={5}>
+                    <SideGraphPanel isMatch={isMatch} />
 
-                <Card
-                  style={{
-                    backgroundColor: "#18161E",
-                    marginTop: "8px",
-                    padding: "5px",
-                  }}
-                >
-                  <CardContent style={{ padding: "5px" }}>
-                    <ProductSideList />
-                  </CardContent>
-                </Card>
+                    <Card
+                      style={{
+                        backgroundColor: "#18161E",
+                        marginTop: "8px",
+                        padding: "5px",
+                      }}
+                    >
+                      <CardContent style={{ padding: "5px" }}>
+                        <ProductSideList />
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                  <Card
+                    style={{ backgroundColor: "#18161E", marginTop: "8px" }}
+                  >
+                    <SideDescription />
+                  </Card>
+                </Grid>
               </Grid>
-            </Grid>
+            ) : (
+              <Grid
+                container
+                spacing={1}
+                style={{
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                }}
+              >
+                <Grid item xs={12} md={7}>
+                  <ImageMain {...configImageMain} />
+                  <Card
+                    style={{ backgroundColor: "#18161E", marginTop: "8px" }}
+                  >
+                    <SideDescription />
+                  </Card>
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <SideGraphPanel isMatch={isMatch} />
+
+                  <Card
+                    style={{
+                      backgroundColor: "#18161E",
+                      marginTop: "8px",
+                      padding: "5px",
+                    }}
+                  >
+                    <CardContent style={{ padding: "5px" }}>
+                      <ProductSideList />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            )}
           </Box>
         </Parallax>
       </Container>
