@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import SideGraphPanel from "../../containers/ProductDetails/ProductSideGraph";
 import SideDescription from "../../containers/ProductDetails/ProductSideDescription";
 import ProductSideList from "../../containers/ProductDetails/ProductSideList";
@@ -40,10 +40,11 @@ const ProductDetails = ({}) => {
   const { productID } = useParams();
 
   const { product, currentUser, cartItems } = useSelector(mapState);
-
+  const [showVote, setShowVote] = useState(false);
   const [compareWatches, setCompareWatches] = useState(false);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  const voteRef = useRef()
 
   const useStyles = makeStyles((theme) => ({
     filter: {},
@@ -99,6 +100,9 @@ const ProductDetails = ({}) => {
     reference,
     avgTotal,
     compareWatches,
+    showVote,
+    setShowVote,
+    voteRef
   };
 
   return (
@@ -121,7 +125,7 @@ const ProductDetails = ({}) => {
                 <ImageMain {...configImageMain} />
 
                 <Grid item xs={12} md={5}>
-                  <SideGraphPanel isMatch={isMatch} />
+                  <SideGraphPanel isMatch={isMatch} showVote={showVote} setShowVote={setShowVote}/>
 
                   <Card
                     style={{
@@ -184,7 +188,7 @@ const ProductDetails = ({}) => {
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                  <SideGraphPanel isMatch={isMatch} />
+                  <SideGraphPanel isMatch={isMatch} showVote={showVote} setShowVote={setShowVote} voteRef={voteRef}/>
 
                   <Card
                     style={{

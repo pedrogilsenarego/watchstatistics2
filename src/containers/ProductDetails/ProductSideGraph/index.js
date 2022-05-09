@@ -16,6 +16,7 @@ import { motion } from "framer-motion";
 import SignIn from "../../SignIn";
 import { Radar } from "react-chartjs-2";
 import Icons from "./Icons";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 const initialTargetVoteState = {
   quality: "",
@@ -28,25 +29,25 @@ const initialTargetVoteState = {
 };
 
 // eslint-disable-next-line
-const ProductSidePanel = ({ isMatch }) => {
+const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
   const mapState = (state) => ({
     currentUser: state.user.currentUser,
     product: state.productsData.product,
   });
 
   const { product, currentUser } = useSelector(mapState);
-
+  const Theme = useTheme();
+  const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
   const [targetVoteCategories, setTargetVoteCategories] = useState({
     ...initialTargetVoteState,
   });
   const [targetVote, setTargetVote] = useState(false);
   const [update, setUpdate] = useState(true);
   const [easterEggMotion, setEasterEggMotion] = useState(false);
-  const [showVote, setShowVote] = useState(false);
+
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [coordinates, setCoordinates] = useState([1, 1]);
 
-  const voteRef = useRef();
   const graphRef = useRef();
   const radarRef = useRef();
 
@@ -309,6 +310,9 @@ const ProductSidePanel = ({ isMatch }) => {
 
   return (
     <>
+      <div ref={voteRef}>
+        {showVote && mobile && <ProductVote {...configTargetVote} />}
+      </div>
       <motion.div
         animate={{
           rotate: easterEggMotion ? 90 : 0,
@@ -368,54 +372,56 @@ const ProductSidePanel = ({ isMatch }) => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                md={6}
-                alignItems='center'
-                justifyContent='center'
-                container
-              >
-                {currentUser && !currentUser.userVotes.includes(productID) && (
-                  <Button
-                    className={classes.textBtn}
-                    style={{ width: "80%", borderColor: "orange" }}
-                    aria-controls='vote'
-                    onClick={(e) => {
-                      handleVote();
-                    }}
-                    disableRipple
-                  >
-                    Vote
-                  </Button>
-                )}
-                {currentUser && currentUser.userVotes.includes(productID) && (
-                  <Button
-                    className={classes.textBtn}
-                    style={{ width: "80%" }}
-                    disableRipple
-                  >
-                    Already Voted
-                  </Button>
-                )}
-                {!currentUser && (
-                  <Button
-                    className={classes.textBtn}
-                    style={{ width: "80%" }}
-                    aria-controls='vote'
-                    disableRipple
-                    onClick={(e) => handleLoginOpen(e)}
-                  >
-                    Login to Vote
-                  </Button>
-                )}
-              </Grid>
+              {!mobile && (
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  alignItems='center'
+                  justifyContent='center'
+                  container
+                >
+                  {currentUser && !currentUser.userVotes.includes(productID) && (
+                    <Button
+                      className={classes.textBtn}
+                      style={{ width: "80%", borderColor: "orange" }}
+                      aria-controls='vote'
+                      onClick={(e) => {
+                        handleVote();
+                      }}
+                      disableRipple
+                    >
+                      Vote
+                    </Button>
+                  )}
+                  {currentUser && currentUser.userVotes.includes(productID) && (
+                    <Button
+                      className={classes.textBtn}
+                      style={{ width: "80%" }}
+                      disableRipple
+                    >
+                      Already Voted
+                    </Button>
+                  )}
+                  {!currentUser && (
+                    <Button
+                      className={classes.textBtn}
+                      style={{ width: "80%" }}
+                      aria-controls='vote'
+                      disableRipple
+                      onClick={(e) => handleLoginOpen(e)}
+                    >
+                      Login to Vote
+                    </Button>
+                  )}
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Card>
       </motion.div>
       <div ref={voteRef}>
-        {showVote && <ProductVote {...configTargetVote} />}
+        {showVote && !mobile && <ProductVote {...configTargetVote} />}
       </div>
       <Menu
         disableScrollLock

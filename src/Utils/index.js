@@ -13,6 +13,10 @@ export const openWindowInNewTab = (url) => {
   if (newWindow) newWindow.opener = null;
 };
 
+export const scrollToRef = (ref) => {
+  window.scrollTo({ top: ref.current.offsetTop, behavior: "smooth" });
+};
+
 export const apiInstance = axios.create({
   //liveURL
   baseURL: "https://us-central1-fir-auth0-9b4cb.cloudfunctions.net/api",
