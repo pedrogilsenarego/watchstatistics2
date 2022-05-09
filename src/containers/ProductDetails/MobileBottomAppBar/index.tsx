@@ -39,6 +39,9 @@ const MobileBottomAppBar = ({
         alignItems='center'
         justifyContent='center'
         sx={{
+          borderTop: "solid 1px",
+          borderColor: "#ffffff66",
+
           width: "100%",
           bottom: 0,
           height: "50px",
