@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Grid } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as Styled from "./styles";
 import { i18n } from "src/translations/i18n";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useHistory } from "react-router-dom";
+import { setCurrentLatestProduct } from "src/redux/Products/products.actions";
 
 interface Props {
   cartItems: any;
@@ -23,6 +23,7 @@ interface Props {
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
   latestProducts: state.productsData.latestProducts,
+  currentLatestProduct: state.productsData.currentLatestProduct,
 });
 
 const MobileBottomAppBar = ({
@@ -37,10 +38,10 @@ const MobileBottomAppBar = ({
   showVote,
   setShowVote,
 }: Props) => {
-  const { currentUser, latestProducts } = useSelector(mapState);
-
+  const { currentUser, latestProducts, currentLatestProduct } =
+    useSelector(mapState);
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [currentLatest, setCurrentLatest] = useState(0);
   const configAvatarControllers = {
     cartItems,
     avgTotal,
@@ -56,18 +57,21 @@ const MobileBottomAppBar = ({
     else return false;
   };
 
+  console.log(currentLatestProduct);
+
   const handleNextWatch = () => {
-    if (currentLatest < 12) {
-      let i = currentLatest;
-      while (i < 12) {
-        const nextWatch = latestProducts?.data[i].documentID;
-        if (!checkUserHasVoted(nextWatch) && productID !== nextWatch) {
-          setCurrentLatest(i);
-          history.push(`/product/${nextWatch}`);
-          break;
-        }
-        i++;
+    let i = currentLatestProduct ?? 0;
+    while (i <= 11) {
+      console.log(i);
+      const nextWatch = latestProducts?.data[i].documentID;
+      console.log(nextWatch);
+      if (!checkUserHasVoted(nextWatch) && productID !== nextWatch) {
+        dispatch(setCurrentLatestProduct(i));
+        history.push(`/product/${nextWatch}`);
+        break;
       }
+      if (i === 11) i = 0;
+      else i++;
     }
   };
   return (
@@ -98,7 +102,7 @@ const MobileBottomAppBar = ({
             </Styled.Typography>
           )}
         </Grid>
-        {currentLatest < 12 && (
+        {latestProducts?.data?.length >= 1 && (
           <Grid item>
             <MdArrowForwardIos
               onClick={() => handleNextWatch()}

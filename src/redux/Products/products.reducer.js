@@ -4,6 +4,7 @@ import productTypes from "./products.types";
 const INITIAL_STATE = {
   products: [],
   latestProducts: [],
+  currentLatestProduct: 0,
   validationProducts: [],
   product: {},
   randomNewProduct: {},
@@ -19,10 +20,16 @@ const productsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         products: action.payload,
       };
+    //latestProducts
     case productTypes.SET_LATEST_PRODUCTS:
       return {
         ...state,
         latestProducts: action.payload,
+      };
+    case productTypes.SET_CURRENT_LATEST_PRODUCT:
+      return {
+        ...state,
+        currentLatestProduct: action.payload,
       };
     case productTypes.SET_VALIDATION_PRODUCTS:
       return {

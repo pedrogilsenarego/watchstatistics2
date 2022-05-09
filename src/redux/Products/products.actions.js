@@ -119,3 +119,10 @@ export const setProductPicture = (payload) => ({
   type: productsTypes.SET_PRODUCT_PICTURE,
   payload,
 });
+
+/////Latest Products
+
+export const setCurrentLatestProduct = (payload) => ({
+  type: productsTypes.SET_CURRENT_LATEST_PRODUCT,
+  payload,
+});
