@@ -3,7 +3,7 @@ import SideGraphPanel from "../../containers/ProductDetails/ProductSideGraph";
 import SideDescription from "../../containers/ProductDetails/ProductSideDescription";
 import ProductSideList from "../../containers/ProductDetails/ProductSideList";
 import { makeStyles } from "@material-ui/core/styles";
-
+import MobileBottomAppBar from "src/containers/ProductDetails/MobileBottomAppBar";
 import { useSelector } from "react-redux";
 import { Parallax } from "react-parallax";
 import { useParams } from "react-router";
@@ -106,64 +106,67 @@ const ProductDetails = ({}) => {
       <Helmet>
         <meta property='og:image' content={productThumbnail} />
       </Helmet>
+      {isMatch ? (
+        <>
+          <Box sx={{ borderRadius: "10px" }} className={classes.filter}>
+            <Grid
+              container
+              spacing={1}
+              style={{
+                paddingLeft: "5px",
+                paddingRight: "5px",
+              }}
+            >
+              <Grid item xs={12}>
+                <ImageMain {...configImageMain} />
 
-      <Container
-        disableGutters={isMatch ? true : false}
-        style={{ marginTop: "40px" }}
-      >
-        <Typography
-          style={{
-            marginTop: isMatch ? "60px" : "90px",
-            color: "#ffffff66",
-            marginLeft: "10px",
-          }}
-          variant='h6'
-        >
-          {productBrand} {productName} - {reference}
-        </Typography>
-        <Parallax bgImage={bgImage()} strength={300}>
-          <Box
-            sx={{ borderRadius: "10px" }}
-            className={classes.filter}
-            height={"100%"}
-            style={{
-              position: "relative",
-            }}
-          >
-            {isMatch ? (
-              <Grid
-                container
-                spacing={1}
-                style={{
-                  paddingLeft: "5px",
-                  paddingRight: "5px",
-                }}
-              >
-                <Grid item xs={12}>
-                  <ImageMain {...configImageMain} />
-                  <Grid item xs={12} md={5}>
-                    <SideGraphPanel isMatch={isMatch} />
+                <Grid item xs={12} md={5}>
+                  <SideGraphPanel isMatch={isMatch} />
 
-                    <Card
-                      style={{
-                        backgroundColor: "#18161E",
-                        marginTop: "8px",
-                        padding: "5px",
-                      }}
-                    >
-                      <CardContent style={{ padding: "5px" }}>
-                        <ProductSideList />
-                      </CardContent>
-                    </Card>
-                  </Grid>
                   <Card
-                    style={{ backgroundColor: "#18161E", marginTop: "8px" }}
+                    style={{
+                      backgroundColor: "#18161E",
+                      marginTop: "8px",
+                      padding: "5px",
+                    }}
                   >
-                    <SideDescription />
+                    <CardContent style={{ padding: "5px" }}>
+                      <ProductSideList />
+                    </CardContent>
                   </Card>
                 </Grid>
+                <Card style={{ backgroundColor: "#18161E", marginTop: "8px" }}>
+                  <SideDescription />
+                </Card>
               </Grid>
-            ) : (
+            </Grid>{" "}
+          </Box>
+          <MobileBottomAppBar {...configImageMain} />
+        </>
+      ) : (
+        <Container
+          disableGutters={isMatch ? true : false}
+          style={{ marginTop: "40px" }}
+        >
+          <Typography
+            style={{
+              marginTop: "90px",
+              color: "#ffffff66",
+              marginLeft: "10px",
+            }}
+            variant='h6'
+          >
+            {productBrand} {productName} - {reference}
+          </Typography>
+          <Parallax bgImage={bgImage()} strength={300}>
+            <Box
+              sx={{ borderRadius: "10px" }}
+              className={classes.filter}
+              height={"100%"}
+              style={{
+                position: "relative",
+              }}
+            >
               <Grid
                 container
                 spacing={1}
@@ -195,11 +198,11 @@ const ProductDetails = ({}) => {
                     </CardContent>
                   </Card>
                 </Grid>
-              </Grid>
-            )}
-          </Box>
-        </Parallax>
-      </Container>
+              </Grid>{" "}
+            </Box>
+          </Parallax>
+        </Container>
+      )}
     </div>
   );
 };

@@ -58,7 +58,7 @@ const ImageMain = ({
               style={{
                 width: "100%",
                 objectFit: "cover",
-                height: mobile ? "30vh" : "70vh",
+                height: mobile ? "40vh" : "70vh",
               }}
               src={mainImage ? mainImage : productThumbnail[0]}
               alt=''
@@ -96,16 +96,26 @@ const ImageMain = ({
               productThumbnail={productThumbnail}
             />
             {isMatch && (
-              <Divider
-                style={{
-                  width: "60%",
-                  background: "#ffffff66",
-                  marginTop: "5px",
-                }}
-              />
+              <>
+                <Divider
+                  style={{
+                    width: "60%",
+                    background: "#ffffff66",
+                    marginTop: "5px",
+                  }}
+                />
+                <Typography
+                  style={{
+                    color: "#ffffff66",
+                  }}
+                  variant='h6'
+                >
+                  {productBrand} {productName} - {reference}
+                </Typography>
+              </>
             )}
             <Grid xs={12} sm={4} item>
-              <AvatarsControllers {...configAvatarControllers} />
+              {!isMatch && <AvatarsControllers {...configAvatarControllers} />}
             </Grid>
             {addAdditionalPictures && (
               <Grid xs={12} item>

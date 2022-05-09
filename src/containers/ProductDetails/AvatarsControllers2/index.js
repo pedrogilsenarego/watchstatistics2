@@ -1,16 +1,14 @@
-import React from "react";
 import FacebookShare from "../../forms/socialShare/Facebook";
 import WhatsappShareButton from "../../forms/socialShare/Whatsapp";
 
 import AddToBoost from "./AddToBoost";
 
-import Stack from "@mui/material/Stack";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 
 import AddToCompare from "./AddToCompare";
 
 const AvatarsControllers = ({
   product,
-  isMatch,
   cartItems,
   productID,
   productBrand,
@@ -19,6 +17,8 @@ const AvatarsControllers = ({
   avgTotal,
   compareWatches,
 }) => {
+  const Theme = useTheme();
+  const isMatch = useMediaQuery(Theme.breakpoints.down("sm"));
   const configShareButtons = {
     quote:
       "Vote here on your personal opinion for the " +
@@ -43,16 +43,13 @@ const AvatarsControllers = ({
     <div style={{}}>
       {" "}
       <Stack
-        direction="row"
+        direction='row'
         spacing={1}
         style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: isMatch ? "center" : "flex-end",
-          paddingTop: isMatch ? "10px" : "0px",
-          paddingRight: "10px",
-          marginBottom: isMatch ? "10px" : "0px",
         }}
       >
         <>
