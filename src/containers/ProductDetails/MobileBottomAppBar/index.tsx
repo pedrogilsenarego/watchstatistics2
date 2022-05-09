@@ -3,6 +3,7 @@ import AvatarsControllers from "../AvatarsControllers2";
 import { useSelector } from "react-redux";
 import * as Styled from "./styles";
 import { i18n } from "src/translations/i18n";
+import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 
 interface Props {
   cartItems: any;
@@ -49,6 +50,7 @@ const MobileBottomAppBar = ({
       <Grid
         container
         alignItems='center'
+        justifyContent='space-between'
         sx={{
           borderTop: "solid 1px",
           borderColor: "#ffffff66",
@@ -72,11 +74,8 @@ const MobileBottomAppBar = ({
           )}
         </Grid>
         <Grid item>
-          {currentUser && !currentUser.userVotes.includes(productID) && (
-            <Styled.Typography onClick={() => setShowVote(!showVote)}>
-              {i18n.t("navigation.mobileBottomAppbar.next")}
-            </Styled.Typography>
-          )}
+          <MdArrowBackIosNew size='3em' color='orange' />
+          <MdArrowForwardIos size='3em' color='orange' />
         </Grid>
       </Grid>
     </>
