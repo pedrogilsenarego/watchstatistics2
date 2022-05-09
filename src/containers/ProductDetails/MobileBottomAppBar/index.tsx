@@ -52,19 +52,28 @@ const MobileBottomAppBar = ({
     reference,
     compareWatches,
   };
+  const checkUserHasWatchesForVote = () => {
+    var b = 0;
+    for (let i = 0; i < latestProducts.data.length; i++) {
+      const nextWatch = latestProducts?.data[i].documentID;
+      if (!checkUserHasVoted(nextWatch)) {
+        b = b + 1;
+      }
+    }
+    console.log(b);
+    if (b > 1) return true;
+    else return false;
+  };
+
   const checkUserHasVoted = (documentID: string) => {
     if (currentUser.userVotes.includes(documentID)) return true;
     else return false;
   };
 
-  console.log(currentLatestProduct);
-
   const handleNextWatch = () => {
     let i = currentLatestProduct ?? 0;
     while (i <= 11) {
-      console.log(i);
       const nextWatch = latestProducts?.data[i].documentID;
-      console.log(nextWatch);
       if (!checkUserHasVoted(nextWatch) && productID !== nextWatch) {
         dispatch(setCurrentLatestProduct(i));
         history.push(`/product/${nextWatch}`);
@@ -102,7 +111,7 @@ const MobileBottomAppBar = ({
             </Styled.Typography>
           )}
         </Grid>
-        {latestProducts?.data?.length >= 1 && (
+        {checkUserHasWatchesForVote() && currentUser && (
           <Grid item>
             <MdArrowForwardIos
               onClick={() => handleNextWatch()}
