@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Grid } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import { useSelector } from "react-redux";
 import * as Styled from "./styles";
 import { i18n } from "src/translations/i18n";
-import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
+import { MdArrowForwardIos } from "react-icons/md";
+import { useHistory } from "react-router-dom";
+import { setLatestProducts } from "src/redux/Products/products.actions";
 
 interface Props {
   cartItems: any;
@@ -20,6 +23,7 @@ interface Props {
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
+  latestProducts: state.productsData.latestProducts,
 });
 
 const MobileBottomAppBar = ({
@@ -34,7 +38,9 @@ const MobileBottomAppBar = ({
   showVote,
   setShowVote,
 }: Props) => {
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, latestProducts } = useSelector(mapState);
+  const history = useHistory();
+  const [currentLatest, setCurrentLatest] = useState(0);
   const configAvatarControllers = {
     cartItems,
     avgTotal,
@@ -44,6 +50,24 @@ const MobileBottomAppBar = ({
     productName,
     reference,
     compareWatches,
+  };
+  const checkUserHasVoted = (documentID: string) => {
+    if (currentUser.userVotes.includes(documentID)) return true;
+    else return false;
+  };
+
+  const handleNextWatch = () => {
+    if (currentLatest < 12) {
+      for (let i = currentLatest; i < 12; i++) {
+        const nextWatch = currentLatest.data[currentLatest].documentID;
+        if (!checkUserHasVoted(nextWatch)) {
+          break;
+        }
+      }
+
+      history.push(`/product/${nextWatch}`);
+      setCurrentLatest(currentLatest + 1);
+    }
   };
   return (
     <>
@@ -74,8 +98,11 @@ const MobileBottomAppBar = ({
           )}
         </Grid>
         <Grid item>
-          <MdArrowBackIosNew size='3em' color='orange' />
-          <MdArrowForwardIos size='3em' color='orange' />
+          <MdArrowForwardIos
+            onClick={() => handleNextWatch()}
+            size='3em'
+            color='orange'
+          />
         </Grid>
       </Grid>
     </>
