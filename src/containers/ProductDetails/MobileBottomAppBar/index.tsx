@@ -60,7 +60,6 @@ const MobileBottomAppBar = ({
         b = b + 1;
       }
     }
-    console.log(b);
     if (b > 1) return true;
     else return false;
   };

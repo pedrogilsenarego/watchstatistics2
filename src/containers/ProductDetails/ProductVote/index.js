@@ -5,6 +5,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { Button } from "@material-ui/core";
+import { useMediaQuery, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -12,6 +13,7 @@ import { updateProductVoteStart } from "../../../redux/Products/products.actions
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { RiCheckboxBlankLine, RiCheckboxFill } from "react-icons/ri";
+import { IoIosArrowDown } from "react-icons/io";
 
 import SliderComponent from "./SliderComponent";
 
@@ -58,7 +60,8 @@ const ProductVote = ({
   graphRef,
 }) => {
   const classes = useStyles();
-
+  const Theme = useTheme();
+  const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const [ownership, setOwnership] = useState("");
@@ -192,16 +195,21 @@ const ProductVote = ({
     <Card
       style={{
         backgroundColor: "#18161E",
-        marginTop: "8px",
-        padding: "10px",
+        marginTop: mobile ? "0px" : "8px",
+        padding: mobile ? "0px" : "10px",
       }}
     >
-      <CardContent style={{ padding: "20px" }}>
-        <FormControl component="fieldset">
+      <CardContent style={{ padding: mobile ? "0px" : "20px" }}>
+        <FormControl component='fieldset'>
           <Grid container>
+            {mobile && (
+              <Grid item xs={12}>
+                <IoIosArrowDown size='3em' color='orange' />
+              </Grid>
+            )}
             <Grid item xs={12}>
               <RadioGroup
-                aria-label="gender"
+                aria-label='gender'
                 value={ownership}
                 onChange={(event) => {
                   setOwnership(event.target.value);
@@ -209,24 +217,24 @@ const ProductVote = ({
                 style={{ color: "#ffffffBF" }}
               >
                 <FormControlLabel
-                  value="Own"
+                  value='Own'
                   control={
                     <Radio
-                      checkedIcon={<RiCheckboxFill color="orange" />}
-                      icon={<RiCheckboxBlankLine color="#ffffff66" />}
+                      checkedIcon={<RiCheckboxFill color='orange' />}
+                      icon={<RiCheckboxBlankLine color='#ffffff66' />}
                     />
                   }
-                  label="I own/experimented the watch"
+                  label='I own/experimented the watch'
                 />
                 <FormControlLabel
-                  value="Not Own"
+                  value='Not Own'
                   control={
                     <Radio
-                      checkedIcon={<RiCheckboxFill color="orange" />}
-                      icon={<RiCheckboxBlankLine color="#ffffff66" />}
+                      checkedIcon={<RiCheckboxFill color='orange' />}
+                      icon={<RiCheckboxBlankLine color='#ffffff66' />}
                     />
                   }
-                  label="I do not own/experimented the watch"
+                  label='I do not own/experimented the watch'
                 />
               </RadioGroup>
               {errors && ownership === "" && (
@@ -238,8 +246,8 @@ const ProductVote = ({
             <Grid
               item
               container
-              justifyContent="center"
-              alignItems="center"
+              justifyContent='center'
+              alignItems='center'
               xs={12}
               style={{
                 marginBottom: "10px",
@@ -249,45 +257,45 @@ const ProductVote = ({
             >
               <SliderComponent
                 {...configSliderComponent}
-                icon="S"
-                name="quality"
-                message="Aesthetics from the Watch"
+                icon='S'
+                name='quality'
+                message='Aesthetics from the Watch'
               />
               <SliderComponent
                 {...configSliderComponent}
-                icon="M"
-                name="price"
-                message="Price over Quality"
+                icon='M'
+                name='price'
+                message='Price over Quality'
               />
               <SliderComponent
                 {...configSliderComponent}
-                icon="L"
-                name="brand"
-                message="The strength from the brand"
+                icon='L'
+                name='brand'
+                message='The strength from the brand'
               />
               <SliderComponent
                 {...configSliderComponent}
-                icon="K"
-                name="refinement"
-                message="Refinement from the watch"
+                icon='K'
+                name='refinement'
+                message='Refinement from the watch'
               />
               <SliderComponent
                 {...configSliderComponent}
-                icon="R"
-                name="history"
-                message="History from the watch and brand"
+                icon='R'
+                name='history'
+                message='History from the watch and brand'
               />
               <SliderComponent
                 {...configSliderComponent}
-                icon="Q"
-                name="engineering"
-                message="What does the engineering from the watch presents"
+                icon='Q'
+                name='engineering'
+                message='What does the engineering from the watch presents'
               />
               <SliderComponent
                 {...configSliderComponent}
-                icon="O"
-                name="xFactor"
-                message="Something hard to explain but special about it"
+                icon='O'
+                name='xFactor'
+                message='Something hard to explain but special about it'
               />
 
               {errors && Object.values(categories).includes("") && (
