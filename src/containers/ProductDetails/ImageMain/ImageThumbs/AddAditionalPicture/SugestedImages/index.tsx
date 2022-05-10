@@ -25,8 +25,9 @@ const SugestedImages = ({ product }: any) => {
   }, [googleImages]);
 
   return (
-    <div style={{ maxHeight: "50vh", overflowY: "auto" }}>
+    <Grid container style={{ maxHeight: "50vh", overflowY: "auto", marginBottom: "10px" }}>
       {!googleImages && (
+        <Grid item textAlign="start" xs={12} style={{marginLeft: "10px"}}>
         <Typography
           style={{
             color: "#ffffffBF",
@@ -40,10 +41,10 @@ const SugestedImages = ({ product }: any) => {
             Google
           </b>{" "}
           for sugested images
-        </Typography>
+        </Typography></Grid>
       )}
       {googleImages && (
-        <Grid container justifyContent='space-evenly'>
+        <Grid container justifyContent='center'>
           {images?.map((image: any, index: number) => {
             return (
               <Grid item key={index}>
@@ -51,7 +52,7 @@ const SugestedImages = ({ product }: any) => {
                   src={image?.image?.src}
                   loading='lazy'
                   alt=''
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", width: "120px", height: "120px", objectFit: "cover", }}
                   onClick={() => openWindowInNewTab(image?.link?.href)}
                 />
               </Grid>
@@ -59,7 +60,7 @@ const SugestedImages = ({ product }: any) => {
           })}
         </Grid>
       )}
-    </div>
+    </Grid>
   );
 };
 

@@ -126,7 +126,8 @@ const AddAdditionalPicture = ({
             )}
           </Grid>
         </Grid>
-        <SugestedImages product={product} />
+        <Grid item>
+        <SugestedImages product={product} /></Grid>
       </Form>
     </Formik>
   );
