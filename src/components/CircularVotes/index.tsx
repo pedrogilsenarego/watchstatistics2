@@ -7,12 +7,13 @@ import {
 interface Props {
   avgTotal: number;
   customSize?: number;
+  customFontSize?: string;
 }
 
-const CircularVotes = ({ avgTotal, customSize }: Props) => {
+const CircularVotes = ({ avgTotal, customSize, customFontSize }: Props) => {
   return (
     <Box
-      component="div"
+      component='div'
       sx={{
         position: "relative",
         display: "inline-flex",
@@ -21,19 +22,19 @@ const CircularVotes = ({ avgTotal, customSize }: Props) => {
       }}
     >
       <MuiCircularProgress
-        variant="determinate"
+        variant='determinate'
         value={avgTotal * 10}
         size={customSize ? customSize : 80}
         style={{ color: "orange", position: "relative", zIndex: 2 }}
       />
       <MuiCircularProgress
-        variant="determinate"
+        variant='determinate'
         value={100}
         size={customSize ? customSize : 80}
         style={{ color: "black", position: "absolute", zIndex: 1 }}
       />
       <Box
-        component="div"
+        component='div'
         sx={{
           top: 0,
           left: 0,
@@ -46,10 +47,10 @@ const CircularVotes = ({ avgTotal, customSize }: Props) => {
         }}
       >
         <Typography
-          variant="caption"
-          component="div"
-          color="white"
-          style={{ fontSize: "16px" }}
+          variant='caption'
+          component='div'
+          color='white'
+          style={{ fontSize: customFontSize ?? "16px" }}
         >
           {avgTotal}
         </Typography>

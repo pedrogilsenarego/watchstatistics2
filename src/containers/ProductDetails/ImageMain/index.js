@@ -6,6 +6,7 @@ import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
 import AddAdditionalPicture from "./ImageThumbs/AddAditionalPicture";
 import { i18n } from "src/translations/i18n";
+import CircularVotes from "src/components/CircularVotes";
 
 const ImageMain = ({
   isMatch,
@@ -95,6 +96,7 @@ const ImageMain = ({
               setAddAdditionalPictures={setAddAdditionalPictures}
               productThumbnail={productThumbnail}
             />
+
             {isMatch && (
               <>
                 <Divider
@@ -104,14 +106,29 @@ const ImageMain = ({
                     marginTop: "5px",
                   }}
                 />
-                <Typography
-                  style={{
-                    color: "#ffffff66",
-                  }}
-                  variant='h6'
+                <Grid
+                  container
+                  justifyContent='space-between'
+                  style={{ marginTop: "10px" }}
                 >
-                  {productBrand} {productName} - {reference}
-                </Typography>
+                  <Grid item xs={6}>
+                    <Typography
+                      style={{
+                        color: "#ffffff66",
+                      }}
+                      variant='h6'
+                    >
+                      {productBrand} {productName} - {reference}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CircularVotes
+                      avgTotal={avgTotal}
+                      customSize={45}
+                      customFontSize='12px'
+                    />
+                  </Grid>
+                </Grid>
               </>
             )}
             <Grid xs={12} sm={4} item>

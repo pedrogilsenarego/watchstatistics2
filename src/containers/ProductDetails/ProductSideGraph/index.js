@@ -353,15 +353,17 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
                     padding: "10px",
                   }}
                 >
-                  <Typography
-                    fontWeight={600}
-                    style={{ color: "#ffffff" }}
-                    onClick={() => {
-                      setEasterEggMotion(!easterEggMotion);
-                    }}
-                  >
-                    Score: {avgTotal}
-                  </Typography>
+                  {!isMatch && (
+                    <Typography
+                      fontWeight={600}
+                      style={{ color: "#ffffff" }}
+                      onClick={() => {
+                        setEasterEggMotion(!easterEggMotion);
+                      }}
+                    >
+                      Score: {avgTotal}
+                    </Typography>
+                  )}
 
                   <Typography style={{ color: "#ffffffBF", fontSize: "13px" }}>
                     Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}

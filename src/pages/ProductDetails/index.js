@@ -44,7 +44,7 @@ const ProductDetails = ({}) => {
   const [compareWatches, setCompareWatches] = useState(false);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  const voteRef = useRef()
+  const voteRef = useRef();
 
   const useStyles = makeStyles((theme) => ({
     filter: {},
@@ -102,7 +102,7 @@ const ProductDetails = ({}) => {
     compareWatches,
     showVote,
     setShowVote,
-    voteRef
+    voteRef,
   };
 
   return (
@@ -125,7 +125,11 @@ const ProductDetails = ({}) => {
                 <ImageMain {...configImageMain} />
 
                 <Grid item xs={12} md={5}>
-                  <SideGraphPanel isMatch={isMatch} showVote={showVote} setShowVote={setShowVote}/>
+                  <SideGraphPanel
+                    isMatch={isMatch}
+                    showVote={showVote}
+                    setShowVote={setShowVote}
+                  />
 
                   <Card
                     style={{
@@ -188,7 +192,12 @@ const ProductDetails = ({}) => {
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                  <SideGraphPanel isMatch={isMatch} showVote={showVote} setShowVote={setShowVote} voteRef={voteRef}/>
+                  <SideGraphPanel
+                    isMatch={isMatch}
+                    showVote={showVote}
+                    setShowVote={setShowVote}
+                    voteRef={voteRef}
+                  />
 
                   <Card
                     style={{
