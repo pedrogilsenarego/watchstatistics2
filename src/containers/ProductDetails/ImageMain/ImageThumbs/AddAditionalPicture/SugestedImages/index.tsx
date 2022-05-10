@@ -52,7 +52,7 @@ const SugestedImages = ({ product }: any) => {
                   src={image?.image?.src}
                   loading='lazy'
                   alt=''
-                  style={{ cursor: "pointer", width: "120px", height: "120px", objectFit: "cover", }}
+                  style={{ cursor: "pointer", width: "80px", height: "110px", objectFit: "cover", }}
                   onClick={() => openWindowInNewTab(image?.link?.href)}
                 />
               </Grid>
