@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "@material-ui/core";
-import { Typography, Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Typography, Grid, useMediaQuery, useTheme, Box } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
@@ -61,7 +61,7 @@ const ImageMain = ({
                 objectFit: "cover",
                 height: mobile ? "40vh" : "70vh",
               }}
-              src={mainImage ? mainImage : productThumbnail[0]}
+              src={mainImage}
               alt=''
             />
           )}
@@ -83,30 +83,67 @@ const ImageMain = ({
             </Grid>
           )}
 
-          <Grid container alignItems='center' justifyContent='center'>
-            <ImageThumbs
-              setMainImage={setMainImage}
-              mainImage={mainImage}
-              addAdditionalPictures={addAdditionalPictures}
-              setAddAdditionalPictures={setAddAdditionalPictures}
-              productThumbnail={productThumbnail}
-            />
+          <Grid
+            container
+            alignItems='center'
+            justifyContent={"center"}
+            style={{ marginLeft: "-2px" }}
+          >
+            {!isMatch && (
+              <ImageThumbs
+                setMainImage={setMainImage}
+                mainImage={mainImage}
+                addAdditionalPictures={addAdditionalPictures}
+                setAddAdditionalPictures={setAddAdditionalPictures}
+                productThumbnail={productThumbnail}
+              />
+            )}
+
+            {isMatch && (
+              <>
+                <Grid item xs={10}>
+                  <ImageThumbs
+                    setMainImage={setMainImage}
+                    mobile={isMatch}
+                    mainImage={mainImage}
+                    addAdditionalPictures={addAdditionalPictures}
+                    setAddAdditionalPictures={setAddAdditionalPictures}
+                    productThumbnail={productThumbnail}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Box display='flex' justifyContent='center'>
+                    <CircularVotes
+                      avgTotal={avgTotal}
+                      customSize={45}
+                      customFontSize='12px'
+                    />
+                  </Box>
+                </Grid>
+              </>
+            )}
 
             {isMatch && (
               <>
                 <Divider
                   style={{
-                    width: "60%",
+                    width: "100%",
                     background: "#ffffff66",
                     marginTop: "5px",
                   }}
                 />
                 <Grid
                   container
-                  justifyContent='space-between'
-                  style={{ marginTop: "10px" }}
+                  justifyContent='center'
+                  alignItems='center'
+                  style={{ marginTop: "5px" }}
                 >
-                  <Grid item xs={6}>
+                  <Grid
+                    item
+                    xs={12}
+                    alignText='center'
+                    style={{ backgroundColor: "green" }}
+                  >
                     <Typography
                       style={{
                         color: "#ffffff66",
@@ -115,13 +152,6 @@ const ImageMain = ({
                     >
                       {productBrand} {productName} - {reference}
                     </Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <CircularVotes
-                      avgTotal={avgTotal}
-                      customSize={45}
-                      customFontSize='12px'
-                    />
                   </Grid>
                 </Grid>
               </>

@@ -9,6 +9,7 @@ interface Props {
   productThumbnail: "string"[];
   setMainImage: (mainImage: string) => void;
   mainImage: string;
+  mobile: boolean;
   addAdditionalPictures: Boolean;
   setAddAdditionalPictures: (addAdditionalPictures: Boolean) => void;
 }
@@ -17,6 +18,7 @@ const ImageThumbs = ({
   productThumbnail,
   setMainImage,
   mainImage,
+  mobile,
   addAdditionalPictures,
   setAddAdditionalPictures,
 }: Props) => {
@@ -35,9 +37,11 @@ const ImageThumbs = ({
           <Grid
             item
             container
-            columnSpacing={1}
+            columnSpacing={mobile ? 0.5 : 1}
             alignItems='center'
             justifyContent='flex-start'
+            wrap='nowrap'
+            style={{ overflow: "hidden" }}
             xs={12}
           >
             {productThumbnail?.map((item, pos) => {

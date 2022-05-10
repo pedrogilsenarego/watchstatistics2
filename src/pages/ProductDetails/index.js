@@ -129,7 +129,7 @@ const ProductDetails = ({}) => {
                   item
                   xs={12}
                   md={5}
-                  style={{ marginTop: isMatch ? "10px" : "0px" }}
+                  style={{ marginTop: isMatch ? "8px" : "0px" }}
                 >
                   <SideGraphPanel
                     isMatch={isMatch}
