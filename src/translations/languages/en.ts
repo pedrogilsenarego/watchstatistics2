@@ -10,6 +10,7 @@ export const content = {
         admin: "Admin",
         mobileBottomAppbar: {
           vote: "Vote",
+          voted: "Voted",
           next: "Next Watch",
           loginVote: "Login to Vote",
         },

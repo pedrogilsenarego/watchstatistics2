@@ -83,12 +83,7 @@ const ImageMain = ({
             </Grid>
           )}
 
-          <Grid
-            container
-            alignItems='center'
-            justifyContent='center'
-            style={{ marginTop: "5px" }}
-          >
+          <Grid container alignItems='center' justifyContent='center'>
             <ImageThumbs
               setMainImage={setMainImage}
               mainImage={mainImage}

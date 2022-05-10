@@ -19,6 +19,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+
 import Container from "@mui/material/Container";
 
 import {
@@ -124,7 +125,12 @@ const ProductDetails = ({}) => {
               <Grid item xs={12}>
                 <ImageMain {...configImageMain} />
 
-                <Grid item xs={12} md={5}>
+                <Grid
+                  item
+                  xs={12}
+                  md={5}
+                  style={{ marginTop: isMatch ? "10px" : "0px" }}
+                >
                   <SideGraphPanel
                     isMatch={isMatch}
                     showVote={showVote}

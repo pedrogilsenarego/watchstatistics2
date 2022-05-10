@@ -91,10 +91,9 @@ const MobileBottomAppBar = ({
         sx={{
           borderTop: "solid 1px",
           borderColor: "#ffffff66",
-
           width: "100%",
           bottom: 0,
-          height: "50px",
+          height: "55px",
           position: "fixed",
           backgroundColor: "black",
           zIndex: "1000",
@@ -111,7 +110,7 @@ const MobileBottomAppBar = ({
           )}
           {currentUser && currentUser.userVotes.includes(productID) && (
             <Styled.TypographyDisabled>
-              {i18n.t("navigation.mobileBottomAppbar.vote")}
+              {i18n.t("navigation.mobileBottomAppbar.voted")}
             </Styled.TypographyDisabled>
           )}
           {!currentUser && (
@@ -130,6 +129,11 @@ const MobileBottomAppBar = ({
           </Grid>
         )}
         {!currentUser && (
+          <Grid item>
+            <MdArrowForwardIos size='3em' color='grey' />
+          </Grid>
+        )}
+        {currentUser && !checkUserHasWatchesForVote() && (
           <Grid item>
             <MdArrowForwardIos size='3em' color='grey' />
           </Grid>

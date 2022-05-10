@@ -50,7 +50,7 @@ const SliderComponent = ({
               fontFamily: "MyFont",
               cursor: "pointer",
             }}
-            id="discrete-slider"
+            id='discrete-slider'
             gutterBottom
           >
             {icon}
@@ -59,13 +59,14 @@ const SliderComponent = ({
         <Grid item xs={10}>
           <Slider
             defaultValue={0}
-            aria-labelledby="discrete-slider"
-            valueLabelDisplay="auto"
+            aria-labelledby='discrete-slider'
+            valueLabelDisplay='auto'
+            value={categories[name]}
             step={1}
             marks
             min={0}
             max={10}
-            name="quality"
+            name='quality'
             onChange={(event, newValue) => {
               setCategories({ ...categories, [name]: newValue });
               handleTargetVote(newValue, name);
