@@ -134,25 +134,22 @@ const ImageMain = ({
                 />
                 <Grid
                   container
-                  justifyContent='center'
-                  alignItems='center'
                   style={{ marginTop: "5px" }}
+                  justifyContent='center'
                 >
-                  <Grid
-                    item
-                    xs={12}
-                    alignText='center'
-                    style={{ backgroundColor: "green" }}
-                  >
+                  <Box item xs={12} alignText='center'>
                     <Typography
                       style={{
                         color: "#ffffff66",
                       }}
                       variant='h6'
                     >
-                      {productBrand} {productName} - {reference}
+                      <b>
+                        {productBrand} {productName}
+                      </b>{" "}
+                      - {reference}
                     </Typography>
-                  </Grid>
+                  </Box>
                 </Grid>
               </>
             )}

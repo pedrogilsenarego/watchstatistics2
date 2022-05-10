@@ -40,7 +40,7 @@ const ImageThumbs = ({
             columnSpacing={mobile ? 0.5 : 1}
             alignItems='center'
             justifyContent='flex-start'
-            wrap='nowrap'
+            wrap='wrap-reverse'
             style={{ overflow: "hidden" }}
             xs={12}
           >
