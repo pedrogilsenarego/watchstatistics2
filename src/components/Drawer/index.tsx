@@ -12,6 +12,7 @@ type Props = {
   setOpenDrawer: (openDrawer: boolean) => void;
   children: any;
   fullWidth?: boolean;
+  fullHeight?: boolean;
   id: number;
 };
 
@@ -20,6 +21,7 @@ const DrawerMine = ({
   openDrawer,
   setOpenDrawer,
   fullWidth,
+  fullHeight,
   children,
   id,
 }: Props) => {
@@ -48,7 +50,7 @@ const DrawerMine = ({
       component='div'
       sx={{
         width: fullWidth ? "100vw" : "auto",
-        minHeight: "100vh",
+        height: fullHeight ? "100vh" : "auto",
         backgroundColor: "#18161E",
         padding: "10px",
         overflowY: "auto",

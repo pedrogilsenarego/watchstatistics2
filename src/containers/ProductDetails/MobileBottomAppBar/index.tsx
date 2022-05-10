@@ -97,7 +97,7 @@ const MobileBottomAppBar = ({
           bottom: 0,
           height: "50px",
           position: "fixed",
-          backgroundColor: "#18161E",
+          backgroundColor: "black",
           zIndex: "1000",
         }}
       >
@@ -110,14 +110,29 @@ const MobileBottomAppBar = ({
               {i18n.t("navigation.mobileBottomAppbar.vote")}
             </Styled.Typography>
           )}
+          {currentUser && currentUser.userVotes.includes(productID) && (
+            <Styled.TypographyDisabled>
+              {i18n.t("navigation.mobileBottomAppbar.vote")}
+            </Styled.TypographyDisabled>
+          )}
+          {!currentUser && (
+            <Styled.TypographyLogin onClick={() => setShowVote(!showVote)}>
+              {i18n.t("navigation.mobileBottomAppbar.loginVote")}
+            </Styled.TypographyLogin>
+          )}
         </Grid>
-        {checkUserHasWatchesForVote() && currentUser && (
+        {currentUser && checkUserHasWatchesForVote() && (
           <Grid item>
             <MdArrowForwardIos
               onClick={() => handleNextWatch()}
               size='3em'
               color='orange'
             />
+          </Grid>
+        )}
+        {!currentUser && (
+          <Grid item>
+            <MdArrowForwardIos size='3em' color='grey' />
           </Grid>
         )}
       </Grid>

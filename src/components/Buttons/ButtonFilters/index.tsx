@@ -69,6 +69,7 @@ const ButtonFilters = ({ list, value, setValue, noReset }: Props) => {
       (
       <DrawerMine
         id={1}
+        fullHeight
         position='top'
         openDrawer={drawerOpen}
         setOpenDrawer={setDrawerOpen}

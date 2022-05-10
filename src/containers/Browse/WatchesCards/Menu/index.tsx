@@ -297,6 +297,7 @@ const Menu = ({
       {isMatch && (
         <DrawerMine
           id={0}
+          fullHeight
           position='bottom'
           openDrawer={filtersVisible}
           setOpenDrawer={setFiltersVisible}

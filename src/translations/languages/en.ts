@@ -11,6 +11,7 @@ export const content = {
         mobileBottomAppbar: {
           vote: "Vote",
           next: "Next Watch",
+          loginVote: "Login to Vote",
         },
       },
       drawer: {

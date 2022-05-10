@@ -17,6 +17,7 @@ import SignIn from "../../SignIn";
 import { Radar } from "react-chartjs-2";
 import Icons from "./Icons";
 import { useTheme, useMediaQuery } from "@mui/material";
+import Drawer from "src/components/Drawer";
 
 const initialTargetVoteState = {
   quality: "",
@@ -310,9 +311,6 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
 
   return (
     <>
-      <div ref={voteRef}>
-        {showVote && mobile && <ProductVote {...configTargetVote} />}
-      </div>
       <motion.div
         animate={{
           rotate: easterEggMotion ? 90 : 0,
@@ -444,6 +442,16 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
           <SignIn {...configMenuLogin} />
         </MenuItem>
       </Menu>
+      {mobile && (
+        <Drawer
+          position='bottom'
+          id={0}
+          openDrawer={showVote}
+          setOpenDrawer={setShowVote}
+        >
+          <ProductVote {...configTargetVote} />
+        </Drawer>
+      )}
     </>
   );
 };

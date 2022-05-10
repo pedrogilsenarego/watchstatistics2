@@ -254,6 +254,7 @@ const Header = (props) => {
       <DrawerMine
         id={0}
         position='left'
+        fullHeight
         openDrawer={mobileDrawer}
         setOpenDrawer={setMobileDrawer}
       >
@@ -261,6 +262,7 @@ const Header = (props) => {
       </DrawerMine>
       <DrawerMine
         id={0}
+        fullHeight
         position='right'
         openDrawer={mobileDrawerSecondary}
         setOpenDrawer={setMobileDrawerSecondary}
