@@ -13,7 +13,7 @@ import { updateProductVoteStart } from "../../../redux/Products/products.actions
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { RiCheckboxBlankLine, RiCheckboxFill } from "react-icons/ri";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import SliderComponent from "./SliderComponent";
 
@@ -55,6 +55,7 @@ const ProductVote = ({
   handleVisualTargetVote,
   targetVote,
   handleUpdate,
+  showVote,
   setShowVote,
   scrollToRef,
   graphRef,
@@ -64,6 +65,7 @@ const ProductVote = ({
   const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
+  const [minimalDrawer, setMinimalDrawer] = useState(false);
   const [ownership, setOwnership] = useState("");
   const [categories, setCategories] = useState({ ...initialCategoriesState });
   const [errors, setErrors] = useState(false);
@@ -204,107 +206,216 @@ const ProductVote = ({
           <Grid container>
             {mobile && (
               <Grid item xs={12}>
-                <IoIosArrowDown size='3em' color='orange' />
+                {!minimalDrawer ? (
+                  <IoIosArrowDown size='3em' color='orange' />
+                ) : (
+                  <IoIosArrowUp size='3em' color='orange' />
+                )}
               </Grid>
             )}
-            <Grid item xs={12}>
-              <RadioGroup
-                aria-label='gender'
-                value={ownership}
-                onChange={(event) => {
-                  setOwnership(event.target.value);
-                }}
-                style={{ color: "#ffffffBF" }}
-              >
-                <FormControlLabel
-                  value='Own'
-                  control={
-                    <Radio
-                      checkedIcon={<RiCheckboxFill color='orange' />}
-                      icon={<RiCheckboxBlankLine color='#ffffff66' />}
-                    />
-                  }
-                  label='I own/experimented the watch'
-                />
-                <FormControlLabel
-                  value='Not Own'
-                  control={
-                    <Radio
-                      checkedIcon={<RiCheckboxFill color='orange' />}
-                      icon={<RiCheckboxBlankLine color='#ffffff66' />}
-                    />
-                  }
-                  label='I do not own/experimented the watch'
-                />
-              </RadioGroup>
-              {errors && ownership === "" && (
-                <Typography style={{ color: "red", fontSize: "15px" }}>
-                  You must choose if you own or just seen the watch
-                </Typography>
-              )}
-            </Grid>
-            <Grid
-              item
-              container
-              justifyContent='center'
-              alignItems='center'
-              xs={12}
-              style={{
-                marginBottom: "10px",
-                marginTop: "10px",
-                color: "#ffffffBF",
-              }}
-            >
-              <SliderComponent
-                {...configSliderComponent}
-                icon='S'
-                name='quality'
-                message='Aesthetics from the Watch'
-              />
-              <SliderComponent
-                {...configSliderComponent}
-                icon='M'
-                name='price'
-                message='Price over Quality'
-              />
-              <SliderComponent
-                {...configSliderComponent}
-                icon='L'
-                name='brand'
-                message='The strength from the brand'
-              />
-              <SliderComponent
-                {...configSliderComponent}
-                icon='K'
-                name='refinement'
-                message='Refinement from the watch'
-              />
-              <SliderComponent
-                {...configSliderComponent}
-                icon='R'
-                name='history'
-                message='History from the watch and brand'
-              />
-              <SliderComponent
-                {...configSliderComponent}
-                icon='Q'
-                name='engineering'
-                message='What does the engineering from the watch presents'
-              />
-              <SliderComponent
-                {...configSliderComponent}
-                icon='O'
-                name='xFactor'
-                message='Something hard to explain but special about it'
-              />
 
-              {errors && Object.values(categories).includes("") && (
-                <Typography style={{ color: "red", fontSize: "15px" }}>
-                  You must choose all fields
-                </Typography>
-              )}
-            </Grid>
+            {mobile && !minimalDrawer && (
+              <>
+                <Grid item xs={12}>
+                  <RadioGroup
+                    aria-label='gender'
+                    value={ownership}
+                    onChange={(event) => {
+                      setOwnership(event.target.value);
+                    }}
+                    style={{ color: "#ffffffBF" }}
+                  >
+                    <FormControlLabel
+                      value='Own'
+                      control={
+                        <Radio
+                          checkedIcon={<RiCheckboxFill color='orange' />}
+                          icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                        />
+                      }
+                      label='I own/experimented the watch'
+                    />
+                    <FormControlLabel
+                      value='Not Own'
+                      control={
+                        <Radio
+                          checkedIcon={<RiCheckboxFill color='orange' />}
+                          icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                        />
+                      }
+                      label='I do not own/experimented the watch'
+                    />
+                  </RadioGroup>
+                  {errors && ownership === "" && (
+                    <Typography style={{ color: "red", fontSize: "15px" }}>
+                      You must choose if you own or just seen the watch
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid
+                  item
+                  container
+                  justifyContent='center'
+                  alignItems='center'
+                  xs={12}
+                  style={{
+                    marginBottom: "10px",
+                    marginTop: "10px",
+                    color: "#ffffffBF",
+                  }}
+                >
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='S'
+                    name='quality'
+                    message='Aesthetics from the Watch'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='M'
+                    name='price'
+                    message='Price over Quality'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='L'
+                    name='brand'
+                    message='The strength from the brand'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='K'
+                    name='refinement'
+                    message='Refinement from the watch'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='R'
+                    name='history'
+                    message='History from the watch and brand'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='Q'
+                    name='engineering'
+                    message='What does the engineering from the watch presents'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='O'
+                    name='xFactor'
+                    message='Something hard to explain but special about it'
+                  />
 
+                  {errors && Object.values(categories).includes("") && (
+                    <Typography style={{ color: "red", fontSize: "15px" }}>
+                      You must choose all fields
+                    </Typography>
+                  )}
+                </Grid>
+              </>
+            )}
+            {!mobile && (
+              <>
+                <Grid item xs={12}>
+                  <RadioGroup
+                    aria-label='gender'
+                    value={ownership}
+                    onChange={(event) => {
+                      setOwnership(event.target.value);
+                    }}
+                    style={{ color: "#ffffffBF" }}
+                  >
+                    <FormControlLabel
+                      value='Own'
+                      control={
+                        <Radio
+                          checkedIcon={<RiCheckboxFill color='orange' />}
+                          icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                        />
+                      }
+                      label='I own/experimented the watch'
+                    />
+                    <FormControlLabel
+                      value='Not Own'
+                      control={
+                        <Radio
+                          checkedIcon={<RiCheckboxFill color='orange' />}
+                          icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                        />
+                      }
+                      label='I do not own/experimented the watch'
+                    />
+                  </RadioGroup>
+                  {errors && ownership === "" && (
+                    <Typography style={{ color: "red", fontSize: "15px" }}>
+                      You must choose if you own or just seen the watch
+                    </Typography>
+                  )}
+                </Grid>
+                <Grid
+                  item
+                  container
+                  justifyContent='center'
+                  alignItems='center'
+                  xs={12}
+                  style={{
+                    marginBottom: "10px",
+                    marginTop: "10px",
+                    color: "#ffffffBF",
+                  }}
+                >
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='S'
+                    name='quality'
+                    message='Aesthetics from the Watch'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='M'
+                    name='price'
+                    message='Price over Quality'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='L'
+                    name='brand'
+                    message='The strength from the brand'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='K'
+                    name='refinement'
+                    message='Refinement from the watch'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='R'
+                    name='history'
+                    message='History from the watch and brand'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='Q'
+                    name='engineering'
+                    message='What does the engineering from the watch presents'
+                  />
+                  <SliderComponent
+                    {...configSliderComponent}
+                    icon='O'
+                    name='xFactor'
+                    message='Something hard to explain but special about it'
+                  />
+
+                  {errors && Object.values(categories).includes("") && (
+                    <Typography style={{ color: "red", fontSize: "15px" }}>
+                      You must choose all fields
+                    </Typography>
+                  )}
+                </Grid>
+              </>
+            )}
             <Button
               className={classes.textBtn}
               style={{ borderColor: "orange" }}
@@ -318,6 +429,7 @@ const ProductVote = ({
               onClick={() => {
                 handleVisualTargetVote(true);
                 handleUpdate();
+                if (mobile) setMinimalDrawer(!minimalDrawer);
                 scrollToRef(graphRef);
               }}
             >

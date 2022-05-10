@@ -304,7 +304,7 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
     setTargetVote,
     handleVisualTargetVote,
     targetVote,
-
+    showVote,
     handleUpdate,
     setShowVote,
   };
