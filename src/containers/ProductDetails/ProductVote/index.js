@@ -53,6 +53,7 @@ const ProductVote = ({
   handleTargetVote,
   setTargetVote,
   handleVisualTargetVote,
+  setClearDrawerBackground,
   targetVote,
   handleUpdate,
   showVote,
@@ -205,12 +206,28 @@ const ProductVote = ({
         <FormControl component='fieldset'>
           <Grid container>
             {mobile && (
-              <Grid item xs={12}>
-                {!minimalDrawer ? (
-                  <IoIosArrowDown size='3em' color='orange' />
-                ) : (
-                  <IoIosArrowUp size='3em' color='orange' />
-                )}
+              <Grid container item xs={12} justifyContent='center'>
+                <Grid item>
+                  {!minimalDrawer ? (
+                    <IoIosArrowDown
+                      onClick={() => {
+                        setMinimalDrawer(true);
+                        setClearDrawerBackground(true);
+                      }}
+                      size='3em'
+                      color='orange'
+                    />
+                  ) : (
+                    <IoIosArrowUp
+                      onClick={() => {
+                        setMinimalDrawer(false);
+                        setClearDrawerBackground(false);
+                      }}
+                      size='3em'
+                      color='orange'
+                    />
+                  )}
+                </Grid>
               </Grid>
             )}
 
@@ -429,12 +446,24 @@ const ProductVote = ({
               onClick={() => {
                 handleVisualTargetVote(true);
                 handleUpdate();
-                if (mobile) setMinimalDrawer(!minimalDrawer);
+                if (mobile) {
+                  setMinimalDrawer(!minimalDrawer);
+                  setClearDrawerBackground(true);
+                }
                 scrollToRef(graphRef);
               }}
             >
               Preview Vote
             </Button>
+            {mobile && (
+              <Button
+                className={classes.textBtn}
+                style={{ borderColor: "orange", marginLeft: "10px" }}
+                onClick={() => setShowVote(false)}
+              >
+                Close
+              </Button>
+            )}
           </Grid>
         </FormControl>
       </CardContent>

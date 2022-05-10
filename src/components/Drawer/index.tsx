@@ -14,6 +14,7 @@ type Props = {
   fullWidth?: boolean;
   fullHeight?: boolean;
   id: number;
+  clearBackground?: boolean;
 };
 
 const DrawerMine = ({
@@ -24,6 +25,7 @@ const DrawerMine = ({
   fullHeight,
   children,
   id,
+  clearBackground,
 }: Props) => {
   const dispatch = useDispatch();
   const mapState = ({ user }: any) => ({
@@ -67,7 +69,16 @@ const DrawerMine = ({
 
   return (
     <div>
-      <Drawer anchor={position} open={openDrawer} onClose={handleClose}>
+      <Drawer
+        BackdropProps={{
+          style: {
+            backgroundColor: clearBackground ? "transparent" : "#00000066",
+          },
+        }}
+        anchor={position}
+        open={openDrawer}
+        onClose={handleClose}
+      >
         {list()}
       </Drawer>
     </div>

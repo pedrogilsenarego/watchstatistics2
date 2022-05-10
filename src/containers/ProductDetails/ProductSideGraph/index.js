@@ -45,7 +45,7 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
   const [targetVote, setTargetVote] = useState(false);
   const [update, setUpdate] = useState(true);
   const [easterEggMotion, setEasterEggMotion] = useState(false);
-
+  const [clearDrawerBackground, setClearDrawerBackground] = useState(false);
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [coordinates, setCoordinates] = useState([1, 1]);
 
@@ -298,6 +298,7 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
   };
 
   const configTargetVote = {
+    setClearDrawerBackground,
     scrollToRef,
     graphRef,
     handleTargetVote,
@@ -444,6 +445,7 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
       </Menu>
       {mobile && (
         <Drawer
+          clearBackground={clearDrawerBackground}
           position='bottom'
           id={0}
           openDrawer={showVote}
