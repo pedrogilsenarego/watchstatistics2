@@ -12,14 +12,14 @@ import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
 import { MdAddCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
-import ButtonMUI from "../../forms/ButtonMUI";
-import { Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import Select from "../../forms/SelectMUIFormik";
 import { rewards } from "src/constants/gamification"
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import * as Details from "src/constants/productOptions"
+import { RiCloseFill } from "react-icons/ri";
+import  ButtonMUI from "src/components/Buttons/Button1Form";
 import { addProductStart } from "../../../redux/Products/products.actions";
 // components
 import BottomComponents from "./BottomComponents";
@@ -150,7 +150,7 @@ const ProductSideList = ({ }) => {
         style={{ cursor: "pointer" }}
         size='1.8em'
         color='orange'
-        onClick={() => setSubmitDetails({ ...submitDetails, [name]: true })}
+        onClick={() => {setSubmitDetails({ ...submitDetails, [name]: true }); setAnchorPopover(null)}}
       />
         <Popover
           anchor={anchorPopover}
@@ -159,6 +159,10 @@ const ProductSideList = ({ }) => {
         /></Grid>)}
     </>
     )
+  }
+
+  const calculatePossiblePoints = () => {
+    return ((movement ? 0 : rewards.PRODUCT_MOVEMENT) + (caliber ? 0 : rewards.PRODUCT_CALIBER)+ (productionYears ? 0 : rewards.PRODUCT_YEARS) + (caseSize ? 0 : rewards.PRODUCT_CASE_SIZE) + (caseMaterial ? 0 : rewards.PRODUCT_CASE_MATERIAL) + (waterResistance ? 0 : rewards.PRODUCT_WATER_RESISTANCE) )
   }
 
   return (
@@ -174,32 +178,38 @@ const ProductSideList = ({ }) => {
         <Form>
           <Box
             color={"text.secondary"}
-            sx={{ display: "flex", justifyContent: "space-between" }}
+            sx={{ display: "flex", justifyContent: "space-between"}}
             borderRadius='10px'
             container
           >
             <Typography
               variant={"h6"}
-              style={{ paddingLeft: "15px", color: "#ffffff" }}
+              style={{  color: "#ffffff" }}
             >
               Details
             </Typography>
-
-            {Object.values(submitDetails).some(element => element) && [
-              <ButtonMUI
-                style={{ marginLeft: "15px" }}
+          
+            {Object.values(submitDetails).some(element => element) && (
+              <Grid container alignItems="center" justifyContent="flex-end"><ButtonMUI
+               
                 className={classes.textBtn}
               >
                 Submit{" "}
-              </ButtonMUI>,
-              <Button
-                className={classes.textBtn}
-                onClick={() => setSubmitDetails(false)}
-              >
-                GoBack
-              </Button>,
-            ]}
+              </ButtonMUI>
+              <RiCloseFill color="orange" onClick={() => setSubmitDetails(false)} style={{cursor:"pointer"}} size="2em"/>,             
+              </Grid>)}
           </Box>
+          {!Object.values(submitDetails).some(element => element) && (<Typography
+              style={{
+                color: "#ffffffBF",
+                marginTop: "5px"
+              }}
+            >
+              This Watch miss some details add those to win up to{" "}
+              <b style={{ color: "orange" }}>{calculatePossiblePoints()}</b>{" "}
+              points.
+            </Typography>)}
+          
           <TableContainer className={classes.table} component={Paper}>
             <Table size='small' aria-label='simple table'>
               <TableBody>

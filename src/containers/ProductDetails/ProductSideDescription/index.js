@@ -52,7 +52,7 @@ const ProductSideDescription = ({}) => {
               </b>{" "}
               to add a description and win{" "}
               <b style={{ color: "orange" }}>{rewards.PRODUCT_DESCRIPTION}</b>{" "}
-              point.
+              points.
             </Typography>
           ) : (
             <AddDescription setOpen={setAddDescription} />
