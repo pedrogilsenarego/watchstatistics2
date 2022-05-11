@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Typography, Box } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { Box, Grid } from "@mui/material"
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -15,9 +16,10 @@ import ButtonMUI from "../../forms/ButtonMUI";
 import { Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import Select from "../../forms/SelectMUIFormik";
-
+import { rewards } from "src/constants/gamification"
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import * as Details from "src/constants/productOptions" 
 import { addProductStart } from "../../../redux/Products/products.actions";
 // components
 import BottomComponents from "./BottomComponents";
@@ -71,12 +73,12 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const ProductSideList = ({}) => {
+const ProductSideList = ({ }) => {
   const { product } = useSelector(mapState);
   const dispatch = useDispatch();
   const { productID } = useParams();
   const [anchorPopover, setAnchorPopover] = useState(null);
-  const [submitDetails, setSubmitDetails] = useState(false);
+  const [submitDetails, setSubmitDetails] = useState({ movement: false, caliber: false });
   const [submitedDetails, setSubmitedDetails] = useState(false);
 
   const {
@@ -135,6 +137,29 @@ const ProductSideList = ({}) => {
     reference,
   };
 
+  const CustomAddDetails = (value, name) => {
+    return (<>
+      {!submitDetails[name] && (<Grid container alignItems="center" justifyContent="flex-end" ><MdAddCircle
+        onMouseOver={(e) => {
+          setAnchorPopover(e.currentTarget);
+        }}
+        onMouseOut={() => {
+          setAnchorPopover(null);
+        }}
+        style={{ cursor: "pointer" }}
+        size='1.8em'
+        color='orange'
+        onClick={() => setSubmitDetails({ ...submitDetails, [name]: true })}
+      />
+        <Popover
+          anchor={anchorPopover}
+          setAnchor={setAnchorPopover}
+          message={value !== 1 ? `Win ${value} points` : `Win ${value} point`}
+        /></Grid>)}
+    </>
+    )
+  }
+
   return (
     <Box>
       <Formik
@@ -152,37 +177,14 @@ const ProductSideList = ({}) => {
             borderRadius='10px'
             container
           >
-            {!submitDetails && (
               <Typography
                 variant={"h6"}
                 style={{ paddingLeft: "15px", color: "#ffffff" }}
               >
-                {submitedDetails ? "Details submited for approval" : "Details"}
+                Details
               </Typography>
-            )}
-            {!submitDetails &&
-              (!caseSize ||
-                !waterResistance ||
-                !caseMaterial ||
-                !caliber ||
-                !movement ||
-                !productionYears) &&
-              !submitedDetails && (
-                <MdAddCircle
-                  onMouseOver={(e) => {
-                    setAnchorPopover(e.currentTarget);
-                  }}
-                  onMouseOut={() => {
-                    setAnchorPopover(null);
-                  }}
-                  style={{ cursor: "pointer" }}
-                  size='2em'
-                  color='orange'
-                  onClick={() => setSubmitDetails(true)}
-                />
-              )}
-
-            {submitDetails && [
+                   
+            {Object.values(submitDetails).some(element=>element) && [
               <ButtonMUI
                 style={{ marginLeft: "15px" }}
                 className={classes.textBtn}
@@ -227,28 +229,22 @@ const ProductSideList = ({}) => {
                 <TableRow>
                   <TableCell className={classes.tableCell}>Movement</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!movement && submitDetails && (
+                    {!movement && submitDetails.movement && (
                       <Select
                         className={classes.select}
                         size='small'
                         name='movement'
-                        options={{
-                          "": "Null",
-                          Automatic: "Automatic",
-                          Quartz: "Quartz",
-                          MechaQuartz: "MechaQuartz",
-                          Manual: "Manual",
-                        }}
+                        options={Details.movements}
                       />
                     )}
-                    {movement}
+                    {movement || CustomAddDetails(rewards.PRODUCT_MOVEMENT, "movement")}
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell className={classes.tableCell}>Caliber</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!caliber && submitDetails && (
+                    {!caliber && submitDetails.caliber && (
                       <InputBase
                         size='small'
                         style={{
@@ -266,7 +262,7 @@ const ProductSideList = ({}) => {
                         }}
                       ></InputBase>
                     )}
-                    {caliber}
+                    {caliber || CustomAddDetails(rewards.PRODUCT_CALIBER, "caliber")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -397,11 +393,7 @@ const ProductSideList = ({}) => {
         </Form>
       </Formik>
       <BottomComponents {...configBottomComponents} />
-      <Popover
-        anchor={anchorPopover}
-        setAnchor={setAnchorPopover}
-        message={`Add up to CHANGE details to win up to CHANGE points`}
-      />
+
     </Box>
   );
 };
