@@ -19,7 +19,7 @@ import Select from "../../forms/SelectMUIFormik";
 import { rewards } from "src/constants/gamification"
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import * as Details from "src/constants/productOptions" 
+import * as Details from "src/constants/productOptions"
 import { addProductStart } from "../../../redux/Products/products.actions";
 // components
 import BottomComponents from "./BottomComponents";
@@ -77,8 +77,8 @@ const ProductSideList = ({ }) => {
   const { product } = useSelector(mapState);
   const dispatch = useDispatch();
   const { productID } = useParams();
-  const [anchorPopover, setAnchorPopover] = useState(null);
-  const [submitDetails, setSubmitDetails] = useState({ movement: false, caliber: false });
+  
+  const [submitDetails, setSubmitDetails] = useState({});
   const [submitedDetails, setSubmitedDetails] = useState(false);
 
   const {
@@ -138,6 +138,7 @@ const ProductSideList = ({ }) => {
   };
 
   const CustomAddDetails = (value, name) => {
+    const [anchorPopover, setAnchorPopover] = useState(null);
     return (<>
       {!submitDetails[name] && (<Grid container alignItems="center" justifyContent="flex-end" ><MdAddCircle
         onMouseOver={(e) => {
@@ -177,14 +178,14 @@ const ProductSideList = ({ }) => {
             borderRadius='10px'
             container
           >
-              <Typography
-                variant={"h6"}
-                style={{ paddingLeft: "15px", color: "#ffffff" }}
-              >
-                Details
-              </Typography>
-                   
-            {Object.values(submitDetails).some(element=>element) && [
+            <Typography
+              variant={"h6"}
+              style={{ paddingLeft: "15px", color: "#ffffff" }}
+            >
+              Details
+            </Typography>
+
+            {Object.values(submitDetails).some(element => element) && [
               <ButtonMUI
                 style={{ marginLeft: "15px" }}
                 className={classes.textBtn}
@@ -271,7 +272,7 @@ const ProductSideList = ({ }) => {
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!productionYears &&
-                      submitDetails && [
+                      submitDetails.years && [
                         <InputBase
                           size='small'
                           key='yearsStart'
@@ -308,13 +309,13 @@ const ProductSideList = ({ }) => {
                           }}
                         ></InputBase>,
                       ]}
-                    {productionYears}
+                    {productionYears || CustomAddDetails(rewards.PRODUCT_YEARS, "years")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Case Size</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!caseSize && submitDetails && (
+                    {!caseSize && submitDetails.caseSize && (
                       <InputBase
                         size='small'
                         style={{
@@ -332,7 +333,7 @@ const ProductSideList = ({ }) => {
                         }}
                       ></InputBase>
                     )}
-                    {caseSize}
+                    {caseSize || CustomAddDetails(rewards.PRODUCT_CASE_SIZE, "caseSize")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -340,21 +341,15 @@ const ProductSideList = ({ }) => {
                     Case Material
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!caseMaterial && submitDetails && (
+                    {!caseMaterial && submitDetails.caseMaterial && (
                       <Select
                         name='caseMaterial'
                         className={classes.select}
                         size='small'
-                        options={{
-                          "": "Null",
-                          Gold: "Gold",
-                          "Stainless Steel": "Stainless Steel",
-                          Titanium: "Titanium",
-                          "White Gold": "White Gold",
-                        }}
+                        options={Details.caseMaterials}
                       />
                     )}
-                    {caseMaterial}
+                    {caseMaterial || CustomAddDetails(rewards.PRODUCT_CASE_MATERIAL, "caseMaterial")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -362,23 +357,15 @@ const ProductSideList = ({ }) => {
                     Water Res.
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!waterResistance && submitDetails && (
+                    {!waterResistance && submitDetails.waterResistance && (
                       <Select
                         className={classes.select}
                         size='small'
                         name='waterResistance'
-                        options={{
-                          "": "Null",
-                          None: "None",
-                          "30 meters": "30meters",
-                          "50 meters": "50meters",
-                          "100 meters": "100meters",
-                          "200 meters": "200meters",
-                          "300 meters": "300meters",
-                        }}
+                        options={Details.waterResistance}
                       />
                     )}
-                    {waterResistance}
+                    {waterResistance || CustomAddDetails(rewards.PRODUCT_WATER_RESISTANCE, "waterResistance")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
