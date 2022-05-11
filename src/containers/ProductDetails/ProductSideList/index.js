@@ -9,7 +9,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
-
+import { MdAddCircle } from "react-icons/md";
+import Popover from "src/components/Popover";
 import ButtonMUI from "../../forms/ButtonMUI";
 import { Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
@@ -74,6 +75,7 @@ const ProductSideList = ({}) => {
   const { product } = useSelector(mapState);
   const dispatch = useDispatch();
   const { productID } = useParams();
+  const [anchorPopover, setAnchorPopover] = useState(null);
   const [submitDetails, setSubmitDetails] = useState(false);
   const [submitedDetails, setSubmitedDetails] = useState(false);
 
@@ -147,7 +149,7 @@ const ProductSideList = ({}) => {
           <Box
             color={"text.secondary"}
             sx={{ display: "flex", justifyContent: "space-between" }}
-            borderRadius="10px"
+            borderRadius='10px'
             container
           >
             {!submitDetails && (
@@ -166,13 +168,18 @@ const ProductSideList = ({}) => {
                 !movement ||
                 !productionYears) &&
               !submitedDetails && (
-                <Button
-                  size="small"
-                  className={classes.textBtn}
+                <MdAddCircle
+                  onMouseOver={(e) => {
+                    setAnchorPopover(e.currentTarget);
+                  }}
+                  onMouseOut={() => {
+                    setAnchorPopover(null);
+                  }}
+                  style={{ cursor: "pointer" }}
+                  size='2em'
+                  color='orange'
                   onClick={() => setSubmitDetails(true)}
-                >
-                  Add +
-                </Button>
+                />
               )}
 
             {submitDetails && [
@@ -191,40 +198,40 @@ const ProductSideList = ({}) => {
             ]}
           </Box>
           <TableContainer className={classes.table} component={Paper}>
-            <Table size="small" aria-label="simple table">
+            <Table size='small' aria-label='simple table'>
               <TableBody>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Category</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {productCategory}
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Brand</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {productBrand}
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Model</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {productName}
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Reference</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {reference}
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Movement</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {!movement && submitDetails && (
                       <Select
                         className={classes.select}
-                        size="small"
-                        name="movement"
+                        size='small'
+                        name='movement'
                         options={{
                           "": "Null",
                           Automatic: "Automatic",
@@ -240,16 +247,16 @@ const ProductSideList = ({}) => {
 
                 <TableRow>
                   <TableCell className={classes.tableCell}>Caliber</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {!caliber && submitDetails && (
                       <InputBase
-                        size="small"
+                        size='small'
                         style={{
                           width: "100px",
                           border: "1.4px solid #ffffffB3",
                           borderRadius: "4px",
                         }}
-                        name="caliber"
+                        name='caliber'
                         inputProps={{
                           style: {
                             padding: 4,
@@ -266,18 +273,18 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>
                     Production
                   </TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {!productionYears &&
                       submitDetails && [
                         <InputBase
-                          size="small"
-                          key="yearsStart"
+                          size='small'
+                          key='yearsStart'
                           style={{
                             width: "60px",
                             border: "1.4px solid #ffffffB3",
                             borderRadius: "4px",
                           }}
-                          name="productionYearsStart"
+                          name='productionYearsStart'
                           inputProps={{
                             style: {
                               padding: 4,
@@ -287,15 +294,15 @@ const ProductSideList = ({}) => {
                           }}
                         ></InputBase>,
                         <InputBase
-                          size="small"
-                          key="yearsEnd"
+                          size='small'
+                          key='yearsEnd'
                           style={{
                             width: "60px",
                             border: "1.4px solid #ffffffB3",
                             borderRadius: "4px",
                             marginLeft: "5px",
                           }}
-                          name="productionYearsEnd"
+                          name='productionYearsEnd'
                           inputProps={{
                             style: {
                               padding: 4,
@@ -310,16 +317,16 @@ const ProductSideList = ({}) => {
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Case Size</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {!caseSize && submitDetails && (
                       <InputBase
-                        size="small"
+                        size='small'
                         style={{
                           width: "100px",
                           border: "1.4px solid #ffffffB3",
                           borderRadius: "4px",
                         }}
-                        name="caseSize"
+                        name='caseSize'
                         inputProps={{
                           style: {
                             padding: 4,
@@ -336,12 +343,12 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>
                     Case Material
                   </TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {!caseMaterial && submitDetails && (
                       <Select
-                        name="caseMaterial"
+                        name='caseMaterial'
                         className={classes.select}
-                        size="small"
+                        size='small'
                         options={{
                           "": "Null",
                           Gold: "Gold",
@@ -358,12 +365,12 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>
                     Water Res.
                   </TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {!waterResistance && submitDetails && (
                       <Select
                         className={classes.select}
-                        size="small"
-                        name="waterResistance"
+                        size='small'
+                        name='waterResistance'
                         options={{
                           "": "Null",
                           None: "None",
@@ -380,7 +387,7 @@ const ProductSideList = ({}) => {
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Price</TableCell>
-                  <TableCell className={classes.tableCell} align="right">
+                  <TableCell className={classes.tableCell} align='right'>
                     {productPriceBrackets}
                   </TableCell>
                 </TableRow>
@@ -390,6 +397,11 @@ const ProductSideList = ({}) => {
         </Form>
       </Formik>
       <BottomComponents {...configBottomComponents} />
+      <Popover
+        anchor={anchorPopover}
+        setAnchor={setAnchorPopover}
+        message={`Add up to CHANGE details to win up to CHANGE points`}
+      />
     </Box>
   );
 };

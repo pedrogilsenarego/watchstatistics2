@@ -41,7 +41,7 @@ const ImageThumbs = ({
             alignItems='center'
             justifyContent='flex-start'
             wrap='wrap-reverse'
-            style={{ overflow: "hidden" }}
+            style={{ overflow: "hidden", marginLeft: mobile ? "-2px" : "5px" }}
             xs={12}
           >
             {productThumbnail?.map((item, pos) => {
