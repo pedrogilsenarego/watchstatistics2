@@ -280,7 +280,7 @@ const ProductSideList = ({ }) => {
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>
-                    Production
+                    Production Years
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!productionYears &&

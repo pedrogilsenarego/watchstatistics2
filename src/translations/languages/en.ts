@@ -59,6 +59,10 @@ export const content = {
         maxCharacters: "Use less characters",
         url: "Enter a valid Url",
         number: "Only number are valid",
+        moreT1600: "Choose a year over 1600",
+        lessT2100: "Choose a year under 2100",
+        lessTYearsEnd: "This year must be under the final date chosen",
+        moreTYearsStart: "This year must be over the initial date chosen"
       },
       forms: {
         updateProduct: {
