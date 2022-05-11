@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
   select: {
     border: "1.4px solid #ffffffB3",
     borderRadius: "4px",
+    color: "white",
     "& .MuiSelect-outlined": {
       paddingBottom: "3px",
       paddingTop: "3px",
@@ -343,7 +344,7 @@ const ProductSideList = ({ }) => {
                         }}
                       ></InputBase>
                     )}
-                    {caseSize || CustomAddDetails(rewards.PRODUCT_CASE_SIZE, "caseSize")}
+                    {caseSize || CustomAddDetails(rewards.PRODUCT_CASE_SIZE, "caseSize")}{caseSize ? "mm": null}
                   </TableCell>
                 </TableRow>
                 <TableRow>

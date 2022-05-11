@@ -33,6 +33,7 @@ const SelectWrapper = ({ name, options, myLabel, ...otherProps }) => {
       {...configSelect}
       label={valueA === "" ? myLabel : ""}
       InputLabelProps={{ shrink: false }}
+      
     >
       {Object.keys(options).map((item, pos) => {
         return (
