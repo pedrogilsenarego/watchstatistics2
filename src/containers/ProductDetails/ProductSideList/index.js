@@ -23,6 +23,7 @@ import  ButtonMUI from "src/components/Buttons/Button1Form";
 import { addProductStart } from "../../../redux/Products/products.actions";
 // components
 import BottomComponents from "./BottomComponents";
+import { FORM_VALIDATION } from "./validation";
 
 const INITIAL_FORM_STATE = {
   movement: "",
@@ -78,7 +79,6 @@ const ProductSideList = ({ }) => {
   const { product } = useSelector(mapState);
   const dispatch = useDispatch();
   const { productID } = useParams();
-  
   const [submitDetails, setSubmitDetails] = useState({});
   const [submitedDetails, setSubmitedDetails] = useState(false);
 
@@ -175,6 +175,7 @@ const ProductSideList = ({ }) => {
         onSubmit={(values) => {
           handleSubmit(values);
         }}
+        validationSchema={FORM_VALIDATION}
       >
         <Form>
           <Box

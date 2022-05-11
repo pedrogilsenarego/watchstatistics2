@@ -58,6 +58,7 @@ export const content = {
         required: "Required",
         maxCharacters: "Use less characters",
         url: "Enter a valid Url",
+        number: "Only number are valid",
       },
       forms: {
         updateProduct: {
