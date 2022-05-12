@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Typography } from "@material-ui/core";
-import { Box, Grid } from "@mui/material"
+import { Box, Grid, Alert } from "@mui/material"
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -81,6 +81,7 @@ const ProductSideList = ({ }) => {
   const { productID } = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
   const [submitedDetails, setSubmitedDetails] = useState(false);
+  const [alert, setAlert] = useState('')
 
   const {
     productName,
@@ -142,7 +143,7 @@ const ProductSideList = ({ }) => {
     const [anchorPopover, setAnchorPopover] = useState(null);
 
     return (<>
-      {!submitDetails[name] && (<Grid container alignItems="center" justifyContent="flex-end" ><MdAddCircle
+        {!submitDetails[name] && (<Grid container alignItems="center" justifyContent="flex-end" ><MdAddCircle
         onMouseOver={(e) => {
           setAnchorPopover(e.currentTarget);
         }}
@@ -167,6 +168,16 @@ const ProductSideList = ({ }) => {
     return ((movement ? 0 : rewards.PRODUCT_MOVEMENT) + (caliber ? 0 : rewards.PRODUCT_CALIBER)+ (productionYears ? 0 : rewards.PRODUCT_YEARS) + (caseSize ? 0 : rewards.PRODUCT_CASE_SIZE) + (caseMaterial ? 0 : rewards.PRODUCT_CASE_MATERIAL) + (waterResistance ? 0 : rewards.PRODUCT_WATER_RESISTANCE) )
   }
 
+  const handleAlert = () => {
+    const alertTimeoutSec = 1000 * 2
+    let alertTimeout= null
+    clearInterval(alertTimeout)
+          alertTimeout = setTimeout(() => setAlert(''), alertTimeoutSec)
+          setAlert("Fill at least one field");
+    }
+  
+  
+
   return (
     <Box>
       <Formik
@@ -174,7 +185,9 @@ const ProductSideList = ({ }) => {
           ...INITIAL_FORM_STATE,
         }}
         onSubmit={(values) => {
-          handleSubmit(values);
+          Object.values(values).some(element => element) ?
+          handleSubmit(values): handleAlert()
+          
         }}
         validationSchema={FORM_VALIDATION}
       >
@@ -212,7 +225,9 @@ const ProductSideList = ({ }) => {
               <b style={{ color: "orange" }}>{calculatePossiblePoints()}</b>{" "}
               points.
             </Typography>)}
-          
+          {alert && (<><Alert variant="filled" severity="error" onClose={() => setAlert('')}>
+                                  {alert}
+                              </Alert></>)}
           <TableContainer className={classes.table} component={Paper}>
             <Table size='small' aria-label='simple table'>
               <TableBody>

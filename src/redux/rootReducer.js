@@ -5,7 +5,7 @@ import cartReducer from "./Cart/cart.reducer";
 import { persistReducer } from "redux-persist";
 import ordersReducer from "./Orders/orders.reducer";
 import marketReducer from "./Market/market.reducer";
-import storage from "redux-persist/lib/storage"; //local storage, can also be used session storage
+import storage from "redux-persist/lib/storage"; 
 import generalReducer from "./general/general.reducer";
 
 export const rootReducer = combineReducers({
