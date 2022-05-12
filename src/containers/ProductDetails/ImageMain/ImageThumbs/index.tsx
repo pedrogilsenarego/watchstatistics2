@@ -13,6 +13,8 @@ interface Props {
   addAdditionalPictures: Boolean;
   setAddAdditionalPictures: (addAdditionalPictures: Boolean) => void;
   currentUser: any;
+  index: number;
+  setIndex: (index: number) => void;
 }
 
 const ImageThumbs = ({
@@ -22,7 +24,9 @@ const ImageThumbs = ({
   mobile,
   addAdditionalPictures,
   setAddAdditionalPictures,
-  currentUser
+  currentUser,
+  index,
+  setIndex
 }: Props) => {
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
@@ -52,6 +56,7 @@ const ImageThumbs = ({
                   item
                   key={pos}
                   onClick={() => {
+                    setIndex(pos)
                     setMainImage(item);
                   }}
                 >

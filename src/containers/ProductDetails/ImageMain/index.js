@@ -7,6 +7,8 @@ import ImageThumbs from "./ImageThumbs";
 import AddAdditionalPicture from "./ImageThumbs/AddAditionalPicture";
 import { i18n } from "src/translations/i18n";
 import CircularVotes from "src/components/CircularVotes";
+import { CarouselProvider, Slider, Slide, DotGroup } from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 const ImageMain = ({
   isMatch,
@@ -19,9 +21,10 @@ const ImageMain = ({
   reference,
   avgTotal,
   compareWatches,
-  currentUser
+  currentUser,
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
+  const [indexMini, setIndexMini] = useState(0);
   const [readySubmit, setReadySubmit] = useState(false);
   const [errorImage, setErrorImage] = useState(false);
   const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
@@ -50,21 +53,60 @@ const ImageMain = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainImage]);
 
+  const mouseDownCoords = (e) => {
+    window.checkForDrag = e.clientX;
+  };
+  const clickOrDrag = (e) => {
+    const mouseUp = e.clientX;
+    if (
+      mouseUp < window.checkForDrag + 5 &&
+      mouseUp > window.checkForDrag - 5
+    ) {
+    }
+  };
+
   return (
     <>
       {productThumbnail && (
         <Card style={{ backgroundColor: "#18161E" }}>
           {!errorImage && (
-            <img
-              onError={handleOnImgError}
-              style={{
-                width: "100%",
-                objectFit: "cover",
-                height: mobile ? "75vh" : "70vh",
-              }}
-              src={mainImage}
-              alt=''
-            />
+            <CarouselProvider
+              naturalSlideWidth={100}
+              totalSlides={productThumbnail.length}
+              currentSlide={indexMini}
+              lockOnWindowScroll
+              touchEnabled={isMatch ? true : false}
+              dragEnabled={isMatch ? true : false}
+            >
+              <Slider
+                onMouseDown={(e) => mouseDownCoords(e)}
+                onMouseUp={(e) => clickOrDrag(e)}
+              >
+                {productThumbnail.map((image, pos) => {
+                  return (
+                    <Slide
+                      index={pos}
+                      style={{
+                        height: mobile ? "75vh" : "70vh",
+                      }}
+                    >
+                      <img
+                        onError={handleOnImgError}
+                        style={{
+                          width: "100%",
+                          objectFit: "cover",
+                          height: "100%",
+                          cursor: "Pointer",
+                        }}
+                        src={image}
+                        alt=''
+                      />
+                    </Slide>
+                  );
+                })}
+              </Slider>
+              {isMatch && <DotGroup />}
+            </CarouselProvider>
           )}
           {errorImage && (
             <Grid
@@ -92,6 +134,8 @@ const ImageMain = ({
           >
             {!isMatch && (
               <ImageThumbs
+                index={indexMini}
+                setIndex={setIndexMini}
                 setMainImage={setMainImage}
                 mainImage={mainImage}
                 addAdditionalPictures={addAdditionalPictures}
@@ -103,17 +147,7 @@ const ImageMain = ({
 
             {isMatch && (
               <>
-                <Grid item xs={10}>
-                  <ImageThumbs
-                    setMainImage={setMainImage}
-                    mobile={isMatch}
-                    mainImage={mainImage}
-                    addAdditionalPictures={addAdditionalPictures}
-                    setAddAdditionalPictures={setAddAdditionalPictures}
-                    productThumbnail={productThumbnail}
-                  />
-                </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={12}>
                   <Box display='flex' justifyContent='center'>
                     <CircularVotes
                       avgTotal={avgTotal}
