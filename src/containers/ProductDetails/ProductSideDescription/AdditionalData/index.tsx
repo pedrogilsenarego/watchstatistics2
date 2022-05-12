@@ -10,9 +10,10 @@ import AddAdditionalData from "./AddAditionalData";
 
 interface Props {
   additionalData: { title: string; link: string }[];
+  currentUser: any;
 }
 
-const AdditionalData = ({ additionalData }: Props) => {
+const AdditionalData = ({ additionalData, currentUser }: Props) => {
   const [addAdditionalData, setAddAdditionalData] = useState(false);
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
@@ -38,7 +39,7 @@ const AdditionalData = ({ additionalData }: Props) => {
                 </Grid>
               );
             })}
-            {!addAdditionalData && additionalData.length <= 4 && (
+            {!addAdditionalData && currentUser && additionalData.length <= 4 && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {
@@ -59,7 +60,7 @@ const AdditionalData = ({ additionalData }: Props) => {
             )}
           </Grid>
         )}
-        {!addAdditionalData && additionalData.length <= 0 && (
+        {!addAdditionalData && currentUser && additionalData.length <= 0 && (
           <Grid item xs={12}>
             <Styled.Typography>
               There is no links for this watch yet,{" "}
@@ -86,9 +87,8 @@ const AdditionalData = ({ additionalData }: Props) => {
       <Popover
         anchor={anchorPopover}
         setAnchor={setAnchorPopover}
-        message={`Add up to ${numberReviews} reviews to win up to ${
-          Number(numberReviews) * rewards.PRODUCT_ADDITIONAL_DATA
-        } points`}
+        message={`Add up to ${numberReviews} reviews to win up to ${Number(numberReviews) * rewards.PRODUCT_ADDITIONAL_DATA
+          } points`}
       />
     </Styled.Box>
   );

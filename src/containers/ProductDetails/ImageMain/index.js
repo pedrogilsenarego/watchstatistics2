@@ -19,6 +19,7 @@ const ImageMain = ({
   reference,
   avgTotal,
   compareWatches,
+  currentUser
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
   const [readySubmit, setReadySubmit] = useState(false);
@@ -59,7 +60,7 @@ const ImageMain = ({
               style={{
                 width: "100%",
                 objectFit: "cover",
-                height: mobile ? "40vh" : "70vh",
+                height: mobile ? "75vh" : "70vh",
               }}
               src={mainImage}
               alt=''
@@ -96,6 +97,7 @@ const ImageMain = ({
                 addAdditionalPictures={addAdditionalPictures}
                 setAddAdditionalPictures={setAddAdditionalPictures}
                 productThumbnail={productThumbnail}
+                currentUser={currentUser}
               />
             )}
 

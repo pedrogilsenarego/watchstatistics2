@@ -104,6 +104,7 @@ const ProductDetails = ({}) => {
     showVote,
     setShowVote,
     voteRef,
+    currentUser
   };
 
   return (

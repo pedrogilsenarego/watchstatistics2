@@ -8,11 +8,12 @@ import { rewards } from "src/constants/gamification";
 
 const mapState = (state) => ({
   product: state.productsData.product,
+  currentUser: state.user.currentUser
 });
 
 // eslint-disable-next-line
 const ProductSideDescription = ({}) => {
-  const { product } = useSelector(mapState);
+  const { product, currentUser } = useSelector(mapState);
   const [addDescription, setAddDescription] = useState(false);
   const { productDesc, additionalData } = product;
 
@@ -35,7 +36,7 @@ const ProductSideDescription = ({}) => {
                 color: "#ffffffBF",
               }}
             />
-          ) : !addDescription ? (
+          ) : !currentUser ? " " : !addDescription ? (
             <Typography
               style={{
                 color: "#ffffffBF",
@@ -62,7 +63,7 @@ const ProductSideDescription = ({}) => {
       <Box sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
         <Divider style={{ background: "#ffffff66" }} />
       </Box>
-      <AdditionalData additionalData={additionalData} />
+      <AdditionalData additionalData={additionalData} currentUser={currentUser}/>
     </div>
   );
 };

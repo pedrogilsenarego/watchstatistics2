@@ -76,7 +76,7 @@ const mapState = (state) => ({
 
 // eslint-disable-next-line
 const ProductSideList = ({ }) => {
-  const { product } = useSelector(mapState);
+  const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const { productID } = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
@@ -140,6 +140,7 @@ const ProductSideList = ({ }) => {
 
   const CustomAddDetails = (value, name) => {
     const [anchorPopover, setAnchorPopover] = useState(null);
+
     return (<>
       {!submitDetails[name] && (<Grid container alignItems="center" justifyContent="flex-end" ><MdAddCircle
         onMouseOver={(e) => {
@@ -201,7 +202,7 @@ const ProductSideList = ({ }) => {
               <RiCloseFill color="orange" onClick={() => setSubmitDetails(false)} style={{cursor:"pointer"}} size="2em"/>,             
               </Grid>)}
           </Box>
-          {!Object.values(submitDetails).some(element => element) && (<Typography
+          {currentUser && !Object.values(submitDetails).some(element => element) && (<Typography
               style={{
                 color: "#ffffffBF",
                 marginTop: "5px"
@@ -250,7 +251,7 @@ const ProductSideList = ({ }) => {
                         options={Details.movements}
                       />
                     )}
-                    {movement || CustomAddDetails(rewards.PRODUCT_MOVEMENT, "movement")}
+                    {movement || (!currentUser ? "-" : CustomAddDetails(rewards.PRODUCT_MOVEMENT, "movement"))}
                   </TableCell>
                 </TableRow>
 
@@ -275,7 +276,7 @@ const ProductSideList = ({ }) => {
                         }}
                       ></InputBase>
                     )}
-                    {caliber || CustomAddDetails(rewards.PRODUCT_CALIBER, "caliber")}
+                    {caliber || (currentUser ? CustomAddDetails(rewards.PRODUCT_CALIBER, "caliber") : "-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -321,7 +322,7 @@ const ProductSideList = ({ }) => {
                           }}
                         ></InputBase>,
                       ]}
-                    {productionYears || CustomAddDetails(rewards.PRODUCT_YEARS, "years")}
+                    {productionYears || (currentUser ? CustomAddDetails(rewards.PRODUCT_YEARS, "years"):"-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -345,7 +346,7 @@ const ProductSideList = ({ }) => {
                         }}
                       ></InputBase>
                     )}
-                    {caseSize || CustomAddDetails(rewards.PRODUCT_CASE_SIZE, "caseSize")}{caseSize ? "mm": null}
+                    {caseSize || (currentUser ? CustomAddDetails(rewards.PRODUCT_CASE_SIZE, "caseSize"):"-")}{caseSize ? "mm": null}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -361,7 +362,7 @@ const ProductSideList = ({ }) => {
                         options={Details.caseMaterials}
                       />
                     )}
-                    {caseMaterial || CustomAddDetails(rewards.PRODUCT_CASE_MATERIAL, "caseMaterial")}
+                    {caseMaterial || (currentUser ? CustomAddDetails(rewards.PRODUCT_CASE_MATERIAL, "caseMaterial"):"-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -377,7 +378,7 @@ const ProductSideList = ({ }) => {
                         options={Details.waterResistance}
                       />
                     )}
-                    {waterResistance || CustomAddDetails(rewards.PRODUCT_WATER_RESISTANCE, "waterResistance")}
+                    {waterResistance || (currentUser ? CustomAddDetails(rewards.PRODUCT_WATER_RESISTANCE, "waterResistance"): "-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>

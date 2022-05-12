@@ -12,6 +12,7 @@ interface Props {
   mobile: boolean;
   addAdditionalPictures: Boolean;
   setAddAdditionalPictures: (addAdditionalPictures: Boolean) => void;
+  currentUser: any;
 }
 
 const ImageThumbs = ({
@@ -21,6 +22,7 @@ const ImageThumbs = ({
   mobile,
   addAdditionalPictures,
   setAddAdditionalPictures,
+  currentUser
 }: Props) => {
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
@@ -68,7 +70,7 @@ const ImageThumbs = ({
                 </Grid>
               );
             })}
-            {!addAdditionalPictures && productThumbnail.length < 4 && (
+            {!addAdditionalPictures && currentUser && productThumbnail.length < 4 && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {
@@ -90,10 +92,10 @@ const ImageThumbs = ({
           </Grid>
         )}
 
-        {!addAdditionalPictures && productThumbnail.length <= 0 && (
+        {!addAdditionalPictures && currentUser && productThumbnail.length <= 0 && (
           <Grid item xs={12}>
             <Styled.Typography>
-              There is no links for this watch yet,{" "}
+              There is no images for this watch yet,{" "}
               <b
                 style={{ color: "orange", cursor: "pointer" }}
                 onClick={() => {
@@ -114,9 +116,8 @@ const ImageThumbs = ({
       <Popover
         anchor={anchorPopover}
         setAnchor={setAnchorPopover}
-        message={`Add up to ${numberPictures} pictures to win up to ${
-          Number(numberPictures) * rewards.PRODUCT_PICTURE
-        } points`}
+        message={`Add up to ${numberPictures} pictures to win up to ${Number(numberPictures) * rewards.PRODUCT_PICTURE
+          } points`}
       />
     </>
   );
