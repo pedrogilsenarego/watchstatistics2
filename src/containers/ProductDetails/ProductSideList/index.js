@@ -80,7 +80,6 @@ const ProductSideList = ({}) => {
   const dispatch = useDispatch();
   const productID = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
-
   const [triggerAlert, setTriggerAlert] = useState(false);
 
   const {
@@ -99,7 +98,7 @@ const ProductSideList = ({}) => {
   } = product;
   const classes = useStyles();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, {resetForm}) => {
     const {
       movement,
       caseMaterial,
@@ -130,6 +129,7 @@ const ProductSideList = ({}) => {
     if (productionYears === "-") delete values.productionYears;
     dispatch(addProductListDetail(values));
     setSubmitDetails(false);
+    resetForm()
   };
 
   const configBottomComponents = {
@@ -161,12 +161,13 @@ const ProductSideList = ({}) => {
   return (
     <Box>
       <Formik
+        enableReinitialize
         initialValues={{
           ...INITIAL_FORM_STATE,
         }}
-        onSubmit={(values) => {
+        onSubmit={(values, {resetForm}) => {
           Object.values(values).some((element) => element)
-            ? handleSubmit(values)
+            ? handleSubmit(values, {resetForm})
             : setTriggerAlert(true);
         }}
         validationSchema={FORM_VALIDATION}

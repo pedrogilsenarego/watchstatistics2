@@ -2,7 +2,9 @@ import * as Yup from "yup";
 import { i18n } from "src/translations/i18n";
 
 export const FORM_VALIDATION = Yup.object().shape({
-  caseSize: Yup.string().matches(/^[0-9]+$/,i18n.t('validation.number')).matches(/^(6[0-9]|2[1-9])$/,"Choose a number between 20 and 70"),
+  caseSize: Yup.number().typeError(i18n.t('validation.number'))
+  .min(20,i18n.t('validation.moreT20'))
+  .max(60,i18n.t('validation.lessT60')),
   productionYearsStart: Yup.number()
   .typeError(i18n.t('validation.number'))
   .min(1600,i18n.t('validation.moreT1600'))

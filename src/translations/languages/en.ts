@@ -64,6 +64,8 @@ export const content = {
         number: "Only number are valid",
         moreT1600: "Choose a year over 1600",
         lessT2100: "Choose a year under 2100",
+        moreT20: "Choose a size over 20mm",
+        lessT60: "Choose a size under 60mm",
         lessTYearsEnd: "This year must be under the final date chosen",
         moreTYearsStart: "This year must be over the initial date chosen"
       },

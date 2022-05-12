@@ -330,12 +330,12 @@ export function* onAddProductPicture() {
 }
 
 function* sagaAddProductListDetails({ payload }) {
-  const { movement, currentUser } = payload;
+  const { currentUser } = payload;
   const timestamp = new Date();
   try {
     if (checkUserIsAdmin(currentUser)) {
-      //yield handleAddProductUpdateAdmin(payload);
-      yield put(setProductListDetail(movement));
+      yield handleAddProductUpdateAdmin(payload);
+      yield put(setProductListDetail(payload));
       yield put(
         updateSuccessNotification(
           i18n.t("notifications.success.updateProductListDetails")

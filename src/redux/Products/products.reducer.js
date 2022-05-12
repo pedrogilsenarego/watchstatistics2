@@ -64,14 +64,22 @@ const productsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         product: { ...state.product, productDesc: action.payload },
       };
-      case productsTypes.SET_PRODUCT_LIST_DETAILS:
-        return {
-          ...state,
-          product: {
-            ...state.product,
-            movement: action.payload,
-          },
-        };
+    case productsTypes.SET_PRODUCT_LIST_DETAILS:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          movement: action.payload.movement || state.product.movement,
+          caseMaterial:
+            action.payload.caseMaterial || state.product.caseMaterial,
+          caliber: action.payload.caliber || state.product.caliber,
+          waterResistance:
+            action.payload.waterResistance || state.product.waterResistance,
+          caseSize: action.payload.caseSize || state.product.caseSize,
+          productionYears:
+            action.payload.productionYears || state.product.productionYears,
+        },
+      };
     case productsTypes.SET_PRODUCT_ADDITIONAL_DATA:
       return {
         ...state,
@@ -88,7 +96,6 @@ const productsReducer = (state = INITIAL_STATE, action) => {
           productThumbnail: [...state.product.productThumbnail, action.payload],
         },
       };
-      
 
     default:
       return state;
