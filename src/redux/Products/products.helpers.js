@@ -494,7 +494,7 @@ export const handleAddProductUpdateAdmin = (payload) => {
     if(productionYears) Object.assign(listDetails, {productionYears})
     if(waterResistance) Object.assign(listDetails, {waterResistance})
     if(caliber) Object.assign(listDetails, {caliber})
-    console.log(listDetails)
+   
     if(Object.keys(listDetails).length !== 0) ref = ref.update(listDetails)
     
 
@@ -533,8 +533,25 @@ export const handleAddProductUpdateUser = (payload) => {
     productName,
     productBrand,
     reference,
+    movement,
+    caseSize,
+    caseMaterial,
+    productionYears,
+    waterResistance,
+    caliber
   } = payload;
   const whichField = () => {
+
+    const listDetails = {}
+    if(movement) Object.assign(listDetails, {movement})
+    if(caseSize) Object.assign(listDetails, {caseSize})
+    if(caseMaterial) Object.assign(listDetails, {caseMaterial})
+    if(productionYears) Object.assign(listDetails, {productionYears})
+    if(waterResistance) Object.assign(listDetails, {waterResistance})
+    if(caliber) Object.assign(listDetails, {caliber})
+    if(Object.keys(listDetails).length !== 0) return {listDetails, type: "+watchListDetails"}
+
+
     if (productDesc) return { productDesc, type: "+watchDescription" };
     if (additionalData) return { additionalData, type: "+watchAdditionalData" };
     if (productThumbnail) return { productThumbnail, type: "+watchPicture" };
@@ -550,7 +567,6 @@ export const handleAddProductUpdateUser = (payload) => {
     reference,
   };
   Object.assign(order, whichField());
-
   return new Promise((resolve, reject) => {
     firestore
       .collection("orders")

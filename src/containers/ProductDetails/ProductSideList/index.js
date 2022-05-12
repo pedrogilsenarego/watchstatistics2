@@ -115,6 +115,7 @@ const ProductSideList = ({}) => {
       productID,
       caseMaterial,
       productName,
+      reference,
       productBrand,
       caliber,
       productionYears,
