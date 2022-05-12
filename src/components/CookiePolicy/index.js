@@ -14,7 +14,7 @@ const mapState = ({ user }) => ({
 });
 
 const CookiePolicy = () => {
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(false);
   const [privacyPolicy, setPrivacyPolicy] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector(mapState);
@@ -33,7 +33,7 @@ const CookiePolicy = () => {
       <Dialog open={open} style={{ color: "black" }}>
         <DialogTitle>
           <div style={{ textAlign: "center" }}>
-            <Typography variant="h6" component="div" style={{ color: "black" }}>
+            <Typography variant='h6' component='div' style={{ color: "black" }}>
               This Website uses Cookies
             </Typography>
           </div>
