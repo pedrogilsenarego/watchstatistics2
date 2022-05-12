@@ -13,6 +13,7 @@ import {
   setProductDescription,
   setProductAdditionalData,
   setProductPicture,
+  setProductListDetail,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -328,8 +329,43 @@ export function* onAddProductPicture() {
   yield takeLatest(productsTypes.ADD_PRODUCT_PICTURE, sagaAddPicture);
 }
 
+function* sagaAddProductListDetails({ payload }) {
+  const { movement, currentUser } = payload;
+  const timestamp = new Date();
+  try {
+    if (checkUserIsAdmin(currentUser)) {
+      console.log(1)
+      yield handleAddProductUpdateAdmin(payload);
+      yield put(setProductListDetail(movement));
+      yield put(
+        updateSuccessNotification(
+          i18n.t("notifications.success.updateProductListDetails")
+        )
+      );
+    } else {
+      yield handleAddProductUpdateUser({
+        ...payload,
+        createdDate: timestamp,
+      });
+      yield put(
+        updateInformationNotification(
+          i18n.t("notifications.information.updateProductListDetails")
+        )
+      );
+    }
+  } catch (err) {
+    yield put(
+      updateFailNotification(i18n.t("notifications.fail.updateProductListDetails"))
+    );
+  }
+}
+export function* onAddProductListDetails() {
+  yield takeLatest(productsTypes.ADD_PRODUCT_LIST_DETAILS, sagaAddProductListDetails);
+}
+
 export default function* productsSagas() {
   yield all([
+    call(onAddProductListDetails),
     call(onAddProductPicture),
     call(onAddProductStart),
     call(onFetchProductsStart),

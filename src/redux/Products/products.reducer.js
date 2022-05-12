@@ -80,6 +80,14 @@ const productsReducer = (state = INITIAL_STATE, action) => {
           productThumbnail: [...state.product.productThumbnail, action.payload],
         },
       };
+      case productsTypes.SET_PRODUCT_LIST_DETAILS:
+        return {
+          ...state,
+          product: {
+            ...state.product,
+            movement: action.payload,
+          },
+        };
 
     default:
       return state;

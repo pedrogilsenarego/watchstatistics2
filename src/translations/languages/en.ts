@@ -26,6 +26,7 @@ export const content = {
           messageSent: "A message was sent to the user",
           updateProductAdditionalData: "The Review was added with success",
           updateProductPicture: "The Picture was added with success",
+          updateProductListDetails: "This detail was added to the list with success",
         },
         fail: {
           orderDeleted: "The order was not possible to delete",
@@ -34,10 +35,12 @@ export const content = {
           updateProductAdditionalData:
             "The Review was not possible to be added",
           updateProductPicture: "The Picture was not possible to be added",
+          updateProductListDetails: "This detail was not possible to be added",
         },
         information: {
           updateProductAdditionalData: "The Review was sent for review",
           updateProductPicture: "The Picture was sent for review",
+          updateProductListDetails: "The details were sent for review",
         },
       },
       placeholders: {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography } from "@material-ui/core";
-import { Box, Grid } from "@mui/material"
-import Alert from "src/components/Alert"
+import { Box, Grid } from "@mui/material";
+import Alert from "src/components/Alert";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -15,13 +15,13 @@ import { MdAddCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
 import { Form, Formik } from "formik";
 import Select from "../../forms/SelectMUIFormik";
-import { rewards } from "src/constants/gamification"
+import { rewards } from "src/constants/gamification";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import * as Details from "src/constants/productOptions"
+import * as Details from "src/constants/productOptions";
 import { RiCloseFill } from "react-icons/ri";
-import  ButtonMUI from "src/components/Buttons/Button1Form";
-import { addProductStart } from "../../../redux/Products/products.actions";
+import ButtonMUI from "src/components/Buttons/Button1Form";
+import { addProductListDetail } from "../../../redux/Products/products.actions";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
@@ -76,13 +76,13 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const ProductSideList = ({ }) => {
+const ProductSideList = ({}) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
-  const { productID } = useParams();
+  const  productID  = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
-  
-  const [triggerAlert, setTriggerAlert] = useState(false)
+
+  const [triggerAlert, setTriggerAlert] = useState(false);
 
   const {
     productName,
@@ -112,6 +112,7 @@ const ProductSideList = ({ }) => {
     } = e;
     const productionYears = productionYearsStart + "-" + productionYearsEnd;
     const values = {
+      currentUser,
       movement,
       productID,
       caseMaterial,
@@ -120,7 +121,7 @@ const ProductSideList = ({ }) => {
       caliber,
       productionYears,
       waterResistance,
-      caseSize: caseSize + "mm",
+      caseSize: caseSize,
     };
     if (caseMaterial === "") delete values.caseMaterial;
     if (movement === "") delete values.movement;
@@ -128,9 +129,8 @@ const ProductSideList = ({ }) => {
     if (waterResistance === "") delete values.waterResistance;
     if (caseSize === "") delete values.caseSize;
     if (productionYears === "-") delete values.productionYears;
-    dispatch(addProductStart(values));
+    dispatch(addProductListDetail(values));
     setSubmitDetails(false);
-    
   };
 
   const configBottomComponents = {
@@ -143,34 +143,48 @@ const ProductSideList = ({ }) => {
   const CustomAddDetails = (value, name) => {
     const [anchorPopover, setAnchorPopover] = useState(null);
 
-    return (<>
-        {!submitDetails[name] && (<Grid container alignItems="center" justifyContent="flex-end" ><MdAddCircle
-        onMouseOver={(e) => {
-          setAnchorPopover(e.currentTarget);
-        }}
-        onMouseOut={() => {
-          setAnchorPopover(null);
-        }}
-        style={{ cursor: "pointer" }}
-        size='1.8em'
-        color='orange'
-        onClick={() => {setSubmitDetails({ ...submitDetails, [name]: true }); setAnchorPopover(null)}}
-      />
-        <Popover
-          anchor={anchorPopover}
-          setAnchor={setAnchorPopover}
-          message={value !== 1 ? `Win ${value} points` : `Win ${value} point`}
-        /></Grid>)}
-    </>
-    )
-  }
+    return (
+      <>
+        {!submitDetails[name] && (
+          <Grid container alignItems='center' justifyContent='flex-end'>
+            <MdAddCircle
+              onMouseOver={(e) => {
+                setAnchorPopover(e.currentTarget);
+              }}
+              onMouseOut={() => {
+                setAnchorPopover(null);
+              }}
+              style={{ cursor: "pointer" }}
+              size='1.8em'
+              color='orange'
+              onClick={() => {
+                setSubmitDetails({ ...submitDetails, [name]: true });
+                setAnchorPopover(null);
+              }}
+            />
+            <Popover
+              anchor={anchorPopover}
+              setAnchor={setAnchorPopover}
+              message={
+                value !== 1 ? `Win ${value} points` : `Win ${value} point`
+              }
+            />
+          </Grid>
+        )}
+      </>
+    );
+  };
 
   const calculatePossiblePoints = () => {
-    return ((movement ? 0 : rewards.PRODUCT_MOVEMENT) + (caliber ? 0 : rewards.PRODUCT_CALIBER)+ (productionYears ? 0 : rewards.PRODUCT_YEARS) + (caseSize ? 0 : rewards.PRODUCT_CASE_SIZE) + (caseMaterial ? 0 : rewards.PRODUCT_CASE_MATERIAL) + (waterResistance ? 0 : rewards.PRODUCT_WATER_RESISTANCE) )
-  }
-
-  
-  
+    return (
+      (movement ? 0 : rewards.PRODUCT_MOVEMENT) +
+      (caliber ? 0 : rewards.PRODUCT_CALIBER) +
+      (productionYears ? 0 : rewards.PRODUCT_YEARS) +
+      (caseSize ? 0 : rewards.PRODUCT_CASE_SIZE) +
+      (caseMaterial ? 0 : rewards.PRODUCT_CASE_MATERIAL) +
+      (waterResistance ? 0 : rewards.PRODUCT_WATER_RESISTANCE)
+    );
+  };
 
   return (
     <Box>
@@ -179,53 +193,61 @@ const ProductSideList = ({ }) => {
           ...INITIAL_FORM_STATE,
         }}
         onSubmit={(values) => {
-          Object.values(values).some(element => element) ?
-          handleSubmit(values): setTriggerAlert(true)
-          
+          Object.values(values).some((element) => element)
+            ? handleSubmit(values)
+            : setTriggerAlert(true);
         }}
         validationSchema={FORM_VALIDATION}
       >
         <Form>
           <Box
             color={"text.secondary"}
-            sx={{ display: "flex", justifyContent: "space-between"}}
+            sx={{ display: "flex", justifyContent: "space-between" }}
             borderRadius='10px'
             container
           >
-            <Typography
-              variant={"h6"}
-              style={{  color: "#ffffff" }}
-            >
+            <Typography variant={"h6"} style={{ color: "#ffffff" }}>
               Details
             </Typography>
-          
-            {Object.values(submitDetails).some(element => element) && (
-              <Grid container alignItems="center" justifyContent="flex-end"><ButtonMUI
-               
-                className={classes.textBtn}
-              >
-                Submit{" "}
-              </ButtonMUI>
-              <RiCloseFill color="orange" onClick={() => setSubmitDetails(false)} style={{cursor:"pointer"}} size="2em"/>,             
-              </Grid>)}
+
+            {Object.values(submitDetails).some((element) => element) && (
+              <Grid container alignItems='center' justifyContent='flex-end'>
+                <ButtonMUI className={classes.textBtn}>Submit </ButtonMUI>
+                <RiCloseFill
+                  color='orange'
+                  onClick={() => setSubmitDetails(false)}
+                  style={{ cursor: "pointer" }}
+                  size='2em'
+                />
+                ,
+              </Grid>
+            )}
           </Box>
-          <Box style={{marginTop: "10px"}}>
-          {currentUser && !Object.values(submitDetails).some(element => element) && (<Typography
-              style={{
-                color: "#ffffffBF",
-                marginTop: "5px"
-              }}
-            >
-              This Watch miss some details add those to win up to{" "}
-              <b style={{ color: "orange" }}>{calculatePossiblePoints()}</b>{" "}
-              points.
-            </Typography>)}
-          {alert && (<>
-                      <Alert message="Choose at least one field" 
-                            severity="error" 
-                            trigger={triggerAlert} 
-                            setTrigger={setTriggerAlert}/>
-                            </>)} </Box>
+          <Box style={{ marginTop: "10px" }}>
+            {currentUser &&
+              !Object.values(submitDetails).some((element) => element) && (
+                <Typography
+                  style={{
+                    color: "#ffffffBF",
+                    marginTop: "5px",
+                  }}
+                >
+                  This Watch miss some details add those to win up to{" "}
+                  <b style={{ color: "orange" }}>{calculatePossiblePoints()}</b>{" "}
+                  points.
+                </Typography>
+              )}
+            {alert && (
+              <>
+                <Alert
+                  message='Choose at least one field'
+                  severity='error'
+                  trigger={triggerAlert}
+                  setTrigger={setTriggerAlert}
+                />
+              </>
+            )}{" "}
+          </Box>
           <TableContainer className={classes.table} component={Paper}>
             <Table size='small' aria-label='simple table'>
               <TableBody>
@@ -264,7 +286,13 @@ const ProductSideList = ({ }) => {
                         options={Details.movements}
                       />
                     )}
-                    {movement || (!currentUser ? "-" : CustomAddDetails(rewards.PRODUCT_MOVEMENT, "movement"))}
+                    {movement ||
+                      (!currentUser
+                        ? "-"
+                        : CustomAddDetails(
+                            rewards.PRODUCT_MOVEMENT,
+                            "movement"
+                          ))}
                   </TableCell>
                 </TableRow>
 
@@ -289,7 +317,10 @@ const ProductSideList = ({ }) => {
                         }}
                       ></InputBase>
                     )}
-                    {caliber || (currentUser ? CustomAddDetails(rewards.PRODUCT_CALIBER, "caliber") : "-")}
+                    {caliber ||
+                      (currentUser
+                        ? CustomAddDetails(rewards.PRODUCT_CALIBER, "caliber")
+                        : "-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -335,7 +366,10 @@ const ProductSideList = ({ }) => {
                           }}
                         ></InputBase>,
                       ]}
-                    {productionYears || (currentUser ? CustomAddDetails(rewards.PRODUCT_YEARS, "years"):"-")}
+                    {productionYears ||
+                      (currentUser
+                        ? CustomAddDetails(rewards.PRODUCT_YEARS, "years")
+                        : "-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -359,7 +393,14 @@ const ProductSideList = ({ }) => {
                         }}
                       ></InputBase>
                     )}
-                    {caseSize || (currentUser ? CustomAddDetails(rewards.PRODUCT_CASE_SIZE, "caseSize"):"-")}{caseSize ? "mm": null}
+                    {caseSize ||
+                      (currentUser
+                        ? CustomAddDetails(
+                            rewards.PRODUCT_CASE_SIZE,
+                            "caseSize"
+                          )
+                        : "-")}
+                    {caseSize ? "mm" : null}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -375,7 +416,13 @@ const ProductSideList = ({ }) => {
                         options={Details.caseMaterials}
                       />
                     )}
-                    {caseMaterial || (currentUser ? CustomAddDetails(rewards.PRODUCT_CASE_MATERIAL, "caseMaterial"):"-")}
+                    {caseMaterial ||
+                      (currentUser
+                        ? CustomAddDetails(
+                            rewards.PRODUCT_CASE_MATERIAL,
+                            "caseMaterial"
+                          )
+                        : "-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -391,7 +438,13 @@ const ProductSideList = ({ }) => {
                         options={Details.waterResistance}
                       />
                     )}
-                    {waterResistance || (currentUser ? CustomAddDetails(rewards.PRODUCT_WATER_RESISTANCE, "waterResistance"): "-")}
+                    {waterResistance ||
+                      (currentUser
+                        ? CustomAddDetails(
+                            rewards.PRODUCT_WATER_RESISTANCE,
+                            "waterResistance"
+                          )
+                        : "-")}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -406,7 +459,6 @@ const ProductSideList = ({ }) => {
         </Form>
       </Formik>
       <BottomComponents {...configBottomComponents} />
-
     </Box>
   );
 };

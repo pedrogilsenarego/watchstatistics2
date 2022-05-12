@@ -120,6 +120,16 @@ export const setProductPicture = (payload) => ({
   payload,
 });
 
+export const addProductListDetail = (payload) => ({
+  type: productsTypes.ADD_PRODUCT_LIST_DETAILS,
+  payload,
+});
+
+export const setProductListDetail = (payload) => ({
+  type: productsTypes.SET_PRODUCT_LIST_DETAILS,
+  payload,
+});
+
 /////Latest Products
 
 export const setCurrentLatestProduct = (payload) => ({
