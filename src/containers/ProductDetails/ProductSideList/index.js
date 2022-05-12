@@ -11,8 +11,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
-import { MdAddCircle } from "react-icons/md";
-import Popover from "src/components/Popover";
 import { Form, Formik } from "formik";
 import Select from "../../forms/SelectMUIFormik";
 import { rewards } from "src/constants/gamification";
@@ -25,6 +23,7 @@ import { addProductListDetail } from "../../../redux/Products/products.actions";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
+import CustomAddCircle from "./CustomAddCircle";
 
 const INITIAL_FORM_STATE = {
   movement: "",
@@ -79,7 +78,7 @@ const mapState = (state) => ({
 const ProductSideList = ({}) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
-  const  productID  = useParams();
+  const productID = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
 
   const [triggerAlert, setTriggerAlert] = useState(false);
@@ -140,39 +139,12 @@ const ProductSideList = ({}) => {
     reference,
   };
 
-  const CustomAddDetails = (value, name) => {
-    const [anchorPopover, setAnchorPopover] = useState(null);
-
-    return (
-      <>
-        {!submitDetails[name] && (
-          <Grid container alignItems='center' justifyContent='flex-end'>
-            <MdAddCircle
-              onMouseOver={(e) => {
-                setAnchorPopover(e.currentTarget);
-              }}
-              onMouseOut={() => {
-                setAnchorPopover(null);
-              }}
-              style={{ cursor: "pointer" }}
-              size='1.8em'
-              color='orange'
-              onClick={() => {
-                setSubmitDetails({ ...submitDetails, [name]: true });
-                setAnchorPopover(null);
-              }}
-            />
-            <Popover
-              anchor={anchorPopover}
-              setAnchor={setAnchorPopover}
-              message={
-                value !== 1 ? `Win ${value} points` : `Win ${value} point`
-              }
-            />
-          </Grid>
-        )}
-      </>
-    );
+ const handleSubmitDetails = (name) => {
+  setSubmitDetails({ ...submitDetails, [name]: true })
+ }
+  const configCustomCircle = {
+    submitDetails,
+    handleSubmitDetails,
   };
 
   const calculatePossiblePoints = () => {
@@ -287,12 +259,15 @@ const ProductSideList = ({}) => {
                       />
                     )}
                     {movement ||
-                      (!currentUser
-                        ? "-"
-                        : CustomAddDetails(
-                            rewards.PRODUCT_MOVEMENT,
-                            "movement"
-                          ))}
+                      (!currentUser ? (
+                        "-"
+                      ) : (
+                        <CustomAddCircle
+                          value={rewards.PRODUCT_MOVEMENT}
+                          name='movement'
+                          {...configCustomCircle}
+                        />
+                      ))}
                   </TableCell>
                 </TableRow>
 
@@ -318,9 +293,15 @@ const ProductSideList = ({}) => {
                       ></InputBase>
                     )}
                     {caliber ||
-                      (currentUser
-                        ? CustomAddDetails(rewards.PRODUCT_CALIBER, "caliber")
-                        : "-")}
+                      (currentUser ? (
+                        <CustomAddCircle
+                          value={rewards.PRODUCT_CALIBER}
+                          name='caliber'
+                          {...configCustomCircle}
+                        />
+                      ) : (
+                        "-"
+                      ))}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -367,9 +348,15 @@ const ProductSideList = ({}) => {
                         ></InputBase>,
                       ]}
                     {productionYears ||
-                      (currentUser
-                        ? CustomAddDetails(rewards.PRODUCT_YEARS, "years")
-                        : "-")}
+                      (currentUser ? (
+                        <CustomAddCircle
+                          value={rewards.PRODUCT_YEARS}
+                          name='years'
+                          {...configCustomCircle}
+                        />
+                      ) : (
+                        "-"
+                      ))}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -394,12 +381,15 @@ const ProductSideList = ({}) => {
                       ></InputBase>
                     )}
                     {caseSize ||
-                      (currentUser
-                        ? CustomAddDetails(
-                            rewards.PRODUCT_CASE_SIZE,
-                            "caseSize"
-                          )
-                        : "-")}
+                      (currentUser ? (
+                        <CustomAddCircle
+                          value={rewards.PRODUCT_CASE_SIZE}
+                          name='caseSize'
+                          {...configCustomCircle}
+                        />
+                      ) : (
+                        "-"
+                      ))}
                     {caseSize ? "mm" : null}
                   </TableCell>
                 </TableRow>
@@ -417,12 +407,15 @@ const ProductSideList = ({}) => {
                       />
                     )}
                     {caseMaterial ||
-                      (currentUser
-                        ? CustomAddDetails(
-                            rewards.PRODUCT_CASE_MATERIAL,
-                            "caseMaterial"
-                          )
-                        : "-")}
+                      (currentUser ? (
+                        <CustomAddCircle
+                          value={rewards.PRODUCT_CASE_MATERIAL}
+                          name='caseMaterial'
+                          {...configCustomCircle}
+                        />
+                      ) : (
+                        "-"
+                      ))}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -439,12 +432,15 @@ const ProductSideList = ({}) => {
                       />
                     )}
                     {waterResistance ||
-                      (currentUser
-                        ? CustomAddDetails(
-                            rewards.PRODUCT_WATER_RESISTANCE,
-                            "waterResistance"
-                          )
-                        : "-")}
+                      (currentUser ? (
+                        <CustomAddCircle
+                          value={rewards.PRODUCT_MOVEMENT}
+                          name='waterResistance'
+                          {...configCustomCircle}
+                        />
+                      ) : (
+                        "-"
+                      ))}
                   </TableCell>
                 </TableRow>
                 <TableRow>

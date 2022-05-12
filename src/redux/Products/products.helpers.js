@@ -476,9 +476,7 @@ export const handleAddProductUpdateAdmin = (payload) => {
   const { productDesc, productID, additionalData, productThumbnail, movement } = payload;
   return new Promise((resolve, reject) => {
     let ref = firestore.collection("products").doc(productID.productID);
-    console.log(2)
     if (movement) ref = ref.update({movement})
-    console.log(3)
     if (productDesc) ref = ref.update({ productDesc });
     if (additionalData) {
       ref = ref.update({

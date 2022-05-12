@@ -334,8 +334,7 @@ function* sagaAddProductListDetails({ payload }) {
   const timestamp = new Date();
   try {
     if (checkUserIsAdmin(currentUser)) {
-      console.log(1)
-      yield handleAddProductUpdateAdmin(payload);
+      //yield handleAddProductUpdateAdmin(payload);
       yield put(setProductListDetail(movement));
       yield put(
         updateSuccessNotification(
