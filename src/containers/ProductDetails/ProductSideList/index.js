@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Typography } from "@material-ui/core";
-import { Box, Grid, Alert } from "@mui/material"
+import { Box, Grid } from "@mui/material"
+import Alert from "src/components/Alert"
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router";
@@ -80,8 +81,8 @@ const ProductSideList = ({ }) => {
   const dispatch = useDispatch();
   const { productID } = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
-  const [submitedDetails, setSubmitedDetails] = useState(false);
-  const [alert, setAlert] = useState('')
+  
+  const [triggerAlert, setTriggerAlert] = useState(false)
 
   const {
     productName,
@@ -129,7 +130,7 @@ const ProductSideList = ({ }) => {
     if (productionYears === "-") delete values.productionYears;
     dispatch(addProductStart(values));
     setSubmitDetails(false);
-    setSubmitedDetails(true);
+    
   };
 
   const configBottomComponents = {
@@ -168,13 +169,6 @@ const ProductSideList = ({ }) => {
     return ((movement ? 0 : rewards.PRODUCT_MOVEMENT) + (caliber ? 0 : rewards.PRODUCT_CALIBER)+ (productionYears ? 0 : rewards.PRODUCT_YEARS) + (caseSize ? 0 : rewards.PRODUCT_CASE_SIZE) + (caseMaterial ? 0 : rewards.PRODUCT_CASE_MATERIAL) + (waterResistance ? 0 : rewards.PRODUCT_WATER_RESISTANCE) )
   }
 
-  const handleAlert = () => {
-    const alertTimeoutSec = 1000 * 2
-    let alertTimeout= null
-    clearInterval(alertTimeout)
-          alertTimeout = setTimeout(() => setAlert(''), alertTimeoutSec)
-          setAlert("Fill at least one field");
-    }
   
   
 
@@ -186,7 +180,7 @@ const ProductSideList = ({ }) => {
         }}
         onSubmit={(values) => {
           Object.values(values).some(element => element) ?
-          handleSubmit(values): handleAlert()
+          handleSubmit(values): setTriggerAlert(true)
           
         }}
         validationSchema={FORM_VALIDATION}
@@ -215,6 +209,7 @@ const ProductSideList = ({ }) => {
               <RiCloseFill color="orange" onClick={() => setSubmitDetails(false)} style={{cursor:"pointer"}} size="2em"/>,             
               </Grid>)}
           </Box>
+          <Box style={{marginTop: "10px"}}>
           {currentUser && !Object.values(submitDetails).some(element => element) && (<Typography
               style={{
                 color: "#ffffffBF",
@@ -225,9 +220,12 @@ const ProductSideList = ({ }) => {
               <b style={{ color: "orange" }}>{calculatePossiblePoints()}</b>{" "}
               points.
             </Typography>)}
-          {alert && (<><Alert variant="filled" severity="error" onClose={() => setAlert('')}>
-                                  {alert}
-                              </Alert></>)}
+          {alert && (<>
+                      <Alert message="Choose at least one field" 
+                            severity="error" 
+                            trigger={triggerAlert} 
+                            setTrigger={setTriggerAlert}/>
+                            </>)} </Box>
           <TableContainer className={classes.table} component={Paper}>
             <Table size='small' aria-label='simple table'>
               <TableBody>
