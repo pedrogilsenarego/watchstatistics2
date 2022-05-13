@@ -14,7 +14,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import { RiCheckboxBlankLine, RiCheckboxFill } from "react-icons/ri";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-
+import Button3 from "src/components/Buttons/Button3";
+import { RiCloseFill } from "react-icons/ri";
 import SliderComponent from "./SliderComponent";
 
 const useStyles = makeStyles((theme) => ({
@@ -335,6 +336,18 @@ const ProductVote = ({
             {!mobile && (
               <>
                 <Grid item xs={12}>
+                  <RiCloseFill
+                    size='2.5em'
+                    color='orange'
+                    onClick={() => {
+                      setShowVote(false);
+                    }}
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      cursor: "pointer",
+                    }}
+                  />
                   <RadioGroup
                     aria-label='gender'
                     value={ownership}
@@ -433,13 +446,8 @@ const ProductVote = ({
                 </Grid>
               </>
             )}
-            <Button
-              className={classes.textBtn}
-              style={{ borderColor: "orange" }}
-              onClick={handleApplyVote}
-            >
-              Apply Vote
-            </Button>
+            <Button3 title='Apply Vote' onClick={handleApplyVote} />
+
             <Button
               className={classes.textBtn}
               style={{ marginLeft: "10px" }}

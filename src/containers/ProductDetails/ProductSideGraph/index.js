@@ -18,6 +18,7 @@ import { Radar } from "react-chartjs-2";
 import Icons from "./Icons";
 import { useTheme, useMediaQuery } from "@mui/material";
 import Drawer from "src/components/Drawer";
+import Button3 from "src/components/Buttons/Button3";
 
 const initialTargetVoteState = {
   quality: "",
@@ -293,8 +294,8 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
   };
 
   const handleVote = () => {
-    setShowVote(!showVote);
-    if (!showVote) scrollToRef(voteRef);
+    setShowVote(true);
+    scrollToRef(voteRef);
   };
 
   const configTargetVote = {
@@ -382,19 +383,17 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
                   justifyContent='center'
                   container
                 >
-                  {currentUser && !currentUser.userVotes.includes(productID) && (
-                    <Button
-                      className={classes.textBtn}
-                      style={{ width: "80%", borderColor: "orange" }}
-                      aria-controls='vote'
-                      onClick={(e) => {
-                        handleVote();
-                      }}
-                      disableRipple
-                    >
-                      Vote
-                    </Button>
-                  )}
+                  {currentUser &&
+                    !showVote &&
+                    !currentUser.userVotes.includes(productID) && (
+                      <Button3
+                        title='Vote'
+                        aria-controls='vote'
+                        onClick={(e) => {
+                          handleVote();
+                        }}
+                      />
+                    )}
                   {currentUser && currentUser.userVotes.includes(productID) && (
                     <Button
                       className={classes.textBtn}
