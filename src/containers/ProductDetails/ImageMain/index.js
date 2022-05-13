@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@material-ui/core";
 import { Typography, Grid, useMediaQuery, useTheme, Box } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
-import Divider from "@mui/material/Divider";
 import ImageThumbs from "./ImageThumbs";
 import AddAdditionalPicture from "./ImageThumbs/AddAditionalPicture";
 import { i18n } from "src/translations/i18n";
@@ -43,6 +42,10 @@ const ImageMain = ({
     compareWatches,
   };
 
+  const IMAGE_HEIGHT_MOBILE = "80vh";
+  const IMAGE_HEIGHT_LAPTOP = "70vh";
+  const CIRCULAR_VOTES_OFFSET = "70vh";
+
   const handleOnImgError = () => {
     setReadySubmit(false);
     setErrorImage(true);
@@ -78,16 +81,40 @@ const ImageMain = ({
               touchEnabled={isMatch ? true : false}
               dragEnabled={isMatch ? true : false}
             >
+              {isMatch && (
+                <Box
+                  display='flex'
+                  justifyContent='center'
+                  style={{
+                    position: "absolute",
+                    marginLeft: "1vw",
+                    marginTop: CIRCULAR_VOTES_OFFSET,
+                    backgroundColor: "#000000CC",
+                    zIndex: "1000",
+                    padding: "5px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  <CircularVotes
+                    avgTotal={avgTotal}
+                    customSize={45}
+                    customFontSize='12px'
+                  />
+                </Box>
+              )}
               <Slider
                 onMouseDown={(e) => mouseDownCoords(e)}
                 onMouseUp={(e) => clickOrDrag(e)}
+                style={{ position: "relative" }}
               >
                 {productThumbnail.map((image, pos) => {
                   return (
                     <Slide
                       index={pos}
                       style={{
-                        height: mobile ? "75vh" : "70vh",
+                        height: mobile
+                          ? IMAGE_HEIGHT_MOBILE
+                          : IMAGE_HEIGHT_LAPTOP,
                       }}
                     >
                       <img
@@ -98,7 +125,7 @@ const ImageMain = ({
                           height: "100%",
                           cursor: "Pointer",
                         }}
-                        src={image}
+                        src={readySubmit ? mainImage : image}
                         alt=''
                       />
                     </Slide>
@@ -106,9 +133,11 @@ const ImageMain = ({
                 })}
               </Slider>
               {isMatch && (
-                <Box display='flex' justifyContent='center'>
-                  <DotGroup />
-                </Box>
+                <>
+                  <Box display='flex' justifyContent='center'>
+                    <DotGroup />
+                  </Box>
+                </>
               )}
             </CarouselProvider>
           )}
@@ -118,7 +147,7 @@ const ImageMain = ({
               justifyContent='center'
               alignItems='center'
               style={{
-                height: "70vh",
+                height: isMatch ? IMAGE_HEIGHT_MOBILE : IMAGE_HEIGHT_LAPTOP,
                 color: "white",
               }}
             >
@@ -150,36 +179,24 @@ const ImageMain = ({
             )}
             {isMatch && (
               <>
-                <Grid
+                <Box
                   container
-                  columnSpacing={2}
-                  style={{ marginBottom: "5px" }}
+                  style={{ marginBottom: "5px", marginTop: "5px" }}
                   justifyContent='center'
                   alignItems='center'
                 >
-                  <Grid item xs={10} alignText='center'>
-                    <Typography
-                      style={{
-                        color: "#ffffff66",
-                      }}
-                      variant='h6'
-                    >
-                      <b>
-                        {productBrand} {productName}
-                      </b>{" "}
-                      - {reference}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <Box display='flex' justifyContent='center'>
-                      <CircularVotes
-                        avgTotal={avgTotal}
-                        customSize={45}
-                        customFontSize='12px'
-                      />
-                    </Box>
-                  </Grid>
-                </Grid>
+                  <Typography
+                    style={{
+                      color: "#ffffff66",
+                    }}
+                    variant='h6'
+                  >
+                    <b>
+                      {productBrand} {productName}
+                    </b>{" "}
+                    - {reference}
+                  </Typography>
+                </Box>
               </>
             )}
             <Grid xs={12} sm={4} item>

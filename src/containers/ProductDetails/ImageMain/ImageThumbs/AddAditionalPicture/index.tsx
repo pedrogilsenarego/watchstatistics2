@@ -48,6 +48,7 @@ const AddAdditionalPicture = ({
       reference,
     };
     dispatch(addProductPicture(payload));
+    setReadySubmit(false)
     setAddAdditionalPicture(false);
   };
 
@@ -127,7 +128,7 @@ const AddAdditionalPicture = ({
           </Grid>
         </Grid>
         <Grid item>
-        <SugestedImages product={product} /></Grid>
+          <SugestedImages product={product} /></Grid>
       </Form>
     </Formik>
   );
