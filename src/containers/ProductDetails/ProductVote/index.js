@@ -321,7 +321,7 @@ const ProductVote = ({
                     {...configSliderComponent}
                     icon='O'
                     name='xFactor'
-                    message='Something hard to explain but special about it'
+                    message='The overall special factor'
                   />
 
                   {errors && Object.values(categories).includes("") && (
@@ -422,7 +422,7 @@ const ProductVote = ({
                     {...configSliderComponent}
                     icon='O'
                     name='xFactor'
-                    message='Something hard to explain but special about it'
+                    message='The overall special factor'
                   />
 
                   {errors && Object.values(categories).includes("") && (

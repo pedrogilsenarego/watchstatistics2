@@ -252,7 +252,7 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
     if (index === 3) return "Refinement from the watch";
     if (index === 4) return "History from the watch and brand";
     if (index === 5) return "What does the engineering from the watch presents";
-    if (index === 6) return "History from the watch and brand";
+    if (index === 6) return "The overall special factor";
     else return;
   };
 

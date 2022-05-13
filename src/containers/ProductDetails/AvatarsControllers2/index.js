@@ -49,7 +49,8 @@ const AvatarsControllers = ({
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: isMatch ? "center" : "flex-end",
+          height: isMatch ? "5vh": "6.5vh",
+          justifyContent: "flex-end",
         }}
       >
         <>

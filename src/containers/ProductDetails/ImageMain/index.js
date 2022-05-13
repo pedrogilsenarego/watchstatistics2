@@ -44,7 +44,6 @@ const ImageMain = ({
 
   const IMAGE_HEIGHT_MOBILE = "80vh";
   const IMAGE_HEIGHT_LAPTOP = "70vh";
-  const CIRCULAR_VOTES_OFFSET = "70vh";
 
   const handleOnImgError = () => {
     setReadySubmit(false);
@@ -80,6 +79,7 @@ const ImageMain = ({
               lockOnWindowScroll
               touchEnabled={isMatch ? true : false}
               dragEnabled={isMatch ? true : false}
+              style={{ position: "relative" }}
             >
               {isMatch && (
                 <Box
@@ -87,12 +87,12 @@ const ImageMain = ({
                   justifyContent='center'
                   style={{
                     position: "absolute",
-                    marginLeft: "1vw",
-                    marginTop: CIRCULAR_VOTES_OFFSET,
+                    right: "5px",
+                    bottom: "17px",
                     backgroundColor: "#000000CC",
                     zIndex: "1000",
                     padding: "5px",
-                    borderRadius: "4px",
+                    borderRadius: "8px",
                   }}
                 >
                   <CircularVotes
@@ -105,7 +105,7 @@ const ImageMain = ({
               <Slider
                 onMouseDown={(e) => mouseDownCoords(e)}
                 onMouseUp={(e) => clickOrDrag(e)}
-                style={{ position: "relative" }}
+                
               >
                 {productThumbnail.map((image, pos) => {
                   return (

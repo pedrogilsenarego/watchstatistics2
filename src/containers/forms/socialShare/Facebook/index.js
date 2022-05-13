@@ -12,7 +12,7 @@ const FacebookShare = ({ ...otherProps }) => {
       hashtag="#VoteForWatches"
       style={{ transform: "translateY(2px)" }}
     >
-      <FacebookIcon size="6vh" round={true} />
+      <FacebookIcon size="5vh" round={true} />
     </FacebookShareButton>
   );
 };

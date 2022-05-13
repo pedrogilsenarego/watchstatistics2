@@ -24,8 +24,8 @@ const AddToBoost = ({ product }) => {
           bgcolor: "#00000000",
           border: "solid 3px",
           borderColor: "#ffffff66",
-          width: "6vh",
-          height: "6vh",
+          width: "5vh",
+          height: "5vh",
           cursor: "pointer",
         }}
         onMouseOver={(e) => {
