@@ -105,7 +105,11 @@ const ImageMain = ({
                   );
                 })}
               </Slider>
-              {isMatch && <DotGroup />}
+              {isMatch && (
+                <Box display='flex' justifyContent='center'>
+                  <DotGroup />
+                </Box>
+              )}
             </CarouselProvider>
           )}
           {errorImage && (
@@ -144,36 +148,16 @@ const ImageMain = ({
                 currentUser={currentUser}
               />
             )}
-
             {isMatch && (
               <>
-                <Grid item xs={12}>
-                  <Box display='flex' justifyContent='center'>
-                    <CircularVotes
-                      avgTotal={avgTotal}
-                      customSize={45}
-                      customFontSize='12px'
-                    />
-                  </Box>
-                </Grid>
-              </>
-            )}
-
-            {isMatch && (
-              <>
-                <Divider
-                  style={{
-                    width: "100%",
-                    background: "#ffffff66",
-                    marginTop: "5px",
-                  }}
-                />
                 <Grid
                   container
-                  style={{ marginTop: "5px" }}
+                  columnSpacing={2}
+                  style={{ marginBottom: "5px" }}
                   justifyContent='center'
+                  alignItems='center'
                 >
-                  <Box item xs={12} alignText='center'>
+                  <Grid item xs={10} alignText='center'>
                     <Typography
                       style={{
                         color: "#ffffff66",
@@ -185,7 +169,16 @@ const ImageMain = ({
                       </b>{" "}
                       - {reference}
                     </Typography>
-                  </Box>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Box display='flex' justifyContent='center'>
+                      <CircularVotes
+                        avgTotal={avgTotal}
+                        customSize={45}
+                        customFontSize='12px'
+                      />
+                    </Box>
+                  </Grid>
                 </Grid>
               </>
             )}
