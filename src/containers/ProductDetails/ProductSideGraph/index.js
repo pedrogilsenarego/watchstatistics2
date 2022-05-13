@@ -1,13 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  Card,
-  Menu,
-  MenuItem,
-} from "@material-ui/core";
+import { Grid, Box, Typography, Card, Menu, MenuItem } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
@@ -395,24 +387,23 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
                       />
                     )}
                   {currentUser && currentUser.userVotes.includes(productID) && (
-                    <Button
-                      className={classes.textBtn}
-                      style={{ width: "80%" }}
-                      disableRipple
-                    >
-                      Already Voted
-                    </Button>
+                    <Box>
+                      <Typography
+                        style={{
+                          color: "orange",
+                          cursor: "pointer",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Already Voted
+                      </Typography>
+                    </Box>
                   )}
                   {!currentUser && (
-                    <Button
-                      className={classes.textBtn}
-                      style={{ width: "80%" }}
-                      aria-controls='vote'
-                      disableRipple
+                    <Button3
+                      title='Login to Vote'
                       onClick={(e) => handleLoginOpen(e)}
-                    >
-                      Login to Vote
-                    </Button>
+                    />
                   )}
                 </Grid>
               )}
@@ -447,6 +438,7 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
           clearBackground={clearDrawerBackground}
           position='bottom'
           id={0}
+          fullWidth
           openDrawer={showVote}
           setOpenDrawer={setShowVote}
         >

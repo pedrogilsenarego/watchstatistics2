@@ -4,35 +4,20 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import { Button } from "@material-ui/core";
+
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { updateProductVoteStart } from "../../../redux/Products/products.actions";
-import { makeStyles } from "@material-ui/core/styles";
+
 import { Grid } from "@material-ui/core";
 import { RiCheckboxBlankLine, RiCheckboxFill } from "react-icons/ri";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import Button3 from "src/components/Buttons/Button3";
 import { RiCloseFill } from "react-icons/ri";
 import SliderComponent from "./SliderComponent";
-
-const useStyles = makeStyles((theme) => ({
-  textBtn: {
-    color: "#FFFFFF",
-    border: "solid 2px",
-    borderColor: "#ffffff66",
-    fontSize: "13px",
-    borderRadius: "20px",
-    "&:hover": {
-      color: "#FFA500",
-    },
-    "&:active": {
-      color: "#FFFFFF",
-    },
-  },
-}));
+import { Box } from "@mui/material";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -62,7 +47,6 @@ const ProductVote = ({
   scrollToRef,
   graphRef,
 }) => {
-  const classes = useStyles();
   const Theme = useTheme();
   const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
   const { product, currentUser } = useSelector(mapState);
@@ -205,7 +189,7 @@ const ProductVote = ({
     >
       <CardContent style={{ padding: mobile ? "0px" : "20px" }}>
         <FormControl component='fieldset'>
-          <Grid container>
+          <Grid container xs={12}>
             {mobile && (
               <Grid container item xs={12} justifyContent='center'>
                 <Grid item>
@@ -234,42 +218,41 @@ const ProductVote = ({
 
             {mobile && !minimalDrawer && (
               <>
-                <Grid item xs={12}>
-                  <RadioGroup
-                    aria-label='gender'
-                    value={ownership}
-                    onChange={(event) => {
-                      setOwnership(event.target.value);
-                    }}
-                    style={{ color: "#ffffffBF" }}
-                  >
-                    <FormControlLabel
-                      value='Own'
-                      control={
-                        <Radio
-                          checkedIcon={<RiCheckboxFill color='orange' />}
-                          icon={<RiCheckboxBlankLine color='#ffffff66' />}
-                        />
-                      }
-                      label='I own/experimented the watch'
-                    />
-                    <FormControlLabel
-                      value='Not Own'
-                      control={
-                        <Radio
-                          checkedIcon={<RiCheckboxFill color='orange' />}
-                          icon={<RiCheckboxBlankLine color='#ffffff66' />}
-                        />
-                      }
-                      label='I do not own/experimented the watch'
-                    />
-                  </RadioGroup>
-                  {errors && ownership === "" && (
-                    <Typography style={{ color: "red", fontSize: "15px" }}>
-                      You must choose if you own or just seen the watch
-                    </Typography>
-                  )}
-                </Grid>
+                <RadioGroup
+                  aria-label='gender'
+                  value={ownership}
+                  onChange={(event) => {
+                    setOwnership(event.target.value);
+                  }}
+                  style={{ color: "#ffffffBF" }}
+                >
+                  <FormControlLabel
+                    value='Own'
+                    control={
+                      <Radio
+                        checkedIcon={<RiCheckboxFill color='orange' />}
+                        icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                      />
+                    }
+                    label='I own/experimented the watch'
+                  />
+                  <FormControlLabel
+                    value='Not Own'
+                    control={
+                      <Radio
+                        checkedIcon={<RiCheckboxFill color='orange' />}
+                        icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                      />
+                    }
+                    label='I do not own/experimented the watch'
+                  />
+                </RadioGroup>
+                {errors && ownership === "" && (
+                  <Typography style={{ color: "red", fontSize: "15px" }}>
+                    You must choose if you own or just seen the watch
+                  </Typography>
+                )}
+
                 <Grid
                   item
                   container
@@ -336,18 +319,6 @@ const ProductVote = ({
             {!mobile && (
               <>
                 <Grid item xs={12}>
-                  <RiCloseFill
-                    size='2.5em'
-                    color='orange'
-                    onClick={() => {
-                      setShowVote(false);
-                    }}
-                    style={{
-                      position: "absolute",
-                      right: 0,
-                      cursor: "pointer",
-                    }}
-                  />
                   <RadioGroup
                     aria-label='gender'
                     value={ownership}
@@ -446,32 +417,61 @@ const ProductVote = ({
                 </Grid>
               </>
             )}
-            <Button3 title='Apply Vote' onClick={handleApplyVote} />
-
-            <Button
-              className={classes.textBtn}
-              style={{ marginLeft: "10px" }}
-              onClick={() => {
-                handleVisualTargetVote(true);
-                handleUpdate();
-                if (mobile) {
-                  setMinimalDrawer(!minimalDrawer);
-                  setClearDrawerBackground(true);
-                }
-                scrollToRef(graphRef);
-              }}
+            <Grid
+              container
+              item
+              xs={12}
+              alignItems='center'
+              justifyContent={mobile ? "center" : "flex-start"}
             >
-              Preview Vote
-            </Button>
-            {mobile && (
-              <Button
-                className={classes.textBtn}
-                style={{ borderColor: "orange", marginLeft: "10px" }}
-                onClick={() => setShowVote(false)}
-              >
-                Close
-              </Button>
-            )}
+              <Grid item>
+                <Button3 title='Apply Vote' onClick={handleApplyVote} />
+              </Grid>
+              <Grid item>
+                <Box
+                  textAlign='center'
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+
+                    marginLeft: "10px",
+                  }}
+                >
+                  <Typography
+                    style={{
+                      cursor: "pointer",
+                      fontWeight: 600,
+                      color: "orange",
+                    }}
+                    onClick={() => {
+                      handleVisualTargetVote(true);
+                      handleUpdate();
+                      if (mobile) {
+                        setMinimalDrawer(!minimalDrawer);
+                        setClearDrawerBackground(true);
+                      }
+                      scrollToRef(graphRef);
+                    }}
+                  >
+                    Preview Vote
+                  </Typography>
+                </Box>
+              </Grid>
+              <RiCloseFill
+                size='2.5em'
+                color='orange'
+                onClick={() => {
+                  setShowVote(false);
+                  scrollToRef(graphRef);
+                }}
+                style={{
+                  position: "absolute",
+                  right: mobile ? "20px" : 0,
+                  bottom: mobile ? 0 : null,
+                  cursor: "pointer",
+                }}
+              />
+            </Grid>
           </Grid>
         </FormControl>
       </CardContent>

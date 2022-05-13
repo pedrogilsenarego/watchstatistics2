@@ -5,6 +5,7 @@ export const content = {
         market: "Market",
         laboratory: "Laboratory",
         myCollection: "My Collection",
+        messages: "Messages",
         dashboard: "Dashboard",
         logout: "Logout",
         admin: "Admin",

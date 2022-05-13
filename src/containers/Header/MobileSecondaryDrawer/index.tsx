@@ -50,6 +50,11 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             {i18n.t("navigation.myCollection")}
           </Styled.TypographyTitle>
         </Grid>
+        <Grid item xs={12} onClick={() => handleClickOption(`/messages`)}>
+          <Styled.TypographyTitle>
+            {i18n.t("navigation.messages")}{`(${currentUser?.messages?.length || 0})`}
+          </Styled.TypographyTitle>
+        </Grid>
         <Grid item xs={12} onClick={() => handleClickOption(`/dashboard`)}>
           <Styled.TypographyTitle>
             {i18n.t("navigation.dashboard")}
