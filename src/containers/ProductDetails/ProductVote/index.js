@@ -422,6 +422,7 @@ const ProductVote = ({
               item
               xs={12}
               alignItems='center'
+              style={{ width: mobile ? "100vw" : "auto" }}
               justifyContent={mobile ? "center" : "flex-start"}
             >
               <Grid item>
