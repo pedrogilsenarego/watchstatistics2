@@ -23,6 +23,7 @@ export const movements = {
     "100 meters": "100meters",
     "200 meters": "200meters",
     "300 meters": "300meters",
+    "500 meters": "500meters",
     "600 meters": "600meters",
     "1000 meters": "1000meters",
   }

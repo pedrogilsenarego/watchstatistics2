@@ -272,23 +272,21 @@ const ProductSideList = ({}) => {
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!productionYears && submitDetails.years && (
-                      <Grid
-                        container
-                        justifyContent='flex-end'
-                        columnSpacing={2}
-                      >
-                        <Grid item xs={4}>
+                      <Grid container justifyContent='flex-end' columnGap={2}>
+                        <Grid item xs={3}>
                           <TextfieldFormik
                             size='small'
                             key='yearsStart'
                             name='productionYearsStart'
+                            placeholder='Start'
                           />
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                           <TextfieldFormik
                             size='small'
                             key='yearsEnd'
                             name='productionYearsEnd'
+                            placeholder='End'
                           />
                         </Grid>
                       </Grid>
@@ -309,7 +307,15 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>Case Size</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!caseSize && submitDetails.caseSize && (
-                      <TextfieldFormik size='small' name='caseSize' />
+                      <Grid container justifyContent='flex-end'>
+                        <Grid item xs={3}>
+                          <TextfieldFormik
+                            size='small'
+                            name='caseSize'
+                            placeholder='mm'
+                          />
+                        </Grid>
+                      </Grid>
                     )}
                     {caseSize ||
                       (currentUser ? (
@@ -330,11 +336,15 @@ const ProductSideList = ({}) => {
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!caseMaterial && submitDetails.caseMaterial && (
-                      <SelectFormik
-                        name='caseMaterial'
-                        size='small'
-                        options={Details.caseMaterials}
-                      />
+                      <Grid container justifyContent='flex-end'>
+                        <Grid item xs={8}>
+                          <SelectFormik
+                            name='caseMaterial'
+                            size='small'
+                            options={Details.caseMaterials}
+                          />
+                        </Grid>
+                      </Grid>
                     )}
                     {caseMaterial ||
                       (currentUser ? (
@@ -354,11 +364,15 @@ const ProductSideList = ({}) => {
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!waterResistance && submitDetails.waterResistance && (
-                      <SelectFormik
-                        size='small'
-                        name='waterResistance'
-                        options={Details.waterResistance}
-                      />
+                      <Grid container justifyContent='flex-end'>
+                        <Grid item xs={8}>
+                          <SelectFormik
+                            size='small'
+                            name='waterResistance'
+                            options={Details.waterResistance}
+                          />
+                        </Grid>
+                      </Grid>
                     )}
                     {waterResistance ||
                       (currentUser ? (
