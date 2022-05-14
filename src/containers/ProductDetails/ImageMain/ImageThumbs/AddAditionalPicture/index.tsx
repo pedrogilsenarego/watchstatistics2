@@ -83,33 +83,30 @@ const AddAdditionalPicture = ({
           alignItems='center'
           columnSpacing={1}
           rowSpacing={2}
+
           style={{
+            marginTop: "10px",
             marginBottom: "20px",
-            marginLeft: "10px",
+
           }}
         >
-          <Grid item xs={12}></Grid>
-          <Grid xs={12}>
+          <Grid xs={12} style={{ marginLeft: "10px" }}>
             <Styled.Typography>
               {i18n.t("forms.updateProduct.picture")}
             </Styled.Typography>
           </Grid>
-          <Grid textAlign='center' style={{ marginTop: "5px" }}>
-            <Textfield2Formik
-              name='picture'
-              placeholder={i18n.t("placeholders.updateProduct.picture")}
-            />
-          </Grid>
-
           <Grid
             item
             container
             xs={12}
             alignItems='center'
-            md={4}
-            justifyContent='flex'
-            columnSpacing={1}
+            columnGap={1}
           >
+            <Grid item><Textfield2Formik
+              name='picture'
+              placeholder={i18n.t("placeholders.updateProduct.picture")}
+            /></Grid>
+
             {readySubmit ? (
               <Grid item>
                 <Button3Formik title={i18n.t("buttons.submit")} />

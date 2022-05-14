@@ -1,12 +1,12 @@
 import { Grid } from "@mui/material";
-import Multiline from "src/components/Inputs/Muitline";
-import Button1Form from "src/components/Buttons/Button1Form";
-import Button2 from "src/components/Buttons/Button2";
+import Multiline2Formik from "src/components/Inputs/Muitline/Multiline2Formik";
+import { RiCloseFill } from "react-icons/ri"
 import { useDispatch, useSelector } from "react-redux";
 import { addProductDescription } from "src/redux/Products/products.actions";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
+import Button3Formik from "src/components/Buttons/Button3Formik"
 
 interface Props {
   setOpen: (setClose: boolean) => void;
@@ -47,7 +47,7 @@ const AddDescription = ({ setOpen }: Props) => {
       <Form>
         <Grid container rowSpacing={1}>
           <Grid item xs={12}>
-            <Multiline form name='productDesc' placeholder='Add Description' />
+            <Multiline2Formik name='productDesc' placeholder='Add Description' />
           </Grid>
           <Grid
             item
@@ -60,16 +60,21 @@ const AddDescription = ({ setOpen }: Props) => {
               marginBottom: "5px",
             }}
           >
+
             <Grid item>
-              <Button2
-                title='Cancel'
+              <RiCloseFill
+                color='orange'
                 onClick={() => {
                   setOpen(false);
                 }}
+                style={{ cursor: "pointer" }}
+                size='2em'
               />
+
+
             </Grid>
             <Grid item>
-              <Button1Form title='Submit' />
+              <Button3Formik title='Submit' />
             </Grid>
           </Grid>
         </Grid>

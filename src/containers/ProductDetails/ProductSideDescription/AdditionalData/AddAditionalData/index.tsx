@@ -91,9 +91,6 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
             columnSpacing={1}
           >
             <Grid item>
-              <Button3Formik title={i18n.t("buttons.submit")} />
-            </Grid>
-            <Grid item>
               <RiCloseFill
                 color='orange'
                 onClick={() => setAddAdditionalData(false)}
@@ -101,6 +98,10 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
                 size='2em'
               />
             </Grid>
+            <Grid item>
+              <Button3Formik title={i18n.t("buttons.submit")} />
+            </Grid>
+
           </Grid>
         </Grid>
       </Form>
