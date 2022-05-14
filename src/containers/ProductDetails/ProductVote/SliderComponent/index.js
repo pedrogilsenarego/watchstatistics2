@@ -34,44 +34,46 @@ const SliderComponent = ({
   return (
     <>
       <ThemeProvider theme={muiTheme}>
-        <Grid item xs={2}>
-          <Typography
-            onClick={(e) => {
-              setAnchor(e.currentTarget);
-            }}
-            onMouseOver={(e) => {
-              setAnchor(e.currentTarget);
-            }}
-            onMouseOut={() => {
-              setAnchor(null);
-            }}
-            style={{
-              fontSize: "20px",
-              fontFamily: "MyFont",
-              cursor: "pointer",
-            }}
-            id='discrete-slider'
-            gutterBottom
-          >
-            {icon}
-          </Typography>
-        </Grid>
-        <Grid item xs={10}>
-          <Slider
-            defaultValue={0}
-            aria-labelledby='discrete-slider'
-            valueLabelDisplay='auto'
-            value={categories[name]}
-            step={1}
-            marks
-            min={0}
-            max={10}
-            name='quality'
-            onChange={(event, newValue) => {
-              setCategories({ ...categories, [name]: newValue });
-              handleTargetVote(newValue, name);
-            }}
-          />
+        <Grid container>
+          <Grid item xs={2}>
+            <Typography
+              onClick={(e) => {
+                setAnchor(e.currentTarget);
+              }}
+              onMouseOver={(e) => {
+                setAnchor(e.currentTarget);
+              }}
+              onMouseOut={() => {
+                setAnchor(null);
+              }}
+              style={{
+                fontSize: "20px",
+                fontFamily: "MyFont",
+                cursor: "pointer",
+              }}
+              id='discrete-slider'
+              gutterBottom
+            >
+              {icon}
+            </Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Slider
+              defaultValue={0}
+              aria-labelledby='discrete-slider'
+              valueLabelDisplay='auto'
+              value={categories[name]}
+              step={1}
+              marks
+              min={0}
+              max={10}
+              name='quality'
+              onChange={(event, newValue) => {
+                setCategories({ ...categories, [name]: newValue });
+                handleTargetVote(newValue, name);
+              }}
+            />
+          </Grid>
         </Grid>
       </ThemeProvider>
       <Popover anchor={anchor} setAnchor={setAnchor} message={message} />

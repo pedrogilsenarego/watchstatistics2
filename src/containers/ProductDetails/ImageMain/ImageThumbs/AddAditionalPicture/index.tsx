@@ -1,8 +1,5 @@
 import { i18n } from "src/translations/i18n";
 import { Grid } from "@mui/material";
-import Textfield from "src/components/Inputs/Textfield";
-import Button1Form from "src/components/Buttons/Button1Form";
-import Button2 from "src/components/Buttons/Button2";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
@@ -10,6 +7,10 @@ import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
 import SugestedImages from "./SugestedImages";
 import { addProductPicture } from "src/redux/Products/products.actions";
+import Textfield2Formik from "src/components/Inputs/Textfield/Textfield2Formik"
+import Button3Formik from "src/components/Buttons/Button3Formik"
+import Button4Formik from "src/components/Buttons/Button4Formik";
+import { RiCloseFill } from "react-icons/ri";
 
 interface Props {
   setAddAdditionalPicture: (addAdditionalPicture: boolean) => void;
@@ -94,8 +95,7 @@ const AddAdditionalPicture = ({
             </Styled.Typography>
           </Grid>
           <Grid textAlign='center' style={{ marginTop: "5px" }}>
-            <Textfield
-              form
+            <Textfield2Formik
               name='picture'
               placeholder={i18n.t("placeholders.updateProduct.picture")}
             />
@@ -110,21 +110,27 @@ const AddAdditionalPicture = ({
             justifyContent='flex'
             columnSpacing={1}
           >
-            <Grid item>
-              <Button2
-                title={i18n.t("buttons.cancel")}
-                onClick={() => setAddAdditionalPicture(false)}
-              />
-            </Grid>
             {readySubmit ? (
               <Grid item>
-                <Button1Form title={i18n.t("buttons.submit")} />
+                <Button3Formik title={i18n.t("buttons.submit")} />
               </Grid>
             ) : (
               <Grid item>
-                <Button1Form title={i18n.t("buttons.testImage")} />
+                <Button4Formik>
+                  {i18n.t("buttons.testImage")}
+                </Button4Formik>
+
               </Grid>
             )}
+            <Grid item>
+              <RiCloseFill
+                color='orange'
+                onClick={() => setAddAdditionalPicture(false)}
+                style={{ cursor: "pointer" }}
+                size='2em'
+              />
+
+            </Grid>
           </Grid>
         </Grid>
         <Grid item>

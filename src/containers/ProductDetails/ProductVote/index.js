@@ -263,6 +263,7 @@ const ProductVote = ({
                     marginBottom: "10px",
                     marginTop: "10px",
                     color: "#ffffffBF",
+                    maxWidth: "90vw",
                   }}
                 >
                   <SliderComponent

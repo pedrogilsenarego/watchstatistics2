@@ -9,17 +9,16 @@ import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import InputBase from "../../forms/InputMUI";
 import { useDispatch } from "react-redux";
 import { Form, Formik } from "formik";
-import Select from "../../forms/SelectMUIFormik";
+import SelectFormik from "src/components/Inputs/Select/SelectFormik";
 import { rewards } from "src/constants/gamification";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import * as Details from "src/constants/productOptions";
 import { RiCloseFill } from "react-icons/ri";
-import ButtonMUI from "src/components/Buttons/Button1Form";
+import Button3Formik from "src/components/Buttons/Button3Formik";
 import { addProductListDetail } from "../../../redux/Products/products.actions";
+import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
@@ -43,30 +42,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "10px",
   },
   tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" },
-  textField: { border: "1.4px solid #ffffffB3", borderRadius: "4px" },
-  select: {
-    border: "1.4px solid #ffffffB3",
-    borderRadius: "4px",
-    color: "white",
-    "& .MuiSelect-outlined": {
-      paddingBottom: "3px",
-      paddingTop: "3px",
-    },
-  },
-  textBtn: {
-    color: "#FFFFFF",
-    border: "solid 2px",
-    borderColor: "#ffffff66",
-    marginRight: "15px",
-    fontSize: "13px",
-    borderRadius: "20px",
-    "&:hover": {
-      color: "#FFA500",
-    },
-    "&:active": {
-      color: "#FFFFFF",
-    },
-  },
 }));
 
 const mapState = (state) => ({
@@ -98,7 +73,7 @@ const ProductSideList = ({}) => {
   } = product;
   const classes = useStyles();
 
-  const handleSubmit = (e, {resetForm}) => {
+  const handleSubmit = (e, { resetForm }) => {
     const {
       movement,
       caseMaterial,
@@ -130,7 +105,7 @@ const ProductSideList = ({}) => {
     if (productionYears === "-") delete values.productionYears;
     dispatch(addProductListDetail(values));
     setSubmitDetails(false);
-    resetForm()
+    resetForm();
   };
 
   const configBottomComponents = {
@@ -140,9 +115,9 @@ const ProductSideList = ({}) => {
     reference,
   };
 
- const handleSubmitDetails = (name) => {
-  setSubmitDetails({ ...submitDetails, [name]: true })
- }
+  const handleSubmitDetails = (name) => {
+    setSubmitDetails({ ...submitDetails, [name]: true });
+  };
   const configCustomCircle = {
     submitDetails,
     handleSubmitDetails,
@@ -166,9 +141,9 @@ const ProductSideList = ({}) => {
         initialValues={{
           ...INITIAL_FORM_STATE,
         }}
-        onSubmit={(values, {resetForm}) => {
+        onSubmit={(values, { resetForm }) => {
           Object.values(values).some((element) => element)
-            ? handleSubmit(values, {resetForm})
+            ? handleSubmit(values, { resetForm })
             : setTriggerAlert(true);
         }}
         validationSchema={FORM_VALIDATION}
@@ -186,14 +161,13 @@ const ProductSideList = ({}) => {
 
             {Object.values(submitDetails).some((element) => element) && (
               <Grid container alignItems='center' justifyContent='flex-end'>
-                <ButtonMUI className={classes.textBtn}>Submit </ButtonMUI>
+                <Button3Formik title='Submit' />
                 <RiCloseFill
                   color='orange'
                   onClick={() => setSubmitDetails(false)}
                   style={{ cursor: "pointer" }}
                   size='2em'
                 />
-                ,
               </Grid>
             )}
           </Box>
@@ -222,11 +196,13 @@ const ProductSideList = ({}) => {
               </>
             )}{" "}
           </Box>
-          <TableContainer className={classes.table} component={Paper}>
+          <TableContainer className={classes.table}>
             <Table size='small' aria-label='simple table'>
               <TableBody>
                 <TableRow>
-                  <TableCell className={classes.tableCell}>Category</TableCell>
+                  <TableCell className={classes.tableCell} align='left'>
+                    Category
+                  </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {productCategory}
                   </TableCell>
@@ -253,8 +229,7 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>Movement</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!movement && submitDetails.movement && (
-                      <Select
-                        className={classes.select}
+                      <SelectFormik
                         size='small'
                         name='movement'
                         options={Details.movements}
@@ -277,22 +252,7 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>Caliber</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!caliber && submitDetails.caliber && (
-                      <InputBase
-                        size='small'
-                        style={{
-                          width: "100px",
-                          border: "1.4px solid #ffffffB3",
-                          borderRadius: "4px",
-                        }}
-                        name='caliber'
-                        inputProps={{
-                          style: {
-                            padding: 4,
-                            color: "#ffffffB3",
-                            width: "75px",
-                          },
-                        }}
-                      ></InputBase>
+                      <TextfieldFormik size='small' name='caliber' />
                     )}
                     {caliber ||
                       (currentUser ? (
@@ -311,44 +271,28 @@ const ProductSideList = ({}) => {
                     Production Years
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!productionYears &&
-                      submitDetails.years && [
-                        <InputBase
-                          size='small'
-                          key='yearsStart'
-                          style={{
-                            width: "60px",
-                            border: "1.4px solid #ffffffB3",
-                            borderRadius: "4px",
-                          }}
-                          name='productionYearsStart'
-                          inputProps={{
-                            style: {
-                              padding: 4,
-                              color: "#ffffffB3",
-                              width: "75px",
-                            },
-                          }}
-                        ></InputBase>,
-                        <InputBase
-                          size='small'
-                          key='yearsEnd'
-                          style={{
-                            width: "60px",
-                            border: "1.4px solid #ffffffB3",
-                            borderRadius: "4px",
-                            marginLeft: "5px",
-                          }}
-                          name='productionYearsEnd'
-                          inputProps={{
-                            style: {
-                              padding: 4,
-                              color: "#ffffffB3",
-                              width: "75px",
-                            },
-                          }}
-                        ></InputBase>,
-                      ]}
+                    {!productionYears && submitDetails.years && (
+                      <Grid
+                        container
+                        justifyContent='flex-end'
+                        columnSpacing={2}
+                      >
+                        <Grid item xs={4}>
+                          <TextfieldFormik
+                            size='small'
+                            key='yearsStart'
+                            name='productionYearsStart'
+                          />
+                        </Grid>
+                        <Grid item xs={4}>
+                          <TextfieldFormik
+                            size='small'
+                            key='yearsEnd'
+                            name='productionYearsEnd'
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
                     {productionYears ||
                       (currentUser ? (
                         <CustomAddCircle
@@ -365,22 +309,7 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell}>Case Size</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!caseSize && submitDetails.caseSize && (
-                      <InputBase
-                        size='small'
-                        style={{
-                          width: "100px",
-                          border: "1.4px solid #ffffffB3",
-                          borderRadius: "4px",
-                        }}
-                        name='caseSize'
-                        inputProps={{
-                          style: {
-                            padding: 4,
-                            color: "#ffffffB3",
-                            width: "75px",
-                          },
-                        }}
-                      ></InputBase>
+                      <TextfieldFormik size='small' name='caseSize' />
                     )}
                     {caseSize ||
                       (currentUser ? (
@@ -401,9 +330,8 @@ const ProductSideList = ({}) => {
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!caseMaterial && submitDetails.caseMaterial && (
-                      <Select
+                      <SelectFormik
                         name='caseMaterial'
-                        className={classes.select}
                         size='small'
                         options={Details.caseMaterials}
                       />
@@ -426,8 +354,7 @@ const ProductSideList = ({}) => {
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
                     {!waterResistance && submitDetails.waterResistance && (
-                      <Select
-                        className={classes.select}
+                      <SelectFormik
                         size='small'
                         name='waterResistance'
                         options={Details.waterResistance}

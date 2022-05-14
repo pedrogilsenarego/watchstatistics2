@@ -1,15 +1,14 @@
 import { i18n } from "src/translations/i18n";
 import { Grid } from "@mui/material";
-import Textfield from "src/components/Inputs/Textfield";
-import Button1Form from "src/components/Buttons/Button1Form";
-import Button2 from "src/components/Buttons/Button2";
+import Button3Formik from "src/components/Buttons/Button3Formik";
+import { RiCloseFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
-
 import { addProductAdditionalData } from "src/redux/Products/products.actions";
+import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 
 interface Props {
   setAddAdditionalData: (addAdditionalData: boolean) => void;
@@ -66,8 +65,7 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
             </Styled.Typography>
           </Grid>
           <Grid item xs={6} md={4} style={{ paddingLeft: 0 }}>
-            <Textfield
-              form
+            <TextfieldFormik
               name='title'
               placeholder={i18n.t(
                 "placeholders.updateProduct.additionalData.title"
@@ -76,8 +74,8 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
           </Grid>
 
           <Grid item xs={6} md={4}>
-            <Textfield
-              form
+            <TextfieldFormik
+
               name='link'
               placeholder={i18n.t(
                 "placeholders.updateProduct.additionalData.link"
@@ -93,13 +91,15 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
             columnSpacing={1}
           >
             <Grid item>
-              <Button2
-                title={i18n.t("buttons.cancel")}
-                onClick={() => setAddAdditionalData(false)}
-              />
+              <Button3Formik title={i18n.t("buttons.submit")} />
             </Grid>
             <Grid item>
-              <Button1Form title={i18n.t("buttons.submit")} />
+              <RiCloseFill
+                color='orange'
+                onClick={() => setAddAdditionalData(false)}
+                style={{ cursor: "pointer" }}
+                size='2em'
+              />
             </Grid>
           </Grid>
         </Grid>
