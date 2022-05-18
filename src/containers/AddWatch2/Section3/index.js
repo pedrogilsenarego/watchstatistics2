@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import ButtonMUI from "../../forms/ButtonMUI";
 import { Button } from "@material-ui/core";
 import ProductDetailsPreview from "../../../pages/ProductDetailsPreview";
-import Popup from "../../controls/Popup";
+import Popup from "../../../components/Popup";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,9 +49,9 @@ const Section3 = ({
         container
         item
         spacing={1}
-        direction="column"
+        direction='column'
         alignItems={isMatch ? "center" : "flex-end"}
-        justifyContent="center"
+        justifyContent='center'
         style={{
           position: "absolute",
           marginTop: "70vh",
@@ -93,7 +93,7 @@ const Section3 = ({
       </Grid>
 
       <Popup
-        title="Preview your watch"
+        title='Preview your watch'
         openPopup={openBoxPopUp}
         setOpenPopup={setOpenBoxPopUp}
       >

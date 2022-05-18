@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 import TextField from "../../forms/InputMUI";
-import Popup from "../../controls/Popup";
+import Popup from "../../../components/Popup";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Divider from "@mui/material/Divider";

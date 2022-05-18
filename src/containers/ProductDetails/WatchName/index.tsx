@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useState } from "react";
 import * as Styled from "./styles";
 import { useSelector } from "react-redux";
-import { i18n } from "src/translations/i18n"
+import { i18n } from "src/translations/i18n";
 import { MdAddCircle } from "react-icons/md";
-import { Grid } from "@mui/material"
+import { Grid } from "@mui/material";
+import Popup from "src/components/Popup";
 
 interface Props {
   newWatch: boolean;
@@ -16,15 +17,14 @@ const mapState = (state: any) => ({
 const WatchName = ({ newWatch }: Props) => {
   const { product } = useSelector(mapState);
   const { productBrand, productName, reference } = product;
-  const [openNewWatchName, setOpenNewWatchName] = useState<boolean>(false)
-
+  const [openNewWatchName, setOpenNewWatchName] = useState<boolean>(false);
 
   return (
     <>
       {newWatch ? (
         <Grid container columnGap={1}>
           <Styled.Typography variant='h6'>
-            {i18n.t('forms.newWatch.watchName.title')}
+            {i18n.t("forms.newWatch.watchName.title")}
           </Styled.Typography>
           <MdAddCircle
             color='orange'
@@ -33,12 +33,14 @@ const WatchName = ({ newWatch }: Props) => {
             }}
             style={{ cursor: "pointer" }}
             size='2em'
-          /></Grid>
+          />
+        </Grid>
       ) : (
         <Styled.Typography variant='h6'>
           {productBrand} {productName} - {reference}
         </Styled.Typography>
       )}
+      <Popup title={i18n.t("forms.newWatch.watchName.title")} openPopup={openNewWatchName}><>Teste</></Popup>
     </>
   );
 };

@@ -6,8 +6,15 @@ import {
   Typography,
 } from "@material-ui/core";
 
-const Popup = (props) => {
-  const { title, children, openPopup } = props;
+interface Props {
+  children: JSX.Element;
+  title: string,
+  openPopup: boolean;
+  setOpenPopup?: (openPopup: boolean) => void
+}
+
+const Popup = ({ title, children, openPopup }: Props) => {
+
 
   return (
     <div>

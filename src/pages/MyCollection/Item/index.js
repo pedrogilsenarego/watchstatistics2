@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import Popup from "../../../containers/controls/Popup";
+import Popup from "../../../components/Popup";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
 import { updateCollectionStatus } from "../../../redux/User/user.actions";
@@ -99,13 +99,13 @@ const Item = ({ item, pos, relativePos, products }) => {
     <Grid item xs={3}>
       <Card style={{ backgroundColor: "#18161E" }}>
         <CardMedia
-          component="img"
-          height="120"
+          component='img'
+          height='120'
           onClick={() => {
             history.push(`/product/${item}`);
           }}
           image={products[relativePos[pos]].productThumbnail[0]}
-          alt="Paella dish"
+          alt='Paella dish'
           style={{ cursor: "pointer" }}
         />
         <CardContent style={{ minHeight: "15vh" }}>
@@ -122,7 +122,7 @@ const Item = ({ item, pos, relativePos, products }) => {
                 style={{
                   color: "white",
                 }}
-                size="small"
+                size='small'
                 onClick={() => {
                   history.push(`/product/${item}`);
                 }}
@@ -135,7 +135,7 @@ const Item = ({ item, pos, relativePos, products }) => {
               style={{
                 color: "white",
               }}
-              size="small"
+              size='small'
               onClick={() => {
                 handleWatch4BoosterPopup(pos, item);
               }}
