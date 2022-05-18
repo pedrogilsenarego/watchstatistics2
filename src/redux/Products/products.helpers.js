@@ -1,16 +1,12 @@
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
 
-export const handleAddProduct = (product) => {
-  const admin = product.admin;
-  const where = admin ? "products" : "orders";
-  delete product.admin;
-
+export const handleAddProductAdmin = (payload) => {
   return new Promise((resolve, reject) => {
     firestore
-      .collection(where)
+      .collection("products")
       .doc()
-      .set(product)
+      .set(payload)
       .then(() => {
         resolve();
       })
@@ -483,20 +479,19 @@ export const handleAddProductUpdateAdmin = (payload) => {
     caseMaterial,
     productionYears,
     waterResistance,
-    caliber
+    caliber,
   } = payload;
   return new Promise((resolve, reject) => {
     let ref = firestore.collection("products").doc(productID.productID);
-    const listDetails = {}
-    if(movement) Object.assign(listDetails, {movement})
-    if(caseSize) Object.assign(listDetails, {caseSize})
-    if(caseMaterial) Object.assign(listDetails, {caseMaterial})
-    if(productionYears) Object.assign(listDetails, {productionYears})
-    if(waterResistance) Object.assign(listDetails, {waterResistance})
-    if(caliber) Object.assign(listDetails, {caliber})
-   
-    if(Object.keys(listDetails).length !== 0) ref = ref.update(listDetails)
-    
+    const listDetails = {};
+    if (movement) Object.assign(listDetails, { movement });
+    if (caseSize) Object.assign(listDetails, { caseSize });
+    if (caseMaterial) Object.assign(listDetails, { caseMaterial });
+    if (productionYears) Object.assign(listDetails, { productionYears });
+    if (waterResistance) Object.assign(listDetails, { waterResistance });
+    if (caliber) Object.assign(listDetails, { caliber });
+
+    if (Object.keys(listDetails).length !== 0) ref = ref.update(listDetails);
 
     if (productDesc) ref = ref.update({ productDesc });
     if (additionalData) {
@@ -538,19 +533,18 @@ export const handleAddProductUpdateUser = (payload) => {
     caseMaterial,
     productionYears,
     waterResistance,
-    caliber
+    caliber,
   } = payload;
   const whichField = () => {
-
-    const listDetails = {}
-    if(movement) Object.assign(listDetails, {movement})
-    if(caseSize) Object.assign(listDetails, {caseSize})
-    if(caseMaterial) Object.assign(listDetails, {caseMaterial})
-    if(productionYears) Object.assign(listDetails, {productionYears})
-    if(waterResistance) Object.assign(listDetails, {waterResistance})
-    if(caliber) Object.assign(listDetails, {caliber})
-    if(Object.keys(listDetails).length !== 0) return {listDetails, type: "+watchListDetails"}
-
+    const listDetails = {};
+    if (movement) Object.assign(listDetails, { movement });
+    if (caseSize) Object.assign(listDetails, { caseSize });
+    if (caseMaterial) Object.assign(listDetails, { caseMaterial });
+    if (productionYears) Object.assign(listDetails, { productionYears });
+    if (waterResistance) Object.assign(listDetails, { waterResistance });
+    if (caliber) Object.assign(listDetails, { caliber });
+    if (Object.keys(listDetails).length !== 0)
+      return { listDetails, type: "+watchListDetails" };
 
     if (productDesc) return { productDesc, type: "+watchDescription" };
     if (additionalData) return { additionalData, type: "+watchAdditionalData" };

@@ -28,10 +28,12 @@ export const content = {
           updateProductAdditionalData: "The Review was added with success",
           updateProductPicture: "The Picture was added with success",
           updateProductListDetails: "This detail was added to the list with success",
+          newWatch: "A new watch was added"
         },
         fail: {
           orderDeleted: "The order was not possible to delete",
           messageSent: "The message failed to be sent to the user",
+          newWatch: "Adding a new watch failed",
 
           updateProductAdditionalData:
             "The Review was not possible to be added",
@@ -42,6 +44,7 @@ export const content = {
           updateProductAdditionalData: "The Review was sent for review",
           updateProductPicture: "The Picture was sent for review",
           updateProductListDetails: "The details were sent for review",
+          newWatch: "The new watch was sent for review",
         },
       },
       placeholders: {

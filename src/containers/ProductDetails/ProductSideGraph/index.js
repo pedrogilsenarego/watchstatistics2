@@ -11,6 +11,7 @@ import Icons from "./Icons";
 import { useTheme, useMediaQuery } from "@mui/material";
 import Drawer from "src/components/Drawer";
 import Button3 from "src/components/Buttons/Button3";
+import Button3Formik from "src/components/Buttons/Button3Formik";
 
 const initialTargetVoteState = {
   quality: "",
@@ -23,7 +24,13 @@ const initialTargetVoteState = {
 };
 
 // eslint-disable-next-line
-const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
+const ProductSidePanel = ({
+  isMatch,
+  showVote,
+  setShowVote,
+  voteRef,
+  newWatch,
+}) => {
   const mapState = (state) => ({
     currentUser: state.user.currentUser,
     product: state.productsData.product,
@@ -375,35 +382,42 @@ const ProductSidePanel = ({ isMatch, showVote, setShowVote, voteRef }) => {
                   justifyContent='center'
                   container
                 >
-                  {currentUser &&
-                    !showVote &&
-                    !currentUser.userVotes.includes(productID) && (
-                      <Button3
-                        title='Vote'
-                        aria-controls='vote'
-                        onClick={(e) => {
-                          handleVote();
-                        }}
-                      />
-                    )}
-                  {currentUser && currentUser.userVotes.includes(productID) && (
-                    <Box>
-                      <Typography
-                        style={{
-                          color: "orange",
-                          cursor: "pointer",
-                          fontWeight: 600,
-                        }}
-                      >
-                        Already Voted
-                      </Typography>
-                    </Box>
-                  )}
-                  {!currentUser && (
-                    <Button3
-                      title='Login to Vote'
-                      onClick={(e) => handleLoginOpen(e)}
-                    />
+                  {newWatch ? (
+                    <Button3Formik title='Submit' />
+                  ) : (
+                    <>
+                      {currentUser &&
+                        !showVote &&
+                        !currentUser.userVotes.includes(productID) && (
+                          <Button3
+                            title='Vote'
+                            aria-controls='vote'
+                            onClick={(e) => {
+                              handleVote();
+                            }}
+                          />
+                        )}
+                      {currentUser &&
+                        currentUser.userVotes.includes(productID) && (
+                          <Box>
+                            <Typography
+                              style={{
+                                color: "orange",
+                                cursor: "pointer",
+                                fontWeight: 600,
+                              }}
+                            >
+                              Already Voted
+                            </Typography>
+                          </Box>
+                        )}
+                      {!currentUser && (
+                        <Button3
+                          title='Login to Vote'
+                          onClick={(e) => handleLoginOpen(e)}
+                        />
+                      )}
+                    </>
                   )}
                 </Grid>
               )}

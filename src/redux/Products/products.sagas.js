@@ -1,4 +1,3 @@
-import { auth } from "./../../firebase/utils";
 import { takeLatest, put, all, call } from "redux-saga/effects";
 import { checkUserIsAdmin } from "src/Utils";
 import {
@@ -16,7 +15,7 @@ import {
   setProductListDetail,
 } from "./products.actions";
 import {
-  handleAddProduct,
+  handleAddProductAdmin,
   handleFetchProducts,
   handleFetchLatestProducts,
   handleFetchValidationProducts,
@@ -44,23 +43,32 @@ import {
 } from "../general/general.actions";
 import { i18n } from "src/translations/i18n";
 
+//New Watch Submit
+
 export function* addProduct({ payload }) {
   try {
+    const { currentUser } = payload;
     const timestamp = new Date();
-
-    yield handleAddProduct({
-      ...payload,
-      UserUID: payload.UserUID ? payload.UserUID : auth.currentUser.uid,
-      createdDate: timestamp,
-    });
-    yield handleIncrementProductsCounter({
-      ...payload,
-    });
-    yield handleUserUpdateDetails({
-      ...payload,
-    });
+    if (checkUserIsAdmin(currentUser)) {
+      delete payload.currentUser;
+      yield handleAddProductAdmin({
+        ...payload,
+        createdDate: timestamp,
+      });
+      yield handleIncrementProductsCounter(payload);
+      yield put(
+        updateSuccessNotification(i18n.t("notifications.success.newWatch"))
+      );
+    } else {
+      delete payload.currentUser;
+      yield put(
+        updateInformationNotification(
+          i18n.t("notifications.information.newWatch")
+        )
+      );
+    }
   } catch (err) {
-    // console.log(err);
+    yield put(updateFailNotification(i18n.t("notifications.fail.newWatch")));
   }
 }
 
@@ -354,12 +362,17 @@ function* sagaAddProductListDetails({ payload }) {
     }
   } catch (err) {
     yield put(
-      updateFailNotification(i18n.t("notifications.fail.updateProductListDetails"))
+      updateFailNotification(
+        i18n.t("notifications.fail.updateProductListDetails")
+      )
     );
   }
 }
 export function* onAddProductListDetails() {
-  yield takeLatest(productsTypes.ADD_PRODUCT_LIST_DETAILS, sagaAddProductListDetails);
+  yield takeLatest(
+    productsTypes.ADD_PRODUCT_LIST_DETAILS,
+    sagaAddProductListDetails
+  );
 }
 
 export default function* productsSagas() {
