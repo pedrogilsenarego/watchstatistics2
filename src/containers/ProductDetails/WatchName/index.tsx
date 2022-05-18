@@ -2,7 +2,7 @@ import * as Styled from "./styles";
 import { useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import SelectFormik from "src/components/Inputs/Select/SelectFormik";
-import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik"
+import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 import watchBrands from "src/assets/data/watchBrands2.json";
 import { useField } from "formik";
 
@@ -17,12 +17,12 @@ const mapState = (state: any) => ({
 const WatchName = ({ newWatch }: Props) => {
   const { product } = useSelector(mapState);
   const { productBrand, productName, reference } = product;
-  const [field, metaProductName] = useField("productName");
+  const [field, metaProductName, helpersProductName] = useField("productName");
 
   return (
     <>
       {newWatch ? (
-        <Styled.GridContainer container columnGap={1} >
+        <Styled.GridContainer container columnGap={1}>
           <Grid item xs={2}>
             <SelectFormik
               myLabel='Brand'
@@ -31,13 +31,22 @@ const WatchName = ({ newWatch }: Props) => {
               options={watchBrands}
             />
           </Grid>
-          {metaProductName.touched ? (<Styled.Typography variant='h6'>Teste</Styled.Typography>) : (<Grid item xs={2}>
-            <TextfieldFormik
-              placeholder='Model'
-              size='small'
-              name='productName'
-            />
-          </Grid>)}
+          {metaProductName.touched ? (
+            <Styled.Typography
+              variant='h6'
+              onClick={() => helpersProductName.setTouched(false)}
+            >
+              {metaProductName.value}
+            </Styled.Typography>
+          ) : (
+            <Grid item xs={2}>
+              <TextfieldFormik
+                placeholder='Model'
+                size='small'
+                name='productName'
+              />
+            </Grid>
+          )}
 
           <Grid item xs={2}>
             <TextfieldFormik
@@ -51,8 +60,7 @@ const WatchName = ({ newWatch }: Props) => {
         <Styled.Typography variant='h6'>
           {productBrand} {productName} - {reference}
         </Styled.Typography>
-      )
-      }
+      )}
     </>
   );
 };
