@@ -8,12 +8,12 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
 import ImageMain from "../../containers/ProductDetails/ImageMain";
+import WatchName from "src/containers/ProductDetails/WatchName";
 
 import {
   Grid,
   Card,
   CardContent,
-  Typography,
   Box,
   useMediaQuery,
   useTheme,
@@ -103,7 +103,7 @@ const ProductDetails = ({}) => {
   return (
     <div>
       <Helmet>
-        <meta property='og:image' content={productThumbnail} />
+        <meta property='og:image' content={productThumbnail[0]} />
       </Helmet>
       {isMatch ? (
         <>
@@ -156,16 +156,7 @@ const ProductDetails = ({}) => {
           disableGutters={isMatch ? true : false}
           style={{ marginTop: "40px" }}
         >
-          <Typography
-            style={{
-              marginTop: "90px",
-              color: "#ffffff66",
-              marginLeft: "10px",
-            }}
-            variant='h6'
-          >
-            {productBrand} {productName} - {reference}
-          </Typography>
+          <WatchName />
 
           <Box
             sx={{ borderRadius: "10px" }}
