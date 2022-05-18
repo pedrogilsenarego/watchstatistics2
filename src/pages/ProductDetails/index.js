@@ -154,7 +154,7 @@ const ProductDetails = ({}) => {
       ) : (
         <Container
           disableGutters={isMatch ? true : false}
-          style={{ marginTop: "40px" }}
+          style={{ marginTop: "130px" }}
         >
           <WatchName newWatch={newWatch} />
           <Box
