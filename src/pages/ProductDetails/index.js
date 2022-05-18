@@ -51,6 +51,7 @@ const ProductDetails = ({}) => {
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
     productName: "",
+    reference: "",
   };
 
   const NO_IMAGE =

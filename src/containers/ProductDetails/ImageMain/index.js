@@ -199,7 +199,9 @@ const ImageMain = ({
               </>
             )}
             <Grid xs={12} sm={4} item>
-              {!isMatch && <AvatarsControllers {...configAvatarControllers} />}
+              {!isMatch && !newWatch && (
+                <AvatarsControllers {...configAvatarControllers} />
+              )}
             </Grid>
             {addAdditionalPictures && (
               <Grid xs={12} item>

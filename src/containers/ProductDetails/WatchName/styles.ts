@@ -1,4 +1,4 @@
-import { styled, Typography as MuiTypography, Grid } from "@mui/material";
+import {styled, Typography as MuiTypography, Grid} from "@mui/material"
 
 export const Typography = styled(MuiTypography)(() => ({
   color: "#ffffff66",
@@ -6,6 +6,5 @@ export const Typography = styled(MuiTypography)(() => ({
 }));
 
 export const GridContainer = styled(Grid)(() => ({
-  marginLeft: "10px",
-  marginBottom: "5px",
+  marginLeft: "10px", marginBottom: "5px" 
 }));
