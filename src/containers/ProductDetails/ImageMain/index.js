@@ -21,6 +21,7 @@ const ImageMain = ({
   avgTotal,
   compareWatches,
   currentUser,
+  newWatch,
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
   const [indexMini, setIndexMini] = useState(0);
@@ -49,7 +50,6 @@ const ImageMain = ({
     setReadySubmit(false);
     setErrorImage(true);
   };
-
   useEffect(() => {
     if (errorImage) setErrorImage(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,7 +105,6 @@ const ImageMain = ({
               <Slider
                 onMouseDown={(e) => mouseDownCoords(e)}
                 onMouseUp={(e) => clickOrDrag(e)}
-                
               >
                 {productThumbnail.map((image, pos) => {
                   return (

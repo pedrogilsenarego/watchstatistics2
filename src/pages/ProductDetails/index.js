@@ -5,7 +5,6 @@ import ProductSideList from "../../containers/ProductDetails/ProductSideList";
 import { makeStyles } from "@material-ui/core/styles";
 import MobileBottomAppBar from "src/containers/ProductDetails/MobileBottomAppBar";
 import { useSelector } from "react-redux";
-import { Parallax } from "react-parallax";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
 import ImageMain from "../../containers/ProductDetails/ImageMain";
@@ -42,10 +41,14 @@ const ProductDetails = ({}) => {
 
   const { product, currentUser, cartItems } = useSelector(mapState);
   const [showVote, setShowVote] = useState(false);
+  const [newWatch, setNewWatch] = useState(false);
   const [compareWatches, setCompareWatches] = useState(false);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const voteRef = useRef();
+
+  const NO_IMAGE =
+    "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
 
   const useStyles = makeStyles((theme) => ({
     filter: {},
@@ -57,42 +60,31 @@ const ProductDetails = ({}) => {
 
   useEffect(
     () => {
-      dispatch(fetchProductStart(productID));
-      if (
-        cartItems.length > 3 ||
-        cartItems.some((e) => e.reference === reference)
-      )
-        setCompareWatches(true);
-      return () => {
-        dispatch(setProduct({}));
-      };
+      if (productID) {
+        setNewWatch(false);
+        dispatch(fetchProductStart(productID));
+        if (
+          cartItems.length > 3 ||
+          cartItems.some((e) => e.reference === reference)
+        )
+          setCompareWatches(true);
+        return () => {
+          dispatch(setProduct({}));
+        };
+      } else setNewWatch(true);
     },
     // eslint-disable-next-line
     [productID]
   );
 
-  const {
-    productThumbnail,
-    productName,
-    productBackground,
-    productBrand,
-    reference,
-    avgTotal,
-  } = product;
-
-  const bgImage = () => {
-    if (!currentUser) return;
-
-    if (currentUser.backgroundImageOff) {
-      if (productBackground) return productBackground;
-    } else return;
-  };
+  const { productThumbnail, productName, productBrand, reference, avgTotal } =
+    product;
 
   if (!productThumbnail || !productName) return null;
 
   const configImageMain = {
     isMatch,
-    productThumbnail,
+    productThumbnail: newWatch ? [NO_IMAGE] : productThumbnail,
     product,
     cartItems,
     productID,
@@ -104,7 +96,8 @@ const ProductDetails = ({}) => {
     showVote,
     setShowVote,
     voteRef,
-    currentUser
+    currentUser,
+    newWatch,
   };
 
   return (
@@ -173,54 +166,51 @@ const ProductDetails = ({}) => {
           >
             {productBrand} {productName} - {reference}
           </Typography>
-          <Parallax bgImage={bgImage()} strength={300}>
-            <Box
-              sx={{ borderRadius: "10px" }}
-              className={classes.filter}
-              height={"100%"}
+
+          <Box
+            sx={{ borderRadius: "10px" }}
+            className={classes.filter}
+            height={"100%"}
+            style={{
+              position: "relative",
+            }}
+          >
+            <Grid
+              container
+              spacing={1}
               style={{
-                position: "relative",
+                paddingLeft: "10px",
+                paddingRight: "10px",
               }}
             >
-              <Grid
-                container
-                spacing={1}
-                style={{
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                }}
-              >
-                <Grid item xs={12} md={7}>
-                  <ImageMain {...configImageMain} />
-                  <Card
-                    style={{ backgroundColor: "#18161E", marginTop: "8px" }}
-                  >
-                    <SideDescription />
-                  </Card>
-                </Grid>
-                <Grid item xs={12} md={5}>
-                  <SideGraphPanel
-                    isMatch={isMatch}
-                    showVote={showVote}
-                    setShowVote={setShowVote}
-                    voteRef={voteRef}
-                  />
+              <Grid item xs={12} md={7}>
+                <ImageMain {...configImageMain} />
+                <Card style={{ backgroundColor: "#18161E", marginTop: "8px" }}>
+                  <SideDescription />
+                </Card>
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <SideGraphPanel
+                  isMatch={isMatch}
+                  showVote={showVote}
+                  setShowVote={setShowVote}
+                  voteRef={voteRef}
+                />
 
-                  <Card
-                    style={{
-                      backgroundColor: "#18161E",
-                      marginTop: "8px",
-                      padding: "5px",
-                    }}
-                  >
-                    <CardContent style={{ padding: "5px" }}>
-                      <ProductSideList />
-                    </CardContent>
-                  </Card>
-                </Grid>
-              </Grid>{" "}
-            </Box>
-          </Parallax>
+                <Card
+                  style={{
+                    backgroundColor: "#18161E",
+                    marginTop: "8px",
+                    padding: "5px",
+                  }}
+                >
+                  <CardContent style={{ padding: "5px" }}>
+                    <ProductSideList />
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>{" "}
+          </Box>
         </Container>
       )}
     </div>

@@ -144,7 +144,17 @@ const App = () => {
                 </WithAuth>
               )}
             />
-
+            <Route
+              exact
+              path='/submit-new-watch'
+              render={() => (
+                <WithAuth>
+                  <MainLayout>
+                    <ProductDetails />
+                  </MainLayout>
+                </WithAuth>
+              )}
+            />
             <Route
               exact
               path='/watchstatistics/addwatch'
