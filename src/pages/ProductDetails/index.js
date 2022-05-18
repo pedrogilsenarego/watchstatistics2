@@ -156,8 +156,7 @@ const ProductDetails = ({}) => {
           disableGutters={isMatch ? true : false}
           style={{ marginTop: "40px" }}
         >
-          <WatchName />
-
+          <WatchName newWatch={newWatch} />
           <Box
             sx={{ borderRadius: "10px" }}
             className={classes.filter}

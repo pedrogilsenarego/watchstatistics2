@@ -76,6 +76,11 @@ export const content = {
           review: "New Review",
         },
         imageCheck: "Something went wrong with this image",
+        newWatch: {
+          watchName:{
+            title: "Add here the watch brand, model and reference"
+          }
+        },
       },
     },
   },
