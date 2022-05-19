@@ -203,9 +203,10 @@ const ImageMain = ({
                 <AvatarsControllers {...configAvatarControllers} />
               )}
             </Grid>
-            {addAdditionalPictures && (
+            {(addAdditionalPictures || newWatch) && (
               <Grid xs={12} item>
                 <AddAdditionalPicture
+                  newWatch={newWatch}
                   readySubmit={readySubmit}
                   setReadySubmit={setReadySubmit}
                   setAddAdditionalPicture={setAddAdditionalPictures}

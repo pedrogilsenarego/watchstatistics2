@@ -7,8 +7,8 @@ import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
 import SugestedImages from "./SugestedImages";
 import { addProductPicture } from "src/redux/Products/products.actions";
-import Textfield2Formik from "src/components/Inputs/Textfield/Textfield2Formik"
-import Button3Formik from "src/components/Buttons/Button3Formik"
+import Textfield2Formik from "src/components/Inputs/Textfield/Textfield2Formik";
+import Button3Formik from "src/components/Buttons/Button3Formik";
 import Button4Formik from "src/components/Buttons/Button4Formik";
 import { RiCloseFill } from "react-icons/ri";
 
@@ -17,6 +17,7 @@ interface Props {
   setMainImage: any;
   readySubmit: boolean;
   setReadySubmit: (readySubmit: boolean) => void;
+  newWatch: boolean;
 }
 
 const AddAdditionalPicture = ({
@@ -24,6 +25,7 @@ const AddAdditionalPicture = ({
   setMainImage,
   readySubmit,
   setReadySubmit,
+  newWatch,
 }: Props) => {
   const INITIAL_FORM_STATE = {
     picture: "",
@@ -49,7 +51,7 @@ const AddAdditionalPicture = ({
       reference,
     };
     dispatch(addProductPicture(payload));
-    setReadySubmit(false)
+    setReadySubmit(false);
     setAddAdditionalPicture(false);
   };
 
@@ -83,11 +85,9 @@ const AddAdditionalPicture = ({
           alignItems='center'
           columnSpacing={1}
           rowSpacing={2}
-
           style={{
             marginTop: "10px",
             marginBottom: "20px",
-
           }}
         >
           <Grid xs={12} style={{ marginLeft: "10px" }}>
@@ -95,43 +95,40 @@ const AddAdditionalPicture = ({
               {i18n.t("forms.updateProduct.picture")}
             </Styled.Typography>
           </Grid>
-          <Grid
-            item
-            container
-            xs={12}
-            alignItems='center'
-            columnGap={1}
-          >
-            <Grid item><Textfield2Formik
-              name='picture'
-              placeholder={i18n.t("placeholders.updateProduct.picture")}
-            /></Grid>
+          <Grid item container xs={12} alignItems='center' columnGap={1}>
+            <Grid item>
+              <Textfield2Formik
+                name='picture'
+                placeholder={i18n.t("placeholders.updateProduct.picture")}
+              />
+            </Grid>
 
-            {readySubmit ? (
+            {readySubmit && !newWatch ? (
               <Grid item>
                 <Button3Formik title={i18n.t("buttons.submit")} />
               </Grid>
             ) : (
               <Grid item>
-                <Button4Formik>
-                  {i18n.t("buttons.testImage")}
-                </Button4Formik>
-
+                <Button4Formik>{i18n.t("buttons.testImage")}</Button4Formik>
               </Grid>
             )}
-            <Grid item>
-              <RiCloseFill
-                color='orange'
-                onClick={() => setAddAdditionalPicture(false)}
-                style={{ cursor: "pointer" }}
-                size='2em'
-              />
-
-            </Grid>
+            {!newWatch && (
+              <Grid item>
+                <RiCloseFill
+                  color='orange'
+                  onClick={() => setAddAdditionalPicture(false)}
+                  style={{ cursor: "pointer" }}
+                  size='2em'
+                />
+              </Grid>
+            )}
           </Grid>
         </Grid>
-        <Grid item>
-          <SugestedImages product={product} /></Grid>
+        {!newWatch && (
+          <Grid item>
+            <SugestedImages product={product} />
+          </Grid>
+        )}
       </Form>
     </Formik>
   );

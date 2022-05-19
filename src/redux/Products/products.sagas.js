@@ -328,6 +328,7 @@ function* sagaAddPicture({ payload }) {
       );
     }
   } catch (err) {
+    console.log(err);
     yield put(
       updateFailNotification(i18n.t("notifications.fail.updateProductPicture"))
     );

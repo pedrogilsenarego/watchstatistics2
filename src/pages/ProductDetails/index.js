@@ -52,6 +52,7 @@ const ProductDetails = ({}) => {
     productBrand: "",
     productName: "",
     reference: "",
+    productThumbnail: [],
   };
 
   const NO_IMAGE =
