@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import SideGraphPanel from "../../containers/ProductDetails/ProductSideGraph";
 import SideDescription from "../../containers/ProductDetails/ProductSideDescription";
 import ProductSideList from "../../containers/ProductDetails/ProductSideList";
-import { makeStyles } from "@material-ui/core/styles";
 import MobileBottomAppBar from "src/containers/ProductDetails/MobileBottomAppBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -25,7 +24,6 @@ import Container from "@mui/material/Container";
 import {
   fetchProductStart,
   addProductStart,
-  setProduct,
 } from "../../redux/Products/products.actions";
 
 const mapState = (state) => ({
@@ -48,6 +46,8 @@ const ProductDetails = ({}) => {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const voteRef = useRef();
 
+  const [productThumbnail, setProductThumbnail] = useState([]);
+
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
     productName: "",
@@ -58,14 +58,6 @@ const ProductDetails = ({}) => {
   const NO_IMAGE =
     "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
 
-  const useStyles = makeStyles((theme) => ({
-    filter: {},
-
-    side: {},
-  }));
-
-  const classes = useStyles();
-
   useEffect(
     () => {
       if (productID) {
@@ -74,25 +66,30 @@ const ProductDetails = ({}) => {
         if (
           cartItems.length > 3 ||
           cartItems.some((e) => e.reference === reference)
-        )
+        ) {
           setCompareWatches(true);
-        return () => {
-          dispatch(setProduct({}));
-        };
-      } else setNewWatch(true);
+        }
+      } else {
+        setNewWatch(true);
+        setProductThumbnail([NO_IMAGE]);
+      }
     },
     // eslint-disable-next-line
     [productID]
   );
 
-  const { productThumbnail, productName, productBrand, reference, avgTotal } =
-    product;
+  useEffect(() => {
+    if (productID) setProductThumbnail(product.productThumbnail);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product]);
+
+  const { productName, productBrand, reference, avgTotal } = product;
 
   if (!productThumbnail || !productName) return null;
 
   const configImageMain = {
     isMatch,
-    productThumbnail: newWatch ? [NO_IMAGE] : productThumbnail,
+    productThumbnail,
     product,
     cartItems,
     productID,
@@ -106,6 +103,7 @@ const ProductDetails = ({}) => {
     voteRef,
     currentUser,
     newWatch,
+    setProductThumbnail,
   };
 
   const handleSubmitNewWatch = (values) => {
@@ -132,7 +130,7 @@ const ProductDetails = ({}) => {
         <Form>
           {isMatch ? (
             <>
-              <Box sx={{ borderRadius: "10px" }} className={classes.filter}>
+              <Box sx={{ borderRadius: "10px" }}>
                 <Grid
                   container
                   spacing={1}
@@ -186,7 +184,6 @@ const ProductDetails = ({}) => {
               <WatchName newWatch={newWatch} />
               <Box
                 sx={{ borderRadius: "10px" }}
-                className={classes.filter}
                 height={"100%"}
                 style={{
                   position: "relative",

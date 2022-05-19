@@ -22,6 +22,7 @@ const ImageMain = ({
   compareWatches,
   currentUser,
   newWatch,
+  setProductThumbnail,
 }) => {
   const [mainImage, setMainImage] = useState(productThumbnail[0]);
   const [indexMini, setIndexMini] = useState(0);
@@ -207,6 +208,8 @@ const ImageMain = ({
             {(addAdditionalPictures || newWatch) && (
               <Grid xs={12} item>
                 <AddAdditionalPicture
+                  setProductThumbnail={setProductThumbnail}
+                  productThumbnail={productThumbnail}
                   newWatch={newWatch}
                   readySubmit={readySubmit}
                   setReadySubmit={setReadySubmit}

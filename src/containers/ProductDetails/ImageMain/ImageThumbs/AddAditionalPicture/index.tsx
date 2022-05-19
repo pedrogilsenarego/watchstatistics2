@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { i18n } from "src/translations/i18n";
 import { Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,6 @@ import * as Styled from "./styles";
 import SugestedImages from "./SugestedImages";
 import { addProductPicture } from "src/redux/Products/products.actions";
 import Textfield2Formik from "src/components/Inputs/Textfield/Textfield2Formik";
-import Button3 from "src/components/Buttons/Button3";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import Button4Formik from "src/components/Buttons/Button4Formik";
 import { RiCloseFill } from "react-icons/ri";
@@ -20,6 +20,8 @@ interface Props {
   readySubmit: boolean;
   setReadySubmit: (readySubmit: boolean) => void;
   newWatch: boolean;
+  setProductThumbnail: (productThumbnail: any) => void;
+  productThumbnail: any;
 }
 
 const AddAdditionalPicture = ({
@@ -28,6 +30,8 @@ const AddAdditionalPicture = ({
   readySubmit,
   setReadySubmit,
   newWatch,
+  setProductThumbnail,
+  productThumbnail,
 }: Props) => {
   const INITIAL_FORM_STATE = {
     picture: "",
@@ -40,6 +44,8 @@ const AddAdditionalPicture = ({
   const { currentUser, product } = useSelector(mapState);
   const dispatch = useDispatch();
   const params = useParams();
+  const [originalPictureNewWatch, setOriginalPictureNewWatch] =
+    useState<boolean>(true);
   const { productBrand, productName, reference } = product;
   const [, metaProductThumbnail, helpersProductThumbnail] =
     useField("productThumbnail");
@@ -66,18 +72,20 @@ const AddAdditionalPicture = ({
   };
 
   const handleNewWatchAddPicture = (e: any) => {
-    const { picture } = e
-
-    helpersProductThumbnail.setValue([...metaProductThumbnail.value, picture])
-
-  }
+    const { picture } = e;
+    originalPictureNewWatch
+      ? setProductThumbnail([picture])
+      : setProductThumbnail([...productThumbnail, picture]);
+    setOriginalPictureNewWatch(false)
+    helpersProductThumbnail.setValue([...metaProductThumbnail.value, picture]);
+  };
 
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
       onSubmit={(values) => {
         if (readySubmit) {
-          if (newWatch) handleNewWatchAddPicture(values)
+          if (newWatch) handleNewWatchAddPicture(values);
           else handleSubmit(values);
         } else {
           handleTestImage(values);
@@ -129,9 +137,7 @@ const AddAdditionalPicture = ({
 
                 {newWatch && readySubmit && (
                   <Grid item>
-                    <Button3Formik
-                      title='Add image'
-                    />
+                    <Button3Formik title='Add image' />
                     <Typography style={{ color: "red" }}>
                       {metaProductThumbnail.error}
                     </Typography>
