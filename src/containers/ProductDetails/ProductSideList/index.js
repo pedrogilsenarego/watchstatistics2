@@ -276,7 +276,13 @@ const ProductSideList = ({
                   <TableCell className={classes.tableCell}>Model</TableCell>
                   <TableCell align='right'>
                     {productName === "" ? (
-                      <TextField2FormikOnChange name='productName' />
+                      <TextField2FormikOnChange
+                        name='productName'
+                        customOnChange={(e) => {
+                          helpersProductName.setValue(e);
+                          setProductName(e);
+                        }}
+                      />
                     ) : (
                       <Typography
                         className={classes.tableCell}
@@ -492,8 +498,3 @@ const ProductSideList = ({
 };
 
 export default ProductSideList;
-
-// customOnChange={(e) => {
-//   helpersProductName.setValue(e);
-//   setProductName(e);
-// }}

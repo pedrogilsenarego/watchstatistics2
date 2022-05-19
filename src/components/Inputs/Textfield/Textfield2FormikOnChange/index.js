@@ -32,13 +32,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TextfieldFormik = ({ name, placeholder, ...otherProps }) => {
+const TextfieldFormik = ({
+  name,
+  placeholder,
+  customOnChange,
+  ...otherProps
+}) => {
   const [field, mata] = useField(name);
   const classes = useStyles();
+
+  const handleChange = (evt) => {
+    const { value } = evt.target;
+    customOnChange(value);
+  };
   const configTextField = {
     ...field,
     ...otherProps,
-
+    onChange: handleChange,
     fullWidth: true,
     variant: "outlined",
   };
