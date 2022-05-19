@@ -71,7 +71,8 @@ export const content = {
         moreT20: "Choose a size over 20mm",
         lessT60: "Choose a size under 60mm",
         lessTYearsEnd: "This year must be under the final date chosen",
-        moreTYearsStart: "This year must be over the initial date chosen"
+        moreTYearsStart: "This year must be over the initial date chosen",
+        onePicture: "Choose at least one picture"
       },
       forms: {
         updateProduct: {

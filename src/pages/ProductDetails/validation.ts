@@ -7,5 +7,6 @@ export const FORM_VALIDATION = Yup.object().shape({
   reference: Yup.string().required(i18n.t("validation.required")),
   productThumbnail: Yup.array()
     .of(Yup.string())
-    .required(i18n.t("validation.required")),
+    .required(i18n.t("validation.required"))
+    .min(1,i18n.t("validation.onePicture"))
 });

@@ -67,15 +67,10 @@ const AddAdditionalPicture = ({
 
   const handleNewWatchAddPicture = (e: any) => {
     const { picture } = e
-    console.log(picture)
-    helpersProductThumbnail.setValue([
-      ...metaProductThumbnail.value,
-      picture
-    ])
-    console.log(metaProductThumbnail.value);
+
+    helpersProductThumbnail.setValue([...metaProductThumbnail.value, picture])
+
   }
-
-
 
   return (
     <Formik

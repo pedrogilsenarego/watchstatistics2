@@ -6,5 +6,5 @@ export const TypographyNewWatch = styled(MuiTypography)(() => ({
 }));
 
 export const GridContainer = styled(Grid)(() => ({
-  marginLeft: "10px", marginBottom: "5px" 
+  marginLeft: "10px", marginBottom: "25px" 
 }));
