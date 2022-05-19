@@ -7,7 +7,6 @@ export const Typography = styled(MuiTypography)(() => ({
 
 export const TypographyNewWatch = styled(MuiTypography)(() => ({
   color: "#ffffff66",
-  marginLeft: "10px !important",
   cursor: "pointer"
 }));
 
