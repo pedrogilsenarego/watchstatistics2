@@ -33,6 +33,9 @@ const mapState = (state) => ({
   cartBoosters: state.cartData.cartBoosters,
 });
 
+const NO_IMAGE =
+  "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
+
 // eslint-disable-next-line
 const ProductDetails = ({}) => {
   const dispatch = useDispatch();
@@ -46,17 +49,16 @@ const ProductDetails = ({}) => {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const voteRef = useRef();
 
-  const [productThumbnail, setProductThumbnail] = useState([]);
+  const [productThumbnail, setProductThumbnail] = useState([NO_IMAGE]);
+  const [productCategory, setProductCategory] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
     productName: "",
     reference: "",
     productThumbnail: [],
+    productCategory: "",
   };
-
-  const NO_IMAGE =
-    "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
 
   useEffect(
     () => {
@@ -71,7 +73,6 @@ const ProductDetails = ({}) => {
         }
       } else {
         setNewWatch(true);
-        setProductThumbnail([NO_IMAGE]);
       }
     },
     // eslint-disable-next-line
@@ -79,7 +80,10 @@ const ProductDetails = ({}) => {
   );
 
   useEffect(() => {
-    if (productID) setProductThumbnail(product.productThumbnail);
+    if (productID) {
+      setProductThumbnail(product.productThumbnail);
+      setProductCategory(product.productCategory);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
@@ -104,6 +108,12 @@ const ProductDetails = ({}) => {
     currentUser,
     newWatch,
     setProductThumbnail,
+  };
+
+  const configProductSideList = {
+    productCategory,
+    newWatch,
+    setProductCategory,
   };
 
   const handleSubmitNewWatch = (values) => {
@@ -222,7 +232,7 @@ const ProductDetails = ({}) => {
                       }}
                     >
                       <CardContent style={{ padding: "5px" }}>
-                        <ProductSideList />
+                        <ProductSideList {...configProductSideList} />
                       </CardContent>
                     </Card>
                   </Grid>

@@ -10,8 +10,9 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import { useDispatch } from "react-redux";
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import SelectFormik from "src/components/Inputs/Select/SelectFormik";
+import SelectFormikOnChange from "src/components/Inputs/Select/SelectFormikOnChange";
 import { rewards } from "src/constants/gamification";
 import TableRow from "@mui/material/TableRow";
 import * as Details from "src/constants/productOptions";
@@ -19,12 +20,14 @@ import { RiCloseFill } from "react-icons/ri";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import { addProductListDetail } from "../../../redux/Products/products.actions";
 import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
+import watchTypes2 from "src/assets/data/watchTypes2.json";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
 import CustomAddCircle from "./CustomAddCircle";
 
 const INITIAL_FORM_STATE = {
+  productCategory: "",
   movement: "",
   caseMaterial: "",
   caliber: "",
@@ -34,33 +37,35 @@ const INITIAL_FORM_STATE = {
   productionYearsEnd: "",
 };
 
-const useStyles = makeStyles((theme) => ({
-  table: {
-    backgroundColor: "#14587500 !important",
-    background: "#14587500 !important",
-    paddingTop: "9px",
-    marginBottom: "10px",
-  },
-  tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" },
-}));
-
 const mapState = (state) => ({
   product: state.productsData.product,
   currentUser: state.user.currentUser,
 });
 
 // eslint-disable-next-line
-const ProductSideList = ({}) => {
+const ProductSideList = ({ productCategory, newWatch, setProductCategory }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const productID = useParams();
   const [submitDetails, setSubmitDetails] = useState({});
   const [triggerAlert, setTriggerAlert] = useState(false);
 
+  const [, , helpersProductCategory] = useField("productCategory");
+
+  const useStyles = makeStyles((theme) => ({
+    table: {
+      backgroundColor: "#14587500 !important",
+      background: "#14587500 !important",
+      paddingTop: "9px",
+      marginBottom: "10px",
+      cursor: newWatch ? "pointer" : "default",
+    },
+    tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" },
+  }));
+
   const {
     productName,
     productBrand,
-    productCategory,
     reference,
     movement,
     caseMaterial,
@@ -203,8 +208,25 @@ const ProductSideList = ({}) => {
                   <TableCell className={classes.tableCell} align='left'>
                     Category
                   </TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {productCategory}
+                  <TableCell align='right'>
+                    {productCategory === "" ? (
+                      <SelectFormikOnChange
+                        size='small'
+                        customOnChange={(e) => {
+                          helpersProductCategory.setValue(e);
+                          setProductCategory(e);
+                        }}
+                        name='productCategory'
+                        options={watchTypes2}
+                      />
+                    ) : (
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => setProductCategory("")}
+                      >
+                        {productCategory}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>

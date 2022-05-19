@@ -145,9 +145,7 @@ const AddAdditionalPicture = ({
                 {newWatch && readySubmit && (
                   <Grid item>
                     <Button3Formik title='Add image' />
-                    <Typography style={{ color: "red" }}>
-                      {metaProductThumbnail.error}
-                    </Typography>
+
                   </Grid>
                 )}
               </>
@@ -162,6 +160,9 @@ const AddAdditionalPicture = ({
                 />
               </Grid>
             )}
+            <Typography style={{ color: "red" }}>
+              {metaProductThumbnail.error}
+            </Typography>
           </Grid>
         </Grid>
         {!newWatch && (
