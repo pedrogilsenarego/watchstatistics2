@@ -205,19 +205,21 @@ const ImageMain = ({
                 <AvatarsControllers {...configAvatarControllers} />
               )}
             </Grid>
-            {(addAdditionalPictures || newWatch) && (
-              <Grid xs={12} item>
-                <AddAdditionalPicture
-                  setProductThumbnail={setProductThumbnail}
-                  productThumbnail={productThumbnail}
-                  newWatch={newWatch}
-                  readySubmit={readySubmit}
-                  setReadySubmit={setReadySubmit}
-                  setAddAdditionalPicture={setAddAdditionalPictures}
-                  setMainImage={setMainImage}
-                />
-              </Grid>
-            )}
+            {(addAdditionalPictures || newWatch) &&
+              productThumbnail.length < 4 && (
+                <Grid xs={12} item>
+                  <AddAdditionalPicture
+                    setIndexMini={setIndexMini}
+                    setProductThumbnail={setProductThumbnail}
+                    productThumbnail={productThumbnail}
+                    newWatch={newWatch}
+                    readySubmit={readySubmit}
+                    setReadySubmit={setReadySubmit}
+                    setAddAdditionalPicture={setAddAdditionalPictures}
+                    setMainImage={setMainImage}
+                  />
+                </Grid>
+              )}
           </Grid>
         </Card>
       )}

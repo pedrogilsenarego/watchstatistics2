@@ -22,6 +22,7 @@ interface Props {
   newWatch: boolean;
   setProductThumbnail: (productThumbnail: any) => void;
   productThumbnail: any;
+  setIndexMini: (indexMini: number) => void
 }
 
 const AddAdditionalPicture = ({
@@ -32,6 +33,8 @@ const AddAdditionalPicture = ({
   newWatch,
   setProductThumbnail,
   productThumbnail,
+  setIndexMini
+
 }: Props) => {
   const INITIAL_FORM_STATE = {
     picture: "",
@@ -78,7 +81,9 @@ const AddAdditionalPicture = ({
     originalPictureNewWatch
       ? setProductThumbnail([picture])
       : setProductThumbnail([...productThumbnail, picture]);
+    setIndexMini(originalPictureNewWatch ? 0 : productThumbnail.length)
     setOriginalPictureNewWatch(false)
+
     helpersProductThumbnail.setValue([...metaProductThumbnail.value, picture]);
   };
 
