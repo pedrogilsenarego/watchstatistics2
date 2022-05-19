@@ -27,8 +27,10 @@ import watchBrands2 from "src/assets/data/watchBrands2.json";
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
 import CustomAddCircle from "./CustomAddCircle";
+import TextField2FormikOnChange from "src/components/Inputs/Textfield/Textfield2FormikOnChange";
 
 const INITIAL_FORM_STATE = {
+  productName: "",
   productBrand: "",
   productPriceBrackets: "",
   productCategory: "",
@@ -55,6 +57,8 @@ const ProductSideList = ({
   setProductPriceBrackets,
   productBrand,
   setProductBrand,
+  productName,
+  setProductName,
 }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -65,6 +69,7 @@ const ProductSideList = ({
   const [, , helpersProductCategory] = useField("productCategory");
   const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
   const [, , helpersProductBrand] = useField("productBrand");
+  const [, , helpersProductName] = useField("productName");
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -78,7 +83,6 @@ const ProductSideList = ({
   }));
 
   const {
-    productName,
     reference,
     movement,
     caseMaterial,
@@ -270,8 +274,19 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Model</TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {productName}
+                  <TableCell align='right'>
+                    {productName === "" ? (
+                      <TextField2FormikOnChange name='productName' />
+                    ) : (
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => {
+                          if (newWatch) setProductName("");
+                        }}
+                      >
+                        {productName}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -477,3 +492,8 @@ const ProductSideList = ({
 };
 
 export default ProductSideList;
+
+// customOnChange={(e) => {
+//   helpersProductName.setValue(e);
+//   setProductName(e);
+// }}
