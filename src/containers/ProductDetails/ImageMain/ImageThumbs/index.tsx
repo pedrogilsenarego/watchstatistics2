@@ -15,6 +15,7 @@ interface Props {
   currentUser: any;
   index: number;
   setIndex: (index: number) => void;
+  newWatch: boolean;
 }
 
 const ImageThumbs = ({
@@ -26,7 +27,8 @@ const ImageThumbs = ({
   setAddAdditionalPictures,
   currentUser,
   index,
-  setIndex
+  setIndex,
+  newWatch
 }: Props) => {
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
@@ -75,7 +77,7 @@ const ImageThumbs = ({
                 </Grid>
               );
             })}
-            {!addAdditionalPictures && currentUser && productThumbnail.length < 4 && (
+            {!addAdditionalPictures && currentUser && productThumbnail.length < 4 && !newWatch && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {

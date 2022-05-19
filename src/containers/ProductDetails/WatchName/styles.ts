@@ -1,4 +1,4 @@
-import {styled, Typography as MuiTypography, Grid} from "@mui/material"
+import {styled, Typography as MuiTypography} from "@mui/material"
 
 export const Typography = styled(MuiTypography)(() => ({
   color: "#ffffff66",

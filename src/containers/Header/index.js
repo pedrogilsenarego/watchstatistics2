@@ -308,7 +308,7 @@ const Header = (props) => {
           disabled={watchstatistics}
           onClick={() => {
             handleCloseWatchstatisticsMenu();
-            history.push("/watchstatistics/addwatch");
+            history.push("/submit-new-watch");
           }}
         >
           Submit New Watch
@@ -440,7 +440,7 @@ const Header = (props) => {
           <MenuItem
             disabled={watchstatistics}
             onClick={() => {
-              history.push("/watchstatistics/addwatch");
+              history.push("/submit-new-watch");
             }}
           >
             Submit New Watch

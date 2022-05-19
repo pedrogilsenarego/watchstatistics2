@@ -66,7 +66,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             <Grid
               item
               xs={12}
-              onClick={() => handleClickOption(`/watchstatistics/addwatch`)}
+              onClick={() => handleClickOption(`/submit-new-watch`)}
             >
               <Styled.TypographyTitle>Add Watch</Styled.TypographyTitle>
             </Grid>

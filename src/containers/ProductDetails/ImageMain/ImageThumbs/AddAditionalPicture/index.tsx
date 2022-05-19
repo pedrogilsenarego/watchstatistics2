@@ -2,15 +2,17 @@ import { i18n } from "src/translations/i18n";
 import { Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
 import SugestedImages from "./SugestedImages";
 import { addProductPicture } from "src/redux/Products/products.actions";
 import Textfield2Formik from "src/components/Inputs/Textfield/Textfield2Formik";
+import Button3 from "src/components/Buttons/Button3";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import Button4Formik from "src/components/Buttons/Button4Formik";
 import { RiCloseFill } from "react-icons/ri";
+import { Typography } from "@material-ui/core";
 
 interface Props {
   setAddAdditionalPicture: (addAdditionalPicture: boolean) => void;
@@ -39,6 +41,8 @@ const AddAdditionalPicture = ({
   const dispatch = useDispatch();
   const params = useParams();
   const { productBrand, productName, reference } = product;
+  const [, metaProductThumbnail, helpersProductThumbnail] =
+    useField("productThumbnail");
 
   const handleSubmit = (e: any) => {
     const { picture } = e;
@@ -61,12 +65,25 @@ const AddAdditionalPicture = ({
     setReadySubmit(true);
   };
 
+  const handleNewWatchAddPicture = (e: any) => {
+    const { picture } = e
+    console.log(picture)
+    helpersProductThumbnail.setValue([
+      ...metaProductThumbnail.value,
+      picture
+    ])
+    console.log(metaProductThumbnail.value);
+  }
+
+
+
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
       onSubmit={(values) => {
         if (readySubmit) {
-          handleSubmit(values);
+          if (newWatch) handleNewWatchAddPicture(values)
+          else handleSubmit(values);
         } else {
           handleTestImage(values);
         }
@@ -108,9 +125,24 @@ const AddAdditionalPicture = ({
                 <Button3Formik title={i18n.t("buttons.submit")} />
               </Grid>
             ) : (
-              <Grid item>
-                <Button4Formik>{i18n.t("buttons.testImage")}</Button4Formik>
-              </Grid>
+              <>
+                {!readySubmit && (
+                  <Grid item>
+                    <Button4Formik>{i18n.t("buttons.testImage")}</Button4Formik>
+                  </Grid>
+                )}
+
+                {newWatch && readySubmit && (
+                  <Grid item>
+                    <Button3Formik
+                      title='Add image'
+                    />
+                    <Typography style={{ color: "red" }}>
+                      {metaProductThumbnail.error}
+                    </Typography>
+                  </Grid>
+                )}
+              </>
             )}
             {!newWatch && (
               <Grid item>

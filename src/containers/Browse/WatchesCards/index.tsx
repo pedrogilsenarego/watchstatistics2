@@ -59,7 +59,7 @@ const WatchesCards = () => {
       ) {
         setScrollGap(
           scrollGap +
-            window.innerHeight / (isMatch ? 1.1 : scrollGap > 0 ? 1.8 : 2.5)
+          window.innerHeight / (isMatch ? 1.1 : scrollGap > 0 ? 1.8 : 2.5)
         );
         handleLoadMore();
       }
@@ -163,7 +163,7 @@ const WatchesCards = () => {
           xs={12}
           item
           textAlign='center'
-          onClick={() => history.push(`/watchstatistics/addwatch`)}
+          onClick={() => history.push(`/submit-new-watch`)}
         >
           <Styled.NoMoreResultsTypography>
             There are no more results
