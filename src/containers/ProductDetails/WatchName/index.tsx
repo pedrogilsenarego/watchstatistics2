@@ -26,7 +26,7 @@ const WatchName = ({ newWatch }: Props) => {
       {newWatch ? (
         <Styled.GridContainer container columnGap={1}>
 
-          {metaProductBrand.touched ? (
+          {(metaProductBrand.touched && metaProductBrand.value !== "") ? (
             <Styled.TypographyNewWatch
               variant='h6'
               onClick={() => helpersProductBrand.setTouched(false)}
@@ -43,7 +43,7 @@ const WatchName = ({ newWatch }: Props) => {
               /></Grid>)}
 
 
-          {metaProductName.touched ? (
+          {(metaProductName.touched && metaProductName.value !== "") ? (
             <Styled.TypographyNewWatch
               variant='h6'
               onClick={() => helpersProductName.setTouched(false)}
@@ -59,7 +59,7 @@ const WatchName = ({ newWatch }: Props) => {
           )}
 
 
-          {metaReference.touched ? (
+          {(metaReference.touched && metaReference.value !== "") ? (
             <Styled.TypographyNewWatch
               variant='h6'
               onClick={() => helpersReference.setTouched(false)}
