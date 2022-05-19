@@ -17,43 +17,60 @@ const mapState = (state: any) => ({
 const WatchName = ({ newWatch }: Props) => {
   const { product } = useSelector(mapState);
   const { productBrand, productName, reference } = product;
-  const [field, metaProductName, helpersProductName] = useField("productName");
+  const [, metaProductBrand, helpersProductBrand] = useField("productBrand");
+  const [, metaProductName, helpersProductName] = useField("productName");
+  const [, metaReference, helpersReference] = useField("reference");
 
   return (
     <>
       {newWatch ? (
         <Styled.GridContainer container columnGap={1}>
           <Grid item xs={2}>
-            <SelectFormik
-              myLabel='Brand'
-              size='small'
-              name='productBrand'
-              options={watchBrands}
-            />
+            {metaProductBrand.touched ? (
+              <Styled.TypographyNewWatch
+                variant='h6'
+                onClick={() => helpersProductBrand.setTouched(false)}
+              >
+                {metaProductBrand.value}
+              </Styled.TypographyNewWatch>
+            ) : (
+              <SelectFormik
+                myLabel='Brand'
+                size='small'
+                name='productBrand'
+                options={watchBrands}
+              />)}
           </Grid>
-          {metaProductName.touched ? (
-            <Styled.Typography
-              variant='h6'
-              onClick={() => helpersProductName.setTouched(false)}
-            >
-              {metaProductName.value}
-            </Styled.Typography>
-          ) : (
-            <Grid item xs={2}>
+          <Grid item xs={2}>
+            {metaProductName.touched ? (
+              <Styled.TypographyNewWatch
+                variant='h6'
+                onClick={() => helpersProductName.setTouched(false)}
+              >
+                {metaProductName.value}
+              </Styled.TypographyNewWatch>
+            ) : (
               <TextfieldFormik
                 placeholder='Model'
                 size='small'
                 name='productName'
               />
-            </Grid>
-          )}
+            )}</Grid>
 
           <Grid item xs={2}>
-            <TextfieldFormik
-              placeholder='Reference'
-              size='small'
-              name='reference'
-            />
+            {metaReference.touched ? (
+              <Styled.TypographyNewWatch
+                variant='h6'
+                onClick={() => helpersReference.setTouched(false)}
+              >
+                {metaReference.value}
+              </Styled.TypographyNewWatch>
+            ) : (
+              <TextfieldFormik
+                placeholder='Reference'
+                size='small'
+                name='reference'
+              />)}
           </Grid>
         </Styled.GridContainer>
       ) : (
