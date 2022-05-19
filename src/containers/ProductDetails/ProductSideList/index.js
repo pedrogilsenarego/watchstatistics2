@@ -27,7 +27,7 @@ import watchBrands2 from "src/assets/data/watchBrands2.json";
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
 import CustomAddCircle from "./CustomAddCircle";
-import TextField2FormikOnChange from "src/components/Inputs/Textfield/Textfield2FormikOnChange";
+import TextField2FormikOnChange from "src/components/Inputs/Textfield/Textfield2Formik copy";
 
 const INITIAL_FORM_STATE = {
   productName: "",
@@ -69,7 +69,7 @@ const ProductSideList = ({
   const [, , helpersProductCategory] = useField("productCategory");
   const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
   const [, , helpersProductBrand] = useField("productBrand");
-  const [, , helpersProductName] = useField("productName");
+  const [, metaProductName, helpersProductName] = useField("productName");
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -275,7 +275,7 @@ const ProductSideList = ({
                 <TableRow>
                   <TableCell className={classes.tableCell}>Model</TableCell>
                   <TableCell align='right'>
-                    {productName === "" ? (
+                    {newWatch && !metaProductName.touched ? (
                       <TextField2FormikOnChange
                         name='productName'
                         customOnChange={(e) => {

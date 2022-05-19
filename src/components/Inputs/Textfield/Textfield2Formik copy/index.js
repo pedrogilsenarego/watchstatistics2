@@ -38,11 +38,12 @@ const TextfieldFormik = ({
   customOnChange,
   ...otherProps
 }) => {
-  const [field, mata] = useField(name);
+  const [field, mata, helpers] = useField(name);
   const classes = useStyles();
 
   const handleChange = (evt) => {
     const { value } = evt.target;
+    helpers.setValue(value);
     customOnChange(value);
   };
   const configTextField = {
