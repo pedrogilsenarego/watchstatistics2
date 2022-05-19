@@ -1,10 +1,6 @@
 import * as Styled from "./styles";
 import { useSelector } from "react-redux";
-import { Grid } from "@mui/material";
-import SelectFormik from "src/components/Inputs/Select/SelectFormik";
-import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
-import watchBrands from "src/assets/data/watchBrands2.json";
-import { useField } from "formik";
+import WatchNameNewWatch from "./WatchNameNewWatch"
 
 interface Props {
   newWatch: boolean;
@@ -17,63 +13,11 @@ const mapState = (state: any) => ({
 const WatchName = ({ newWatch }: Props) => {
   const { product } = useSelector(mapState);
   const { productBrand, productName, reference } = product;
-  const [, metaProductBrand, helpersProductBrand] = useField("productBrand");
-  const [, metaProductName, helpersProductName] = useField("productName");
-  const [, metaReference, helpersReference] = useField("reference");
 
   return (
     <>
       {newWatch ? (
-        <Styled.GridContainer container columnGap={1}>
-
-          {(metaProductBrand.touched && metaProductBrand.value !== "") ? (
-            <Styled.TypographyNewWatch
-              variant='h6'
-              onClick={() => helpersProductBrand.setTouched(false)}
-            >
-              {metaProductBrand.value}
-            </Styled.TypographyNewWatch>
-          ) : (
-            <Grid item xs={2}>
-              <SelectFormik
-                myLabel='Brand'
-                size='small'
-                name='productBrand'
-                options={watchBrands}
-              /></Grid>)}
-
-
-          {(metaProductName.touched && metaProductName.value !== "") ? (
-            <Styled.TypographyNewWatch
-              variant='h6'
-              onClick={() => helpersProductName.setTouched(false)}
-            >
-              {metaProductName.value} -
-            </Styled.TypographyNewWatch>
-          ) : (<Grid item xs={2}>
-            <TextfieldFormik
-              placeholder='Model'
-              size='small'
-              name='productName'
-            /></Grid>
-          )}
-
-
-          {(metaReference.touched && metaReference.value !== "") ? (
-            <Styled.TypographyNewWatch
-              variant='h6'
-              onClick={() => helpersReference.setTouched(false)}
-            >
-              {metaReference.value}
-            </Styled.TypographyNewWatch>
-          ) : (<Grid item xs={2}>
-            <TextfieldFormik
-              placeholder='Reference'
-              size='small'
-              name='reference'
-            /> </Grid>)}
-
-        </Styled.GridContainer>
+        <WatchNameNewWatch />
       ) : (
         <Styled.Typography variant='h6'>
           {productBrand} {productName} - {reference}
