@@ -36,6 +36,7 @@ const TextfieldFormik = ({
   name,
   placeholder,
   customOnChange,
+  customOnBlur,
   ...otherProps
 }) => {
   const [field, mata, helpers] = useField(name);
@@ -46,6 +47,7 @@ const TextfieldFormik = ({
     helpers.setValue(value);
     customOnChange(value);
   };
+
   const configTextField = {
     ...field,
     ...otherProps,

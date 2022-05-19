@@ -287,7 +287,7 @@ const ProductSideList = ({
                       <Typography
                         className={classes.tableCell}
                         onClick={() => {
-                          if (newWatch) setProductName("");
+                          if (newWatch) helpersProductName.setTouched(false);
                         }}
                       >
                         {productName}
