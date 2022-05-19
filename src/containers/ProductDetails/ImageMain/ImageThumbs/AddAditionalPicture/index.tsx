@@ -71,8 +71,10 @@ const AddAdditionalPicture = ({
     setReadySubmit(true);
   };
 
-  const handleNewWatchAddPicture = (e: any) => {
+  const handleNewWatchAddPicture = (e: any, { resetForm }: any) => {
     const { picture } = e;
+    setReadySubmit(false)
+    resetForm()
     originalPictureNewWatch
       ? setProductThumbnail([picture])
       : setProductThumbnail([...productThumbnail, picture]);
@@ -83,9 +85,9 @@ const AddAdditionalPicture = ({
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         if (readySubmit) {
-          if (newWatch) handleNewWatchAddPicture(values);
+          if (newWatch) handleNewWatchAddPicture(values, { resetForm });
           else handleSubmit(values);
         } else {
           handleTestImage(values);
