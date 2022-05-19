@@ -7,10 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
 import ImageMain from "../../containers/ProductDetails/ImageMain";
-import WatchName from "src/containers/ProductDetails/WatchName";
 import { Form, Formik } from "formik";
 import { FORM_VALIDATION } from "./validation";
 import {
+  Typography,
   Grid,
   Card,
   CardContent,
@@ -52,6 +52,7 @@ const ProductDetails = ({}) => {
   const [productThumbnail, setProductThumbnail] = useState([NO_IMAGE]);
   const [productCategory, setProductCategory] = useState("");
   const [productPriceBrackets, setProductPriceBrackets] = useState("");
+  const [productBrand, setProductBrand] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -86,11 +87,12 @@ const ProductDetails = ({}) => {
       setProductThumbnail(product.productThumbnail);
       setProductCategory(product.productCategory);
       setProductPriceBrackets(product.productPriceBrackets);
+      setProductBrand(product.productBrand);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
-  const { productName, productBrand, reference, avgTotal } = product;
+  const { productName, reference, avgTotal } = product;
 
   if (!productThumbnail || !productName) return null;
 
@@ -119,6 +121,8 @@ const ProductDetails = ({}) => {
     setProductCategory,
     productPriceBrackets,
     setProductPriceBrackets,
+    productBrand,
+    setProductBrand,
   };
 
   const handleSubmitNewWatch = (values) => {
@@ -194,9 +198,17 @@ const ProductDetails = ({}) => {
           ) : (
             <Container
               disableGutters={isMatch ? true : false}
-              style={{ marginTop: "130px" }}
+              style={{ marginTop: "120px" }}
             >
-              <WatchName newWatch={newWatch} />
+              <Typography
+                variant='h6'
+                style={{
+                  color: "#ffffff66",
+                  paddingLeft: "10px",
+                }}
+              >
+                {productBrand} {productName} - {reference}
+              </Typography>
               <Box
                 sx={{ borderRadius: "10px" }}
                 height={"100%"}

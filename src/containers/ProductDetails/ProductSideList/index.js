@@ -22,12 +22,14 @@ import { addProductListDetail } from "../../../redux/Products/products.actions";
 import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 import watchTypes2 from "src/assets/data/watchTypes2.json";
 import pricesBrackets2 from "src/assets/data/pricesBracket2.json";
+import watchBrands2 from "src/assets/data/watchBrands2.json";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
 import CustomAddCircle from "./CustomAddCircle";
 
 const INITIAL_FORM_STATE = {
+  productBrand: "",
   productPriceBrackets: "",
   productCategory: "",
   movement: "",
@@ -51,6 +53,8 @@ const ProductSideList = ({
   setProductCategory,
   productPriceBrackets,
   setProductPriceBrackets,
+  productBrand,
+  setProductBrand,
 }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -60,6 +64,7 @@ const ProductSideList = ({
 
   const [, , helpersProductCategory] = useField("productCategory");
   const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
+  const [, , helpersProductBrand] = useField("productBrand");
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -74,7 +79,6 @@ const ProductSideList = ({
 
   const {
     productName,
-    productBrand,
     reference,
     movement,
     caseMaterial,
@@ -230,7 +234,9 @@ const ProductSideList = ({
                     ) : (
                       <Typography
                         className={classes.tableCell}
-                        onClick={() => setProductCategory("")}
+                        onClick={() => {
+                          if (newWatch) setProductCategory("");
+                        }}
                       >
                         {productCategory}
                       </Typography>
@@ -239,8 +245,27 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Brand</TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {productBrand}
+                  <TableCell align='right'>
+                    {productBrand === "" ? (
+                      <SelectFormikOnChange
+                        size='small'
+                        customOnChange={(e) => {
+                          helpersProductBrand.setValue(e);
+                          setProductBrand(e);
+                        }}
+                        name='productBrand'
+                        options={watchBrands2}
+                      />
+                    ) : (
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => {
+                          if (newWatch) setProductBrand("");
+                        }}
+                      >
+                        {productBrand}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -432,7 +457,9 @@ const ProductSideList = ({
                     ) : (
                       <Typography
                         className={classes.tableCell}
-                        onClick={() => setProductPriceBrackets("")}
+                        onClick={() => {
+                          if (newWatch) setProductPriceBrackets("");
+                        }}
                       >
                         {productPriceBrackets}
                       </Typography>
