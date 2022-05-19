@@ -21,12 +21,14 @@ import Button3Formik from "src/components/Buttons/Button3Formik";
 import { addProductListDetail } from "../../../redux/Products/products.actions";
 import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 import watchTypes2 from "src/assets/data/watchTypes2.json";
+import pricesBrackets2 from "src/assets/data/pricesBracket2.json";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
 import CustomAddCircle from "./CustomAddCircle";
 
 const INITIAL_FORM_STATE = {
+  productPriceBrackets: "",
   productCategory: "",
   movement: "",
   caseMaterial: "",
@@ -43,7 +45,13 @@ const mapState = (state) => ({
 });
 
 // eslint-disable-next-line
-const ProductSideList = ({ productCategory, newWatch, setProductCategory }) => {
+const ProductSideList = ({
+  productCategory,
+  newWatch,
+  setProductCategory,
+  productPriceBrackets,
+  setProductPriceBrackets,
+}) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const productID = useParams();
@@ -51,6 +59,7 @@ const ProductSideList = ({ productCategory, newWatch, setProductCategory }) => {
   const [triggerAlert, setTriggerAlert] = useState(false);
 
   const [, , helpersProductCategory] = useField("productCategory");
+  const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -71,7 +80,6 @@ const ProductSideList = ({ productCategory, newWatch, setProductCategory }) => {
     caseMaterial,
     caseSize,
     caliber,
-    productPriceBrackets,
     waterResistance,
     productionYears,
     userID,
@@ -410,8 +418,25 @@ const ProductSideList = ({ productCategory, newWatch, setProductCategory }) => {
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Price</TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {productPriceBrackets}
+                  <TableCell align='right'>
+                    {productPriceBrackets === "" ? (
+                      <SelectFormikOnChange
+                        size='small'
+                        customOnChange={(e) => {
+                          helpersProductPriceBrackets.setValue(e);
+                          setProductPriceBrackets(e);
+                        }}
+                        name='productPriceBrackets'
+                        options={pricesBrackets2}
+                      />
+                    ) : (
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => setProductPriceBrackets("")}
+                      >
+                        {productPriceBrackets}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
               </TableBody>

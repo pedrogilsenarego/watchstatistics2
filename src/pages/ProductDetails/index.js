@@ -51,6 +51,7 @@ const ProductDetails = ({}) => {
 
   const [productThumbnail, setProductThumbnail] = useState([NO_IMAGE]);
   const [productCategory, setProductCategory] = useState("");
+  const [productPriceBrackets, setProductPriceBrackets] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -58,6 +59,7 @@ const ProductDetails = ({}) => {
     reference: "",
     productThumbnail: [],
     productCategory: "",
+    productPriceBrackets: "",
   };
 
   useEffect(
@@ -83,6 +85,7 @@ const ProductDetails = ({}) => {
     if (productID) {
       setProductThumbnail(product.productThumbnail);
       setProductCategory(product.productCategory);
+      setProductPriceBrackets(product.productPriceBrackets);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
@@ -114,6 +117,8 @@ const ProductDetails = ({}) => {
     productCategory,
     newWatch,
     setProductCategory,
+    productPriceBrackets,
+    setProductPriceBrackets,
   };
 
   const handleSubmitNewWatch = (values) => {
