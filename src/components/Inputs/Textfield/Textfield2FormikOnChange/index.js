@@ -36,6 +36,7 @@ const TextfieldFormik = ({
   name,
   placeholder,
   customOnChange,
+  multiline,
   show,
   setShow,
   ...otherProps
@@ -75,7 +76,7 @@ const TextfieldFormik = ({
     <Container
       style={{
         backgroundColor: "white",
-        height: "40px",
+        height: multiline ? "202px" : "40px",
         padding: "0px",
 
         borderRadius: "4px",
@@ -83,6 +84,8 @@ const TextfieldFormik = ({
     >
       <TextField
         {...configTextField}
+        multiline={multiline}
+        minRows={multiline ? 6 : null}
         size='small'
         className={classes.textField}
         name={name}

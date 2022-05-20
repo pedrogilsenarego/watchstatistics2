@@ -8,14 +8,14 @@ import { rewards } from "src/constants/gamification";
 
 const mapState = (state) => ({
   product: state.productsData.product,
-  currentUser: state.user.currentUser
+  currentUser: state.user.currentUser,
 });
 
 // eslint-disable-next-line
-const ProductSideDescription = ({}) => {
+const ProductSideDescription = ({ newWatch, productDesc, setProductDesc }) => {
   const { product, currentUser } = useSelector(mapState);
   const [addDescription, setAddDescription] = useState(false);
-  const { productDesc, additionalData } = product;
+  const { additionalData } = product;
 
   return (
     <div>
@@ -27,7 +27,7 @@ const ProductSideDescription = ({}) => {
           Description
         </Typography>
         <Box style={{ padding: "10px" }}>
-          {productDesc !== "" ? (
+          {productDesc !== "" && !newWatch ? (
             <Typography
               dangerouslySetInnerHTML={{ __html: productDesc }}
               align='justify'
@@ -36,7 +36,9 @@ const ProductSideDescription = ({}) => {
                 color: "#ffffffBF",
               }}
             />
-          ) : !currentUser ? " " : !addDescription ? (
+          ) : !currentUser ? (
+            " "
+          ) : !addDescription ? (
             <Typography
               style={{
                 color: "#ffffffBF",
@@ -56,14 +58,22 @@ const ProductSideDescription = ({}) => {
               points.
             </Typography>
           ) : (
-            <AddDescription setOpen={setAddDescription} />
+            <AddDescription
+              setOpen={setAddDescription}
+              newWatch={newWatch}
+              setProductDesc={setProductDesc}
+              productDesc={productDesc}
+            />
           )}
         </Box>
       </Box>
       <Box sx={{ paddingLeft: "10px", paddingRight: "10px" }}>
         <Divider style={{ background: "#ffffff66" }} />
       </Box>
-      <AdditionalData additionalData={additionalData} currentUser={currentUser}/>
+      <AdditionalData
+        additionalData={additionalData}
+        currentUser={currentUser}
+      />
     </div>
   );
 };

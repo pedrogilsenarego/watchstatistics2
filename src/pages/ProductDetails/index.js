@@ -55,6 +55,7 @@ const ProductDetails = ({}) => {
   const [productBrand, setProductBrand] = useState("");
   const [productName, setProductName] = useState("");
   const [reference, setReference] = useState("");
+  const [productDesc, setProductDesc] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -63,6 +64,7 @@ const ProductDetails = ({}) => {
     productThumbnail: [],
     productCategory: "",
     productPriceBrackets: "",
+    productDesc: "",
   };
 
   useEffect(
@@ -92,6 +94,7 @@ const ProductDetails = ({}) => {
       setProductBrand(product.productBrand);
       setProductName(product.productName);
       setReference(product.reference);
+      setProductDesc(product.productDesc);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
@@ -129,6 +132,12 @@ const ProductDetails = ({}) => {
     setProductName,
     reference,
     setReference,
+  };
+
+  const configSideDescription = {
+    newWatch,
+    productDesc,
+    setProductDesc,
   };
 
   const handleSubmitNewWatch = (values) => {
@@ -187,14 +196,14 @@ const ProductDetails = ({}) => {
                         }}
                       >
                         <CardContent style={{ padding: "5px" }}>
-                          <ProductSideList />
+                          <ProductSideList {...configProductSideList} />
                         </CardContent>
                       </Card>
                     </Grid>
                     <Card
                       style={{ backgroundColor: "#18161E", marginTop: "8px" }}
                     >
-                      <SideDescription />
+                      <SideDescription {...configSideDescription} />
                     </Card>
                   </Grid>
                 </Grid>{" "}
@@ -235,7 +244,7 @@ const ProductDetails = ({}) => {
                     <Card
                       style={{ backgroundColor: "#18161E", marginTop: "8px" }}
                     >
-                      <SideDescription />
+                      <SideDescription {...configSideDescription} />
                     </Card>
                   </Grid>
                   <Grid item xs={12} md={5}>
