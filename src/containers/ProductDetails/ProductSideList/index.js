@@ -30,6 +30,7 @@ import CustomAddCircle from "./CustomAddCircle";
 import TextField2FormikOnChange from "src/components/Inputs/Textfield/Textfield2FormikOnChange";
 
 const INITIAL_FORM_STATE = {
+  reference: "",
   productName: "",
   productBrand: "",
   productPriceBrackets: "",
@@ -59,6 +60,8 @@ const ProductSideList = ({
   setProductBrand,
   productName,
   setProductName,
+  reference,
+  setReference,
 }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -69,9 +72,11 @@ const ProductSideList = ({
   const [, , helpersProductCategory] = useField("productCategory");
   const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
   const [, , helpersProductBrand] = useField("productBrand");
-  const [, metaProductName, helpersProductName] = useField("productName");
+  const [, , helpersProductName] = useField("productName");
+  const [, , helpersReference] = useField("reference");
 
   const [productNameInput, setProductNameInput] = useState(true);
+  const [referenceInput, setReferenceInput] = useState(true);
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -85,7 +90,6 @@ const ProductSideList = ({
   }));
 
   const {
-    reference,
     movement,
     caseMaterial,
     caseSize,
@@ -226,7 +230,12 @@ const ProductSideList = ({
                   <TableCell className={classes.tableCell} align='left'>
                     Category
                   </TableCell>
-                  <TableCell align='right'>
+                  <TableCell
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setProductCategory("");
+                    }}
+                  >
                     {productCategory === "" ? (
                       <SelectFormikOnChange
                         size='small'
@@ -238,12 +247,7 @@ const ProductSideList = ({
                         options={watchTypes2}
                       />
                     ) : (
-                      <Typography
-                        className={classes.tableCell}
-                        onClick={() => {
-                          if (newWatch) setProductCategory("");
-                        }}
-                      >
+                      <Typography className={classes.tableCell}>
                         {productCategory}
                       </Typography>
                     )}
@@ -251,7 +255,12 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Brand</TableCell>
-                  <TableCell align='right'>
+                  <TableCell
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setProductBrand("");
+                    }}
+                  >
                     {productBrand === "" ? (
                       <SelectFormikOnChange
                         size='small'
@@ -263,12 +272,7 @@ const ProductSideList = ({
                         options={watchBrands2}
                       />
                     ) : (
-                      <Typography
-                        className={classes.tableCell}
-                        onClick={() => {
-                          if (newWatch) setProductBrand("");
-                        }}
-                      >
+                      <Typography className={classes.tableCell}>
                         {productBrand}
                       </Typography>
                     )}
@@ -276,7 +280,12 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Model</TableCell>
-                  <TableCell align='right'>
+                  <TableCell
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setProductNameInput(true);
+                    }}
+                  >
                     {newWatch && productNameInput ? (
                       <TextField2FormikOnChange
                         show={productNameInput}
@@ -288,12 +297,7 @@ const ProductSideList = ({
                         }}
                       />
                     ) : (
-                      <Typography
-                        className={classes.tableCell}
-                        onClick={() => {
-                          if (newWatch) setProductNameInput(true);
-                        }}
-                      >
+                      <Typography className={classes.tableCell}>
                         {productName}
                       </Typography>
                     )}
@@ -301,8 +305,28 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Reference</TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {reference}
+                  <TableCell
+                    className={classes.tableCell}
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setReferenceInput(true);
+                    }}
+                  >
+                    {newWatch && referenceInput ? (
+                      <TextField2FormikOnChange
+                        show={referenceInput}
+                        setShow={setReferenceInput}
+                        name='reference'
+                        customOnChange={(e) => {
+                          helpersReference.setValue(e);
+                          setReference(e);
+                        }}
+                      />
+                    ) : (
+                      <Typography className={classes.tableCell}>
+                        {reference}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -468,7 +492,12 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Price</TableCell>
-                  <TableCell align='right'>
+                  <TableCell
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setProductPriceBrackets("");
+                    }}
+                  >
                     {productPriceBrackets === "" ? (
                       <SelectFormikOnChange
                         size='small'
@@ -480,12 +509,7 @@ const ProductSideList = ({
                         options={pricesBrackets2}
                       />
                     ) : (
-                      <Typography
-                        className={classes.tableCell}
-                        onClick={() => {
-                          if (newWatch) setProductPriceBrackets("");
-                        }}
-                      >
+                      <Typography className={classes.tableCell}>
                         {productPriceBrackets}
                       </Typography>
                     )}

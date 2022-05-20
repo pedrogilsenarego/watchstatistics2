@@ -54,6 +54,7 @@ const ProductDetails = ({}) => {
   const [productPriceBrackets, setProductPriceBrackets] = useState("");
   const [productBrand, setProductBrand] = useState("");
   const [productName, setProductName] = useState("");
+  const [reference, setReference] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -90,11 +91,12 @@ const ProductDetails = ({}) => {
       setProductPriceBrackets(product.productPriceBrackets);
       setProductBrand(product.productBrand);
       setProductName(product.productName);
+      setReference(product.reference);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
-  const { reference, avgTotal } = product;
+  const { avgTotal } = product;
 
   const configImageMain = {
     isMatch,
@@ -125,6 +127,8 @@ const ProductDetails = ({}) => {
     setProductBrand,
     productName,
     setProductName,
+    reference,
+    setReference,
   };
 
   const handleSubmitNewWatch = (values) => {
