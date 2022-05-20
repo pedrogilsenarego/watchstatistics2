@@ -56,6 +56,7 @@ const ProductDetails = ({}) => {
   const [productName, setProductName] = useState("");
   const [reference, setReference] = useState("");
   const [productDesc, setProductDesc] = useState("");
+  const [movement, setMovement] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -65,6 +66,17 @@ const ProductDetails = ({}) => {
     productCategory: "",
     productPriceBrackets: "",
     productDesc: "",
+    additionalData: [],
+    avgTotal: 0,
+    avgVotationNotOwn: 0,
+    avgVotationsOwn: 0,
+    caseMaterial: "",
+    caseSize: "",
+    movement: "",
+    numberVotesNotOwn: 0,
+    numberVotesOwn: 0,
+    votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
+    votationsOwn: [0, 0, 0, 0, 0, 0, 0],
   };
 
   useEffect(
@@ -95,6 +107,7 @@ const ProductDetails = ({}) => {
       setProductName(product.productName);
       setReference(product.reference);
       setProductDesc(product.productDesc);
+      setMovement(product.movement);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
@@ -132,6 +145,8 @@ const ProductDetails = ({}) => {
     setProductName,
     reference,
     setReference,
+    movement,
+    setMovement,
   };
 
   const configSideDescription = {

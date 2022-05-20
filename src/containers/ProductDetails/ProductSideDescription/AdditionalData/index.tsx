@@ -60,7 +60,7 @@ const AdditionalData = ({ additionalData, currentUser }: Props) => {
             )}
           </Grid>
         )}
-        {!addAdditionalData && currentUser && additionalData?.length <= 0 && (
+        {currentUser && (additionalData?.length <= 0 || !additionalData) && (
           <Grid item xs={12}>
             <Styled.Typography>
               There is no links for this watch yet,{" "}

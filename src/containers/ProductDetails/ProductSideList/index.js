@@ -62,6 +62,8 @@ const ProductSideList = ({
   setProductName,
   reference,
   setReference,
+  movement,
+  setMovement,
 }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -74,6 +76,7 @@ const ProductSideList = ({
   const [, , helpersProductBrand] = useField("productBrand");
   const [, , helpersProductName] = useField("productName");
   const [, , helpersReference] = useField("reference");
+  const [, , helpersMovement] = useField("movement");
 
   const [productNameInput, setProductNameInput] = useState(true);
   const [referenceInput, setReferenceInput] = useState(true);
@@ -90,7 +93,6 @@ const ProductSideList = ({
   }));
 
   const {
-    movement,
     caseMaterial,
     caseSize,
     caliber,
@@ -332,9 +334,20 @@ const ProductSideList = ({
                 <TableRow>
                   <TableCell className={classes.tableCell}>Movement</TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!movement && submitDetails.movement && (
+                    {!movement && !newWatch && submitDetails.movement && (
                       <SelectFormik
                         size='small'
+                        name='movement'
+                        options={Details.movements}
+                      />
+                    )}
+                    {!movement && newWatch && submitDetails.movement && (
+                      <SelectFormikOnChange
+                        size='small'
+                        customOnChange={(e) => {
+                          helpersMovement.setValue(e);
+                          setMovement(e);
+                        }}
                         name='movement'
                         options={Details.movements}
                       />
