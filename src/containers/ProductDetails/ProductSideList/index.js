@@ -27,7 +27,7 @@ import watchBrands2 from "src/assets/data/watchBrands2.json";
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
 import CustomAddCircle from "./CustomAddCircle";
-import TextField2FormikOnChange from "src/components/Inputs/Textfield/Textfield2Formik copy";
+import TextField2FormikOnChange from "src/components/Inputs/Textfield/Textfield2FormikOnChange";
 
 const INITIAL_FORM_STATE = {
   productName: "",
@@ -70,6 +70,8 @@ const ProductSideList = ({
   const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
   const [, , helpersProductBrand] = useField("productBrand");
   const [, metaProductName, helpersProductName] = useField("productName");
+
+  const [productNameInput, setProductNameInput] = useState(true);
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -275,8 +277,10 @@ const ProductSideList = ({
                 <TableRow>
                   <TableCell className={classes.tableCell}>Model</TableCell>
                   <TableCell align='right'>
-                    {newWatch && !metaProductName.touched ? (
+                    {newWatch && productNameInput ? (
                       <TextField2FormikOnChange
+                        show={productNameInput}
+                        setShow={setProductNameInput}
                         name='productName'
                         customOnChange={(e) => {
                           helpersProductName.setValue(e);
@@ -287,7 +291,7 @@ const ProductSideList = ({
                       <Typography
                         className={classes.tableCell}
                         onClick={() => {
-                          if (newWatch) helpersProductName.setTouched(false);
+                          if (newWatch) setProductNameInput(true);
                         }}
                       >
                         {productName}

@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { TextField, Container } from "@material-ui/core";
 import { useField } from "formik";
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,7 +36,7 @@ const TextfieldFormik = ({
   name,
   placeholder,
   customOnChange,
-  customOnBlur,
+  setShow,
   ...otherProps
 }) => {
   const [field, mata, helpers] = useField(name);
@@ -52,6 +52,7 @@ const TextfieldFormik = ({
     ...field,
     ...otherProps,
     onChange: handleChange,
+
     fullWidth: true,
     variant: "outlined",
   };
@@ -60,6 +61,14 @@ const TextfieldFormik = ({
     configTextField.error = true;
     configTextField.helperText = mata.error;
   }
+
+  useEffect(() => {
+    if (mata.touched) {
+      setShow(false);
+      helpers.setTouched(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mata.touched]);
 
   return (
     <Container
