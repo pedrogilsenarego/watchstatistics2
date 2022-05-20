@@ -230,12 +230,7 @@ const ProductSideList = ({
                   <TableCell className={classes.tableCell} align='left'>
                     Category
                   </TableCell>
-                  <TableCell
-                    align='right'
-                    onClick={() => {
-                      if (newWatch) setProductCategory("");
-                    }}
-                  >
+                  <TableCell align='right'>
                     {productCategory === "" ? (
                       <SelectFormikOnChange
                         size='small'
@@ -247,7 +242,12 @@ const ProductSideList = ({
                         options={watchTypes2}
                       />
                     ) : (
-                      <Typography className={classes.tableCell}>
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => {
+                          if (newWatch) setProductCategory("");
+                        }}
+                      >
                         {productCategory}
                       </Typography>
                     )}
@@ -255,12 +255,7 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Brand</TableCell>
-                  <TableCell
-                    align='right'
-                    onClick={() => {
-                      if (newWatch) setProductBrand("");
-                    }}
-                  >
+                  <TableCell align='right'>
                     {productBrand === "" ? (
                       <SelectFormikOnChange
                         size='small'
@@ -272,7 +267,12 @@ const ProductSideList = ({
                         options={watchBrands2}
                       />
                     ) : (
-                      <Typography className={classes.tableCell}>
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => {
+                          if (newWatch) setProductBrand("");
+                        }}
+                      >
                         {productBrand}
                       </Typography>
                     )}
@@ -492,12 +492,7 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Price</TableCell>
-                  <TableCell
-                    align='right'
-                    onClick={() => {
-                      if (newWatch) setProductPriceBrackets("");
-                    }}
-                  >
+                  <TableCell align='right'>
                     {productPriceBrackets === "" ? (
                       <SelectFormikOnChange
                         size='small'
@@ -509,7 +504,12 @@ const ProductSideList = ({
                         options={pricesBrackets2}
                       />
                     ) : (
-                      <Typography className={classes.tableCell}>
+                      <Typography
+                        className={classes.tableCell}
+                        onClick={() => {
+                          if (newWatch) setProductPriceBrackets("");
+                        }}
+                      >
                         {productPriceBrackets}
                       </Typography>
                     )}

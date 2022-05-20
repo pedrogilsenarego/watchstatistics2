@@ -46,7 +46,6 @@ const TextfieldFormik = ({
   const handleChange = (evt) => {
     const { value } = evt.target;
     helpers.setValue(value);
-    customOnChange(value);
   };
 
   const configTextField = {
@@ -67,6 +66,7 @@ const TextfieldFormik = ({
     if (mata.touched) {
       setShow(false);
       helpers.setTouched(false);
+      customOnChange(mata.value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mata.touched]);
