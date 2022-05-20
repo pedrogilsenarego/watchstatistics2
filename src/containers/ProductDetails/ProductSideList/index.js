@@ -353,7 +353,16 @@ const ProductSideList = ({
                         options={Details.movements}
                       />
                     )}
-                    {movement ||
+                    {(movement && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                        onClick={() => {
+                          if (newWatch) setMovement("");
+                        }}
+                      >
+                        {movement}
+                      </Typography>
+                    )) ||
                       (!currentUser ? (
                         "-"
                       ) : (
