@@ -36,6 +36,7 @@ const TextfieldFormik = ({
   name,
   placeholder,
   customOnChange,
+  show,
   setShow,
   ...otherProps
 }) => {
