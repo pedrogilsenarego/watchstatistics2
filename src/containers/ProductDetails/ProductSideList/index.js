@@ -188,17 +188,18 @@ const ProductSideList = ({
               Details
             </Typography>
 
-            {Object.values(submitDetails).some((element) => element) && (
-              <Grid container alignItems='center' justifyContent='flex-end'>
-                <Button3Formik title='Submit' />
-                <RiCloseFill
-                  color='orange'
-                  onClick={() => setSubmitDetails(false)}
-                  style={{ cursor: "pointer" }}
-                  size='2em'
-                />
-              </Grid>
-            )}
+            {Object.values(submitDetails).some((element) => element) &&
+              !newWatch && (
+                <Grid container alignItems='center' justifyContent='flex-end'>
+                  <Button3Formik title='Submit' />
+                  <RiCloseFill
+                    color='orange'
+                    onClick={() => setSubmitDetails(false)}
+                    style={{ cursor: "pointer" }}
+                    size='2em'
+                  />
+                </Grid>
+              )}
           </Box>
           <Box style={{ marginTop: "10px" }}>
             {currentUser &&
