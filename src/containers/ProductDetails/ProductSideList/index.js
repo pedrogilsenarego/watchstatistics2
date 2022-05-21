@@ -64,6 +64,14 @@ const ProductSideList = ({
   setReference,
   movement,
   setMovement,
+  caliber,
+  setCaliber,
+  caseSize,
+  setCaseSize,
+  waterResistance,
+  setWaterResistance,
+  caseMaterial,
+  setCaseMaterial,
 }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -77,9 +85,15 @@ const ProductSideList = ({
   const [, , helpersProductName] = useField("productName");
   const [, , helpersReference] = useField("reference");
   const [, , helpersMovement] = useField("movement");
+  const [, , helpersCaliber] = useField("caliber");
+  const [, , helpersCaseSize] = useField("caseSize");
+  const [, , helpersWaterResistance] = useField("waterResistance");
+  const [, , helpersCaseMaterial] = useField("caseMaterial");
 
   const [productNameInput, setProductNameInput] = useState(true);
   const [referenceInput, setReferenceInput] = useState(true);
+  const [caliberInput, setCaliberInput] = useState(true);
+  const [caseSizeInput, setCaseSizeINput] = useState(true);
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -92,14 +106,7 @@ const ProductSideList = ({
     tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" },
   }));
 
-  const {
-    caseMaterial,
-    caseSize,
-    caliber,
-    waterResistance,
-    productionYears,
-    userID,
-  } = product;
+  const { productionYears, userID } = product;
   const classes = useStyles();
 
   const handleSubmit = (e, { resetForm }) => {
@@ -377,20 +384,50 @@ const ProductSideList = ({
 
                 <TableRow>
                   <TableCell className={classes.tableCell}>Caliber</TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {!caliber && submitDetails.caliber && (
+                  <TableCell
+                    className={classes.tableCell}
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setCaliberInput(true);
+                    }}
+                  >
+                    {!caliber && !newWatch && submitDetails.caliber && (
                       <TextfieldFormik size='small' name='caliber' />
                     )}
-                    {caliber ||
-                      (currentUser ? (
+                    {caliberInput && newWatch && submitDetails.caliber && (
+                      <TextField2FormikOnChange
+                        show={caliberInput}
+                        setShow={setCaliberInput}
+                        name='caliber'
+                        customOnChange={(e) => {
+                          helpersCaliber.setValue(e);
+                          setCaliber(e);
+                        }}
+                      />
+                    )}
+                    {(caliber && !newWatch && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                      >
+                        {caliber}
+                      </Typography>
+                    )) ||
+                      (!currentUser ? (
+                        "-"
+                      ) : (
                         <CustomAddCircle
                           value={rewards.PRODUCT_CALIBER}
                           name='caliber'
                           {...configCustomCircle}
                         />
-                      ) : (
-                        "-"
                       ))}
+                    {caliber && !caliberInput && newWatch && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                      >
+                        {caliber}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -432,29 +469,50 @@ const ProductSideList = ({
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.tableCell}>Case Size</TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {!caseSize && submitDetails.caseSize && (
-                      <Grid container justifyContent='flex-end'>
-                        <Grid item xs={3}>
-                          <TextfieldFormik
-                            size='small'
-                            name='caseSize'
-                            placeholder='mm'
-                          />
-                        </Grid>
-                      </Grid>
+                  <TableCell
+                    className={classes.tableCell}
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setCaseSizeINput(true);
+                    }}
+                  >
+                    {!caseSize && !newWatch && submitDetails.caseSize && (
+                      <TextfieldFormik size='small' name='caseSize' />
                     )}
-                    {caseSize ||
-                      (currentUser ? (
+                    {caseSizeInput && newWatch && submitDetails.caseSize && (
+                      <TextField2FormikOnChange
+                        show={caseSizeInput}
+                        setShow={setCaseSizeINput}
+                        name='caseSize'
+                        customOnChange={(e) => {
+                          helpersCaseSize.setValue(e);
+                          setCaseSize(e);
+                        }}
+                      />
+                    )}
+                    {(caseSize && !newWatch && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                      >
+                        {caseSize} mm
+                      </Typography>
+                    )) ||
+                      (!currentUser ? (
+                        "-"
+                      ) : (
                         <CustomAddCircle
                           value={rewards.PRODUCT_CASE_SIZE}
                           name='caseSize'
                           {...configCustomCircle}
                         />
-                      ) : (
-                        "-"
                       ))}
-                    {caseSize ? "mm" : null}
+                    {caseSize && newWatch && !caseSizeInput && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                      >
+                        {caseSize} mm
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -462,26 +520,44 @@ const ProductSideList = ({
                     Case Material
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!caseMaterial && submitDetails.caseMaterial && (
-                      <Grid container justifyContent='flex-end'>
-                        <Grid item xs={8}>
-                          <SelectFormik
-                            name='caseMaterial'
-                            size='small'
-                            options={Details.caseMaterials}
-                          />
-                        </Grid>
-                      </Grid>
+                    {!caseMaterial &&
+                      !newWatch &&
+                      submitDetails.caseMaterial && (
+                        <SelectFormik
+                          size='small'
+                          name='caseMaterial'
+                          options={Details.caseMaterials}
+                        />
+                      )}
+                    {!caseMaterial && newWatch && submitDetails.caseMaterial && (
+                      <SelectFormikOnChange
+                        size='small'
+                        customOnChange={(e) => {
+                          helpersCaseMaterial.setValue(e);
+                          setCaseMaterial(e);
+                        }}
+                        name='caseMaterial'
+                        options={Details.caseMaterials}
+                      />
                     )}
-                    {caseMaterial ||
-                      (currentUser ? (
+                    {(caseMaterial && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                        onClick={() => {
+                          if (newWatch) setCaseMaterial("");
+                        }}
+                      >
+                        {caseMaterial}
+                      </Typography>
+                    )) ||
+                      (!currentUser ? (
+                        "-"
+                      ) : (
                         <CustomAddCircle
                           value={rewards.PRODUCT_CASE_MATERIAL}
                           name='caseMaterial'
                           {...configCustomCircle}
                         />
-                      ) : (
-                        "-"
                       ))}
                   </TableCell>
                 </TableRow>
@@ -490,26 +566,46 @@ const ProductSideList = ({
                     Water Res.
                   </TableCell>
                   <TableCell className={classes.tableCell} align='right'>
-                    {!waterResistance && submitDetails.waterResistance && (
-                      <Grid container justifyContent='flex-end'>
-                        <Grid item xs={8}>
-                          <SelectFormik
-                            size='small'
-                            name='waterResistance'
-                            options={Details.waterResistance}
-                          />
-                        </Grid>
-                      </Grid>
-                    )}
-                    {waterResistance ||
-                      (currentUser ? (
+                    {!waterResistance &&
+                      !newWatch &&
+                      submitDetails.waterResistance && (
+                        <SelectFormik
+                          size='small'
+                          name='waterResistance'
+                          options={Details.waterResistance}
+                        />
+                      )}
+                    {!waterResistance &&
+                      newWatch &&
+                      submitDetails.waterResistance && (
+                        <SelectFormikOnChange
+                          size='small'
+                          customOnChange={(e) => {
+                            helpersWaterResistance.setValue(e);
+                            setWaterResistance(e);
+                          }}
+                          name='waterResistance'
+                          options={Details.waterResistance}
+                        />
+                      )}
+                    {(waterResistance && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                        onClick={() => {
+                          if (newWatch) setWaterResistance("");
+                        }}
+                      >
+                        {waterResistance}
+                      </Typography>
+                    )) ||
+                      (!currentUser ? (
+                        "-"
+                      ) : (
                         <CustomAddCircle
-                          value={rewards.PRODUCT_MOVEMENT}
+                          value={rewards.PRODUCT_WATER_RESISTANCE}
                           name='waterResistance'
                           {...configCustomCircle}
                         />
-                      ) : (
-                        "-"
                       ))}
                   </TableCell>
                 </TableRow>

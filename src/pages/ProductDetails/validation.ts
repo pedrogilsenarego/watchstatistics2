@@ -12,5 +12,8 @@ export const FORM_VALIDATION = Yup.object().shape({
   productCategory: Yup.string().required(i18n.t("validation.required")),
   productPriceBrackets: Yup.string().required(i18n.t("validation.required")),
   productDesc: Yup.string()
-  .max(2000, i18n.t("validation.maxCharacters"))
+  .max(2000, i18n.t("validation.maxCharacters")),
+  caseSize: Yup.number().typeError(i18n.t('validation.number'))
+  .min(20,i18n.t('validation.moreT20'))
+  .max(60,i18n.t('validation.lessT60')),
 });

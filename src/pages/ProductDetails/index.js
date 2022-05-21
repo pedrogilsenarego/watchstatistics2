@@ -3,6 +3,7 @@ import SideGraphPanel from "../../containers/ProductDetails/ProductSideGraph";
 import SideDescription from "../../containers/ProductDetails/ProductSideDescription";
 import ProductSideList from "../../containers/ProductDetails/ProductSideList";
 import MobileBottomAppBar from "src/containers/ProductDetails/MobileBottomAppBar";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { Helmet } from "react-helmet";
@@ -40,7 +41,7 @@ const NO_IMAGE =
 const ProductDetails = ({}) => {
   const dispatch = useDispatch();
   const { productID } = useParams();
-
+  const history = useHistory();
   const { product, currentUser, cartItems } = useSelector(mapState);
   const [showVote, setShowVote] = useState(false);
   const [newWatch, setNewWatch] = useState(false);
@@ -57,6 +58,10 @@ const ProductDetails = ({}) => {
   const [reference, setReference] = useState("");
   const [productDesc, setProductDesc] = useState("");
   const [movement, setMovement] = useState("");
+  const [caliber, setCaliber] = useState("");
+  const [caseSize, setCaseSize] = useState("");
+  const [waterResistance, setWaterResistance] = useState("");
+  const [caseMaterial, setCaseMaterial] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -68,11 +73,13 @@ const ProductDetails = ({}) => {
     productDesc: "",
     additionalData: [],
     avgTotal: 0,
-    avgVotationNotOwn: 0,
+    avgVotationsNotOwn: 0,
     avgVotationsOwn: 0,
     caseMaterial: "",
     caseSize: "",
     movement: "",
+    caliber: "",
+    waterResistance: "",
     numberVotesNotOwn: 0,
     numberVotesOwn: 0,
     votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
@@ -108,6 +115,10 @@ const ProductDetails = ({}) => {
       setReference(product.reference);
       setProductDesc(product.productDesc);
       setMovement(product.movement);
+      setCaliber(product.caliber ?? "");
+      setCaseSize(product.caseSize);
+      setWaterResistance(product.waterResistance ?? "");
+      setCaseMaterial(product.caseMaterial ?? "");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
@@ -147,6 +158,14 @@ const ProductDetails = ({}) => {
     setReference,
     movement,
     setMovement,
+    caliber,
+    setCaliber,
+    caseSize,
+    setCaseSize,
+    waterResistance,
+    setWaterResistance,
+    caseMaterial,
+    setCaseMaterial,
   };
 
   const configSideDescription = {
@@ -164,6 +183,7 @@ const ProductDetails = ({}) => {
         UserUID: currentUser.id,
       })
     );
+    history.push("/");
   };
 
   return (
