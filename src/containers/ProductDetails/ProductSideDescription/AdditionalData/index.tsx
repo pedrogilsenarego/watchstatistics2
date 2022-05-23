@@ -10,10 +10,19 @@ import AddAdditionalData from "./AddAditionalData";
 
 interface Props {
   additionalData: { title: string; link: string }[];
+  setAdditionalData: (
+    additionalData: { title: string; link: string }[]
+  ) => void;
   currentUser: any;
+  newWatch: boolean;
 }
 
-const AdditionalData = ({ additionalData, currentUser }: Props) => {
+const AdditionalData = ({
+  additionalData,
+  currentUser,
+  setAdditionalData,
+  newWatch,
+}: Props) => {
   const [addAdditionalData, setAddAdditionalData] = useState(false);
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
 
@@ -80,8 +89,13 @@ const AdditionalData = ({ additionalData, currentUser }: Props) => {
             </Styled.Typography>
           </Grid>
         )}
-        {addAdditionalData && (
-          <AddAdditionalData setAddAdditionalData={setAddAdditionalData} />
+        {addAdditionalData && additionalData?.length <= 4 && (
+          <AddAdditionalData
+            setAddAdditionalData={setAddAdditionalData}
+            additionalData={additionalData}
+            newWatch={newWatch}
+            setAdditionalData={setAdditionalData}
+          />
         )}
       </Grid>
       <Popover

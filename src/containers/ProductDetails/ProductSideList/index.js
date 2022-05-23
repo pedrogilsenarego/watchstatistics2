@@ -72,6 +72,8 @@ const ProductSideList = ({
   setWaterResistance,
   caseMaterial,
   setCaseMaterial,
+  productionYears,
+  setProductionYears,
 }) => {
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
@@ -89,11 +91,17 @@ const ProductSideList = ({
   const [, , helpersCaseSize] = useField("caseSize");
   const [, , helpersWaterResistance] = useField("waterResistance");
   const [, , helpersCaseMaterial] = useField("caseMaterial");
+  const [, metaProductionYearStart, helpersProductionYearStart] = useField(
+    "productionYearStart"
+  );
+  const [, metaProductionYearEnd, helpersProductionYearEnd] =
+    useField("productionYearEnd");
 
   const [productNameInput, setProductNameInput] = useState(true);
   const [referenceInput, setReferenceInput] = useState(true);
   const [caliberInput, setCaliberInput] = useState(true);
   const [caseSizeInput, setCaseSizeINput] = useState(true);
+  const [productionYearsInput, setProductionYearsInput] = useState(true);
 
   const useStyles = makeStyles((theme) => ({
     table: {
@@ -106,7 +114,7 @@ const ProductSideList = ({
     tableCell: { fontSize: "18px !important", color: "#ffffffB3 !important" },
   }));
 
-  const { productionYears, userID } = product;
+  const { userID } = product;
   const classes = useStyles();
 
   const handleSubmit = (e, { resetForm }) => {
@@ -434,8 +442,14 @@ const ProductSideList = ({
                   <TableCell className={classes.tableCell}>
                     Production Years
                   </TableCell>
-                  <TableCell className={classes.tableCell} align='right'>
-                    {!productionYears && submitDetails.years && (
+                  <TableCell
+                    className={classes.tableCell}
+                    align='right'
+                    onClick={() => {
+                      if (newWatch) setProductionYearsInput(true);
+                    }}
+                  >
+                    {!productionYears && !newWatch && submitDetails.years && (
                       <Grid container justifyContent='flex-end' columnGap={2}>
                         <Grid item xs={3}>
                           <TextfieldFormik
@@ -455,16 +469,59 @@ const ProductSideList = ({
                         </Grid>
                       </Grid>
                     )}
-                    {productionYears ||
-                      (currentUser ? (
+                    {productionYearsInput && newWatch && submitDetails.years && (
+                      <Grid container justifyContent='flex-end' columnGap={2}>
+                        <Grid item xs={3}>
+                          <TextField2FormikOnChange
+                            show={productionYearsInput}
+                            setShow={setProductionYearsInput}
+                            name='productionYearStart'
+                            customOnChange={(e) => {
+                              helpersProductionYearStart.setValue(e);
+                              setProductionYears(
+                                e + "-" + metaProductionYearEnd.value
+                              );
+                            }}
+                          />
+                        </Grid>
+                        <Grid item xs={3}>
+                          <TextField2FormikOnChange
+                            show={productionYearsInput}
+                            setShow={setProductionYearsInput}
+                            name='productionYearEnd'
+                            customOnChange={(e) => {
+                              helpersProductionYearEnd.setValue(e);
+                              setProductionYears(
+                                metaProductionYearStart.value + "-" + e
+                              );
+                            }}
+                          />
+                        </Grid>
+                      </Grid>
+                    )}
+                    {(productionYears && !newWatch && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                      >
+                        {productionYears}
+                      </Typography>
+                    )) ||
+                      (!currentUser ? (
+                        "-"
+                      ) : (
                         <CustomAddCircle
                           value={rewards.PRODUCT_YEARS}
                           name='years'
                           {...configCustomCircle}
                         />
-                      ) : (
-                        "-"
                       ))}
+                    {productionYears && !productionYearsInput && newWatch && (
+                      <Typography
+                        style={{ color: "inherit", fontSize: "inherit" }}
+                      >
+                        {productionYears}
+                      </Typography>
+                    )}
                   </TableCell>
                 </TableRow>
                 <TableRow>

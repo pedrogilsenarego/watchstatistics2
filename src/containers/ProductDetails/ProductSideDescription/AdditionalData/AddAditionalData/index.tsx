@@ -4,7 +4,7 @@ import Button3Formik from "src/components/Buttons/Button3Formik";
 import { RiCloseFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import { FORM_VALIDATION } from "./validation";
 import * as Styled from "./styles";
 import { addProductAdditionalData } from "src/redux/Products/products.actions";
@@ -12,9 +12,14 @@ import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 
 interface Props {
   setAddAdditionalData: (addAdditionalData: boolean) => void;
+  newWatch: boolean;
+  additionalData: { title: string; link: string }[];
+  setAdditionalData: (
+    additionalData: any
+  ) => void;
 }
 
-const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
+const AddAdditionalData = ({ setAddAdditionalData, newWatch, additionalData, setAdditionalData }: Props) => {
   const INITIAL_FORM_STATE = {
     title: "",
     link: "",
@@ -28,6 +33,7 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const { productBrand, productName, reference } = product;
+  const [, metaAdditionalData, helpersAdditionalData] = useField("additionalData")
 
   const handleSubmit = (e: any) => {
     const { title, link } = e;
@@ -43,10 +49,22 @@ const AddAdditionalData = ({ setAddAdditionalData }: Props) => {
     setAddAdditionalData(false);
   };
 
+  const handleNewWatch = (e: any) => {
+    const { title, link } = e
+    console.log(title, link)
+    setAdditionalData([...additionalData, { title, link }])
+    helpersAdditionalData.setValue([...metaAdditionalData.value, { title, link }])
+    console.log(additionalData, metaAdditionalData.value)
+  }
+
   return (
     <Formik
       initialValues={{ ...INITIAL_FORM_STATE }}
-      onSubmit={(values) => handleSubmit(values)}
+      onSubmit={(values) => {
+        if (newWatch)
+          handleNewWatch(values);
+        else handleSubmit(values)
+      }}
       validationSchema={FORM_VALIDATION}
     >
       <Form>

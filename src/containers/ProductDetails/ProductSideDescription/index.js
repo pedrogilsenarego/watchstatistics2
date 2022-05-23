@@ -7,15 +7,19 @@ import AdditionalData from "./AdditionalData";
 import { rewards } from "src/constants/gamification";
 
 const mapState = (state) => ({
-  product: state.productsData.product,
   currentUser: state.user.currentUser,
 });
 
 // eslint-disable-next-line
-const ProductSideDescription = ({ newWatch, productDesc, setProductDesc }) => {
-  const { product, currentUser } = useSelector(mapState);
+const ProductSideDescription = ({
+  newWatch,
+  productDesc,
+  setProductDesc,
+  additionalData,
+  setAdditionalData,
+}) => {
+  const { currentUser } = useSelector(mapState);
   const [addDescription, setAddDescription] = useState(false);
-  const { additionalData } = product;
 
   return (
     <div>
@@ -71,8 +75,10 @@ const ProductSideDescription = ({ newWatch, productDesc, setProductDesc }) => {
         <Divider style={{ background: "#ffffff66" }} />
       </Box>
       <AdditionalData
+        newWatch={newWatch}
         additionalData={additionalData}
         currentUser={currentUser}
+        setAdditionalData={setAdditionalData}
       />
     </div>
   );

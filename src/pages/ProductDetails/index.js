@@ -62,6 +62,8 @@ const ProductDetails = ({}) => {
   const [caseSize, setCaseSize] = useState("");
   const [waterResistance, setWaterResistance] = useState("");
   const [caseMaterial, setCaseMaterial] = useState("");
+  const [additionalData, setAdditionalData] = useState([]);
+  const [productionYears, setProductionYears] = useState("");
 
   const NEW_WATCH_INITIAL_VALUES = {
     productBrand: "",
@@ -84,6 +86,8 @@ const ProductDetails = ({}) => {
     numberVotesOwn: 0,
     votationsNonOwn: [0, 0, 0, 0, 0, 0, 0],
     votationsOwn: [0, 0, 0, 0, 0, 0, 0],
+    productionYearStart: "",
+    productionYearEnd: "",
   };
 
   useEffect(
@@ -119,6 +123,8 @@ const ProductDetails = ({}) => {
       setCaseSize(product.caseSize);
       setWaterResistance(product.waterResistance ?? "");
       setCaseMaterial(product.caseMaterial ?? "");
+      setAdditionalData(product.additionalData ?? []);
+      setProductionYears(product.productionYears ?? "");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
@@ -166,18 +172,26 @@ const ProductDetails = ({}) => {
     setWaterResistance,
     caseMaterial,
     setCaseMaterial,
+    productionYears,
+    setProductionYears,
   };
 
   const configSideDescription = {
     newWatch,
     productDesc,
     setProductDesc,
+    additionalData,
+    setAdditionalData,
   };
 
   const handleSubmitNewWatch = (values) => {
+    const productionYears =
+      values.productionYearStart + "-" + values.productionYearEnd;
+    delete values.productionYears;
     dispatch(
       addProductStart({
         ...values,
+        productionYears,
         currentUser,
         userID: currentUser.displayName,
         UserUID: currentUser.id,
