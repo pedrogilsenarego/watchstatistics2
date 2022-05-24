@@ -29,6 +29,7 @@ const ImageMain = ({
   const [readySubmit, setReadySubmit] = useState(false);
   const [errorImage, setErrorImage] = useState(false);
   const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
+  const [originalPictureNewWatch, setOriginalPictureNewWatch] = useState(true);
   const Theme = useTheme();
   const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
 
@@ -55,6 +56,11 @@ const ImageMain = ({
     if (errorImage) setErrorImage(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainImage]);
+
+  useEffect(() => {
+    if (newWatch) setAddAdditionalPictures(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newWatch]);
 
   const mouseDownCoords = (e) => {
     window.checkForDrag = e.clientX;
@@ -205,21 +211,22 @@ const ImageMain = ({
                 <AvatarsControllers {...configAvatarControllers} />
               )}
             </Grid>
-            {(addAdditionalPictures || newWatch) &&
-              productThumbnail.length < 4 && (
-                <Grid xs={12} item>
-                  <AddAdditionalPicture
-                    setIndexMini={setIndexMini}
-                    setProductThumbnail={setProductThumbnail}
-                    productThumbnail={productThumbnail}
-                    newWatch={newWatch}
-                    readySubmit={readySubmit}
-                    setReadySubmit={setReadySubmit}
-                    setAddAdditionalPicture={setAddAdditionalPictures}
-                    setMainImage={setMainImage}
-                  />
-                </Grid>
-              )}
+            {addAdditionalPictures && productThumbnail.length < 4 && (
+              <Grid xs={12} item>
+                <AddAdditionalPicture
+                  setIndexMini={setIndexMini}
+                  setProductThumbnail={setProductThumbnail}
+                  productThumbnail={productThumbnail}
+                  newWatch={newWatch}
+                  readySubmit={readySubmit}
+                  setReadySubmit={setReadySubmit}
+                  setAddAdditionalPicture={setAddAdditionalPictures}
+                  setMainImage={setMainImage}
+                  originalPictureNewWatch={originalPictureNewWatch}
+                  setOriginalPictureNewWatch={setOriginalPictureNewWatch}
+                />
+              </Grid>
+            )}
           </Grid>
         </Card>
       )}

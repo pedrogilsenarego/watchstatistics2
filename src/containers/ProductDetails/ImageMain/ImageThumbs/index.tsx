@@ -77,7 +77,7 @@ const ImageThumbs = ({
                 </Grid>
               );
             })}
-            {!addAdditionalPictures && currentUser && productThumbnail.length < 4 && !newWatch && (
+            {!addAdditionalPictures && currentUser && productThumbnail.length < 4 && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {

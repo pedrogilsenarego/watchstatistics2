@@ -182,6 +182,14 @@ const Admin = ({}) => {
         </Grid>
       </Grid>
       <Button1 title='Get All Watches' onClick={() => handleGetWatches()} />
+      {watchProducts.map((item, pos) => {
+        return (
+          <Typography style={{ color: "white" }} key={pos}>
+            &#123;"name":"{item.productBrand} {item.productName}{" "}
+            {item.reference}", "id": "{item.documentID}"&#125;,
+          </Typography>
+        );
+      })}
     </div>
   );
 };

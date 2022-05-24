@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { i18n } from "src/translations/i18n";
 import { Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +22,8 @@ interface Props {
   setProductThumbnail: (productThumbnail: any) => void;
   productThumbnail: any;
   setIndexMini: (indexMini: number) => void
+  originalPictureNewWatch: boolean;
+  setOriginalPictureNewWatch: (originalPictureNewWatch: boolean) => void;
 }
 
 const AddAdditionalPicture = ({
@@ -33,7 +34,9 @@ const AddAdditionalPicture = ({
   newWatch,
   setProductThumbnail,
   productThumbnail,
-  setIndexMini
+  setIndexMini,
+  originalPictureNewWatch,
+  setOriginalPictureNewWatch,
 
 }: Props) => {
   const INITIAL_FORM_STATE = {
@@ -47,8 +50,7 @@ const AddAdditionalPicture = ({
   const { currentUser, product } = useSelector(mapState);
   const dispatch = useDispatch();
   const params = useParams();
-  const [originalPictureNewWatch, setOriginalPictureNewWatch] =
-    useState<boolean>(true);
+
   const { productBrand, productName, reference } = product;
   const [, metaProductThumbnail, helpersProductThumbnail] =
     useField("productThumbnail");
@@ -78,13 +80,18 @@ const AddAdditionalPicture = ({
     const { picture } = e;
     setReadySubmit(false)
     resetForm()
-    originalPictureNewWatch
-      ? setProductThumbnail([picture])
-      : setProductThumbnail([...productThumbnail, picture]);
-    setIndexMini(originalPictureNewWatch ? 0 : productThumbnail.length)
-    setOriginalPictureNewWatch(false)
+    setIndexMini(originalPictureNewWatch ? 0 : productThumbnail.length);
+    if (originalPictureNewWatch) {
+      setProductThumbnail([picture])
+    }
+    else {
+      setProductThumbnail([...productThumbnail, picture])
+    }
 
+    setOriginalPictureNewWatch(false)
+    setAddAdditionalPicture(false);
     helpersProductThumbnail.setValue([...metaProductThumbnail.value, picture]);
+
   };
 
   return (
@@ -150,7 +157,7 @@ const AddAdditionalPicture = ({
                 )}
               </>
             )}
-            {!newWatch && (
+            {(!originalPictureNewWatch || !newWatch) && (
               <Grid item>
                 <RiCloseFill
                   color='orange'
@@ -160,9 +167,11 @@ const AddAdditionalPicture = ({
                 />
               </Grid>
             )}
-            <Typography style={{ color: "red" }}>
-              {metaProductThumbnail.error}
-            </Typography>
+            <Grid item xs={12}>
+              <Typography style={{ color: "red", marginTop: "5px" }}>
+                {metaProductThumbnail.error}
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
         {!newWatch && (
