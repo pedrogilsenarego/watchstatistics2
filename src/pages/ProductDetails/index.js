@@ -184,6 +184,8 @@ const ProductDetails = ({}) => {
     setAdditionalData,
   };
 
+  const configGraphPanel = {};
+
   const handleSubmitNewWatch = (values) => {
     const productionYears =
       values.productionYearStart + "-" + values.productionYearEnd;
@@ -235,6 +237,7 @@ const ProductDetails = ({}) => {
                         isMatch={isMatch}
                         showVote={showVote}
                         setShowVote={setShowVote}
+                        {...configGraphPanel}
                       />
 
                       <Card
@@ -303,6 +306,7 @@ const ProductDetails = ({}) => {
                       showVote={showVote}
                       setShowVote={setShowVote}
                       voteRef={voteRef}
+                      {...configGraphPanel}
                     />
 
                     <Card

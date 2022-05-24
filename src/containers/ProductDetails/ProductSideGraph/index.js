@@ -8,10 +8,12 @@ import { motion } from "framer-motion";
 import SignIn from "../../SignIn";
 import { Radar } from "react-chartjs-2";
 import Icons from "./Icons";
+import { useFormikContext } from "formik";
 import { useTheme, useMediaQuery } from "@mui/material";
 import Drawer from "src/components/Drawer";
 import Button3 from "src/components/Buttons/Button3";
 import Button3Formik from "src/components/Buttons/Button3Formik";
+import Alert from "src/components/Alert";
 
 const initialTargetVoteState = {
   quality: "",
@@ -48,6 +50,8 @@ const ProductSidePanel = ({
   const [clearDrawerBackground, setClearDrawerBackground] = useState(false);
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [coordinates, setCoordinates] = useState([1, 1]);
+  const [triggerAlert, setTriggerAlert] = useState(false);
+  const { isValid } = useFormikContext();
 
   const graphRef = useRef();
   const radarRef = useRef();
@@ -345,7 +349,7 @@ const ProductSidePanel = ({
                 marginBottom: isMatch ? "10px" : "0px",
               }}
             >
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12}>
                 <Box
                   style={{
                     textAlign: isMatch ? "center" : "left",
@@ -374,52 +378,68 @@ const ProductSidePanel = ({
                 </Box>
               </Grid>
               {!mobile && (
-                <Grid
-                  item
-                  xs={12}
-                  md={6}
-                  alignItems='center'
-                  justifyContent='center'
-                  container
-                >
-                  {newWatch ? (
-                    <Button3Formik title='Submit' />
-                  ) : (
-                    <>
-                      {currentUser &&
-                        !showVote &&
-                        !currentUser.userVotes.includes(productID) && (
+                <>
+                  <Grid
+                    item
+                    xs={12}
+                    alignItems='center'
+                    justifyContent='center'
+                    container
+                  >
+                    {newWatch ? (
+                      <Button3Formik
+                        title='Submit'
+                        customOnClick={() => {
+                          if (!isValid) {
+                            setTriggerAlert(true);
+                          }
+                        }}
+                      />
+                    ) : (
+                      <>
+                        {currentUser &&
+                          !showVote &&
+                          !currentUser.userVotes.includes(productID) && (
+                            <Button3
+                              title='Vote'
+                              aria-controls='vote'
+                              onClick={(e) => {
+                                handleVote();
+                              }}
+                            />
+                          )}
+                        {currentUser &&
+                          currentUser.userVotes.includes(productID) && (
+                            <Box>
+                              <Typography
+                                style={{
+                                  color: "orange",
+                                  cursor: "pointer",
+                                  fontWeight: 600,
+                                }}
+                              >
+                                Already Voted
+                              </Typography>
+                            </Box>
+                          )}
+                        {!currentUser && (
                           <Button3
-                            title='Vote'
-                            aria-controls='vote'
-                            onClick={(e) => {
-                              handleVote();
-                            }}
+                            title='Login to Vote'
+                            onClick={(e) => handleLoginOpen(e)}
                           />
                         )}
-                      {currentUser &&
-                        currentUser.userVotes.includes(productID) && (
-                          <Box>
-                            <Typography
-                              style={{
-                                color: "orange",
-                                cursor: "pointer",
-                                fontWeight: 600,
-                              }}
-                            >
-                              Already Voted
-                            </Typography>
-                          </Box>
-                        )}
-                      {!currentUser && (
-                        <Button3
-                          title='Login to Vote'
-                          onClick={(e) => handleLoginOpen(e)}
-                        />
-                      )}
-                    </>
-                  )}
-                </Grid>
+                      </>
+                    )}
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Alert
+                      severity='error'
+                      message='Teste'
+                      trigger={triggerAlert}
+                      setTrigger={setTriggerAlert}
+                    />
+                  </Grid>
+                </>
               )}
             </Grid>
           </Grid>
