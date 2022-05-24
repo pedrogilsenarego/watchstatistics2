@@ -1,10 +1,12 @@
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
 
-export const handleAddProductAdmin = (payload) => {
+export const handleAddProduct = (payload) => {
   return new Promise((resolve, reject) => {
+    const { mode } = payload;
+    delete payload.mode;
     firestore
-      .collection("products")
+      .collection(mode)
       .doc()
       .set(payload)
       .then(() => {

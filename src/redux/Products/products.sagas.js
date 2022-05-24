@@ -15,7 +15,7 @@ import {
   setProductListDetail,
 } from "./products.actions";
 import {
-  handleAddProductAdmin,
+  handleAddProduct,
   handleFetchProducts,
   handleFetchLatestProducts,
   handleFetchValidationProducts,
@@ -51,9 +51,10 @@ export function* addProduct({ payload }) {
     const timestamp = new Date();
     if (checkUserIsAdmin(currentUser)) {
       delete payload.currentUser;
-      yield handleAddProductAdmin({
+      yield handleAddProduct({
         ...payload,
         createdDate: timestamp,
+        mode: "products",
       });
       yield handleIncrementProductsCounter(payload);
       yield put(
@@ -61,6 +62,11 @@ export function* addProduct({ payload }) {
       );
     } else {
       delete payload.currentUser;
+      yield handleAddProduct({
+        ...payload,
+        createdDate: timestamp,
+        mode: "orders"
+      });
       yield put(
         updateInformationNotification(
           i18n.t("notifications.information.newWatch")
