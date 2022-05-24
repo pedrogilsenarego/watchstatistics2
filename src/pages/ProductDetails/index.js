@@ -211,6 +211,7 @@ const ProductDetails = ({}) => {
         initialValues={NEW_WATCH_INITIAL_VALUES}
         onSubmit={(values) => handleSubmitNewWatch(values)}
         validationSchema={FORM_VALIDATION}
+        validateOnMount={true}
       >
         <Form>
           {isMatch ? (
