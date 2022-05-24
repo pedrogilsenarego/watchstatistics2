@@ -15,6 +15,7 @@ import Button3 from "src/components/Buttons/Button3";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import Alert from "src/components/Alert";
 import { i18n } from "src/translations/i18n";
+import VotesBox from "./VotesBox";
 
 const initialTargetVoteState = {
   quality: "",
@@ -125,15 +126,7 @@ const ProductSidePanel = ({
 
   const classes = useStyles();
 
-  const {
-    avgVotationsOwn,
-    avgVotationsNotOwn,
-    votationsOwn,
-    votationsNonOwn,
-    numberVotesOwn,
-    numberVotesNotOwn,
-    avgTotal,
-  } = product;
+  const { votationsOwn, votationsNonOwn } = product;
 
   const targetVoteData = [
     targetVoteCategories.quality,
@@ -350,34 +343,15 @@ const ProductSidePanel = ({
                 marginBottom: isMatch ? "10px" : "0px",
               }}
             >
-              <Grid item xs={12}>
-                <Box
-                  style={{
-                    textAlign: isMatch ? "center" : "left",
-                    padding: "10px",
-                  }}
-                >
-                  {!isMatch && (
-                    <Typography
-                      fontWeight={600}
-                      style={{ color: "#ffffff" }}
-                      onClick={() => {
-                        setEasterEggMotion(!easterEggMotion);
-                      }}
-                    >
-                      Score: {avgTotal}
-                    </Typography>
-                  )}
+              {!newWatch && (
+                <Grid item xs={12} style={{ padding: "10px" }}>
+                  <VotesBox
+                    easterEggMotion={easterEggMotion}
+                    setEasterEggMotion={setEasterEggMotion}
+                  />
+                </Grid>
+              )}
 
-                  <Typography style={{ color: "#ffffffBF", fontSize: "13px" }}>
-                    Own/Experimented: {avgVotationsOwn} Votes: {numberVotesOwn}
-                  </Typography>
-                  <Typography style={{ color: "#ffffffBF", fontSize: "13px" }}>
-                    Only Seen Digital: {avgVotationsNotOwn} Votes:{" "}
-                    {numberVotesNotOwn}
-                  </Typography>
-                </Box>
-              </Grid>
               {!mobile && (
                 <>
                   <Grid
@@ -386,6 +360,7 @@ const ProductSidePanel = ({
                     alignItems='center'
                     justifyContent='center'
                     container
+                    style={{ marginTop: newWatch ? "15px" : "0px" }}
                   >
                     {newWatch ? (
                       <Button3Formik
@@ -432,10 +407,14 @@ const ProductSidePanel = ({
                       </>
                     )}
                   </Grid>
-                  <Grid item xs={12} style={{marginTop: "10px", marginBottom: "10px"}}>
+                  <Grid
+                    item
+                    xs={12}
+                    style={{ marginTop: "10px", marginBottom: "10px" }}
+                  >
                     <Alert
                       severity='error'
-                      message={i18n.t('forms.notifications.error')}
+                      message={i18n.t("forms.notifications.error")}
                       trigger={triggerAlert}
                       setTrigger={setTriggerAlert}
                     />
