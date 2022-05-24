@@ -81,10 +81,13 @@ export const content = {
         },
         imageCheck: "Something went wrong with this image",
         newWatch: {
-          watchName:{
+          watchName: {
             title: "Add here the watch brand, model and reference"
           }
         },
+        notifications: {
+          error: "Review some of the fields."
+        }
       },
     },
   },

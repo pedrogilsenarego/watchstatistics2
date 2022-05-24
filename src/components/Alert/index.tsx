@@ -15,7 +15,7 @@ const Alert = ({ severity, message, trigger, setTrigger }: Props) => {
   const [alert, setAlert] = useState("")
 
   const handleAlert = () => {
-    const alertTimeoutSec = 1500 * 2
+    const alertTimeoutSec = 2000 * 2
     let alertTimeout = undefined
     clearInterval(alertTimeout)
     alertTimeout = setTimeout(() => { setAlert(''); setTrigger(false) }, alertTimeoutSec)

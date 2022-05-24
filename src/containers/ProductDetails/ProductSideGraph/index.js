@@ -14,6 +14,7 @@ import Drawer from "src/components/Drawer";
 import Button3 from "src/components/Buttons/Button3";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import Alert from "src/components/Alert";
+import { i18n } from "src/translations/i18n";
 
 const initialTargetVoteState = {
   quality: "",
@@ -431,10 +432,10 @@ const ProductSidePanel = ({
                       </>
                     )}
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} style={{marginTop: "10px", marginBottom: "10px"}}>
                     <Alert
                       severity='error'
-                      message='Teste'
+                      message={i18n.t('forms.notifications.error')}
                       trigger={triggerAlert}
                       setTrigger={setTriggerAlert}
                     />
