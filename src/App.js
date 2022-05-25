@@ -14,10 +14,8 @@ import Dashboard from "./pages/Dashboard";
 import MyCollection from "./pages/MyCollection";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
-import ProductDetailsPreview from "./pages/ProductDetailsPreview";
 import FAQ from "./pages/FAQ";
 import Watchstatistics from "./pages/Watchstatistics";
-import AddWatch from "./pages/Watchstatistics/AddWatch";
 import CompareWatches from "./pages/CompareWatches";
 import WatchLaboratory2 from "./containers/WatchLab2";
 import Market from "./pages/Market";
@@ -155,17 +153,7 @@ const App = () => {
                 </WithAuth>
               )}
             />
-            <Route
-              exact
-              path='/watchstatistics/addwatch'
-              render={() => (
-                <WithAuth>
-                  <WatchLab>
-                    <AddWatch />
-                  </WatchLab>
-                </WithAuth>
-              )}
-            />
+            
             <Route
               exact
               path='/watchstatistics/market'
@@ -202,16 +190,7 @@ const App = () => {
                 </MainLayout>
               )}
             />
-            <Route
-              path='/product/preview'
-              render={() => (
-                <WithAuth>
-                  <MainLayout>
-                    <ProductDetailsPreview />
-                  </MainLayout>
-                </WithAuth>
-              )}
-            />
+           
             <Route
               path='/FAQ'
               render={() => (

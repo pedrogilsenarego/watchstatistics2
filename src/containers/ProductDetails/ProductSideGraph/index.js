@@ -16,6 +16,7 @@ import Button3Formik from "src/components/Buttons/Button3Formik";
 import Alert from "src/components/Alert";
 import { i18n } from "src/translations/i18n";
 import VotesBox from "./VotesBox";
+import RewardsBanner from "./RewardsBanner";
 
 const initialTargetVoteState = {
   quality: "",
@@ -349,6 +350,11 @@ const ProductSidePanel = ({
                     easterEggMotion={easterEggMotion}
                     setEasterEggMotion={setEasterEggMotion}
                   />
+                </Grid>
+              )}
+              {newWatch && (
+                <Grid item xs={12} style={{ padding: "10px" }}>
+                  <RewardsBanner />
                 </Grid>
               )}
 
