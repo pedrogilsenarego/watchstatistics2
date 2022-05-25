@@ -696,7 +696,7 @@ const ProductSideList = ({
           </TableContainer>
         </Form>
       </Formik>
-      <BottomComponents {...configBottomComponents} />
+      {!newWatch && (<BottomComponents {...configBottomComponents} />)}
     </Box>
   );
 };

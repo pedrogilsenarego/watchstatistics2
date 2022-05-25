@@ -48,7 +48,7 @@ const AdditionalData = ({
                 </Grid>
               );
             })}
-            {!addAdditionalData && currentUser && additionalData.length <= 4 && (
+            {!addAdditionalData && currentUser && additionalData.length < 4 && (
               <Grid item>
                 <MdAddCircle
                   onMouseOver={(e) => {
@@ -89,7 +89,7 @@ const AdditionalData = ({
             </Styled.Typography>
           </Grid>
         )}
-        {addAdditionalData && additionalData?.length <= 4 && (
+        {addAdditionalData && additionalData?.length < 4 && (
           <AddAdditionalData
             setAddAdditionalData={setAddAdditionalData}
             additionalData={additionalData}
