@@ -2,7 +2,7 @@ import * as Styled from "./styles";
 import { useSelector } from "react-redux";
 import { Redux } from "src/redux/types";
 import { useTheme, useMediaQuery, Grid } from "@mui/material";
-import CircularVotes from "src/components/CircularVotes";
+import CircularVotes from "src/components/ProgressBars/CircularVotes";
 
 interface Props {
   easterEggMotion: boolean;

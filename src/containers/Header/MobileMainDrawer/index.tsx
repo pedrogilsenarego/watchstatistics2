@@ -57,18 +57,18 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
+        //onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
         >
-          <Styled.TypographyTitle>Compare Watches</Styled.TypographyTitle>
+          <Styled.TypographyTitle>Compare Watches (not ready)</Styled.TypographyTitle>
         </Grid>
         {auth && (
           <>
             <Grid
               item
               xs={12}
-              onClick={() => handleClickOption(`/submit-new-watch`)}
+            //onClick={() => handleClickOption(`/submit-new-watch`)}
             >
-              <Styled.TypographyTitle>Add Watch</Styled.TypographyTitle>
+              <Styled.TypographyTitle>Add Watch (not ready)</Styled.TypographyTitle>
             </Grid>
             <Grid item xs={12}>
               <Styled.Divider />
@@ -76,21 +76,21 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             <Grid
               item
               xs={12}
-              onClick={() =>
-                handleClickOption(`/watchstatistics/watchlaboratory`)
-              }
+            // onClick={() =>
+            //   handleClickOption(`/watchstatistics/watchlaboratory`)
+            // }
             >
               <Styled.TypographyTitle>
-                {i18n.t("navigation.laboratory")}
+                {i18n.t("navigation.laboratory")} (not ready)
               </Styled.TypographyTitle>
             </Grid>
             <Grid
               item
               xs={12}
-              onClick={() => handleClickOption(`/watchstatistics/market`)}
+            //onClick={() => handleClickOption(`/watchstatistics/market`)}
             >
               <Styled.TypographyTitle>
-                {i18n.t("navigation.market")}
+                {i18n.t("navigation.market")} (not ready)
               </Styled.TypographyTitle>
             </Grid>
           </>

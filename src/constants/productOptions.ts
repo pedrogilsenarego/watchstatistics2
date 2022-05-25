@@ -10,6 +10,7 @@ export const movements = {
     "": "Null",
     Aluminium: "Aluminium",
     Gold: "Gold",
+    Platinum: "Platinum",
     "Stainless Steel": "Stainless Steel",
     Titanium: "Titanium",
     "White Gold": "White Gold",

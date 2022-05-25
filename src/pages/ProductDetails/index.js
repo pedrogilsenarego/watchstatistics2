@@ -188,7 +188,9 @@ const ProductDetails = ({}) => {
 
   const handleSubmitNewWatch = (values) => {
     const productionYears =
-      values.productionYearStart + "-" + values.productionYearEnd;
+      values.productionYearStart && values.productionYearEnd
+        ? values.productionYearStart + "-" + values.productionYearEnd
+        : "";
     delete values.productionYears;
     dispatch(
       addProductStart({

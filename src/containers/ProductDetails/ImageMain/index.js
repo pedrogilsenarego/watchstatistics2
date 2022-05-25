@@ -5,7 +5,7 @@ import AvatarsControllers from "../AvatarsControllers2";
 import ImageThumbs from "./ImageThumbs";
 import AddAdditionalPicture from "./ImageThumbs/AddAditionalPicture";
 import { i18n } from "src/translations/i18n";
-import CircularVotes from "src/components/CircularVotes";
+import CircularVotes from "src/components/ProgressBars/CircularVotes";
 import { CarouselProvider, Slider, Slide, DotGroup } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 

@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import * as Styled from "./styles";
 import { useHistory } from "react-router-dom";
-import CircularVotes from "../../../../components/CircularVotes";
+import CircularVotes from "../../../../components/ProgressBars/CircularVotes";
 
 const WatchCard = ({
   data,
