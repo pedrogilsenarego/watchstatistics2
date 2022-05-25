@@ -23,6 +23,7 @@ import TextfieldFormik from "src/components/Inputs/Textfield/Textfield2Formik";
 import watchTypes2 from "src/assets/data/watchTypes2.json";
 import pricesBrackets2 from "src/assets/data/pricesBracket2.json";
 import watchBrands2 from "src/assets/data/watchBrands2.json";
+import { StyledFormError } from "src/styles/styles";
 // components
 import BottomComponents from "./BottomComponents";
 import { FORM_VALIDATION } from "./validation";
@@ -84,8 +85,8 @@ const ProductSideList = ({
   const [, , helpersProductCategory] = useField("productCategory");
   const [, , helpersProductPriceBrackets] = useField("productPriceBrackets");
   const [, , helpersProductBrand] = useField("productBrand");
-  const [, , helpersProductName] = useField("productName");
-  const [, , helpersReference] = useField("reference");
+  const [, metaProductName, helpersProductName] = useField("productName");
+  const [, metaReference, helpersReference] = useField("reference");
   const [, , helpersMovement] = useField("movement");
   const [, , helpersCaliber] = useField("caliber");
   const [, , helpersCaseSize] = useField("caseSize");
@@ -218,6 +219,7 @@ const ProductSideList = ({
           </Box>
           <Box style={{ marginTop: "10px" }}>
             {currentUser &&
+              !newWatch &&
               !Object.values(submitDetails).some((element) => element) && (
                 <Typography
                   style={{
@@ -315,9 +317,14 @@ const ProductSideList = ({
                         }}
                       />
                     ) : (
-                      <Typography className={classes.tableCell}>
-                        {productName}
-                      </Typography>
+                      <>
+                        <Typography className={classes.tableCell}>
+                          {productName}
+                        </Typography>
+                        <StyledFormError>
+                          {metaProductName.error}
+                        </StyledFormError>
+                      </>
                     )}
                   </TableCell>
                 </TableRow>
@@ -341,9 +348,12 @@ const ProductSideList = ({
                         }}
                       />
                     ) : (
-                      <Typography className={classes.tableCell}>
-                        {reference}
-                      </Typography>
+                      <>
+                        <Typography className={classes.tableCell}>
+                          {reference}
+                        </Typography>
+                        <StyledFormError>{metaReference.error}</StyledFormError>
+                      </>
                     )}
                   </TableCell>
                 </TableRow>
@@ -696,7 +706,7 @@ const ProductSideList = ({
           </TableContainer>
         </Form>
       </Formik>
-      {!newWatch && (<BottomComponents {...configBottomComponents} />)}
+      {!newWatch && <BottomComponents {...configBottomComponents} />}
     </Box>
   );
 };

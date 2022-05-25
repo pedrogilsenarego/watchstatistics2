@@ -212,7 +212,7 @@ const ImageMain = ({
               )}
             </Grid>
             {addAdditionalPictures && productThumbnail.length < 4 && (
-              <Grid xs={12} item>
+              <Grid xs={12} item style={{ padding: "10px" }}>
                 <AddAdditionalPicture
                   setIndexMini={setIndexMini}
                   setProductThumbnail={setProductThumbnail}

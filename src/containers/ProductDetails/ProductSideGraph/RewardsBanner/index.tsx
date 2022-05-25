@@ -8,6 +8,7 @@ import {
 } from "src/constants/gamification";
 import { sumValuesObject } from "src/Utils/math";
 import LinearBar from "src/components/ProgressBars/LinearBar";
+import { DashedGrid as StyledDashedGrid } from "src/styles/styles";
 
 const RewardsBanner = () => {
   const { values } = useFormikContext<any>();
@@ -53,7 +54,7 @@ const RewardsBanner = () => {
   }, [values]);
 
   return (
-    <Styled.MainBox
+    <StyledDashedGrid
       item
       container
       justifyContent='center'
@@ -69,7 +70,7 @@ const RewardsBanner = () => {
           + {maxPointsNewWatchBonusFull} Bonus
         </Styled.MainTypography>
       )}
-    </Styled.MainBox>
+    </StyledDashedGrid>
   );
 };
 

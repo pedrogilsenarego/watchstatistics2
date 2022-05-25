@@ -86,7 +86,7 @@ export const content = {
           }
         },
         notifications: {
-          error: "Review some of the fields."
+          error: "Fill and review the mandatory fields."
         }
       },
     },

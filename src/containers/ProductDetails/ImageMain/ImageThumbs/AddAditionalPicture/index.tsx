@@ -11,7 +11,7 @@ import Textfield2Formik from "src/components/Inputs/Textfield/Textfield2Formik";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import Button4Formik from "src/components/Buttons/Button4Formik";
 import { RiCloseFill } from "react-icons/ri";
-import { Typography } from "@material-ui/core";
+import { DashedGrid as StyledDashedGrid } from "src/styles/styles"
 
 interface Props {
   setAddAdditionalPicture: (addAdditionalPicture: boolean) => void;
@@ -112,24 +112,20 @@ const AddAdditionalPicture = ({
           if (readySubmit) setReadySubmit(false);
         }}
       >
-        <Grid
+        <StyledDashedGrid
           item
           xs={12}
           container
           alignItems='center'
-          columnSpacing={1}
-          rowSpacing={2}
-          style={{
-            marginTop: "10px",
-            marginBottom: "20px",
-          }}
+          columnGap={1}
+          rowGap={1}
         >
-          <Grid xs={12} style={{ marginLeft: "10px" }}>
+          <Grid xs={12}>
             <Styled.Typography>
               {i18n.t("forms.updateProduct.picture")}
             </Styled.Typography>
           </Grid>
-          <Grid item container xs={12} alignItems='center' columnGap={1}>
+          <Grid item container xs={12} alignItems='center' columnGap={1} style={{ marginBottom: "10px" }}>
             <Grid item>
               <Textfield2Formik
                 name='picture'
@@ -167,13 +163,8 @@ const AddAdditionalPicture = ({
                 />
               </Grid>
             )}
-            <Grid item xs={12}>
-              <Typography style={{ color: "red", marginTop: "5px" }}>
-                {metaProductThumbnail.error}
-              </Typography>
-            </Grid>
           </Grid>
-        </Grid>
+        </StyledDashedGrid>
         {!newWatch && (
           <Grid item>
             <SugestedImages product={product} />
