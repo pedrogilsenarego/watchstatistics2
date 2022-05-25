@@ -321,9 +321,11 @@ const ProductSideList = ({
                         <Typography className={classes.tableCell}>
                           {productName}
                         </Typography>
-                        <StyledFormError>
-                          {metaProductName.error}
-                        </StyledFormError>
+                        {newWatch && (
+                          <StyledFormError>
+                            {metaProductName.error}
+                          </StyledFormError>
+                        )}
                       </>
                     )}
                   </TableCell>
@@ -352,7 +354,11 @@ const ProductSideList = ({
                         <Typography className={classes.tableCell}>
                           {reference}
                         </Typography>
-                        <StyledFormError>{metaReference.error}</StyledFormError>
+                        {newWatch && (
+                          <StyledFormError>
+                            {metaReference.error}
+                          </StyledFormError>
+                        )}
                       </>
                     )}
                   </TableCell>
