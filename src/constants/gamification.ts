@@ -9,10 +9,11 @@ export const rewards = {
   PRODUCT_CASE_SIZE: 1,
   PRODUCT_CASE_MATERIAL: 1,
   PRODUCT_WATER_RESISTANCE: 1,
-  PRODUCT_BRAND:2,
-  PRODUCT_NAME:2,
-  PRODUCT_REFERENCE:2,
-  PRODUCT_PRICE:2,
+  PRODUCT_CATEGORY: 2,
+  PRODUCT_BRAND: 2,
+  PRODUCT_NAME: 2,
+  PRODUCT_REFERENCE: 2,
+  PRODUCT_PRICE: 2,
 };
 
 //number of entries that can exist
@@ -24,7 +25,7 @@ export const rewardsEntries = {
 export const maxPointsNewProduct =
   rewards.PRODUCT_DESCRIPTION +
   rewards.PRODUCT_ADDITIONAL_DATA * rewardsEntries.PRODUCT_ADDITIONAL_DATA +
-  rewards.PRODUCT_PICTURE * rewardsEntries.PRODUCT_PICTURE + 
+  rewards.PRODUCT_PICTURE * rewardsEntries.PRODUCT_PICTURE +
   rewards.PRODUCT_MOVEMENT +
   rewards.PRODUCT_CALIBER +
   rewards.PRODUCT_YEARS +
@@ -32,9 +33,10 @@ export const maxPointsNewProduct =
   rewards.PRODUCT_CASE_MATERIAL +
   rewards.PRODUCT_WATER_RESISTANCE +
   rewards.PRODUCT_BRAND +
-  rewards.PRODUCT_NAME + 
+  rewards.PRODUCT_NAME +
   rewards.PRODUCT_REFERENCE +
-  rewards.PRODUCT_PRICE
+  rewards.PRODUCT_PRICE +
+  rewards.PRODUCT_CATEGORY
 
 export const maxPointsNewWatchBonusFull = 10
 
