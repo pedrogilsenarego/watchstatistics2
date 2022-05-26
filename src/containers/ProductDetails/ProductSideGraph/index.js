@@ -457,6 +457,7 @@ const ProductSidePanel = ({
         <Drawer
           clearBackground={clearDrawerBackground}
           position='bottom'
+          topRadius
           id={0}
           fullWidth
           openDrawer={showVote}

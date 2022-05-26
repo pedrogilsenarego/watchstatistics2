@@ -1,5 +1,5 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import { useBackBrowser } from "src/customHooks";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ type Props = {
   fullHeight?: boolean;
   id: number;
   clearBackground?: boolean;
+  topRadius?: boolean;
 };
 
 const DrawerMine = ({
@@ -26,6 +27,7 @@ const DrawerMine = ({
   children,
   id,
   clearBackground,
+  topRadius,
 }: Props) => {
   const dispatch = useDispatch();
   const mapState = ({ user }: any) => ({
@@ -42,6 +44,7 @@ const DrawerMine = ({
     modId
   );
 
+
   React.useEffect(() => {
     dispatch(modalId(openDrawer ? id : id - 1));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +59,9 @@ const DrawerMine = ({
         backgroundColor: "#18161E",
         padding: "10px",
         overflowY: "auto",
+        borderRadius: topRadius ? "20px 20px 0 0" : "0 0 0 0",
       }}
+
       role='presentation'
     >
       {children}
@@ -72,8 +77,14 @@ const DrawerMine = ({
       <Drawer
         BackdropProps={{
           style: {
+
             backgroundColor: clearBackground ? "transparent" : "#00000066",
           },
+        }}
+        sx={{
+          "& .MuiPaper-root": {
+            backgroundColor: "transparent"
+          }
         }}
         anchor={position}
         open={openDrawer}
