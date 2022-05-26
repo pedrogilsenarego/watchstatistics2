@@ -7,7 +7,7 @@ import { checkUserSession } from "./redux/User/user.actions";
 //hoc
 import WithAuth from "./hoc/withAuth";
 import WithAdminAuth from "./hoc/withAdminAuth";
-
+import ScrollToTop from "./hoc/ScrollToTop";
 //pages
 import Search from "./pages/Search";
 import Dashboard from "./pages/Dashboard";
@@ -75,8 +75,11 @@ const App = () => {
         <CssBaseline />
         <Snackbar />
         <CookiePolicy />
+        <ScrollToTop/>
         <div className='App'>
+        
           <Switch>
+            
             <Route
               exact
               path='/'
@@ -153,7 +156,7 @@ const App = () => {
                 </WithAuth>
               )}
             />
-            
+
             <Route
               exact
               path='/watchstatistics/market'
@@ -185,12 +188,14 @@ const App = () => {
             <Route
               path='/product/:productID'
               render={() => (
+                
                 <MainLayout>
                   <ProductDetails />
                 </MainLayout>
+              
               )}
             />
-           
+
             <Route
               path='/FAQ'
               render={() => (
@@ -251,6 +256,7 @@ const App = () => {
               )}
             />
           </Switch>
+         
         </div>
       </ThemeProvider>
     </StyledEngineProvider>
