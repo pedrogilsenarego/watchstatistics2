@@ -31,7 +31,7 @@ const RightIconsUser = ({ search, setMobileDrawerSecondary }) => {
           disableRipple
           onClick={() => setMobileDrawerSecondary(true)}
         >
-          <VscAccount fontSize='1.5em' />
+          <VscAccount fontSize='2em' />
           &nbsp;
         </Button>
       )}

@@ -88,7 +88,7 @@ const ImageMain = ({
               dragEnabled={isMatch ? true : false}
               style={{ position: "relative" }}
             >
-              {isMatch && (
+              {isMatch && !newWatch && (
                 <Box
                   display='flex'
                   justifyContent='center'
@@ -191,6 +191,7 @@ const ImageMain = ({
                   style={{ marginBottom: "5px", marginTop: "5px" }}
                   justifyContent='center'
                   alignItems='center'
+                  textAlign='center'
                 >
                   <Typography
                     style={{

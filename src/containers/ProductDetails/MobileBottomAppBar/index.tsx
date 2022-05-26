@@ -83,63 +83,61 @@ const MobileBottomAppBar = ({
     }
   };
   return (
-    <>
-      <Grid
-        container
-        alignItems='center'
-        justifyContent='space-between'
-        sx={{
-          borderTop: "solid 1px",
-          borderColor: "#ffffff66",
-          width: "100%",
-          bottom: 0,
-          height: "55px",
-          position: "fixed",
-          backgroundColor: "black",
-          zIndex: "1000",
-        }}
-      >
-        <Grid item style={{ marginLeft: "10px" }}>
-          <AvatarsControllers {...configAvatarControllers} />
-        </Grid>
-        <Grid item>
-          {currentUser && !currentUser.userVotes.includes(productID) && (
-            <Styled.Typography onClick={() => setShowVote(!showVote)}>
-              {i18n.t("navigation.mobileBottomAppbar.vote")}
-            </Styled.Typography>
-          )}
-          {currentUser && currentUser.userVotes.includes(productID) && (
-            <Styled.TypographyDisabled>
-              {i18n.t("navigation.mobileBottomAppbar.voted")}
-            </Styled.TypographyDisabled>
-          )}
-          {!currentUser && (
-            <Styled.TypographyLogin onClick={() => setShowVote(!showVote)}>
-              {i18n.t("navigation.mobileBottomAppbar.loginVote")}
-            </Styled.TypographyLogin>
-          )}
-        </Grid>
-        {currentUser && checkUserHasWatchesForVote() && (
-          <Grid item>
-            <MdArrowForwardIos
-              onClick={() => handleNextWatch()}
-              size='3em'
-              color='orange'
-            />
-          </Grid>
+    <Grid
+      container
+      alignItems='center'
+      justifyContent='space-between'
+      sx={{
+        borderTop: "solid 1px",
+        borderColor: "#ffffff66",
+        width: "100%",
+        bottom: 0,
+        height: "55px",
+        position: "fixed",
+        backgroundColor: "black",
+        zIndex: "1000",
+      }}
+    >
+      <Grid item style={{ marginLeft: "10px" }}>
+        <AvatarsControllers {...configAvatarControllers} />
+      </Grid>
+      <Grid item>
+        {currentUser && !currentUser.userVotes.includes(productID) && (
+          <Styled.Typography onClick={() => setShowVote(!showVote)}>
+            {i18n.t("navigation.mobileBottomAppbar.vote")}
+          </Styled.Typography>
+        )}
+        {currentUser && currentUser.userVotes.includes(productID) && (
+          <Styled.TypographyDisabled>
+            {i18n.t("navigation.mobileBottomAppbar.voted")}
+          </Styled.TypographyDisabled>
         )}
         {!currentUser && (
-          <Grid item>
-            <MdArrowForwardIos size='3em' color='grey' />
-          </Grid>
-        )}
-        {currentUser && !checkUserHasWatchesForVote() && (
-          <Grid item>
-            <MdArrowForwardIos size='3em' color='grey' />
-          </Grid>
+          <Styled.TypographyLogin onClick={() => setShowVote(!showVote)}>
+            {i18n.t("navigation.mobileBottomAppbar.loginVote")}
+          </Styled.TypographyLogin>
         )}
       </Grid>
-    </>
+      {currentUser && checkUserHasWatchesForVote() && (
+        <Grid item>
+          <MdArrowForwardIos
+            onClick={() => handleNextWatch()}
+            size='3em'
+            color='orange'
+          />
+        </Grid>
+      )}
+      {!currentUser && (
+        <Grid item>
+          <MdArrowForwardIos size='3em' color='grey' />
+        </Grid>
+      )}
+      {currentUser && !checkUserHasWatchesForVote() && (
+        <Grid item>
+          <MdArrowForwardIos size='3em' color='grey' />
+        </Grid>
+      )}
+    </Grid>
   );
 };
 
