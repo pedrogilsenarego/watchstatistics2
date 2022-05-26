@@ -12,6 +12,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
+import { Container } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import Search from "./Search";
 
@@ -237,17 +238,21 @@ const Header = (props) => {
               </Grid>
             </>
           ) : (
-            <>
-              <Grid item xs={12} md={7} className={classes.grid} align='left'>
-                <LeftIcons {...configLeftIcons} />
+            <Container>
+              <Grid container justifyContent='space-between'>
+                <Grid item className={classes.grid} align='left'>
+                  <LeftIcons {...configLeftIcons} />
+                </Grid>
+                <Grid item align='right'>
+                  {currentUser && (
+                    <RightIconsBigUser {...configRightIconsUser} />
+                  )}
+                  {!currentUser && (
+                    <RightIconsNoUser {...configRightIconsNoUser} />
+                  )}
+                </Grid>{" "}
               </Grid>
-              <Grid item xs={12} md={5} align='right'>
-                {currentUser && <RightIconsBigUser {...configRightIconsUser} />}
-                {!currentUser && (
-                  <RightIconsNoUser {...configRightIconsNoUser} />
-                )}
-              </Grid>{" "}
-            </>
+            </Container>
           )}
         </Toolbar>
       </AppBar>

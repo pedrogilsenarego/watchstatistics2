@@ -11,7 +11,7 @@ const WATCHES_INFO =
 const useStyles = makeStyles((theme) => ({
   textField: {
     [`& fieldset`]: {
-      borderRadius: 12,
+      borderRadius: 8,
       background: "#ffffff1A",
     },
 
@@ -93,20 +93,22 @@ const Search = ({ isMatch }) => {
   return (
     <>
       <TextField
-        variant="outlined"
+        variant='outlined'
         className={classes.textField}
         style={{
           marginLeft: isMatch ? "20px" : "20px",
           marginTop: isMatch ? "5px" : "-2px",
-          minWidth: isMatch ? "230px" : "0px",
+          minWidth: isMatch ? "230px" : "350px",
         }}
-        name="search"
-        size="small"
-        autoComplete="off"
-        placeholder={searchHover ? `${options.length} watches` : "Search"}
+        name='search'
+        size='small'
+        autoComplete='off'
+        placeholder={
+          searchHover ? `${options.length} watches` : "Search Watches"
+        }
         value={search}
         InputProps={{
-          endAdornment: isMatch ? null : <FiSearch color="#ffffff66" />,
+          endAdornment: isMatch ? null : <FiSearch color='#ffffff66' />,
         }}
         onChange={(event) => {
           setDisplay(true);
