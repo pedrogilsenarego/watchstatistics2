@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
 import { Alert as MuiAlert } from "@mui/material"
 
-
 interface Props {
   severity: "error" | "success" | "info" | "warning";
   message: string;
   trigger: boolean;
   setTrigger: (trigger: boolean) => void;
 }
-
-
 
 const Alert = ({ severity, message, trigger, setTrigger }: Props) => {
   const [alert, setAlert] = useState("")

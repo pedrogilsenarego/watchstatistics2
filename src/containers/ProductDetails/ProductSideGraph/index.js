@@ -54,6 +54,7 @@ const ProductSidePanel = ({
   const [anchorLogin, setAnchorLogin] = useState(null);
   const [coordinates, setCoordinates] = useState([1, 1]);
   const [triggerAlert, setTriggerAlert] = useState(false);
+  const [minimalDrawer, setMinimalDrawer] = useState(false);
   const { isValid } = useFormikContext();
 
   const graphRef = useRef();
@@ -307,6 +308,8 @@ const ProductSidePanel = ({
     showVote,
     handleUpdate,
     setShowVote,
+    minimalDrawer,
+    setMinimalDrawer,
   };
 
   return (

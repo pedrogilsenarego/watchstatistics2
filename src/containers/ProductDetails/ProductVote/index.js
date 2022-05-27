@@ -4,7 +4,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -44,12 +43,14 @@ const ProductVote = ({
   setShowVote,
   scrollToRef,
   graphRef,
+  minimalDrawer,
+  setMinimalDrawer,
 }) => {
   const Theme = useTheme();
   const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
   const { product, currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
-  const [minimalDrawer, setMinimalDrawer] = useState(false);
+
   const [ownership, setOwnership] = useState("");
   const [categories, setCategories] = useState({ ...initialCategoriesState });
   const [errors, setErrors] = useState(false);

@@ -117,7 +117,7 @@ const WatchstatisticsSubHeader = ({}) => {
 
   return (
     <div>
-      <Container maxWidth={false} className={classes.root}>
+      <Container className={classes.root}>
         <Grid container className={classes.container}>
           <Grid
             item
