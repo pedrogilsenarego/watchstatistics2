@@ -1,7 +1,4 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import {Box, Container, Grid, Button} from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -96,8 +93,8 @@ const Next = () => {
     return initialArray;
   };
   return (
-    <div>
-      <Box style={{ marginLeft: "5.5vw" }}>
+    <Container>
+      <Box>
         <Grid container spacing={2} style={{ marginTop: "-2px" }}>
           {nextItems().map((item, pos) => {
             return (
@@ -126,7 +123,7 @@ const Next = () => {
           })}
         </Grid>
       </Box>
-    </div>
+    </Container>
   );
 };
 
