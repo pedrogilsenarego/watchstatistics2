@@ -4,11 +4,11 @@ import Footer from "../containers/Footer";
 
 const HomepageLayout = (props) => {
   return (
-    <div className="fullHeight">
+    < >
       <Header {...props} />
       {props.children}
       <Footer {...props} />
-    </div>
+    </>
   );
 };
 

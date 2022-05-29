@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import {Grid, Container} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import { useMediaQuery, useTheme } from "@material-ui/core";
@@ -101,11 +101,11 @@ const Sugested2Vote = () => {
   if (filterData()[0].length === 0) return null;
 
   return (
-    <div>
+    <Container >
       <Box
         sx={{
           alignItems: "center",
-          justifyContent: "center",
+          
         }}
         style={{
           display: "flex",
@@ -118,7 +118,7 @@ const Sugested2Vote = () => {
         <Avatar
           style={{
             backgroundColor: "#ffffff00",
-            marginRight: isMatch ? "2vw" : "90vw",
+            marginRight: isMatch ? "2vw" : "70vw",
             cursor: buttonLeft ? "pointer" : "default",
             zIndex: "2",
           }}
@@ -149,24 +149,23 @@ const Sugested2Vote = () => {
         </Avatar>
       </Box>
       <div
-        style={{ marginTop: "50px", marginLeft: "5.5vw", marginRight: "4vw" }}
+        style={{ marginTop: "50px" }}
       >
         <Typography variant={"h6"}>Sugested for you to vote</Typography>
 
         <Grid
           container
           wrap="nowrap"
-          spacing={"10.5vw"}
-          style={{ display: "flex", marginTop: "5px" }}
+          style={{ display: "flex" }}
         >
           {filterData().map((item, pos) => (
             <Grid
               container
               item
-              spacing={"1.5vw"}
+              spacing={2}
               style={{
                 display: "flex",
-                paddingTop: "10px",
+                
                 minWidth: "100%",
 
                 transition: "0.5s",
@@ -186,7 +185,7 @@ const Sugested2Vote = () => {
           ))}
         </Grid>
       </div>
-    </div>
+    </Container>
   );
 };
 

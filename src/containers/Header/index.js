@@ -187,17 +187,14 @@ const Header = (props) => {
   const configSearch = { isMatch };
 
   return (
-    <div>
+    <>
       <AppBar position='fixed' elevation={0} className={classes.appbar}>
-        <Toolbar>
+        <Toolbar disableGutters>
           {isMatch ? (
             <>
-              <Grid container>
+              <Grid container justifyContent="space-between">
                 <Grid
-                  item
-                  xs={search ? 12 : 6}
-                  style={{ display: "flex" }}
-                  align='left'
+                  item                 
                 >
                   {!search && (
                     <Button
@@ -226,8 +223,8 @@ const Header = (props) => {
                 </Grid>
                 <Grid
                   item
-                  xs={search ? 0 : 6}
-                  align='right'
+                  
+                  
                   style={{ marginTop: "3px" }}
                 >
                   {currentUser && <RightIconsUser {...configRightIconsUser} />}
@@ -240,7 +237,7 @@ const Header = (props) => {
           ) : (
             <Container>
               <Grid container justifyContent='space-between'>
-                <Grid item className={classes.grid} align='left'>
+                <Grid item  align='left'>
                   <LeftIcons {...configLeftIcons} />
                 </Grid>
                 <Grid item align='right'>
@@ -493,7 +490,7 @@ const Header = (props) => {
           <SignIn {...configMenuLogin} />
         </MenuItem>
       </Menu>
-    </div>
+    </>
   );
 };
 

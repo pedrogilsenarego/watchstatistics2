@@ -54,7 +54,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 	const classes = useStyles();
 
 	return (
-		<div>
+		<>
 			<Button
 				className={classes.textBtn}
 				component={NavLink}
@@ -87,7 +87,7 @@ const LeftIcons = ({ handleSupportOpen, handleWatchstatisticsOpen }) => {
 				&nbsp; Ecosystem
 			</Button>
 			<Search />
-		</div>
+		</>
 	);
 };
 

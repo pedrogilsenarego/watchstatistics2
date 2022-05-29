@@ -4,10 +4,10 @@ import Next from "./Next";
 
 const HomePage = () => {
 	return (
-		<div >
+		< >
 			<Next />
-			<Sugested2Vote />
-		</div>
+			<Sugested2Vote/>
+		</>
 	);
 };
 
