@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
+import { Grid, Container } from "@mui/material";
 import { MenuItem, Menu } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
@@ -41,7 +41,7 @@ const Intro = () => {
   };
 
   return (
-    <div>
+    <Container disableGutters>
       <Box style={{ height: "70vh", overflow: "hidden" }}>
         <Grid
           container
@@ -58,19 +58,19 @@ const Intro = () => {
               style={{
                 fontWeight: "bold",
               }}
-              variant="h3"
+              variant='h3'
             >
               Find what enthusiasts think of every watch
             </Typography>
-            <Typography variant="h6">
+            <Typography variant='h6'>
               Welcome to an open community where the opinion on each watch is
               added by their members. Gain points, build your own virtual
               collection and trade with other members.
             </Typography>
             <Grid item style={{ display: "flex" }}>
               <Button
-                aria-controls="login"
-                variant="contained"
+                aria-controls='login'
+                variant='contained'
                 style={{
                   backgroundImage:
                     "linear-gradient(90deg, rgba(214,121,41,1) 50%, rgba(193,74,27,1) 100%)",
@@ -95,17 +95,17 @@ const Intro = () => {
         <img
           style={{ filter: "grayscale(100%) brightness(0.4)", float: "right" }}
           src={img1}
-          alt=""
+          alt=''
         />
       </Box>
       <Menu
         disableScrollLock
         className={classes.menu}
-        id="login"
+        id='login'
         onClose={handleCloseLoginMenu}
         anchorEl={anchorLogin}
         open={Boolean(anchorLogin)}
-        anchorReference="none"
+        anchorReference='none'
         PaperProps={{
           style: {
             left: "50%",
@@ -117,7 +117,7 @@ const Intro = () => {
           <SignIn {...configMenuLogin} />
         </MenuItem>
       </Menu>
-    </div>
+    </Container>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUserStart } from "../../redux/User/user.actions";
 import {
@@ -17,10 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Search from "./Search";
 
 import { CgMenuGridO } from "react-icons/cg";
-import { BsGraphUp } from "react-icons/bs";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
-import { VscHome } from "react-icons/vsc";
 
 import SignIn from "../SignIn";
 import DrawerMine from "src/components/Drawer";
@@ -83,10 +80,7 @@ const Header = (props) => {
   const [anchorSupport, setAnchorSupport] = useState(null);
   const [anchorMyAccount, setAnchorMyAccount] = useState(null);
   const [anchorLogin, setAnchorLogin] = useState(null);
-  const [anchorMediaMenu, setAnchorMediaMenu] = useState(null);
   const [anchorWatchStatistics, setAnchorWatchstatistics] = useState(null);
-  const [mediaWatchstatisticsBtns, setMediaWatchstatisticsBtns] =
-    useState(false);
   const [search, setSearch] = useState(false);
 
   const [watchstatistics, setWatchstatistics] = useState(true);
@@ -139,10 +133,6 @@ const Header = (props) => {
   };
 
   //next
-  const handleCloseMediaMenu = () => {
-    setAnchorMediaMenu(null);
-    setMediaWatchstatisticsBtns(false);
-  };
   const handleCloseMessagesMenu = () => {
     setAnchorMessages(null);
   };
@@ -192,10 +182,8 @@ const Header = (props) => {
         <Toolbar disableGutters>
           {isMatch ? (
             <>
-              <Grid container justifyContent="space-between">
-                <Grid
-                  item                 
-                >
+              <Grid container justifyContent='space-between'>
+                <Grid item>
                   {!search && (
                     <Button
                       aria-controls='mediaMenu'
@@ -221,12 +209,7 @@ const Header = (props) => {
                   </Button>
                   {search && <Search {...configSearch} />}
                 </Grid>
-                <Grid
-                  item
-                  
-                  
-                  style={{ marginTop: "3px" }}
-                >
+                <Grid item style={{ marginTop: "3px", marginRight: "10px" }}>
                   {currentUser && <RightIconsUser {...configRightIconsUser} />}
                   {!currentUser && (
                     <RightIconsNoUser {...configRightIconsNoUser} />
@@ -237,10 +220,10 @@ const Header = (props) => {
           ) : (
             <Container>
               <Grid container justifyContent='space-between'>
-                <Grid item  align='left'>
+                <Grid item>
                   <LeftIcons {...configLeftIcons} />
                 </Grid>
-                <Grid item align='right'>
+                <Grid item>
                   {currentUser && (
                     <RightIconsBigUser {...configRightIconsUser} />
                   )}
@@ -316,6 +299,7 @@ const Header = (props) => {
           Submit New Watch
         </MenuItem>
         <MenuItem
+          disabled
           onClick={() => {
             handleCloseWatchstatisticsMenu();
             history.push("/watchstatistics/comparewatches");
@@ -333,7 +317,7 @@ const Header = (props) => {
         open={Boolean(anchorSupport)}
       >
         <MenuItem
-          disabled={watchstatistics}
+          disabled
           onClick={() => {
             handleCloseWatchstatisticsMenu();
             history.push("/watchstatistics/watchlaboratory");
@@ -342,7 +326,7 @@ const Header = (props) => {
           Watch Laboratory
         </MenuItem>
         <MenuItem
-          disabled={watchstatistics}
+          disabled
           onClick={() => {
             handleCloseWatchstatisticsMenu();
             history.push("/watchstatistics/market");
@@ -394,80 +378,6 @@ const Header = (props) => {
           }}
         >
           Logout
-        </MenuItem>
-      </Menu>
-      <Menu
-        disableScrollLock
-        className={classes.menu}
-        id='mediaMenu'
-        onClose={handleCloseMediaMenu}
-        anchorEl={anchorMediaMenu}
-        open={Boolean(anchorMediaMenu)}
-      >
-        <MenuItem
-          className={classes.textBtn}
-          activestyle={activeStyle}
-          component={NavLink}
-          disableRipple
-          to='/'
-          exact
-        >
-          <VscHome fontSize='1.5em' />
-          &nbsp;Home
-        </MenuItem>
-        <MenuItem
-          className={classes.textBtn}
-          disableRipple
-          style={
-            mediaWatchstatisticsBtns
-              ? { color: "#FFA500" }
-              : { color: "#ffffff" }
-          }
-          onClick={(e) =>
-            setMediaWatchstatisticsBtns(!mediaWatchstatisticsBtns)
-          }
-        >
-          <BsGraphUp />
-          &nbsp;WatchStatistics
-        </MenuItem>
-        {mediaWatchstatisticsBtns && [
-          <MenuItem
-            onClick={() => {
-              history.push("/browse");
-            }}
-          >
-            Browse
-          </MenuItem>,
-
-          <MenuItem
-            disabled={watchstatistics}
-            onClick={() => {
-              history.push("/submit-new-watch");
-            }}
-          >
-            Submit New Watch
-          </MenuItem>,
-          <MenuItem
-            onClick={() => {
-              handleCloseWatchstatisticsMenu();
-              history.push("/watchstatistics/comparewatches");
-            }}
-          >
-            Compare Watches
-          </MenuItem>,
-        ]}
-
-        <MenuItem
-          aria-controls='support'
-          disableRipple
-          className={classes.textBtn}
-          activestyle={activeStyle}
-          onClick={(e) => {
-            setAnchorSupport(e.currentTarget);
-          }}
-        >
-          <AiOutlineInfoCircle fontSize='1.5em' />
-          &nbsp; Ecosystem
         </MenuItem>
       </Menu>
 

@@ -8,9 +8,9 @@ import { Grid } from "@material-ui/core";
 import TextField from "../../forms/InputMUI";
 import CheckBox from "../../forms/checkBoxMUI";
 import { makeStyles } from "@material-ui/core/styles";
-import ButtonMUI from "../../forms/ButtonMUI";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import Button3Formik from "src/components/Buttons/Button3Formik";
 const useStyles = makeStyles((theme) => ({
   textField: {
     "& .MuiOutlinedInput-input": { color: "white" },
@@ -146,9 +146,9 @@ const Signup = (props) => {
                 >
                   <TextField
                     className={classes.textField}
-                    name="displayName"
-                    size="small"
-                    placeholder="Full name"
+                    name='displayName'
+                    size='small'
+                    placeholder='Full name'
                   ></TextField>
                 </Container>
               </Grid>
@@ -164,9 +164,9 @@ const Signup = (props) => {
                 >
                   <TextField
                     className={classes.textField}
-                    size="small"
-                    name="email"
-                    placeholder="Email"
+                    size='small'
+                    name='email'
+                    placeholder='Email'
                   ></TextField>
                 </Container>
               </Grid>
@@ -182,10 +182,10 @@ const Signup = (props) => {
                 >
                   <TextField
                     className={classes.textField}
-                    size="small"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
+                    size='small'
+                    type='password'
+                    name='password'
+                    placeholder='Password'
                   />
                 </Container>
               </Grid>
@@ -201,10 +201,10 @@ const Signup = (props) => {
                 >
                   <TextField
                     className={classes.textField}
-                    size="small"
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="ConfirmPassword"
+                    size='small'
+                    type='password'
+                    name='confirmPassword'
+                    placeholder='ConfirmPassword'
                   />
                 </Container>
               </Grid>
@@ -231,12 +231,12 @@ const Signup = (props) => {
 
                 <CheckBox
                   style={{ color: "white" }}
-                  name="termsOfService"
-                  label="I, agree"
+                  name='termsOfService'
+                  label='I, agree'
                 />
               </Grid>
               <Grid item xs={12} style={{ paddingTop: "15px" }}>
-                <ButtonMUI className={classes.textBtn}>Submit</ButtonMUI>
+                <Button3Formik title='Submit' />
               </Grid>
             </Grid>
           </Form>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import {Grid, Container} from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Item from "./Item";
@@ -101,90 +100,76 @@ const Sugested2Vote = () => {
   if (filterData()[0].length === 0) return null;
 
   return (
-    <Container >
-      <Box
-        sx={{
-          alignItems: "center",
-          
-        }}
-        style={{
-          display: "flex",
-          minWidth: "100%",
-          paddingTop: isMatch ? "-1.7vh" : "0px",
-          position: "absolute",
-          paddingLeft: isMatch ? "70vw" : "0vw",
-        }}
-      >
-        <Avatar
-          style={{
-            backgroundColor: "#ffffff00",
-            marginRight: isMatch ? "2vw" : "70vw",
-            cursor: buttonLeft ? "pointer" : "default",
-            zIndex: "2",
-          }}
-          onClick={() => {
-            handleGoLeft();
-          }}
-        >
-          <IoIosArrowBack
-            fontSize={isMatch ? "1.5em" : "1em"}
-            color={buttonLeft ? "white" : "#ffffff00"}
-          />
-        </Avatar>
-
-        <Avatar
-          style={{
-            backgroundColor: "#ffffff00",
-            zIndex: "2",
-            cursor: buttonRight ? "pointer" : "default",
-          }}
-          onClick={() => {
-            handleGoRight();
-          }}
-        >
-          <IoIosArrowForward
-            fontSize={isMatch ? "1.5em" : "1em"}
-            color={buttonRight ? "white" : "#ffffff00"}
-          />
-        </Avatar>
-      </Box>
-      <div
-        style={{ marginTop: "50px" }}
-      >
-        <Typography variant={"h6"}>Sugested for you to vote</Typography>
-
-        <Grid
-          container
-          wrap="nowrap"
-          style={{ display: "flex" }}
-        >
-          {filterData().map((item, pos) => (
-            <Grid
-              container
-              item
-              spacing={2}
-              style={{
-                display: "flex",
-                
-                minWidth: "100%",
-
-                transition: "0.5s",
-                transform: `translateX(${x}%)`,
-              }}
-            >
-              {item.map((item, pos) => {
-                const configItem = { currentUser };
-
-                return (
-                  <Grid item key={pos} xs={6} md={3}>
-                    <Item item={item} {...configItem} />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          ))}
+    <Container>
+      <Grid container style={{ marginTop: "50px" }} alignItems='center'>
+        <Grid item>
+          <Typography variant={"h6"}>Sugested for you to vote</Typography>
         </Grid>
-      </div>
+        <Grid item>
+          <Avatar
+            style={{
+              backgroundColor: "#ffffff00",
+              cursor: buttonLeft ? "pointer" : "default",
+            }}
+            onClick={() => {
+              handleGoLeft();
+            }}
+          >
+            <IoIosArrowBack
+              fontSize={isMatch ? "1.5em" : "1em"}
+              color={buttonLeft ? "white" : "#ffffff00"}
+            />
+          </Avatar>
+        </Grid>
+        <Grid item>
+          <Avatar
+            style={{
+              backgroundColor: "#ffffff00",
+
+              cursor: buttonRight ? "pointer" : "default",
+            }}
+            onClick={() => {
+              handleGoRight();
+            }}
+          >
+            <IoIosArrowForward
+              fontSize={isMatch ? "1.5em" : "1em"}
+              color={buttonRight ? "white" : "#ffffff00"}
+            />
+          </Avatar>
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        wrap='nowrap'
+        style={{ display: "flex", marginTop: "2px" }}
+      >
+        {filterData().map((item, pos) => (
+          <Grid
+            container
+            item
+            spacing={2}
+            style={{
+              display: "flex",
+
+              minWidth: "100%",
+
+              transition: "0.5s",
+              transform: `translateX(${x}%)`,
+            }}
+          >
+            {item.map((item, pos) => {
+              const configItem = { currentUser };
+
+              return (
+                <Grid item key={pos} xs={6} md={3}>
+                  <Item item={item} {...configItem} />
+                </Grid>
+              );
+            })}
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 };

@@ -8,9 +8,9 @@ import * as Yup from "yup";
 import { Grid, Button } from "@material-ui/core";
 import { Form, Formik } from "formik";
 import TextField from "../../forms/InputMUI";
-import ButtonMUI from "../../forms/ButtonMUI";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@material-ui/core/styles";
+import Button3Formik from "src/components/Buttons/Button3Formik";
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -118,9 +118,9 @@ const Main = ({ handleCloseLoginMenu }) => {
                 >
                   <TextField
                     className={classes.textField}
-                    name="email"
-                    size="small"
-                    placeholder="Email"
+                    name='email'
+                    size='small'
+                    placeholder='Email'
                   ></TextField>
                 </Container>
               </Grid>
@@ -137,21 +137,21 @@ const Main = ({ handleCloseLoginMenu }) => {
                 >
                   <TextField
                     className={classes.textField}
-                    type="password"
-                    name="password"
-                    size="small"
-                    placeholder="Password"
+                    type='password'
+                    name='password'
+                    size='small'
+                    placeholder='Password'
                   ></TextField>
                 </Container>
               </Grid>
               <Grid item xs={12} style={{ paddingTop: "10px" }}>
-                <ButtonMUI className={classes.textBtn}>Login</ButtonMUI>
+                <Button3Formik title='login' />
               </Grid>
             </Grid>
           </Form>
         </Formik>
       </Grid>
-      <Grid item xs={12} style={{ paddingTop: "30px" }}>
+      <Grid item xs={12} style={{ paddingTop: "20px" }}>
         <Button
           onClick={handleGoogleSigniIn}
           variant={"contained"}

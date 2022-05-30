@@ -10,6 +10,12 @@ export const TypographyTitle = styled(MuiTypography)(() => ({
   fontWeight: "600 !important",
 }));
 
+export const TypographyTitleD = styled(MuiTypography)(() => ({
+  color: "#ffffff66 !important",
+  fontSize: "30px !important",
+  fontWeight: "600 !important",
+}));
+
 export const TypographySmaller = styled(MuiTypography)(() => ({
   color: "#ffffff66 !important",
   fontSize: "16px !important",

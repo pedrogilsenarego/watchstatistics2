@@ -109,19 +109,19 @@ const RecoverPwd = ({ handleCloseLoginMenu }) => {
           >
             <TextField
               className={classes.textField}
-              size="small"
-              name="email"
+              size='small'
+              name='email'
               value={email}
-              placeholder="Email"
+              placeholder='Email'
               onChange={(e) => setEmail(e.target.value)}
             />
           </Container>
           <Button
             className={classes.textBtn}
             style={{ marginTop: "15px" }}
-            variant="contained"
-            size="small"
-            type="submit"
+            variant='contained'
+            size='small'
+            type='submit'
           >
             Recover Password
           </Button>

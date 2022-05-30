@@ -3,7 +3,6 @@ import { Grid, Button } from "@mui/material";
 import { BiImages } from "react-icons/bi";
 import { VscListUnordered } from "react-icons/vsc";
 import { AiOutlineTable } from "react-icons/ai";
-import { useHistory } from "react-router-dom";
 
 type Props = {
   table: string;
@@ -20,7 +19,6 @@ const MenuTables = ({
   setTypeTable,
   isMatch,
 }: Props) => {
-  const history = useHistory();
 
   return (
     <Styled.Box>
@@ -79,9 +77,7 @@ const MenuTables = ({
           </Grid>
           <Grid item>
             <BiImages
-              onClick={() => {
-                history.push("/browse/tiles");
-              }}
+
               size="1.5em"
               style={{ cursor: "pointer", color: "lightgray" }}
             />
