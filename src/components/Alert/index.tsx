@@ -13,7 +13,7 @@ const Alert = ({ severity, message, trigger, setTrigger, onClose }: Props) => {
   const [alert, setAlert] = useState("");
 
   const handleAlert = () => {
-    const alertTimeoutSec = 2000 * 2;
+    const alertTimeoutSec = 3000 * 2;
     let alertTimeout = undefined;
     clearInterval(alertTimeout);
     alertTimeout = setTimeout(() => {
@@ -27,7 +27,7 @@ const Alert = ({ severity, message, trigger, setTrigger, onClose }: Props) => {
   useEffect(() => {
     if (trigger) handleAlert();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trigger]);
+  }, [trigger, message]);
 
   const handleClose = () => {
     setAlert("");

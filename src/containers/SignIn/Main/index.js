@@ -5,7 +5,7 @@ import {
   googleSignInStart,
 } from "../../../redux/User/user.actions";
 import * as Yup from "yup";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button } from "@mui/material";
 import { Form, Formik } from "formik";
 import TextField from "../../forms/InputMUI";
 import Container from "@mui/material/Container";
@@ -17,6 +17,7 @@ import { clearApiRequest } from "src/redux/general/general.actions";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
+    width: "500px",
     "& .MuiOutlinedInput-input": { color: "white" },
     "& . MuiInputLabel-root": {
       color: "#ffffffB3",
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     border: "solid 2px",
     borderColor: "orange",
     borderRadius: "14px",
+    width: "500px",
     "&:hover": {
       color: "#FFA500",
       backgroundColor: "#ffffff00",
@@ -101,8 +103,8 @@ const Main = ({ handleCloseLoginMenu }) => {
   };
 
   return (
-    <div>
-      <Grid item xs={12}>
+    <>
+      <Grid item container>
         <Formik
           initialValues={{
             ...INITIAL_FORM_STATE,
@@ -113,72 +115,71 @@ const Main = ({ handleCloseLoginMenu }) => {
           }}
         >
           <Form>
-            <Grid container spacing={1}>
-              <Grid item xs={12}>
-                <Container
-                  style={{
-                    backgroundColor: "white",
-                    height: "40px",
-                    padding: "0px",
-                    marginTop: "10px",
-                    borderRadius: "4px",
-                  }}
-                >
-                  <TextField
-                    className={classes.textField}
-                    name='email'
-                    size='small'
-                    placeholder='Email'
-                  ></TextField>
-                </Container>
-              </Grid>
+            <Grid item xs={12}>
+              <Container
+                style={{
+                  backgroundColor: "white",
+                  height: "40px",
+                  padding: "0px",
+                  marginTop: "10px",
+                  borderRadius: "4px",
+                  maxWidth: "500px",
+                }}
+              >
+                <TextField
+                  className={classes.textField}
+                  name='email'
+                  size='small'
+                  placeholder='Email'
+                ></TextField>
+              </Container>
+            </Grid>
 
-              <Grid item xs={12}>
-                <Container
-                  style={{
-                    backgroundColor: "white",
-                    height: "40px",
-                    padding: "0px",
-
-                    borderRadius: "4px",
-                  }}
-                >
-                  <TextField
-                    className={classes.textField}
-                    type='password'
-                    name='password'
-                    size='small'
-                    placeholder='Password'
-                  ></TextField>
-                </Container>
-              </Grid>
-              <Grid item xs={12} style={{ paddingTop: "10px" }}>
-                <Button3Formik title='login' />
-              </Grid>
-              <Grid item xs={12}>
-                <Alert
-                  onClose={() => dispatch(clearApiRequest())}
-                  severity='error'
-                  message={general.apiRequestMessage}
-                  trigger={triggerAlert}
-                  setTrigger={setTriggerAlert}
-                />
-              </Grid>
+            <Grid item xs={12} style={{ marginTop: "20px" }}>
+              <Container
+                style={{
+                  backgroundColor: "white",
+                  height: "40px",
+                  padding: "0px",
+                  width: "500px",
+                  borderRadius: "4px",
+                }}
+              >
+                <TextField
+                  className={classes.textField}
+                  type='password'
+                  name='password'
+                  size='small'
+                  placeholder='Password'
+                ></TextField>
+              </Container>
+            </Grid>
+            <Grid item xs={12} style={{ paddingTop: "20px" }}>
+              <Button3Formik title='login' />
+            </Grid>
+            <Grid item xs={12}>
+              <Alert
+                onClose={() => dispatch(clearApiRequest())}
+                severity='error'
+                message={general.apiRequestMessage}
+                trigger={triggerAlert}
+                setTrigger={setTriggerAlert}
+              />
+            </Grid>
+            <Grid item style={{ paddingTop: "10px" }}>
+              <Button
+                onClick={handleGoogleSigniIn}
+                variant={"contained"}
+                fullWidth={true}
+                style={{ backgroundColor: "#4285F4", color: "#FFFFFF" }}
+              >
+                <FcGoogle size={"2em"} /> &nbsp;Login With Google
+              </Button>
             </Grid>
           </Form>
         </Formik>
       </Grid>
-      <Grid item xs={12} style={{ paddingTop: "10px" }}>
-        <Button
-          onClick={handleGoogleSigniIn}
-          variant={"contained"}
-          fullWidth={true}
-          style={{ backgroundColor: "#4285F4", color: "#FFFFFF" }}
-        >
-          <FcGoogle size={"2em"} /> &nbsp;Login With Google
-        </Button>
-      </Grid>
-    </div>
+    </>
   );
 };
 
