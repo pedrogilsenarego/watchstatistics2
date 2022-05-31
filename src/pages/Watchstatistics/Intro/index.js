@@ -1,43 +1,20 @@
 import React, { useState } from "react";
-
+import DrawerMine from "src/components/Drawer";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Grid, Container } from "@mui/material";
-import { MenuItem, Menu } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { AiOutlineDoubleLeft } from "react-icons/ai";
-import SignIn from "../../../containers/SignIn";
+import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
 
 const img1 =
   "https://dlmag.com/wp-content/uploads/2020/08/How-to-start-luxury-watch-collection_img1.jpg";
-const useStyles = makeStyles((theme) => ({
-  menu: {
-    marginTop: "70px",
-    "& .MuiPaper-root": {
-      backgroundColor: "#040406BF",
-      color: "#ffffff",
-      disableScrollLock: true,
-      minWidth: "300px",
 
-      [theme.breakpoints.up(750)]: {
-        maxWidth: "350px",
-      },
-    },
-  },
-}));
 const Intro = () => {
-  const [anchorLogin, setAnchorLogin] = useState(null);
-  const classes = useStyles();
+  const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
 
-  const handleCloseLoginMenu = () => {
-    setAnchorLogin(null);
-  };
-  const handleLoginOpen = (e) => {
-    setAnchorLogin(e.currentTarget);
-  };
-  const configMenuLogin = {
-    handleCloseLoginMenu,
+  const handleLoginOpen = () => {
+    setMobileDrawerSecondary(true);
   };
 
   return (
@@ -76,7 +53,7 @@ const Intro = () => {
                     "linear-gradient(90deg, rgba(214,121,41,1) 50%, rgba(193,74,27,1) 100%)",
                   marginTop: "5px",
                 }}
-                onClick={(e) => handleLoginOpen(e)}
+                onClick={(e) => handleLoginOpen()}
               >
                 Start Here
               </Button>
@@ -98,25 +75,16 @@ const Intro = () => {
           alt=''
         />
       </Box>
-      <Menu
-        disableScrollLock
-        className={classes.menu}
-        id='login'
-        onClose={handleCloseLoginMenu}
-        anchorEl={anchorLogin}
-        open={Boolean(anchorLogin)}
-        anchorReference='none'
-        PaperProps={{
-          style: {
-            left: "50%",
-            transform: "translateX(-50%) translateY(15%)",
-          },
-        }}
+      <DrawerMine
+        id={0}
+        fullHeight
+        fullWidth
+        position='right'
+        openDrawer={mobileDrawerSecondary}
+        setOpenDrawer={setMobileDrawerSecondary}
       >
-        <MenuItem disableRipple>
-          <SignIn {...configMenuLogin} />
-        </MenuItem>
-      </Menu>
+        <MobileSecondaryDrawer setMobileDrawer={setMobileDrawerSecondary} />
+      </DrawerMine>
     </Container>
   );
 };
