@@ -56,21 +56,21 @@ const Sugested2Vote = () => {
   if (!Array.isArray(data)) return null;
 
   const goLeft = () => {
-    setX(x + 98.5);
+    setX(x + 200);
   };
   const goRight = () => {
-    setX(x - 98.5);
+    setX(x - 200);
   };
 
   const handleGoRight = () => {
     if (filterData()[1].length === 0) return;
-    if (x !== -197) {
+    if (x !== -400) {
       if (x === 0) {
         goRight();
         setButtonLeft(true);
         if (filterData()[2].length === 0) setButtonRight(false);
       }
-      if (x === -98.5) {
+      if (x === -200) {
         goRight();
         setButtonRight(false);
       }
@@ -80,11 +80,11 @@ const Sugested2Vote = () => {
   const handleGoLeft = () => {
     if (x !== 0) {
       goLeft();
-      if (x === -98.5) {
+      if (x === -200) {
         setButtonLeft(false);
         setButtonRight(true);
       }
-      if (x === -197) {
+      if (x === -400) {
         setButtonRight(true);
       }
     }
@@ -142,18 +142,18 @@ const Sugested2Vote = () => {
       <Grid
         container
         wrap='nowrap'
+        columnGap='100%'
         style={{ display: "flex", marginTop: "2px" }}
       >
         {filterData().map((item, pos) => (
           <Grid
             container
             item
-            spacing={2}
+            key={pos}
+            columnGap={0}
             style={{
               display: "flex",
-
               minWidth: "100%",
-
               transition: "0.5s",
               transform: `translateX(${x}%)`,
             }}

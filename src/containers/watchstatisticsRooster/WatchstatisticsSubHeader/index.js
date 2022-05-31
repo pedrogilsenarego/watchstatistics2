@@ -124,7 +124,7 @@ const WatchstatisticsSubHeader = ({}) => {
             container
             xs={12}
             sm={6}
-            alignItems="center"
+            alignItems='center'
             className={classes.item}
             style={{
               display: "flex",
@@ -170,7 +170,7 @@ const WatchstatisticsSubHeader = ({}) => {
             >
               <Typography
                 className={classes.text}
-                variant="h4"
+                variant='h4'
                 style={{
                   fontFamily: "Open Sans Condensed,sans-serif",
                 }}
@@ -179,7 +179,7 @@ const WatchstatisticsSubHeader = ({}) => {
               </Typography>
               <Typography
                 className={classes.text}
-                variant="h6"
+                variant='h6'
                 style={{
                   color: "#ffffffB3",
                   fontFamily: "Open Sans Condensed,sans-serif",
@@ -204,14 +204,14 @@ const WatchstatisticsSubHeader = ({}) => {
             item
             xs={12}
             sm={6}
-            alignItems="center"
-            justifyContent="center"
+            alignItems='center'
+            justifyContent='center'
             className={classes.item}
             style={{ marginTop: isMatch ? "10px" : "0px" }}
           >
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={6}>
               <Typography
-                variant="h6"
+                variant='h6'
                 className={classes.text}
                 style={{
                   color: "#ffffffB3",
@@ -221,7 +221,7 @@ const WatchstatisticsSubHeader = ({}) => {
                 Watches Voted: {numberVotes}
               </Typography>
               <Typography
-                variant="h6"
+                variant='h6'
                 className={classes.text}
                 style={{
                   color: "#ffffffB3",
@@ -231,7 +231,7 @@ const WatchstatisticsSubHeader = ({}) => {
                 Watches Submited: {watchesSubmited}
               </Typography>
               <Typography
-                variant="h6"
+                variant='h6'
                 className={classes.text}
                 style={{
                   color: colorRank(),
@@ -249,10 +249,13 @@ const WatchstatisticsSubHeader = ({}) => {
               >
                 <BorderLinearProgress
                   style={{ width: "50%" }}
-                  variant="determinate"
+                  variant='determinate'
                   value={progress}
                 />
               </Box>
+              <Typography style={{ marginTop: "10px" }}>
+                Points: {currentUser.points}
+              </Typography>
             </Grid>
           </Grid>
         </Grid>
