@@ -94,12 +94,8 @@ const Header = (props) => {
 
   //RightIconsNoUser
 
-  const handleLoginOpen = (e) => {
-    setAnchorLogin(e.currentTarget);
-  };
-
   const configRightIconsNoUser = {
-    handleLoginOpen,
+    setMobileDrawerSecondary,
     search,
   };
 
@@ -243,6 +239,7 @@ const Header = (props) => {
       <DrawerMine
         id={0}
         fullHeight
+        fullWidth
         position='right'
         openDrawer={mobileDrawerSecondary}
         setOpenDrawer={setMobileDrawerSecondary}

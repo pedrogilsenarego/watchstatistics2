@@ -6,6 +6,7 @@ import { i18n } from "src/translations/i18n";
 import { useDispatch, useSelector } from "react-redux";
 import { signOutUserStart } from "src/redux/User/user.actions";
 import { checkUserIsAdmin } from "src/Utils";
+import Signup from "src/containers/SignIn"
 
 interface Props {
   setMobileDrawer: (mobileDrawer: boolean) => void;
@@ -28,8 +29,8 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
     dispatch(signOutUserStart());
   };
 
-  return (
-    <>
+  const renderLoggedIn = () => {
+    return (
       <Grid container rowSpacing={1}>
         <Grid container item xs={12} alignItems='center'>
           <Grid item>
@@ -52,7 +53,8 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         </Grid>
         <Grid item xs={12} onClick={() => handleClickOption(`/messages`)}>
           <Styled.TypographyTitle>
-            {i18n.t("navigation.messages")}{`(${currentUser?.messages?.length || 0})`}
+            {i18n.t("navigation.messages")}
+            {`(${currentUser?.messages?.length || 0})`}
           </Styled.TypographyTitle>
         </Grid>
         <Grid item xs={12} onClick={() => handleClickOption(`/dashboard`)}>
@@ -90,8 +92,14 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
           </Grid>
         )}
       </Grid>
-    </>
-  );
+    );
+  };
+
+  const renderLoggedOff = () => {
+    return <><Signup handleCloseLoginMenu={() => setMobileDrawer(false)} /></>;
+  };
+
+  return <>{currentUser ? renderLoggedIn() : renderLoggedOff()}</>;
 };
 
 export default MobileMainDrawer;

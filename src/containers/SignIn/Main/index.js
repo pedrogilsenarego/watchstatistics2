@@ -5,7 +5,7 @@ import {
   googleSignInStart,
 } from "../../../redux/User/user.actions";
 import * as Yup from "yup";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, useTheme, useMediaQuery } from "@mui/material";
 import { Form, Formik } from "formik";
 import TextField from "../../forms/InputMUI";
 import Container from "@mui/material/Container";
@@ -17,7 +17,6 @@ import { clearApiRequest } from "src/redux/general/general.actions";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
-    width: "500px",
     "& .MuiOutlinedInput-input": { color: "white" },
     "& . MuiInputLabel-root": {
       color: "#ffffffB3",
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     border: "solid 2px",
     borderColor: "orange",
     borderRadius: "14px",
-    width: "500px",
+
     "&:hover": {
       color: "#FFA500",
       backgroundColor: "#ffffff00",
@@ -70,7 +69,7 @@ const INITIAL_FORM_STATE = {
 };
 
 const FORM_VALIDATION = Yup.object().shape({
-  email: Yup.string().required("Required"),
+  email: Yup.string().email("Must be a valid Email").required("Required"),
   password: Yup.string().required("Required"),
 });
 
@@ -83,6 +82,8 @@ const Main = ({ handleCloseLoginMenu }) => {
   const classes = useStyles();
   const { general } = useSelector(mapState);
   const [triggerAlert, setTriggerAlert] = useState(false);
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleFormSubmit = (event) => {
     const { email, password } = event;
@@ -93,7 +94,6 @@ const Main = ({ handleCloseLoginMenu }) => {
       })
     );
     setTriggerAlert(true);
-    //if (general.apiRequestType === "success") handleCloseLoginMenu();
 
     return false;
   };
@@ -103,83 +103,89 @@ const Main = ({ handleCloseLoginMenu }) => {
   };
 
   return (
-    <>
-      <Grid item container>
-        <Formik
-          initialValues={{
-            ...INITIAL_FORM_STATE,
-          }}
-          validationSchema={FORM_VALIDATION}
-          onSubmit={(values) => {
-            handleFormSubmit(values);
-          }}
+    <Formik
+      initialValues={{
+        ...INITIAL_FORM_STATE,
+      }}
+      validationSchema={FORM_VALIDATION}
+      onSubmit={(values) => {
+        handleFormSubmit(values);
+      }}
+    >
+      <Form>
+        <Grid item xs={12}>
+          <Container
+            style={{
+              backgroundColor: "white",
+              height: "40px",
+              padding: "0px",
+              marginTop: "10px",
+              borderRadius: "4px",
+              maxWidth: "500px",
+            }}
+          >
+            <TextField
+              className={classes.textField}
+              name='email'
+              size='small'
+              placeholder='Email'
+            ></TextField>
+          </Container>
+        </Grid>
+        <Grid item xs={12} style={{ marginTop: mobile ? "20px" : "30px" }}>
+          <Container
+            fullWidth
+            style={{
+              backgroundColor: "white",
+              height: "40px",
+              padding: "0px",
+              maxWidth: "500px",
+              borderRadius: "4px",
+            }}
+          >
+            <TextField
+              fullWidth
+              className={classes.textField}
+              type='password'
+              name='password'
+              size='small'
+              placeholder='Password'
+            ></TextField>
+          </Container>
+        </Grid>
+        <Grid item xs={12} style={{ paddingTop: "30px" }}>
+          <Alert
+            onClose={() => dispatch(clearApiRequest())}
+            severity='error'
+            message={general.apiRequestMessage}
+            trigger={triggerAlert}
+            setTrigger={setTriggerAlert}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          style={{ paddingTop: mobile ? "30px" : "100px" }}
+          textAlign='center'
         >
-          <Form>
-            <Grid item xs={12}>
-              <Container
-                style={{
-                  backgroundColor: "white",
-                  height: "40px",
-                  padding: "0px",
-                  marginTop: "10px",
-                  borderRadius: "4px",
-                  maxWidth: "500px",
-                }}
-              >
-                <TextField
-                  className={classes.textField}
-                  name='email'
-                  size='small'
-                  placeholder='Email'
-                ></TextField>
-              </Container>
-            </Grid>
-
-            <Grid item xs={12} style={{ marginTop: "20px" }}>
-              <Container
-                style={{
-                  backgroundColor: "white",
-                  height: "40px",
-                  padding: "0px",
-                  width: "500px",
-                  borderRadius: "4px",
-                }}
-              >
-                <TextField
-                  className={classes.textField}
-                  type='password'
-                  name='password'
-                  size='small'
-                  placeholder='Password'
-                ></TextField>
-              </Container>
-            </Grid>
-            <Grid item xs={12} style={{ paddingTop: "20px" }}>
-              <Button3Formik title='login' />
-            </Grid>
-            <Grid item xs={12}>
-              <Alert
-                onClose={() => dispatch(clearApiRequest())}
-                severity='error'
-                message={general.apiRequestMessage}
-                trigger={triggerAlert}
-                setTrigger={setTriggerAlert}
-              />
-            </Grid>
-            <Grid item style={{ paddingTop: "10px" }}>
-              <Button
-                onClick={handleGoogleSigniIn}
-                variant={"contained"}
-                fullWidth={true}
-                style={{ backgroundColor: "#4285F4", color: "#FFFFFF" }}
-              >
-                <FcGoogle size={"2em"} /> &nbsp;Login With Google
-              </Button>
-            </Grid>
-          </Form>
-        </Formik>
-      </Grid>
-    </>
+          <Button3Formik fullWidth title='login' />
+        </Grid>
+        <Grid item style={{ paddingTop: "20px" }} textAlign='center'>
+          <Button
+            onClick={handleGoogleSigniIn}
+            variant={"contained"}
+            fullWidth={true}
+            style={{
+              backgroundColor: "#4285F4",
+              color: "#FFFFFF",
+              maxWidth: "500px",
+            }}
+          >
+            <FcGoogle size={"2em"} /> &nbsp;Login With Google
+          </Button>
+        </Grid>
+      </Form>
+    </Formik>
   );
 };
 
