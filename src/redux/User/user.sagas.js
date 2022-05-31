@@ -25,10 +25,10 @@ import {
   handleRemoveMessage,
   handleAddMessage,
 } from "./user.helpers";
-// import {
-//   updateSuccessNotification,
-//   updateFailNotification,
-// } from "../general/general.actions";
+import {
+  updateFailApiRequest,
+  updateSuccessApiRequest,
+} from "../general/general.actions";
 // import { i18n } from "src/translations/i18n";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
@@ -71,8 +71,9 @@ export function* emailSignIn({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getSnapshotFromUserAuth(user);
+    yield put(updateSuccessApiRequest(""));
   } catch (err) {
-    // console.log(err);
+    yield put(updateFailApiRequest(err.message));
   }
 }
 

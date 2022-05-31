@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   loading: false,
   notificationMessage: "",
   notificationType: null,
+  apiRequestMessage: "",
+  apiRequestType: null,
 };
 
 interface Action {
@@ -46,6 +48,24 @@ const generalReducer = (state = INITIAL_STATE, action: Action) => {
         ...state,
         notificationMessage: "",
         notificationType: null,
+      };
+    case generalTypes.UPDATE_SUCCESS_API_REQUEST:
+      return {
+        ...state,
+        apiRequestMessage: action.payload,
+        apiRequestType: "success",
+      };
+    case generalTypes.UPDATE_FAIL_API_REQUEST:
+      return {
+        ...state,
+        apiRequestMessage: action.payload,
+        apiRequestType: "fail",
+      };
+    case generalTypes.CLEAR_API_REQUEST:
+      return {
+        ...state,
+        apiRequestMessage: "",
+        apiRequestType: null,
       };
     default:
       return state;

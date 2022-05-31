@@ -1,5 +1,5 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   emailSignInStart,
   googleSignInStart,
@@ -11,8 +11,9 @@ import TextField from "../../forms/InputMUI";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import Button3Formik from "src/components/Buttons/Button3Formik";
-
 import { FcGoogle } from "react-icons/fc";
+import Alert from "src/components/Alert";
+import { clearApiRequest } from "src/redux/general/general.actions";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -71,9 +72,15 @@ const FORM_VALIDATION = Yup.object().shape({
   password: Yup.string().required("Required"),
 });
 
+const mapState = (state) => ({
+  general: state.general,
+});
+
 const Main = ({ handleCloseLoginMenu }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const { general } = useSelector(mapState);
+  const [triggerAlert, setTriggerAlert] = useState(false);
 
   const handleFormSubmit = (event) => {
     const { email, password } = event;
@@ -83,10 +90,11 @@ const Main = ({ handleCloseLoginMenu }) => {
         password,
       })
     );
-    handleCloseLoginMenu();
+    setTriggerAlert(true);
+    //if (general.apiRequestType === "success") handleCloseLoginMenu();
+
     return false;
   };
-
   const handleGoogleSigniIn = () => {
     dispatch(googleSignInStart());
     handleCloseLoginMenu();
@@ -147,11 +155,20 @@ const Main = ({ handleCloseLoginMenu }) => {
               <Grid item xs={12} style={{ paddingTop: "10px" }}>
                 <Button3Formik title='login' />
               </Grid>
+              <Grid item xs={12}>
+                <Alert
+                  onClose={() => dispatch(clearApiRequest())}
+                  severity='error'
+                  message={general.apiRequestMessage}
+                  trigger={triggerAlert}
+                  setTrigger={setTriggerAlert}
+                />
+              </Grid>
             </Grid>
           </Form>
         </Formik>
       </Grid>
-      <Grid item xs={12} style={{ paddingTop: "20px" }}>
+      <Grid item xs={12} style={{ paddingTop: "10px" }}>
         <Button
           onClick={handleGoogleSigniIn}
           variant={"contained"}

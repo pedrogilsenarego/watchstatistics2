@@ -35,9 +35,8 @@ const WatchstatisticsSubHeader = ({}) => {
   const useStyles = makeStyles(() => ({
     root: {
       marginTop: "80px",
-
-      paddingTop: "15px",
-      paddingBottom: "15px",
+      paddingTop: "5px",
+      paddingBottom: "5px",
       background: "#154A6799",
       display: "flex",
       flexDirection: "column",
