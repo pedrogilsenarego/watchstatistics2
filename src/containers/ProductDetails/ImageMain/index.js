@@ -181,6 +181,7 @@ const ImageMain = ({
                 addAdditionalPictures={addAdditionalPictures}
                 setAddAdditionalPictures={setAddAdditionalPictures}
                 productThumbnail={productThumbnail}
+                setProductThumbnail={setProductThumbnail}
                 currentUser={currentUser}
                 newWatch={newWatch}
               />

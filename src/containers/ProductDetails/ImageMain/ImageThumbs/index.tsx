@@ -4,9 +4,11 @@ import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
 import * as Styled from "./styles";
 import { rewards } from "src/constants/gamification";
+import { Typography } from "@material-ui/core";
 
 interface Props {
-  productThumbnail: "string"[];
+  productThumbnail: string[];
+  setProductThumbnail: (productThumbnail: string[]) => void;
   setMainImage: (mainImage: string) => void;
   mainImage: string;
   mobile: boolean;
@@ -20,6 +22,7 @@ interface Props {
 
 const ImageThumbs = ({
   productThumbnail,
+  setProductThumbnail,
   setMainImage,
   mainImage,
   mobile,
@@ -39,6 +42,18 @@ const ImageThumbs = ({
       return 4 - productThumbnail.length;
     else return 0;
   }, [productThumbnail]);
+
+  const handleRemoveThumb = (pos: number) => {
+    const newArray = [...productThumbnail];
+    newArray.splice(pos, 1);
+    if (newArray.length === 0) {
+      setRemoveAdditionalPictures(false);
+      newArray.push(
+        "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png"
+      );
+    }
+    setProductThumbnail(newArray);
+  };
 
   return (
     <>
@@ -64,26 +79,46 @@ const ImageThumbs = ({
                     setMainImage(item);
                   }}
                 >
-                  <CardMedia
-                    style={{
-                      filter: removeAdditionalPictures
-                        ? "grayscale(100%) brightness(0.4)"
-                        : "grayscale(0%) brightness(1)",
-                      cursor: "pointer",
-                      border: mainImage === item ? "solid 1.5px" : "solid 0px",
-                      borderRadius: "2px",
-                      borderColor: mainImage === item ? "orange" : "ffffff00",
-                    }}
-                    component='img'
-                    height='50px'
-                    image={item}
-                    alt=''
-                  />
+                  <div style={{ position: "relative" }}>
+                    <CardMedia
+                      style={{
+                        filter: removeAdditionalPictures
+                          ? "grayscale(100%) brightness(0.4)"
+                          : "grayscale(0%) brightness(1)",
+                        cursor: "pointer",
+                        border:
+                          mainImage === item ? "solid 1.5px" : "solid 0px",
+                        borderRadius: "2px",
+                        borderColor: mainImage === item ? "orange" : "ffffff00",
+                      }}
+                      component='img'
+                      height='50px'
+                      image={item}
+                      alt=''
+                    />
+                    {removeAdditionalPictures && (
+                      <MdRemoveCircle
+                        style={{
+                          backgroundColor: "yellow",
+                          borderRadius: "2px",
+                          cursor: "pointer",
+                          position: "absolute",
+                          top: "25%",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                        }}
+                        size='1.7em'
+                        color='#F80A0A66'
+                        onClick={() => handleRemoveThumb(pos)}
+                      />
+                    )}
+                  </div>
                 </Grid>
               );
             })}
             {!addAdditionalPictures &&
-              currentUser && !removeAdditionalPictures &&
+              currentUser &&
+              !removeAdditionalPictures &&
               productThumbnail.length < 4 && (
                 <Grid item>
                   <MdAddCircle
@@ -125,6 +160,16 @@ const ImageThumbs = ({
                   />
                 </Grid>
               )}
+            {removeAdditionalPictures && (
+              <Grid item>
+                <Typography
+                  onClick={() => setRemoveAdditionalPictures(false)}
+                  style={{ color: "red", cursor: "pointer" }}
+                >
+                  Cancel
+                </Typography>
+              </Grid>
+            )}
           </Grid>
         )}
 
