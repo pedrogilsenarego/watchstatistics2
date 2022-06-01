@@ -174,6 +174,24 @@ const Footer = () => {
           }}
         >
           &nbsp; About &nbsp;
+          {!isMatch && (
+            <BsFillDiamondFill
+              style={{ marginBottom: "2px" }}
+              fontSize={"0.3em"}
+            />
+          )}
+        </Typograpy>
+        <Typograpy
+          style={{
+            fontSize: "15px",
+            cursor: "pointer",
+            marginTop: isMatch ? "20px" : "0px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          &nbsp; Version-1.0.0 &nbsp;
         </Typograpy>
       </Box>
     </div>

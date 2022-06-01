@@ -1,11 +1,9 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
-import { Grid, Box, Typography, Card, Menu, MenuItem } from "@material-ui/core";
+import { Grid, Box, Typography, Card } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import ProductVote from "../ProductVote";
 import { useParams } from "react-router";
 import { motion } from "framer-motion";
-import SignIn from "../../SignIn";
 import { Radar } from "react-chartjs-2";
 import Icons from "./Icons";
 import { useFormikContext } from "formik";
@@ -17,6 +15,8 @@ import Alert from "src/components/Alert";
 import { i18n } from "src/translations/i18n";
 import VotesBox from "./VotesBox";
 import RewardsBanner from "./RewardsBanner";
+import DrawerMine from "src/components/Drawer";
+import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
 
 const initialTargetVoteState = {
   quality: "",
@@ -51,58 +51,16 @@ const ProductSidePanel = ({
   const [update, setUpdate] = useState(true);
   const [easterEggMotion, setEasterEggMotion] = useState(false);
   const [clearDrawerBackground, setClearDrawerBackground] = useState(false);
-  const [anchorLogin, setAnchorLogin] = useState(null);
   const [coordinates, setCoordinates] = useState([1, 1]);
   const [triggerAlert, setTriggerAlert] = useState(false);
   const [minimalDrawer, setMinimalDrawer] = useState(false);
   const { isValid } = useFormikContext();
+  const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
 
   const graphRef = useRef();
   const radarRef = useRef();
 
   const { productID } = useParams();
-
-  const useStyles = makeStyles((theme) => ({
-    menu: {
-      transform: "translateX(-65%)",
-      "& .MuiPaper-root": {
-        backgroundColor: "#18161E",
-        color: "#ffffff",
-        disableScrollLock: true,
-
-        maxWidth: "350px",
-        boxShadow: "0 0 0.5rem hsl(0 0% 100%)",
-      },
-    },
-
-    menu2: {
-      marginTop: "70px",
-      "& .MuiPaper-root": {
-        backgroundColor: "#040406BF",
-        color: "#ffffff",
-        disableScrollLock: true,
-        minWidth: "300px",
-
-        [theme.breakpoints.up(750)]: {
-          maxWidth: "350px",
-        },
-      },
-    },
-
-    textBtn: {
-      color: "#FFFFFF",
-      border: "solid 2px",
-      borderColor: "#ffffff66",
-      fontSize: "13px",
-      borderRadius: "20px",
-      "&:hover": {
-        color: "#FFA500",
-      },
-      "&:active": {
-        color: "#FFFFFF",
-      },
-    },
-  }));
 
   const handleTargetVote = (value, name) => {
     setTargetVoteCategories({ ...targetVoteCategories, [name]: value });
@@ -116,17 +74,9 @@ const ProductSidePanel = ({
     setUpdate(!update);
   };
 
-  const handleCloseLoginMenu = () => {
-    setAnchorLogin(null);
-  };
   const handleLoginOpen = (e) => {
-    setAnchorLogin(e.currentTarget);
+    setMobileDrawerSecondary(true);
   };
-  const configMenuLogin = {
-    handleCloseLoginMenu,
-  };
-
-  const classes = useStyles();
 
   const { votationsOwn, votationsNonOwn } = product;
 
@@ -437,25 +387,16 @@ const ProductSidePanel = ({
       <div ref={voteRef}>
         {showVote && !mobile && <ProductVote {...configTargetVote} />}
       </div>
-      <Menu
-        disableScrollLock
-        className={classes.menu2}
-        id='login'
-        onClose={handleCloseLoginMenu}
-        anchorEl={anchorLogin}
-        open={Boolean(anchorLogin)}
-        anchorReference='none'
-        PaperProps={{
-          style: {
-            left: "50%",
-            transform: "translateX(-50%) translateY(15%)",
-          },
-        }}
+      <DrawerMine
+        id={0}
+        fullHeight
+        fullWidth
+        position='right'
+        openDrawer={mobileDrawerSecondary}
+        setOpenDrawer={setMobileDrawerSecondary}
       >
-        <MenuItem disableRipple>
-          <SignIn {...configMenuLogin} />
-        </MenuItem>
-      </Menu>
+        <MobileSecondaryDrawer setMobileDrawer={setMobileDrawerSecondary} />
+      </DrawerMine>
       {mobile && (
         <Drawer
           clearBackground={clearDrawerBackground}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Grid } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +7,8 @@ import { i18n } from "src/translations/i18n";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import { setCurrentLatestProduct } from "src/redux/Products/products.actions";
+import DrawerMine from "src/components/Drawer"
+import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
 
 interface Props {
   cartItems: any;
@@ -42,6 +45,7 @@ const MobileBottomAppBar = ({
     useSelector(mapState);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
   const configAvatarControllers = {
     cartItems,
     avgTotal,
@@ -82,6 +86,7 @@ const MobileBottomAppBar = ({
       else i++;
     }
   };
+
   return (
     <Grid
       container
@@ -113,7 +118,7 @@ const MobileBottomAppBar = ({
           </Styled.TypographyDisabled>
         )}
         {!currentUser && (
-          <Styled.TypographyLogin onClick={() => setShowVote(!showVote)}>
+          <Styled.TypographyLogin onClick={() => setMobileDrawerSecondary(true)}>
             {i18n.t("navigation.mobileBottomAppbar.loginVote")}
           </Styled.TypographyLogin>
         )}
@@ -137,6 +142,16 @@ const MobileBottomAppBar = ({
           <MdArrowForwardIos size='3em' color='grey' />
         </Grid>
       )}
+      <DrawerMine
+        id={0}
+        fullHeight
+        fullWidth
+        position='right'
+        openDrawer={mobileDrawerSecondary}
+        setOpenDrawer={setMobileDrawerSecondary}
+      >
+        <MobileSecondaryDrawer setMobileDrawer={setMobileDrawerSecondary} />
+      </DrawerMine>
     </Grid>
   );
 };
