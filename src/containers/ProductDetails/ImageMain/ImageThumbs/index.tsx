@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Grid, CardMedia } from "@mui/material";
-import { MdAddCircle } from "react-icons/md";
+import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 import Popover from "src/components/Popover";
 import * as Styled from "./styles";
 import { rewards } from "src/constants/gamification";
@@ -26,11 +26,13 @@ const ImageThumbs = ({
   addAdditionalPictures,
   setAddAdditionalPictures,
   currentUser,
-  index,
   setIndex,
-  newWatch
+  newWatch,
 }: Props) => {
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
+  const [anchorPopoverDelete, setAnchorPopoverDelete] = useState<any>(null);
+  const [removeAdditionalPictures, setRemoveAdditionalPictures] =
+    useState(false);
 
   const numberPictures = useMemo(() => {
     if (productThumbnail && productThumbnail !== undefined)
@@ -58,12 +60,15 @@ const ImageThumbs = ({
                   item
                   key={pos}
                   onClick={() => {
-                    setIndex(pos)
+                    setIndex(pos);
                     setMainImage(item);
                   }}
                 >
                   <CardMedia
                     style={{
+                      filter: removeAdditionalPictures
+                        ? "grayscale(100%) brightness(0.4)"
+                        : "grayscale(0%) brightness(1)",
                       cursor: "pointer",
                       border: mainImage === item ? "solid 1.5px" : "solid 0px",
                       borderRadius: "2px",
@@ -77,25 +82,49 @@ const ImageThumbs = ({
                 </Grid>
               );
             })}
-            {!addAdditionalPictures && currentUser && productThumbnail.length < 4 && (
-              <Grid item>
-                <MdAddCircle
-                  onMouseOver={(e) => {
-                    setAnchorPopover(e.currentTarget);
-                  }}
-                  onMouseOut={() => {
-                    setAnchorPopover(null);
-                  }}
-                  style={{ cursor: "pointer" }}
-                  size='2em'
-                  color='orange'
-                  onClick={() => {
-                    setAnchorPopover(null);
-                    setAddAdditionalPictures(true);
-                  }}
-                />
-              </Grid>
-            )}
+            {!addAdditionalPictures &&
+              currentUser && !removeAdditionalPictures &&
+              productThumbnail.length < 4 && (
+                <Grid item>
+                  <MdAddCircle
+                    onMouseOver={(e) => {
+                      setAnchorPopover(e.currentTarget);
+                    }}
+                    onMouseOut={() => {
+                      setAnchorPopover(null);
+                    }}
+                    style={{ cursor: "pointer" }}
+                    size='2em'
+                    color='orange'
+                    onClick={() => {
+                      setAnchorPopover(null);
+                      setAddAdditionalPictures(true);
+                    }}
+                  />
+                </Grid>
+              )}
+            {newWatch &&
+              !addAdditionalPictures &&
+              currentUser &&
+              !removeAdditionalPictures && (
+                <Grid item>
+                  <MdRemoveCircle
+                    onMouseOver={(e) => {
+                      setAnchorPopoverDelete(e.currentTarget);
+                    }}
+                    onMouseOut={() => {
+                      setAnchorPopoverDelete(null);
+                    }}
+                    style={{ cursor: "pointer" }}
+                    size='2em'
+                    color='red'
+                    onClick={() => {
+                      setAnchorPopoverDelete(null);
+                      setRemoveAdditionalPictures(true);
+                    }}
+                  />
+                </Grid>
+              )}
           </Grid>
         )}
 
@@ -125,6 +154,11 @@ const ImageThumbs = ({
         setAnchor={setAnchorPopover}
         message={`Add up to ${numberPictures} pictures to win up to ${Number(numberPictures) * rewards.PRODUCT_PICTURE
           } points`}
+      />
+      <Popover
+        anchor={anchorPopoverDelete}
+        setAnchor={setAnchorPopoverDelete}
+        message={`Remove pictures you don't like`}
       />
     </>
   );

@@ -29,6 +29,7 @@ const ImageMain = ({
   const [readySubmit, setReadySubmit] = useState(false);
   const [errorImage, setErrorImage] = useState(false);
   const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
+
   const [originalPictureNewWatch, setOriginalPictureNewWatch] = useState(true);
   const Theme = useTheme();
   const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
