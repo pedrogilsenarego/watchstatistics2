@@ -31,14 +31,20 @@ const SliderComponent = ({
 }) => {
   const [anchor, setAnchor] = useState(null);
 
+  const handleClick = (e) => {
+    let time = 1500 * 2;
+    setTimeout(() => {
+      setAnchor(null);
+    }, time);
+    setAnchor(e.currentTarget);
+  };
+
   return (
     <>
       <ThemeProvider theme={muiTheme}>
         <Grid item xs={2}>
           <Typography
-            onClick={(e) => {
-              setAnchor(e.currentTarget);
-            }}
+            onClick={handleClick}
             onMouseOver={(e) => {
               setAnchor(e.currentTarget);
             }}

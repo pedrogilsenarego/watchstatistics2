@@ -373,115 +373,117 @@ const ProductVote = ({
             )}
           </Grid>
         </Grid>
-        {!minimalDrawer && (
-          <Grid item xs={12} container justifyContent='center'>
-            <RadioGroup
-              aria-label='gender'
-              value={ownership}
-              onChange={(event) => {
-                setOwnership(event.target.value);
-              }}
-              style={{ color: "#ffffffBF" }}
-            >
-              <FormControlLabel
-                value='Own'
-                control={
-                  <Radio
-                    checkedIcon={<RiCheckboxFill color='orange' />}
-                    icon={<RiCheckboxBlankLine color='#ffffff66' />}
-                  />
-                }
-                label='I own/experimented the watch'
-              />
-              <FormControlLabel
-                value='Not Own'
-                control={
-                  <Radio
-                    checkedIcon={<RiCheckboxFill color='orange' />}
-                    icon={<RiCheckboxBlankLine color='#ffffff66' />}
-                  />
-                }
-                label='I do not own/experimented the watch'
-              />
-            </RadioGroup>
-            {errors && ownership === "" && (
-              <Typography style={{ color: "red", fontSize: "15px" }}>
-                You must choose if you own or just seen the watch
-              </Typography>
-            )}
-
-            <Grid
-              item
-              container
-              style={{
-                marginBottom: "5px",
-                marginTop: "10px",
-                marginLeft: "15px",
-                marginRight: "15px",
-                color: "#ffffffBF",
-              }}
-            >
-              {renderSliders()}
-              {errors && Object.values(categories).includes("") && (
+        <Grid item xs={12} container justifyContent='center'>
+          {!minimalDrawer && (
+            <>
+              <RadioGroup
+                aria-label='gender'
+                value={ownership}
+                onChange={(event) => {
+                  setOwnership(event.target.value);
+                }}
+                style={{ color: "#ffffffBF" }}
+              >
+                <FormControlLabel
+                  value='Own'
+                  control={
+                    <Radio
+                      checkedIcon={<RiCheckboxFill color='orange' />}
+                      icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                    />
+                  }
+                  label='I own/experimented the watch'
+                />
+                <FormControlLabel
+                  value='Not Own'
+                  control={
+                    <Radio
+                      checkedIcon={<RiCheckboxFill color='orange' />}
+                      icon={<RiCheckboxBlankLine color='#ffffff66' />}
+                    />
+                  }
+                  label='I do not own/experimented the watch'
+                />
+              </RadioGroup>
+              {errors && ownership === "" && (
                 <Typography style={{ color: "red", fontSize: "15px" }}>
-                  You must choose all fields
+                  You must choose if you own or just seen the watch
                 </Typography>
               )}
-            </Grid>
-          </Grid>
-        )}
-        <Grid
-          container
-          item
-          columnGap={2}
-          xs={12}
-          style={{ marginBottom: "20px" }}
-          alignItems='center'
-          justifyContent='center'
-        >
-          <Grid item>
-            <Button3 title='Apply Vote' onClick={handleApplyVote} />
-          </Grid>
-          <Grid item>
-            <Box
-              textAlign='center'
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Typography
+
+              <Grid
+                item
+                container
                 style={{
-                  cursor: "pointer",
-                  fontWeight: 600,
-                  color: "orange",
-                }}
-                onClick={() => {
-                  handleVisualTargetVote(true);
-                  handleUpdate();
-                  if (mobile) {
-                    setMinimalDrawer(!minimalDrawer);
-                    setClearDrawerBackground(true);
-                  }
-                  scrollToRef(graphRef);
+                  marginBottom: "5px",
+                  marginTop: "10px",
+                  marginLeft: "15px",
+                  marginRight: "15px",
+                  color: "#ffffffBF",
                 }}
               >
-                Preview Vote
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item>
-            <RiCloseFill
-              size='2.5em'
-              color='orange'
-              onClick={() => {
-                setShowVote(false);
-                scrollToRef(graphRef);
-              }}
-              style={{
-                cursor: "pointer",
-              }}
-            />
+                {renderSliders()}
+                {errors && Object.values(categories).includes("") && (
+                  <Typography style={{ color: "red", fontSize: "15px" }}>
+                    You must choose all fields
+                  </Typography>
+                )}
+              </Grid>
+            </>
+          )}
+          <Grid
+            container
+            item
+            columnGap={2}
+            xs={12}
+            style={{ marginBottom: "20px" }}
+            alignItems='center'
+            justifyContent='center'
+          >
+            <Grid item>
+              <Button3 title='Apply Vote' onClick={handleApplyVote} />
+            </Grid>
+            <Grid item>
+              <Box
+                textAlign='center'
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  style={{
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    color: "orange",
+                  }}
+                  onClick={() => {
+                    handleVisualTargetVote(true);
+                    handleUpdate();
+                    if (mobile) {
+                      setMinimalDrawer(!minimalDrawer);
+                      setClearDrawerBackground(true);
+                    }
+                    scrollToRef(graphRef);
+                  }}
+                >
+                  Preview Vote
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item>
+              <RiCloseFill
+                size='2.5em'
+                color='orange'
+                onClick={() => {
+                  setShowVote(false);
+                  scrollToRef(graphRef);
+                }}
+                style={{
+                  cursor: "pointer",
+                }}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </FormControl>
@@ -491,7 +493,9 @@ const ProductVote = ({
   return (
     <>
       {mobile ? (
-        renderContentMobile()
+        <Grid container justifyContent='center'>
+          {renderContentMobile()}
+        </Grid>
       ) : (
         <Card
           style={{
