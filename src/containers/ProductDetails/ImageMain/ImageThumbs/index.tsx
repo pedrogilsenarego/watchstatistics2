@@ -5,6 +5,7 @@ import Popover from "src/components/Popover";
 import * as Styled from "./styles";
 import { rewards } from "src/constants/gamification";
 import { Typography } from "@material-ui/core";
+import { useField } from "formik"
 
 interface Props {
   productThumbnail: string[];
@@ -18,6 +19,7 @@ interface Props {
   index: number;
   setIndex: (index: number) => void;
   newWatch: boolean;
+  setOriginalPictureNewWatch: (originalPictureNewWatch: boolean) => void
 }
 
 const ImageThumbs = ({
@@ -31,11 +33,14 @@ const ImageThumbs = ({
   currentUser,
   setIndex,
   newWatch,
+  setOriginalPictureNewWatch
 }: Props) => {
+  const NO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png"
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
   const [anchorPopoverDelete, setAnchorPopoverDelete] = useState<any>(null);
   const [removeAdditionalPictures, setRemoveAdditionalPictures] =
     useState(false);
+  const [, , helpersProductThumbnail] = useField("productThumbnail")
 
   const numberPictures = useMemo(() => {
     if (productThumbnail && productThumbnail !== undefined)
@@ -47,14 +52,18 @@ const ImageThumbs = ({
     const newArray = [...productThumbnail];
     newArray.splice(pos, 1);
     if (newArray.length === 0) {
+      setOriginalPictureNewWatch(true)
+      setAddAdditionalPictures(true)
+      helpersProductThumbnail.setValue([])
       setRemoveAdditionalPictures(false);
       newArray.push(
-        "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png"
+        NO_IMAGE
       );
     }
+    else helpersProductThumbnail.setValue(newArray)
     setProductThumbnail(newArray);
-  };
 
+  };
   return (
     <>
       <Grid container xs={12} sm={8}>

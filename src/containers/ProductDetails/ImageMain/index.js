@@ -184,6 +184,7 @@ const ImageMain = ({
                 setProductThumbnail={setProductThumbnail}
                 currentUser={currentUser}
                 newWatch={newWatch}
+                setOriginalPictureNewWatch={setOriginalPictureNewWatch}
               />
             )}
             {isMatch && (
