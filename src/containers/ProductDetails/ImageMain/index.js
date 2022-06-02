@@ -8,6 +8,8 @@ import { i18n } from "src/translations/i18n";
 import CircularVotes from "src/components/ProgressBars/CircularVotes";
 import { CarouselProvider, Slider, Slide, DotGroup } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { MdAddCircle } from "react-icons/md";
+import "./styles.scss";
 
 const ImageMain = ({
   isMatch,
@@ -90,25 +92,44 @@ const ImageMain = ({
               style={{ position: "relative" }}
             >
               {isMatch && !newWatch && (
-                <Box
-                  display='flex'
-                  justifyContent='center'
-                  style={{
-                    position: "absolute",
-                    right: "5px",
-                    bottom: "17px",
-                    backgroundColor: "#000000CC",
-                    zIndex: "1000",
-                    padding: "5px",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <CircularVotes
-                    avgTotal={avgTotal}
-                    customSize={45}
-                    customFontSize='12px'
-                  />
-                </Box>
+                <>
+                  {productThumbnail.length < 4 && (
+                    <MdAddCircle
+                      style={{
+                        cursor: "pointer",
+                        position: "absolute",
+                        left: "5px",
+                        bottom: "25px",
+                        zIndex: "1000",
+                      }}
+                      size='2.5em'
+                      color='orange'
+                      onClick={() => {
+                        setAddAdditionalPictures(true);
+                      }}
+                    />
+                  )}
+
+                  <Box
+                    display='flex'
+                    justifyContent='center'
+                    style={{
+                      position: "absolute",
+                      right: "5px",
+                      bottom: "25px",
+                      backgroundColor: "#000000CC",
+                      zIndex: "1000",
+                      padding: "5px",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <CircularVotes
+                      avgTotal={avgTotal}
+                      customSize={45}
+                      customFontSize='12px'
+                    />
+                  </Box>
+                </>
               )}
               <Slider
                 onMouseDown={(e) => mouseDownCoords(e)}
@@ -141,8 +162,15 @@ const ImageMain = ({
               </Slider>
               {isMatch && (
                 <>
-                  <Box display='flex' justifyContent='center'>
-                    <DotGroup />
+                  <Box
+                    display='flex'
+                    justifyContent='center'
+                    style={{ marginTop: "5px" }}
+                  >
+                    <DotGroup
+                      className='prc-dotGroup'
+                      style={{ transform: "scale(0.6)" }}
+                    />
                   </Box>
                 </>
               )}
