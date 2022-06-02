@@ -23,6 +23,7 @@ import Messages from "./pages/Messages";
 import Browse from "./containers/Browse";
 import Order from "./pages/Order";
 import Mapper from "./containers/Mapper";
+import DevelopmentPoles from "./containers/DevelopmentPoles";
 
 // layouts
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -75,11 +76,9 @@ const App = () => {
         <CssBaseline />
         <Snackbar />
         <CookiePolicy />
-        <ScrollToTop/>
+        <ScrollToTop />
         <div className='App'>
-        
           <Switch>
-            
             <Route
               exact
               path='/'
@@ -111,6 +110,15 @@ const App = () => {
               render={() => (
                 <MainLayout>
                   <Mapper />
+                </MainLayout>
+              )}
+            />
+            <Route
+              exact
+              path='/development-poles'
+              render={() => (
+                <MainLayout>
+                  <DevelopmentPoles />
                 </MainLayout>
               )}
             />
@@ -188,11 +196,9 @@ const App = () => {
             <Route
               path='/product/:productID'
               render={() => (
-                
                 <MainLayout>
                   <ProductDetails />
                 </MainLayout>
-              
               )}
             />
 
@@ -256,7 +262,6 @@ const App = () => {
               )}
             />
           </Switch>
-         
         </div>
       </ThemeProvider>
     </StyledEngineProvider>

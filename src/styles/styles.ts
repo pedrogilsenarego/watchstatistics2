@@ -1,4 +1,4 @@
-import {styled, Grid, Typography} from "@mui/material"
+import {styled, Grid, Typography, Card} from "@mui/material"
 
 
 export const DashedGrid = styled(Grid)(() => ({
@@ -9,6 +9,20 @@ export const DashedGrid = styled(Grid)(() => ({
 
 }))
 
+
+
+export const StyledCard = styled(Card) (()=>({
+ backgroundColor: "#18161E !important",
+ padding: "10px"
+}))
+
+// Typographies
+
 export const StyledFormError = styled(Typography)(()=>({
   color: "red"
+}))
+
+export const StyledBasicTypography = styled(Typography)(()=>({
+  color: "white",
+  fontSize: "20px"
 }))

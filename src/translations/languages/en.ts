@@ -89,6 +89,11 @@ export const content = {
           error: "Fill and review the mandatory fields."
         }
       },
+      text: {
+        developmentPoles: {
+          title: "Development Poles"
+        }
+      }
     },
   },
 };
