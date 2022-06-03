@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import { useSelector, useDispatch } from "react-redux";
-import * as Styled from "./styles";
 import { i18n } from "src/translations/i18n";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useHistory } from "react-router-dom";
 import { setCurrentLatestProduct } from "src/redux/Products/products.actions";
-import DrawerMine from "src/components/Drawer"
+import DrawerMine from "src/components/Drawer";
 import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
-import { ImPlus } from "react-icons/im"
+import { ImPlus } from "react-icons/im";
+import { MdHowToVote } from "react-icons/md";
 
 interface Props {
   cartItems: any;
@@ -47,7 +47,7 @@ const MobileBottomAppBar = ({
   const dispatch = useDispatch();
   const history = useHistory();
   const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
-  const [showOptions, setShowOptions] = useState(false)
+  const [showOptions, setShowOptions] = useState(false);
   const configAvatarControllers = {
     cartItems,
     avgTotal,
@@ -71,7 +71,7 @@ const MobileBottomAppBar = ({
   };
 
   const checkUserHasVoted = (documentID: string) => {
-    if (currentUser.userVotes.includes(documentID)) return true;
+    if (currentUser?.userVotes.includes(documentID)) return true;
     else return false;
   };
 
@@ -93,7 +93,6 @@ const MobileBottomAppBar = ({
     <Grid
       container
       alignItems='center'
-      justifyContent='space-evenly'
       sx={{
         borderTop: "solid 1px",
         borderColor: "#ffffff66",
@@ -105,34 +104,41 @@ const MobileBottomAppBar = ({
         zIndex: "1000",
       }}
     >
-      <Grid item>
-        {currentUser && !currentUser.userVotes.includes(productID) && (
-          <Styled.Typography onClick={() => setShowVote(!showVote)}>
-            {i18n.t("navigation.mobileBottomAppbar.vote")}
-          </Styled.Typography>
-        )}
-        {currentUser && currentUser.userVotes.includes(productID) && (
-          <Styled.TypographyDisabled>
-            {i18n.t("navigation.mobileBottomAppbar.voted")}
-          </Styled.TypographyDisabled>
-        )}
-        {!currentUser && (
-          <Styled.TypographyLogin onClick={() => setMobileDrawerSecondary(true)}>
-            {i18n.t("navigation.mobileBottomAppbar.loginVote")}
-          </Styled.TypographyLogin>
-        )}
+      <Grid item xs={4} textAlign='center'>
+        <MdHowToVote
+          onClick={() =>
+            currentUser
+              ? checkUserHasVoted(productID)
+                ? null
+                : setShowVote(!showVote)
+              : setMobileDrawerSecondary(true)
+          }
+          size='1.6em'
+          color={
+            checkUserHasVoted(productID) || !currentUser
+              ? "#ffffff66"
+              : "orange"
+          }
+        />
+        <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
+          {currentUser
+            ? checkUserHasVoted(productID)
+              ? i18n.t("navigation.mobileBottomAppbar.voted")
+              : i18n.t("navigation.mobileBottomAppbar.vote")
+            : i18n.t("navigation.mobileBottomAppbar.loginVote")}
+        </Typography>
       </Grid>
-      <Grid item textAlign="center">
-        {currentUser && (
-          <ImPlus
-            onClick={() => setShowOptions(true)}
-            size='2em'
-            color='orange'
-          />
-        )}
-        <Typography style={{ marginTop: "-4px" }}>Options</Typography>
+      <Grid item textAlign='center' xs={4}>
+        <ImPlus
+          onClick={() => setShowOptions(true)}
+          size='1.6em'
+          color='orange'
+        />
+        <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
+          Options
+        </Typography>
       </Grid>
-      <Grid item>
+      <Grid item xs={4} textAlign='center'>
         {currentUser && checkUserHasWatchesForVote() && (
           <MdArrowForwardIos
             onClick={() => handleNextWatch()}
@@ -140,13 +146,13 @@ const MobileBottomAppBar = ({
             color='orange'
           />
         )}
-        {!currentUser && (
-          <MdArrowForwardIos size='2em' color='grey' />
-        )}
+        {!currentUser && <MdArrowForwardIos size='2em' color='grey' />}
         {currentUser && !checkUserHasWatchesForVote() && (
           <MdArrowForwardIos size='2em' color='grey' />
         )}
-        <Typography style={{ marginTop: "-4px" }}>Next</Typography>
+        <Typography style={{ marginTop: "-4px", color: "lightGrey" }}>
+          Next
+        </Typography>
       </Grid>
       <DrawerMine
         id={0}
