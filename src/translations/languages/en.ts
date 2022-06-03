@@ -14,6 +14,7 @@ export const content = {
           voted: "Voted",
           next: "Next Watch",
           loginVote: "Login to Vote",
+          options: "Options",
         },
       },
       drawer: {

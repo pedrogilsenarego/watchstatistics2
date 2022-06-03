@@ -135,7 +135,7 @@ const MobileBottomAppBar = ({
           color='orange'
         />
         <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
-          Options
+          {i18n.t("navigation.mobileBottomAppbar.options")}
         </Typography>
       </Grid>
       <Grid item xs={4} textAlign='center'>
@@ -151,7 +151,7 @@ const MobileBottomAppBar = ({
           <MdArrowForwardIos size='2em' color='grey' />
         )}
         <Typography style={{ marginTop: "-4px", color: "lightGrey" }}>
-          Next
+          {i18n.t("navigation.mobileBottomAppbar.next")}
         </Typography>
       </Grid>
       <DrawerMine
