@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import AvatarsControllers from "../AvatarsControllers2";
 import { useSelector, useDispatch } from "react-redux";
 import * as Styled from "./styles";
@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { setCurrentLatestProduct } from "src/redux/Products/products.actions";
 import DrawerMine from "src/components/Drawer"
 import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
+import { ImPlus } from "react-icons/im"
 
 interface Props {
   cartItems: any;
@@ -46,6 +47,7 @@ const MobileBottomAppBar = ({
   const dispatch = useDispatch();
   const history = useHistory();
   const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
+  const [showOptions, setShowOptions] = useState(false)
   const configAvatarControllers = {
     cartItems,
     avgTotal,
@@ -91,7 +93,7 @@ const MobileBottomAppBar = ({
     <Grid
       container
       alignItems='center'
-      justifyContent='space-between'
+      justifyContent='space-evenly'
       sx={{
         borderTop: "solid 1px",
         borderColor: "#ffffff66",
@@ -103,9 +105,6 @@ const MobileBottomAppBar = ({
         zIndex: "1000",
       }}
     >
-      <Grid item style={{ marginLeft: "10px" }}>
-        <AvatarsControllers {...configAvatarControllers} />
-      </Grid>
       <Grid item>
         {currentUser && !currentUser.userVotes.includes(productID) && (
           <Styled.Typography onClick={() => setShowVote(!showVote)}>
@@ -123,25 +122,32 @@ const MobileBottomAppBar = ({
           </Styled.TypographyLogin>
         )}
       </Grid>
-      {currentUser && checkUserHasWatchesForVote() && (
-        <Grid item>
-          <MdArrowForwardIos
-            onClick={() => handleNextWatch()}
-            size='3em'
+      <Grid item textAlign="center">
+        {currentUser && (
+          <ImPlus
+            onClick={() => setShowOptions(true)}
+            size='2em'
             color='orange'
           />
-        </Grid>
-      )}
-      {!currentUser && (
-        <Grid item>
-          <MdArrowForwardIos size='3em' color='grey' />
-        </Grid>
-      )}
-      {currentUser && !checkUserHasWatchesForVote() && (
-        <Grid item>
-          <MdArrowForwardIos size='3em' color='grey' />
-        </Grid>
-      )}
+        )}
+        <Typography style={{ marginTop: "-4px" }}>Options</Typography>
+      </Grid>
+      <Grid item>
+        {currentUser && checkUserHasWatchesForVote() && (
+          <MdArrowForwardIos
+            onClick={() => handleNextWatch()}
+            size='2em'
+            color='orange'
+          />
+        )}
+        {!currentUser && (
+          <MdArrowForwardIos size='2em' color='grey' />
+        )}
+        {currentUser && !checkUserHasWatchesForVote() && (
+          <MdArrowForwardIos size='2em' color='grey' />
+        )}
+        <Typography style={{ marginTop: "-4px" }}>Next</Typography>
+      </Grid>
       <DrawerMine
         id={0}
         fullHeight
@@ -151,6 +157,16 @@ const MobileBottomAppBar = ({
         setOpenDrawer={setMobileDrawerSecondary}
       >
         <MobileSecondaryDrawer setMobileDrawer={setMobileDrawerSecondary} />
+      </DrawerMine>
+      <DrawerMine
+        position='bottom'
+        topRadius
+        id={0}
+        fullWidth
+        openDrawer={showOptions}
+        setOpenDrawer={setShowOptions}
+      >
+        <AvatarsControllers {...configAvatarControllers} />
       </DrawerMine>
     </Grid>
   );
