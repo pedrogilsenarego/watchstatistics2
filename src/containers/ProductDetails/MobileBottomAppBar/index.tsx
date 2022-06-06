@@ -11,6 +11,7 @@ import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
 import { ImPlus } from "react-icons/im";
 import { MdHowToVote } from "react-icons/md";
 import { BsWatch } from "react-icons/bs"
+import RewardsBanner from "src/containers/ProductDetails/ProductSideGraph/RewardsBanner"
 
 interface Props {
   cartItems: any;
@@ -148,17 +149,22 @@ const MobileBottomAppBar = ({
   )
 
   const renderNewWatchBottomApp = () => (
-    <Grid item xs={12} textAlign='center'>
-      <BsWatch
-        size='1.6em'
-        color="orange"
+    <>
+      <Grid item xs={3} textAlign='center'>
+        <BsWatch
+          size='1.6em'
+          color="orange"
 
-      />
-      <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
-        {i18n.t("navigation.mobileBottomAppbar.submitWatch")
-        }
-      </Typography>
-    </Grid>
+        />
+        <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
+          {i18n.t("navigation.mobileBottomAppbar.submitWatch")
+          }
+        </Typography>
+      </Grid>
+      <Grid item xs={9}>
+        <RewardsBanner />
+      </Grid>
+    </>
   )
 
   return (

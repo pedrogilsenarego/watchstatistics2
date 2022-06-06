@@ -237,6 +237,7 @@ const ProductDetails = ({}) => {
                       style={{ marginTop: isMatch ? "8px" : "0px" }}
                     >
                       <SideGraphPanel
+                      newWatch={newWatch}
                         isMatch={isMatch}
                         showVote={showVote}
                         setShowVote={setShowVote}

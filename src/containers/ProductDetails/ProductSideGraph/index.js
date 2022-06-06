@@ -305,7 +305,7 @@ const ProductSidePanel = ({
                   />
                 </Grid>
               )}
-              {newWatch && (
+              {newWatch && !mobile && (
                 <Grid item xs={12} style={{ padding: "10px" }}>
                   <RewardsBanner />
                 </Grid>
