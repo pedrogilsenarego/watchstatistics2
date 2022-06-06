@@ -10,6 +10,7 @@ import DrawerMine from "src/components/Drawer";
 import MobileSecondaryDrawer from "src/containers/Header/MobileSecondaryDrawer";
 import { ImPlus } from "react-icons/im";
 import { MdHowToVote } from "react-icons/md";
+import { BsWatch } from "react-icons/bs"
 
 interface Props {
   cartItems: any;
@@ -22,6 +23,7 @@ interface Props {
   compareWatches: boolean;
   showVote: boolean;
   setShowVote: (showVote: boolean) => void;
+  newWatch: boolean;
 }
 
 const mapState = (state: any) => ({
@@ -41,6 +43,7 @@ const MobileBottomAppBar = ({
   compareWatches,
   showVote,
   setShowVote,
+  newWatch
 }: Props) => {
   const { currentUser, latestProducts, currentLatestProduct } =
     useSelector(mapState);
@@ -89,21 +92,8 @@ const MobileBottomAppBar = ({
     }
   };
 
-  return (
-    <Grid
-      container
-      alignItems='center'
-      sx={{
-        borderTop: "solid 1px",
-        borderColor: "#ffffff66",
-        width: "100%",
-        bottom: 0,
-        height: "55px",
-        position: "fixed",
-        backgroundColor: "black",
-        zIndex: "1000",
-      }}
-    >
+  const renderBottomButtons = () => (
+    <>
       <Grid item xs={4} textAlign='center'>
         <MdHowToVote
           onClick={() =>
@@ -154,6 +144,39 @@ const MobileBottomAppBar = ({
           {i18n.t("navigation.mobileBottomAppbar.next")}
         </Typography>
       </Grid>
+    </>
+  )
+
+  const renderNewWatchBottomApp = () => (
+    <Grid item xs={12} textAlign='center'>
+      <BsWatch
+        size='1.6em'
+        color="orange"
+
+      />
+      <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
+        {i18n.t("navigation.mobileBottomAppbar.submitWatch")
+        }
+      </Typography>
+    </Grid>
+  )
+
+  return (
+    <Grid
+      container
+      alignItems='center'
+      sx={{
+        borderTop: "solid 1px",
+        borderColor: "#ffffff66",
+        width: "100%",
+        bottom: 0,
+        height: "55px",
+        position: "fixed",
+        backgroundColor: "black",
+        zIndex: "1000",
+      }}
+    >
+      {newWatch ? renderNewWatchBottomApp() : renderBottomButtons()}
       <DrawerMine
         id={0}
         fullHeight

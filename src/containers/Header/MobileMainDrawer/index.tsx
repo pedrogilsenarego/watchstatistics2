@@ -66,9 +66,9 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             <Grid
               item
               xs={12}
-            //onClick={() => handleClickOption(`/submit-new-watch`)}
+              onClick={() => handleClickOption(`/submit-new-watch`)}
             >
-              <Styled.TypographyTitleD>Add Watch</Styled.TypographyTitleD>
+              <Styled.TypographyTitle>{i18n.t("drawer.main.addWatch")}</Styled.TypographyTitle>
             </Grid>
             <Grid item xs={12}>
               <Styled.Divider />

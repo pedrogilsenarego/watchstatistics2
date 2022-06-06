@@ -15,12 +15,17 @@ export const content = {
           next: "Next Watch",
           loginVote: "Login to Vote",
           options: "Options",
+          submitWatch: "Submit"
         },
       },
       drawer: {
         main: {
           loginNotification: "Login for more options",
+          addWatch: "Add Watch"
         },
+        secondary: {
+
+        }
       },
       notifications: {
         success: {
