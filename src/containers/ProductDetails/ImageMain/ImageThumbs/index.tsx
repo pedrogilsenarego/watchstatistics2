@@ -20,6 +20,8 @@ interface Props {
   setIndex: (index: number) => void;
   newWatch: boolean;
   setOriginalPictureNewWatch: (originalPictureNewWatch: boolean) => void
+  removeAdditionalPictures: boolean;
+  setRemoveAdditionalPictures: (removeAdditionalPictures: boolean) => void;
 }
 
 const ImageThumbs = ({
@@ -33,13 +35,14 @@ const ImageThumbs = ({
   currentUser,
   setIndex,
   newWatch,
-  setOriginalPictureNewWatch
+  setOriginalPictureNewWatch,
+  removeAdditionalPictures,
+  setRemoveAdditionalPictures
 }: Props) => {
   const NO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png"
   const [anchorPopover, setAnchorPopover] = useState<any>(null);
   const [anchorPopoverDelete, setAnchorPopoverDelete] = useState<any>(null);
-  const [removeAdditionalPictures, setRemoveAdditionalPictures] =
-    useState(false);
+
   const [, , helpersProductThumbnail] = useField("productThumbnail")
 
   const numberPictures = useMemo(() => {

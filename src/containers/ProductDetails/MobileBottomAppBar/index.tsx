@@ -12,6 +12,9 @@ import { ImPlus } from "react-icons/im";
 import { MdHowToVote } from "react-icons/md";
 import { BsWatch } from "react-icons/bs"
 import RewardsBanner from "src/containers/ProductDetails/ProductSideGraph/RewardsBanner"
+import { useFormikContext } from "formik"
+import Alert from "src/components/Alert";
+
 
 interface Props {
   cartItems: any;
@@ -52,6 +55,8 @@ const MobileBottomAppBar = ({
   const history = useHistory();
   const [mobileDrawerSecondary, setMobileDrawerSecondary] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const { submitForm, isValid } = useFormikContext();
+  const [triggerAlert, setTriggerAlert] = useState(false);
   const configAvatarControllers = {
     cartItems,
     avgTotal,
@@ -150,7 +155,12 @@ const MobileBottomAppBar = ({
 
   const renderNewWatchBottomApp = () => (
     <>
-      <Grid item xs={3} textAlign='center'>
+      <Grid item xs={3} textAlign='center' onClick={() => {
+        submitForm();
+        if (!isValid) {
+          setTriggerAlert(true)
+        };
+      }}>
         <BsWatch
           size='1.6em'
           color="orange"
@@ -160,10 +170,17 @@ const MobileBottomAppBar = ({
           {i18n.t("navigation.mobileBottomAppbar.submitWatch")
           }
         </Typography>
+
       </Grid>
       <Grid item xs={9}>
-        <RewardsBanner />
-      </Grid>
+        {triggerAlert ? <Alert
+
+          severity='error'
+          message={i18n.t("forms.notifications.error")}
+          trigger={triggerAlert}
+          setTrigger={setTriggerAlert}
+        /> : <RewardsBanner />
+        }</Grid>
     </>
   )
 

@@ -8,8 +8,10 @@ import { i18n } from "src/translations/i18n";
 import CircularVotes from "src/components/ProgressBars/CircularVotes";
 import { CarouselProvider, Slider, Slide, DotGroup } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { MdAddCircle } from "react-icons/md";
+import { MdAddCircle, MdRemoveCircle } from "react-icons/md";
 import "./styles.scss";
+import { useField } from "formik";
+import MobileRemoveImageList from "./ImageThumbs/MobileRemoveImageList";
 
 const ImageMain = ({
   isMatch,
@@ -31,8 +33,11 @@ const ImageMain = ({
   const [readySubmit, setReadySubmit] = useState(false);
   const [errorImage, setErrorImage] = useState(false);
   const [addAdditionalPictures, setAddAdditionalPictures] = useState(false);
-
+  const [removeAdditionalPictures, setRemoveAdditionalPictures] =
+    useState(false);
   const [originalPictureNewWatch, setOriginalPictureNewWatch] = useState(true);
+  const [showImageRemoveList, setShowImageRemoveList] = useState(false);
+  const [, , helpersProductThumbnail] = useField("productThumbnail");
   const Theme = useTheme();
   const mobile = useMediaQuery(Theme.breakpoints.down("sm"));
 
@@ -47,9 +52,10 @@ const ImageMain = ({
     avgTotal,
     compareWatches,
   };
-
   const IMAGE_HEIGHT_MOBILE = "80vh";
   const IMAGE_HEIGHT_LAPTOP = "70vh";
+  const NO_IMAGE =
+    "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
 
   const handleOnImgError = () => {
     setReadySubmit(false);
@@ -77,6 +83,20 @@ const ImageMain = ({
     }
   };
 
+  const handleRemoveThumb = (pos) => {
+    const newArray = [...productThumbnail];
+    newArray.splice(pos, 1);
+    if (newArray.length === 0) {
+      setOriginalPictureNewWatch(true);
+      setAddAdditionalPictures(true);
+      helpersProductThumbnail.setValue([]);
+      setRemoveAdditionalPictures(false);
+      setShowImageRemoveList(false);
+      newArray.push(NO_IMAGE);
+    } else helpersProductThumbnail.setValue(newArray);
+    setProductThumbnail(newArray);
+  };
+
   return (
     <>
       {productThumbnail && (
@@ -91,44 +111,66 @@ const ImageMain = ({
               dragEnabled={isMatch ? true : false}
               style={{ position: "relative" }}
             >
-              {isMatch && !newWatch && (
+              {isMatch && (
                 <>
-                  {productThumbnail.length < 4 && (
-                    <MdAddCircle
+                  {newWatch &&
+                    !addAdditionalPictures &&
+                    currentUser &&
+                    !showImageRemoveList &&
+                    !removeAdditionalPictures && (
+                      <MdRemoveCircle
+                        style={{
+                          position: "absolute",
+                          left: "35px",
+                          bottom: "25px",
+                          zIndex: "1000",
+                        }}
+                        size='2.5em'
+                        color='red'
+                        onClick={() => setShowImageRemoveList(true)}
+                      />
+                    )}
+                  {!addAdditionalPictures &&
+                    currentUser &&
+                    !showImageRemoveList &&
+                    !removeAdditionalPictures &&
+                    productThumbnail.length < 4 && (
+                      <MdAddCircle
+                        style={{
+                          cursor: "pointer",
+                          position: "absolute",
+                          left: "5px",
+                          bottom: "25px",
+                          zIndex: "1000",
+                        }}
+                        size='2.5em'
+                        color='orange'
+                        onClick={() => {
+                          setAddAdditionalPictures(true);
+                        }}
+                      />
+                    )}
+                  {!newWatch && (
+                    <Box
+                      display='flex'
+                      justifyContent='center'
                       style={{
-                        cursor: "pointer",
                         position: "absolute",
-                        left: "5px",
+                        right: "5px",
                         bottom: "25px",
+                        backgroundColor: "#000000CC",
                         zIndex: "1000",
+                        padding: "5px",
+                        borderRadius: "8px",
                       }}
-                      size='2.5em'
-                      color='orange'
-                      onClick={() => {
-                        setAddAdditionalPictures(true);
-                      }}
-                    />
+                    >
+                      <CircularVotes
+                        avgTotal={avgTotal}
+                        customSize={45}
+                        customFontSize='12px'
+                      />
+                    </Box>
                   )}
-
-                  <Box
-                    display='flex'
-                    justifyContent='center'
-                    style={{
-                      position: "absolute",
-                      right: "5px",
-                      bottom: "25px",
-                      backgroundColor: "#000000CC",
-                      zIndex: "1000",
-                      padding: "5px",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <CircularVotes
-                      avgTotal={avgTotal}
-                      customSize={45}
-                      customFontSize='12px'
-                    />
-                  </Box>
                 </>
               )}
               <Slider
@@ -202,6 +244,8 @@ const ImageMain = ({
           >
             {!isMatch && (
               <ImageThumbs
+                removeAdditionalPictures={removeAdditionalPictures}
+                setRemoveAdditionalPictures={setRemoveAdditionalPictures}
                 index={indexMini}
                 setIndex={setIndexMini}
                 setMainImage={setMainImage}
@@ -256,6 +300,16 @@ const ImageMain = ({
                   setMainImage={setMainImage}
                   originalPictureNewWatch={originalPictureNewWatch}
                   setOriginalPictureNewWatch={setOriginalPictureNewWatch}
+                />
+              </Grid>
+            )}
+            {showImageRemoveList && (
+              <Grid xs={12} item style={{ padding: "10px" }}>
+                <MobileRemoveImageList
+                  setProductThumbnail={setProductThumbnail}
+                  productThumbnail={productThumbnail}
+                  handleRemoveThumb={handleRemoveThumb}
+                  setShowImageRemoveList={setShowImageRemoveList}
                 />
               </Grid>
             )}
