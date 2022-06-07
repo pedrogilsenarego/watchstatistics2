@@ -5,6 +5,7 @@ import TableList from "src/components/TableList";
 import { tableColumns } from "./constants";
 import { useSelector, useDispatch } from "react-redux";
 import { mapCartItems } from "./mapper";
+import useCompareWatches from "./useCompareWatches";
 import {
   Table,
   TableContainer,
@@ -24,7 +25,6 @@ import {
 import { clearCart } from "../../redux/Cart/cart.actions";
 import Item from "./Item";
 
-
 const mapState = (state) => ({
   cartItems: state.cartData.cartItems,
 });
@@ -40,6 +40,8 @@ const CompareWatches = () => {
   const [hide1, setHide1] = useState(false);
   const [hide2, setHide2] = useState(false);
   const [hide3, setHide3] = useState(false);
+
+  const { handleAction } = useCompareWatches({ cartItems });
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -255,6 +257,7 @@ const CompareWatches = () => {
             <TableList
               columns={tableColumns}
               rows={mapCartItems(cartItems).rows}
+              onAction={handleAction}
             />
             <Grid container>
               <Grid item xs={6}>

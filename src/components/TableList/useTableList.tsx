@@ -6,12 +6,12 @@ import ImagePreview from "src/components/ImagePreview"
 
 interface Props {
   onCheckBoxChangeAll?: (checked: boolean) => void;
-  onAction?: (type: string, id: number) => void;
+  onAction: (type: string, id: number) => void;
   selectedOptions?: number[];
   onCheckBoxChange?: (data: any) => void;
 }
 
-const useTableList = ({ onCheckBoxChangeAll, onAction = () => { }, selectedOptions = [], onCheckBoxChange = () => undefined, }: Props) => {
+const useTableList = ({ onCheckBoxChangeAll, onAction, selectedOptions = [], onCheckBoxChange = () => undefined, }: Props) => {
   const [checked, setChecked] = useState(false);
 
   const handleHeaderCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {

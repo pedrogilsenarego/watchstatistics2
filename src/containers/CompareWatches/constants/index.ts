@@ -16,7 +16,7 @@ export const tableColumns = [
   },
   {
     id: 'delete',
-    label: 'Delete',
+    label: 'Remove',
     type: ColumnType.ActionComponent,
     minWidth: 70,
     sortable: false,

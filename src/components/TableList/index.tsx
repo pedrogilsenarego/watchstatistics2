@@ -21,7 +21,7 @@ interface Props<T> {
   onCheckBoxChangeAll?: (checked: boolean) => void;
   selectedOptions?: number[];
   loading?: boolean;
-  onAction?: (type: string, id: number) => void;
+  onAction: (type: string, id: number) => void;
   onCheckBoxChange?: (data: any) => void;
 }
 
@@ -37,7 +37,7 @@ const TableList = <T extends BaseProps>({
   rows,
   selectedOptions = [],
   loading = false,
-  onAction = () => { },
+  onAction,
   onCheckBoxChange = () => undefined,
 }: Props<T>) => {
   const { checked, handleHeaderCheckBoxChange, formatValue } = useTableList({
@@ -128,7 +128,6 @@ const TableList = <T extends BaseProps>({
     const id = columns[0].id as keyof T;
     const isChecked =
       enableCheckBox && selectedOptions.includes(row[id] as any);
-
     return (
       <Styled.TableRow
         isChecked={isChecked}
