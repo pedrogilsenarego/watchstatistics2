@@ -29,7 +29,7 @@ export interface TableListAction {
   buttonType: 'toggle' | 'icon';
   event: string;
   label: string;
-  icon: string;
+  icon: any;
   confirmationRequired?: boolean;
   confirmationTitle?: string;
   confirmationDescription?: string;

@@ -14,5 +14,12 @@ export const tableColumns = [
     type: ColumnType.Text,
     sortable: false,
   },
+  {
+    id: 'delete',
+    label: 'Delete',
+    type: ColumnType.ActionComponent,
+    minWidth: 70,
+    sortable: false,
+  },
 
 ]

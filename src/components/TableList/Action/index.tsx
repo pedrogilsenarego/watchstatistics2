@@ -7,7 +7,6 @@ import {
   DialogContentText,
   DialogActions,
   Button,
-  Icon,
   Box,
 } from '@mui/material'
 import { TableListAction } from '../types'
@@ -53,8 +52,8 @@ export const Action: FunctionComponent<ActionProps> = ({
     <>
       <Tooltip arrow placement="top" title={label}>
         {buttonType === 'icon' ? (
-          <Styled.IconButton onClick={handleClick} disabled={disabled}>
-            {icon && <Icon>{icon}</Icon>}
+          <Styled.IconButton onClick={handleClick}>
+            {icon ?? null}
           </Styled.IconButton>
         ) : (
           <Box component="div">
