@@ -291,7 +291,6 @@ const Header = (props) => {
           Submit New Watch
         </MenuItem>
         <MenuItem
-          disabled
           onClick={() => {
             handleCloseWatchstatisticsMenu();
             history.push("/watchstatistics/comparewatches");

@@ -4,8 +4,7 @@ import WhatsappShareButton from "../../forms/socialShare/Whatsapp";
 //import AddToBoost from "./AddToBoost";
 
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
-
-//import AddToCompare from "./AddToCompare";
+import AddToCompare from "./AddToCompare";
 
 const AvatarsControllers = ({
   product,
@@ -32,12 +31,12 @@ const AvatarsControllers = ({
     url: "https://fir-auth0-9b4cb.web.app/product/" + productID,
   };
 
-  // const configAddToCompare = {
-  //   product,
-  //   cartItems,
-  //   productID,
-  //   compareWatches,
-  // };
+  const configAddToCompare = {
+    product,
+    cartItems,
+    productID,
+    compareWatches,
+  };
 
   return (
     <div style={{}}>
@@ -54,8 +53,8 @@ const AvatarsControllers = ({
         }}
       >
         <>
-          {/* <AddToBoost product={product} />
-          <AddToCompare {...configAddToCompare} /> */}
+          {/* <AddToBoost product={product} />*/}
+          <AddToCompare {...configAddToCompare} />
 
           <FacebookShare {...configShareButtons} />
           <WhatsappShareButton {...configShareButtons} />

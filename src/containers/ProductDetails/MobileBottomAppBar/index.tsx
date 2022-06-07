@@ -172,7 +172,7 @@ const MobileBottomAppBar = ({
         </Typography>
 
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={9} textAlign="center" style={{ paddingLeft: "5px", paddingRight: "5px" }}>
         {triggerAlert ? <Alert
 
           severity='error'

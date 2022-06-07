@@ -55,6 +55,7 @@ const RewardsBanner = () => {
 
   return (
     <StyledDashedGrid
+      disableBorder
       item
       container
       justifyContent='center'

@@ -1,10 +1,13 @@
 import {styled, Grid, Typography, Card} from "@mui/material"
 
+interface Props {
+  disableBorder?: boolean;
+}
 
-export const DashedGrid = styled(Grid)(() => ({
+export const DashedGrid = styled(Grid)(({disableBorder}:Props) => ({
   textAlign: "left",
   padding: "12px",
-  border: "dashed 1px #ffffff1A",
+  border: disableBorder ? "solid 0px" : "dashed 1px #ffffff1A",
   borderRadius: "6px",
 
 }))

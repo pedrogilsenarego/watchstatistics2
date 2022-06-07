@@ -8,9 +8,20 @@ interface Props {
   setTrigger: (trigger: boolean) => void;
   onClose?: () => void;
   m?: string;
+  maxWidth?: string;
+  maxHeight?: string;
 }
 
-const Alert = ({ severity, message, trigger, setTrigger, onClose, m }: Props) => {
+const Alert = ({
+  severity,
+  message,
+  trigger,
+  setTrigger,
+  onClose,
+  m,
+  maxWidth,
+  maxHeight,
+}: Props) => {
   const [alert, setAlert] = useState("");
 
   const handleAlert = () => {
@@ -42,13 +53,18 @@ const Alert = ({ severity, message, trigger, setTrigger, onClose, m }: Props) =>
         <MuiAlert
           variant='filled'
           severity={severity}
-          style={{ backgroundColor: "red", color: "white", margin: m ?? "0px" }}
+          style={{
+            backgroundColor: "red",
+            color: "white",
+            margin: m ?? "0px",
+            maxWidth: maxWidth ?? "auto",
+            maxHeight: maxHeight ?? "auto",
+          }}
           onClose={handleClose}
         >
           {alert}
         </MuiAlert>
-      )
-      }
+      )}
     </>
   );
 };
