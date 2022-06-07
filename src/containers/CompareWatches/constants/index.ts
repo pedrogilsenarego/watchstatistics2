@@ -4,13 +4,13 @@ import { ColumnType } from 'src/components/TableList/types'
 export const tableColumns = [
   {
     id: "productThumbnail",
-    label: "image",
+    label: "Preview",
     type: ColumnType.Image,
     sortable: false,
   },
   {
     id: "description",
-    label: "productBrand",
+    label: "Description",
     type: ColumnType.Text,
     sortable: false,
   },

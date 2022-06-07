@@ -1,9 +1,9 @@
 import {
-  TableContainer,
+
   Table,
   TableHead,
   TableRow,
-  TableCell,
+  TableSortLabel,
   TableBody,
   Skeleton,
   Tooltip,
@@ -48,21 +48,39 @@ const TableList = <T extends BaseProps>({
   });
 
   const renderHeadCell = (column: Column) => {
-    if (
-      enableBulkSelect &&
-      enableCheckBox &&
-      column.type === ColumnType.CheckBox
-    ) {
+    if (enableBulkSelect && enableCheckBox && column.type === ColumnType.CheckBox) {
       return (
-        <TableCell>
+        <Styled.TableCell
+          isFirstRow
+        >
           <Styled.CheckboxContainer
             checked={checked}
             onChange={handleHeaderCheckBoxChange}
           />
-        </TableCell>
-      );
+        </Styled.TableCell>
+      )
     }
-  };
+
+    return (
+      <Styled.TableCell
+        isFirstRow
+        key={column.id}
+        align={
+          column.type === ColumnType.ActionComponent ? 'center' : column.align
+        }
+        style={{ minWidth: column.minWidth }}
+      >
+        {column.sortable ? (
+          <TableSortLabel
+          >
+            {column.label}
+          </TableSortLabel>
+        ) : (
+          column.label
+        )}
+      </Styled.TableCell>
+    )
+  }
 
   const renderBodyCell = (column: Column, value: T[keyof T], row: T) => {
     if (loading) {
@@ -129,14 +147,14 @@ const TableList = <T extends BaseProps>({
   };
 
   return (
-    <TableContainer>
-      <Table size='small'>
+    <Styled.TableContainer>
+      <Table aria-label="sticky table" size="small">
         <TableHead>
           <TableRow>{columns.map((column) => renderHeadCell(column))}</TableRow>
         </TableHead>
         <TableBody>{rows.map((row) => renderBodyRow(row))}</TableBody>
       </Table>
-    </TableContainer>
+    </Styled.TableContainer>
   );
 };
 

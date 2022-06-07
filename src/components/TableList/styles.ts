@@ -1,15 +1,21 @@
-import {styled, Checkbox, TableRow as MuiTableRow, BoxProps, TableCell as MuiTableCell, TableCellProps as MuiTableCellProps, Box} from "@mui/material"
+import { styled, Checkbox, TableRow as MuiTableRow, BoxProps, TableCell as MuiTableCell, TableContainer as MuiTableContainer, TableCellProps as MuiTableCellProps, Box } from "@mui/material"
 
 export const CheckboxContainer = styled(Checkbox)({
   height: '24px',
 })
+
+export const TableContainer = styled(MuiTableContainer)(() => ({
+  position: 'relative',
+  maxHeight: '65vh',
+  borderRadius: '5px',
+}))
 
 interface TableRowProps {
   isChecked?: boolean
 }
 
 export const TableRow = styled(MuiTableRow)<TableRowProps>(({ isChecked }) => ({
-  background: isChecked ? '#FFF7DF' : 'white',
+  background: isChecked ? '#FFF7DF' : 'transparent',
   color: '#333333',
 }))
 
@@ -25,6 +31,7 @@ export const TableCell = styled(MuiTableCell, {
   paddingInline: '27px',
   paddingTop: isFirstRow ? '16px' : '8px',
   paddingBottom: isFirstRow ? '16px' : '8px',
+  color: "#ffffffCE !important"
 }))
 
 export const ActionContainer = styled(Box)({
