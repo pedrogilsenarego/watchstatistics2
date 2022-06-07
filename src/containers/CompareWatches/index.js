@@ -1,41 +1,24 @@
 import RadarChart from "../RadarChart";
-import { useHistory } from "react-router";
+
 import TableList from "src/components/TableList";
 import { tableColumns } from "./constants";
-import { useSelector, useDispatch } from "react-redux";
 import { mapCartItems } from "./mapper";
 import useCompareWatches from "./useCompareWatches";
-import {
-  Grid,
-  useMediaQuery,
-  Container,
-  useTheme,
-  Paper,
-  Button,
-  Typography,
-} from "@material-ui/core";
-
-import { clearCart } from "../../redux/Cart/cart.actions";
-
-const mapState = (state) => ({
-  cartItems: state.cartData.cartItems,
-});
+import { Grid, Container, Paper, Button, Typography } from "@material-ui/core";
 
 const CompareWatches = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const { cartItems } = useSelector(mapState);
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  // const [list, setList] = useState([]);
-
-  const { handleAction, hide0, hide1, hide2, hide3 } = useCompareWatches({
+  const {
+    handleAction,
+    hide0,
+    hide1,
+    hide2,
+    hide3,
+    handleClearCart,
     cartItems,
-  });
+    history,
+    mobile,
+  } = useCompareWatches();
 
-  const handleClearCart = () => {
-    dispatch(clearCart());
-  };
   function mergeVotations(index) {
     var i = 0;
     const newArray = [];
@@ -183,7 +166,7 @@ const CompareWatches = () => {
 
   return (
     <Container
-      disableGutters={isMatch ? true : false}
+      disableGutters={mobile ? true : false}
       style={{ marginTop: "100px" }}
     >
       <Grid
