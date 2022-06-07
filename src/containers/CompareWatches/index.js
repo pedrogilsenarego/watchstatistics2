@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import RadarChart from "../RadarChart";
 import { useHistory } from "react-router";
-
+import TableList from "src/components/TableList";
+import { tableColumns } from "./constants";
 import { useSelector, useDispatch } from "react-redux";
+import { mapCartItems } from "./mapper";
 import {
   Table,
   TableContainer,
@@ -22,6 +24,7 @@ import {
 import { clearCart } from "../../redux/Cart/cart.actions";
 import Item from "./Item";
 
+
 const mapState = (state) => ({
   cartItems: state.cartData.cartItems,
 });
@@ -32,6 +35,7 @@ const CompareWatches = () => {
   const { cartItems } = useSelector(mapState);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  // const [list, setList] = useState([]);
   const [hide0, setHide0] = useState(false);
   const [hide1, setHide1] = useState(false);
   const [hide2, setHide2] = useState(false);
@@ -248,6 +252,10 @@ const CompareWatches = () => {
                 </Table>
               </TableContainer>
             )}
+            <TableList
+              columns={tableColumns}
+              rows={mapCartItems(cartItems).rows}
+            />
             <Grid container>
               <Grid item xs={6}>
                 <Button

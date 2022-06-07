@@ -1,8 +1,13 @@
-import { styled, Box } from '@mui/material'
+import { styled, Box, CardMedia as MuiCardMedia } from '@mui/material'
 
-export const Container = styled(Box)(({ theme }) => ({
-  border: '1px solid',
-  borderColor: theme.palette.primary.main,
-  borderRadius: '4px',
-  overflow: 'clip',
+export const Container = styled(Box)(() => ({
+  borderRadius: '3px',
+  height: "50px",
+  width: "80px"
+}))
+
+export const CardMedia = styled(MuiCardMedia)(() => ({
+  height: "50px",
+  width: "80px",
+  borderRadius: "3px",
 }))

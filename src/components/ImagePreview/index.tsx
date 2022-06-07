@@ -8,8 +8,9 @@ interface Props extends BoxProps {
 
 const ImagePreview: FunctionComponent<Props> = ({ src, ...rest }: Props) => (
   <Styled.Container {...rest}>
-    <img height="100%" width="100%" src={src} alt="" />
+    <Styled.CardMedia image={src} />
   </Styled.Container>
 )
 
 export default ImagePreview
+
