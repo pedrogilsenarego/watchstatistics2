@@ -12,6 +12,14 @@ const mapCartItem = (cartItems: any, pos: number) => {
       cartItems.productName +
       " " +
       cartItems.reference,
+    show: [
+      {
+        buttonType: "toggle",
+        event: "show",
+        label: "Show/Hide this watch",
+        disabled: false,
+      },
+    ],
     delete: [
       {
         buttonType: "icon",

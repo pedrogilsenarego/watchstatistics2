@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import RadarChart from "../RadarChart";
 import { useHistory } from "react-router";
 import TableList from "src/components/TableList";
@@ -7,12 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { mapCartItems } from "./mapper";
 import useCompareWatches from "./useCompareWatches";
 import {
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
   Grid,
   useMediaQuery,
   Container,
@@ -23,7 +16,6 @@ import {
 } from "@material-ui/core";
 
 import { clearCart } from "../../redux/Cart/cart.actions";
-import Item from "./Item";
 
 const mapState = (state) => ({
   cartItems: state.cartData.cartItems,
@@ -36,12 +28,10 @@ const CompareWatches = () => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   // const [list, setList] = useState([]);
-  const [hide0, setHide0] = useState(false);
-  const [hide1, setHide1] = useState(false);
-  const [hide2, setHide2] = useState(false);
-  const [hide3, setHide3] = useState(false);
 
-  const { handleAction } = useCompareWatches({ cartItems });
+  const { handleAction, hide0, hide1, hide2, hide3 } = useCompareWatches({
+    cartItems,
+  });
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -191,13 +181,6 @@ const CompareWatches = () => {
     n--;
   }
 
-  const handleToggleView = (pos) => {
-    if (pos === 0) setHide0(!hide0);
-    if (pos === 1) setHide1(!hide1);
-    if (pos === 2) setHide2(!hide2);
-    if (pos === 3) setHide3(!hide3);
-  };
-
   return (
     <Container
       disableGutters={isMatch ? true : false}
@@ -211,54 +194,13 @@ const CompareWatches = () => {
         <Grid item xs={12} md={7}>
           <Paper style={{ background: "#18161E" }}>
             {cartItems && cartItems.length > 0 && (
-              <TableContainer>
-                <Table size='small' border='0' aria-label='simple table'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align='left' style={{ fontSize: "15px" }}>
-                        Image
-                      </TableCell>
-                      <TableCell align='left' style={{ fontSize: "15px" }}>
-                        Description
-                      </TableCell>
-                      <TableCell align='center' style={{ fontSize: "15px" }}>
-                        Label
-                      </TableCell>
-                      <TableCell align='center' style={{ fontSize: "15px" }}>
-                        Hide
-                      </TableCell>
-                      <TableCell align='center' style={{ fontSize: "15px" }}>
-                        Remove
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {cartItems.map((item, pos) => {
-                      const color =
-                        item === cartItems[0]
-                          ? "#42e6f5"
-                          : item === cartItems[1]
-                          ? "#E5F517"
-                          : item === cartItems[2]
-                          ? "#ffffff"
-                          : "#DC0D0D";
-                      const configItem = {
-                        ...item,
-                        color: color,
-                        handleToggleView,
-                        pos: pos,
-                      };
-                      return <Item {...configItem} />;
-                    })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <TableList
+                columns={tableColumns}
+                rows={mapCartItems(cartItems).rows}
+                onAction={handleAction}
+              />
             )}
-            <TableList
-              columns={tableColumns}
-              rows={mapCartItems(cartItems).rows}
-              onAction={handleAction}
-            />
+
             <Grid container>
               <Grid item xs={6}>
                 <Button

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useState, useEffect } from 'react'
 import {
   Tooltip,
   Dialog,
@@ -30,6 +30,7 @@ export const Action: FunctionComponent<ActionProps> = ({
   declineButtonLabel = 'Decline',
 }: ActionProps) => {
   const [openConfirmation, setOpenConfirmation] = useState(false)
+  const [toggleDisabled, setToggleDisabled] = useState(false)
 
   const handleCloseConfirmation = () => {
     setOpenConfirmation(false)
@@ -46,7 +47,12 @@ export const Action: FunctionComponent<ActionProps> = ({
       return
     }
     onClick()
+    setToggleDisabled(!toggleDisabled)
   }
+
+  useEffect(() => {
+    if (disabled) setToggleDisabled(disabled)
+  }, [disabled])
 
   return (
     <>
@@ -57,7 +63,7 @@ export const Action: FunctionComponent<ActionProps> = ({
           </Styled.IconButton>
         ) : (
           <Box component="div">
-            <Toggle isActive={!disabled} onClick={handleClick} />
+            <Toggle isActive={!toggleDisabled} onClick={handleClick} />
           </Box>
         )}
       </Tooltip>
