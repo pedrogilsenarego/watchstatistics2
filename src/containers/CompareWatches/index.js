@@ -4,7 +4,7 @@ import TableList from "src/components/TableList";
 import { tableColumns } from "./constants";
 import { mapCartItems } from "./mapper";
 import useCompareWatches from "./useCompareWatches";
-import { Grid, Container, Paper, Typography } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import Button3 from "src/components/Buttons/Button3";
 
 const CompareWatches = () => {
@@ -29,12 +29,20 @@ const CompareWatches = () => {
       >
         <Grid item xs={12} md={7}>
           <GeneralStyled.Card>
-            {cartItems && cartItems.length > 0 && (
+            <GeneralStyled.BasicTypography>
+              CompareWatches
+            </GeneralStyled.BasicTypography>
+            {cartItems?.length > 0 ? (
               <TableList
                 columns={tableColumns}
                 rows={mapCartItems(cartItems).rows}
                 onAction={handleAction}
               />
+            ) : (
+              <GeneralStyled.BasicTypography fontSize='16px'>
+                You got no watches added to the compare system yet, go search
+                for them.
+              </GeneralStyled.BasicTypography>
             )}
 
             <Grid
@@ -43,14 +51,17 @@ const CompareWatches = () => {
               justifyContent='end'
               style={{ marginTop: "20px" }}
             >
-              <Grid item>
-                <Button3
-                  title='Search for Watches'
-                  onClick={() => {
-                    history.push("/browse");
-                  }}
-                />
-              </Grid>
+              {cartItems?.length < 4 && (
+                <Grid item>
+                  <Button3
+                    title='Search for Watches'
+                    onClick={() => {
+                      history.push("/browse");
+                    }}
+                  />
+                </Grid>
+              )}
+
               <Grid item>
                 <Button3
                   onClick={() => {
@@ -62,13 +73,16 @@ const CompareWatches = () => {
             </Grid>
           </GeneralStyled.Card>
         </Grid>
-        <Grid item xs={12} md={5}>
-          <Paper style={{ background: "#18161E" }}>
+        <Grid item xs={12} md={5} textAlign='center'>
+          <GeneralStyled.Card>
             <RadarChart {...configRadarChart} />
-            <Typography>
+            <GeneralStyled.BasicTypography
+              fontSize='14px'
+              style={{ marginTop: "10px" }}
+            >
               Weighted average from the votes of owners VS non-owners
-            </Typography>
-          </Paper>
+            </GeneralStyled.BasicTypography>
+          </GeneralStyled.Card>
         </Grid>
       </Grid>
     </Container>

@@ -25,7 +25,11 @@ export const StyledFormError = styled(Typography)(()=>({
   color: "red"
 }))
 
-export const BasicTypography = styled(Typography)(()=>({
-  color: "white",
-  fontSize: "20px"
+interface BasicTypographyProps {
+  fontSize?:string;
+}
+
+export const BasicTypography = styled(Typography)(({fontSize}: BasicTypographyProps)=>({
+  color: "#ffffffCE",
+  fontSize: fontSize??"20px"
 }))
