@@ -1,4 +1,4 @@
-import {styled, Grid, Typography, Card} from "@mui/material"
+import {styled, Grid, Typography, Card as MuiCard} from "@mui/material"
 
 interface Props {
   disableBorder?: boolean;
@@ -14,7 +14,7 @@ export const DashedGrid = styled(Grid)(({disableBorder}:Props) => ({
 
 
 
-export const StyledCard = styled(Card) (()=>({
+export const Card = styled(MuiCard) (()=>({
  backgroundColor: "#18161E !important",
  padding: "10px"
 }))
@@ -25,7 +25,7 @@ export const StyledFormError = styled(Typography)(()=>({
   color: "red"
 }))
 
-export const StyledBasicTypography = styled(Typography)(()=>({
+export const BasicTypography = styled(Typography)(()=>({
   color: "white",
   fontSize: "20px"
 }))

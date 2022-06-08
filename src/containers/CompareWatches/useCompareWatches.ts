@@ -58,16 +58,158 @@ const useCompareWatches = () => {
     }
   };
 
+  function mergeVotations(index: number) {
+    var i = 0;
+    const newArray = [];
+    const { votationsOwn, numberVotesOwn, votationsNonOwn, numberVotesNotOwn } =
+      cartItems[index];
+    while (i < 7) {
+      newArray.push(
+        (
+          (Number(votationsNonOwn[i]) * numberVotesNotOwn +
+            Number(votationsOwn[i]) * numberVotesOwn) /
+          (numberVotesNotOwn + numberVotesOwn)
+        ).toFixed(2)
+      );
+      i++;
+    }
+    return newArray;
+  }
+
+  const configRadarChart = {
+    data: {
+      //"Quality", "Price", "Brand", "Refinement", "History", "Engineering", "X-Factor"
+      labels: ["S", "M", "L", "K", "R", "Q", "O"],
+      datasets: [
+        {
+          data: cartItems[0] && mergeVotations(0),
+          label: cartItems[0] && cartItems[0].productName,
+
+          borderColor: hide0 ? "#42e6f51A" : "#42e6f5",
+          backgroundColor: hide0 ? "#42e6f51A" : "#42e6f566",
+          fill: true,
+        },
+        {
+          data: cartItems[1] && mergeVotations(1),
+          label: cartItems[1] && cartItems[1].productName,
+          borderColor: hide1 ? "#E5F5171A" : "#E5F517",
+          fill: true,
+          backgroundColor: hide1 ? "#E5F5171A" : "#E5F51766",
+        },
+        {
+          data: cartItems[2] && mergeVotations(2),
+          label: cartItems[2] && cartItems[2].productName,
+          borderColor: hide2 ? "#ffffff1A" : "#ffffff",
+          fill: true,
+          backgroundColor: hide2 ? "#ffffff1A" : "#ffffff66",
+        },
+        {
+          data: cartItems[3] && mergeVotations(3),
+          label: cartItems[3] && cartItems[3].productName,
+          borderColor: hide3 ? "#DC0D0D1A" : "#DC0D0D",
+          fill: true,
+          backgroundColor: hide3 ? "#DC0D0D1A" : "#DC0D0D66",
+        },
+      ],
+    },
+
+    options: {
+      plugins: {
+        tooltip: {
+          displayColors: false,
+          titleAlign: "center",
+          bodyAlign: "center",
+          titleColor: "#ffffff",
+          bodyColor: "#ffffffDB",
+          callbacks: {
+            title: function (item: any, everything: any) {
+              if (item[0].label === "Q") {
+                return "Engineering";
+              }
+              if (item[0].label === "S") {
+                return "Aesthetics";
+              }
+              if (item[0].label === "M") {
+                return "Price over Quality";
+              }
+              if (item[0].label === "L") {
+                return "Brand";
+              }
+              if (item[0].label === "K") {
+                return "Refinement";
+              }
+              if (item[0].label === "R") {
+                return "History";
+              }
+              if (item[0].label === "O") {
+                return "X-Factor";
+              }
+              return;
+            },
+          },
+        },
+        legend: {
+          position: "bottom",
+
+          labels: {
+            color: "#dcdae0",
+            boxWidth: 20,
+            padding: 20,
+            font: {
+              size: 12,
+            },
+          },
+        },
+      },
+      scales: {
+        r: {
+          grid: {
+            color: "#dcdae066",
+          },
+          pointLabels: {
+            color: "#dcdae0",
+
+            font: {
+              family: "MyFont",
+              size: 15,
+            },
+          },
+          angleLines: { color: "#dcdae066" },
+          suggestedMin: 0,
+          suggestedMax: 10,
+          ticks: {
+            stepSize: 2,
+            color: "#ffffff",
+            backdropColor: "#dcdae005",
+          },
+        },
+      },
+
+      animations: {
+        tension: {
+          duration: 700,
+          easing: "linear",
+          from: 0.05,
+          to: 0,
+          loop: true,
+        },
+      },
+    },
+  };
+
+  let n = 3;
+  while (n > 0) {
+    if (!cartItems[n]) configRadarChart.data.datasets.pop();
+    n--;
+  }
+
   return {
     handleAction,
-    hide0,
-    hide1,
-    hide2,
-    hide3,
     handleClearCart,
     cartItems,
     history,
-    mobile
+    mobile,
+    configRadarChart
   };
 };
 
