@@ -1,12 +1,11 @@
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
-import Loading from "../Loading";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Environment, ContactShadows } from "@react-three/drei";
 
 import Watch from "./Solid";
 
-import React, { useRef, Suspense } from "react";
+import React, { useRef } from "react";
 
 extend({ OrbitControls });
 
@@ -54,30 +53,28 @@ const Boxes = (configWatch) => {
       camera={{ position: [30, 80, 300], fov: 0.5 }}
       style={{ cursor: "pointer", height: "70vh" }}
     >
-      <Suspense fallback={<Loading />}>
-        <ambientLight intensity={0.3} />
+      <ambientLight intensity={0.3} />
 
-        <spotLight
-          position={[10, 10, 10]}
-          angle={0.15}
-          penumbra={1}
-          shadow-mapSize={[512, 512]}
-          castShadow
-        />
+      <spotLight
+        position={[10, 10, 10]}
+        angle={0.15}
+        penumbra={1}
+        shadow-mapSize={[512, 512]}
+        castShadow
+      />
 
-        <MyMesh {...configWatch} />
-        <CameraControls />
-        <ContactShadows
-          rotation-x={Math.PI / 2}
-          position={[0, -0.8, 0]}
-          opacity={0.75}
-          width={10}
-          height={10}
-          blur={2.6}
-          far={2}
-        />
-        <Environment preset="city" />
-      </Suspense>
+      <MyMesh {...configWatch} />
+      <CameraControls />
+      <ContactShadows
+        rotation-x={Math.PI / 2}
+        position={[0, -0.8, 0]}
+        opacity={0.75}
+        width={10}
+        height={10}
+        blur={2.6}
+        far={2}
+      />
+      <Environment preset='city' />
     </Canvas>
   );
 };

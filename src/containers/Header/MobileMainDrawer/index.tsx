@@ -57,9 +57,9 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-        //onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
+          onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
         >
-          <Styled.TypographyTitleD>Compare Watches</Styled.TypographyTitleD>
+          <Styled.TypographyTitle>Compare Watches</Styled.TypographyTitle>
         </Grid>
         {auth && (
           <>

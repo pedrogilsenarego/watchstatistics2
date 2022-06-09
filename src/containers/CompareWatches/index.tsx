@@ -6,6 +6,8 @@ import { mapCartItems } from "./mapper";
 import useCompareWatches from "./useCompareWatches";
 import { Grid, Container } from "@mui/material";
 import Button3 from "src/components/Buttons/Button3";
+import { i18n } from "src/translations/i18n";
+import { generalEndpoints } from "src/constants/endpoints";
 
 const CompareWatches = () => {
   const {
@@ -15,12 +17,14 @@ const CompareWatches = () => {
     history,
     mobile,
     configRadarChart,
+    showClearWatches,
+    showSearchWatches,
   } = useCompareWatches();
 
   return (
     <Container
       disableGutters={mobile ? true : false}
-      style={{ marginTop: "100px" }}
+      style={{ marginTop: mobile ? "100px" : "140px" }}
     >
       <Grid
         container
@@ -30,9 +34,9 @@ const CompareWatches = () => {
         <Grid item xs={12} md={7}>
           <GeneralStyled.Card>
             <GeneralStyled.BasicTypography>
-              CompareWatches
+              {i18n.t("text.compareWatches.title")}
             </GeneralStyled.BasicTypography>
-            {cartItems?.length > 0 ? (
+            {showClearWatches() ? (
               <TableList
                 columns={tableColumns}
                 rows={mapCartItems(cartItems).rows}
@@ -40,36 +44,36 @@ const CompareWatches = () => {
               />
             ) : (
               <GeneralStyled.BasicTypography fontSize='16px'>
-                You got no watches added to the compare system yet, go search
-                for them.
+                {i18n.t("text.compareWatches.noWatches")}
               </GeneralStyled.BasicTypography>
             )}
 
             <Grid
               container
               columnGap={2}
-              justifyContent='end'
+              justifyContent={mobile ? "center" : "end"}
               style={{ marginTop: "20px" }}
             >
-              {cartItems?.length < 4 && (
+              {showSearchWatches() && (
                 <Grid item>
                   <Button3
-                    title='Search for Watches'
+                    title={i18n.t("buttons.compareWatches.searchWatches")}
                     onClick={() => {
-                      history.push("/browse");
+                      history.push(generalEndpoints.BROWSE);
                     }}
                   />
                 </Grid>
               )}
-
-              <Grid item>
-                <Button3
-                  onClick={() => {
-                    handleClearCart();
-                  }}
-                  title='Clear Watches'
-                />
-              </Grid>
+              {showClearWatches() && (
+                <Grid item>
+                  <Button3
+                    onClick={() => {
+                      handleClearCart();
+                    }}
+                    title={i18n.t("buttons.compareWatches.clearWatches")}
+                  />
+                </Grid>
+              )}
             </Grid>
           </GeneralStyled.Card>
         </Grid>
@@ -80,7 +84,7 @@ const CompareWatches = () => {
               fontSize='14px'
               style={{ marginTop: "10px" }}
             >
-              Weighted average from the votes of owners VS non-owners
+              {i18n.t("text.compareWatches.graphDescription")}
             </GeneralStyled.BasicTypography>
           </GeneralStyled.Card>
         </Grid>

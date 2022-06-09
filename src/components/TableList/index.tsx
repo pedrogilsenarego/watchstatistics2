@@ -1,5 +1,4 @@
 import {
-
   Table,
   TableHead,
   TableRow,
@@ -7,9 +6,9 @@ import {
   TableBody,
   Skeleton,
   Tooltip,
-  Box
+  Box,
 } from "@mui/material";
-import { Column, ColumnType } from "./types";
+import { Column, ColumnType, ClickType } from "./types";
 import * as Styled from "./styles";
 import useTableList from "./useTableList";
 
@@ -27,6 +26,7 @@ interface Props<T> {
 
 interface BaseProps {
   id: number;
+  productID: string;
 }
 
 const TableList = <T extends BaseProps>({
@@ -40,25 +40,28 @@ const TableList = <T extends BaseProps>({
   onAction,
   onCheckBoxChange = () => undefined,
 }: Props<T>) => {
-  const { checked, handleHeaderCheckBoxChange, formatValue } = useTableList({
-    onCheckBoxChangeAll,
-    onAction,
-    selectedOptions,
-    onCheckBoxChange,
-  });
+  const { checked, handleHeaderCheckBoxChange, formatValue, history } =
+    useTableList({
+      onCheckBoxChangeAll,
+      onAction,
+      selectedOptions,
+      onCheckBoxChange,
+    });
 
   const renderHeadCell = (column: Column) => {
-    if (enableBulkSelect && enableCheckBox && column.type === ColumnType.CheckBox) {
+    if (
+      enableBulkSelect &&
+      enableCheckBox &&
+      column.type === ColumnType.CheckBox
+    ) {
       return (
-        <Styled.TableCell
-          isFirstRow
-        >
+        <Styled.TableCell isFirstRow>
           <Styled.CheckboxContainer
             checked={checked}
             onChange={handleHeaderCheckBoxChange}
           />
         </Styled.TableCell>
-      )
+      );
     }
 
     return (
@@ -66,21 +69,18 @@ const TableList = <T extends BaseProps>({
         isFirstRow
         key={column.id}
         align={
-          column.type === ColumnType.ActionComponent ? 'center' : column.align
+          column.type === ColumnType.ActionComponent ? "center" : column.align
         }
         style={{ minWidth: column.minWidth }}
       >
         {column.sortable ? (
-          <TableSortLabel
-          >
-            {column.label}
-          </TableSortLabel>
+          <TableSortLabel>{column.label}</TableSortLabel>
         ) : (
           column.label
         )}
       </Styled.TableCell>
-    )
-  }
+    );
+  };
 
   const renderBodyCell = (column: Column, value: T[keyof T], row: T) => {
     if (loading) {
@@ -97,13 +97,22 @@ const TableList = <T extends BaseProps>({
 
     return (
       <Styled.TableCell
+        onClick={
+          column.onClick === ClickType.visitProduct
+            ? () => {
+              history.push(`/product/${row.productID}`);
+            }
+            : undefined
+        }
         key={column.id}
         align={column.align}
         style={
           column.type === ColumnType.Image ||
             column.type === ColumnType.CheckBox
             ? { width: column.width }
-            : { minWidth: column.minWidth }
+            : {
+              minWidth: column.minWidth,
+            }
         }
       >
         <Tooltip
@@ -111,7 +120,7 @@ const TableList = <T extends BaseProps>({
           title={column.hoverMapper?.find((h) => h.key === value)?.value || ""}
         >
           <Box
-            component="div"
+            component='div'
             display={column.type === ColumnType.ActionComponent ? "flex" : ""}
             justifyContent={
               column.type === ColumnType.ActionComponent ? "center" : ""
@@ -147,7 +156,7 @@ const TableList = <T extends BaseProps>({
 
   return (
     <Styled.TableContainer>
-      <Table aria-label="sticky table" size="small">
+      <Table aria-label='sticky table' size='small'>
         <TableHead>
           <TableRow>{columns.map((column) => renderHeadCell(column))}</TableRow>
         </TableHead>

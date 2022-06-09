@@ -5,6 +5,7 @@ const deleteIcon = <ImCross fontSize='1em' color="#ffffffCE" style={{ cursor: "p
 const mapCartItem = (cartItems: any, pos: number) => {
   return {
     id: pos,
+    productID: cartItems.productID,
     productThumbnail: cartItems.productThumbnail[0],
     description:
       cartItems.productBrand +

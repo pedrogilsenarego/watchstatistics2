@@ -76,6 +76,14 @@ const useCompareWatches = () => {
     return newArray;
   }
 
+  const showClearWatches = () => {
+    if (cartItems?.length > 0) return true;
+  };
+
+  const showSearchWatches = () => {
+    if (cartItems?.length < 4) return true;
+  };
+
   const configRadarChart = {
     data: {
       //"Quality", "Price", "Brand", "Refinement", "History", "Engineering", "X-Factor"
@@ -209,7 +217,9 @@ const useCompareWatches = () => {
     cartItems,
     history,
     mobile,
-    configRadarChart
+    configRadarChart,
+    showClearWatches,
+    showSearchWatches,
   };
 };
 

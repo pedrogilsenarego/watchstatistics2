@@ -2,7 +2,8 @@ import { useState, ChangeEvent } from "react"
 import { Column, Mapper, ColumnType, TableListAction } from "./types"
 import * as Styled from "./styles"
 import { Action } from "./Action"
-import ImagePreview from "src/components/ImagePreview"
+import ImagePreview from "src/components/TableList/ImagePreview"
+import { useHistory } from "react-router-dom"
 
 interface Props {
   onCheckBoxChangeAll?: (checked: boolean) => void;
@@ -13,6 +14,7 @@ interface Props {
 
 const useTableList = ({ onCheckBoxChangeAll, onAction, selectedOptions = [], onCheckBoxChange = () => undefined, }: Props) => {
   const [checked, setChecked] = useState(false);
+  const history = useHistory()
 
   const handleHeaderCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onCheckBoxChangeAll) onCheckBoxChangeAll(checked)
@@ -81,7 +83,7 @@ const useTableList = ({ onCheckBoxChangeAll, onAction, selectedOptions = [], onC
     }
   }
 
-  return { checked, handleHeaderCheckBoxChange, formatValue }
+  return { checked, handleHeaderCheckBoxChange, formatValue, history }
 }
 
 export default useTableList

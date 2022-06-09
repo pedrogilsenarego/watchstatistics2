@@ -21,17 +21,19 @@ export const TableRow = styled(MuiTableRow)<TableRowProps>(({ isChecked }) => ({
 
 interface TableCellProps extends MuiTableCellProps {
   isFirstRow?: boolean;
+  onClick?:any
 }
 
 export const TableCell = styled(MuiTableCell, {
   shouldForwardProp: (prop) => prop !== 'isFirstRow',
-})<TableCellProps>(({ isFirstRow }) => ({
-  borderBottom: isFirstRow ? 'none' : '2px solid #E6E6E9',
-  fontSize: isFirstRow ? '12px' : '14px',
+})<TableCellProps>(({ isFirstRow, onClick }) => ({
+  borderBottom: '1px solid #E6E6E9',
+  fontSize: isFirstRow ? '14px' : '14px',
   paddingInline: '27px',
   paddingTop: isFirstRow ? '16px' : '8px',
-  paddingBottom: isFirstRow ? '16px' : '8px',
-  color: "#ffffffCE !important"
+  paddingBottom: isFirstRow ? '10px' : '8px',
+  color: "#ffffffCE !important",
+  cursor: onClick?"pointer": "default"
 }))
 
 export const ActionContainer = styled(Box)({

@@ -66,6 +66,10 @@ export const content = {
         submit: "Submit",
         cancel: "Cancel",
         testImage: "Test Image",
+        compareWatches: {
+          searchWatches: 'Search for Watches',
+          clearWatches: "Clear Watches"
+        }
       },
       validation: {
         required: "Required",
@@ -98,6 +102,11 @@ export const content = {
       text: {
         developmentPoles: {
           title: "Development Poles"
+        },
+        compareWatches: {
+          title: "Compare Watches",
+          noWatches: "You got no watches added to the compare system yet, go search for them.",
+          graphDescription: "Weighted average from the votes of owners VS non-owners",
         }
       }
     },

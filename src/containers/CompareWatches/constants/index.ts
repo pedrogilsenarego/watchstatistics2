@@ -1,12 +1,16 @@
-import { ColumnType } from 'src/components/TableList/types'
+import { ColumnType, ClickType } from 'src/components/TableList/types'
 // import { i18n } from 'src/translations/i18n'
 
-export const tableColumns = [
+
+export const tableColumns = 
+  
+  [
   {
     id: "productThumbnail",
     label: "Preview",
     type: ColumnType.Image,
     sortable: false,
+    onClick: ClickType.visitProduct
   },
   {
     id: "description",

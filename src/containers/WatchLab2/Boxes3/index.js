@@ -1,12 +1,11 @@
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
-import Loading from "../Loading";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 import PurpleBox from "./PurpleBox";
 //import test from "../../../assets/teste.jpg";
 
-import React, { useRef, Suspense, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
@@ -49,25 +48,23 @@ const Boxes = ({ x }) => {
       colorManagement
       camera={{ position: [30, 50, 200], fov: 1.5 }}
     >
-      <Suspense fallback={<Loading />}>
-        <ambientLight intensity={0.3} />
-        <directionalLight
-          position={[0, 30, 20]}
-          angle={0.3}
-          penumbra={1}
-          intensity={2}
-          castShadow
-        />
-        <spotLight
-          position={[10, 0, 0]}
-          angle={0.3}
-          penumbra={1}
-          intensity={2}
-          castShadow
-        />
+      <ambientLight intensity={0.3} />
+      <directionalLight
+        position={[0, 30, 20]}
+        angle={0.3}
+        penumbra={1}
+        intensity={2}
+        castShadow
+      />
+      <spotLight
+        position={[10, 0, 0]}
+        angle={0.3}
+        penumbra={1}
+        intensity={2}
+        castShadow
+      />
 
-        <MyMesh {...configMesh} />
-      </Suspense>
+      <MyMesh {...configMesh} />
     </Canvas>
   );
 };

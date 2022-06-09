@@ -44,7 +44,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          onClick={() => handleClickOption("/mycollection")}
+          //onClick={() => handleClickOption("/mycollection")}
           style={{ marginTop: "30px" }}
         >
           <Styled.TypographyTitle>

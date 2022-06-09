@@ -7,6 +7,10 @@ export enum ColumnType {
   Image,
 }
 
+export enum ClickType {
+  visitProduct
+}
+
 export interface Mapper<T> {
   key: T;
   value: string;
@@ -23,6 +27,7 @@ export interface Column {
   format?: (value: number) => string;
   hoverMapper?: Mapper<any>[];
   colorMapper?: Mapper<any>[];
+  onClick?: any
 }
 
 export interface TableListAction {
