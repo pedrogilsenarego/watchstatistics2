@@ -24,7 +24,7 @@ const WatchstatisticsSubHeader = () => {
   return (
     <Styled.Container>
       <Grid container textAlign='center' justifyContent='center'>
-        <Grid item container xs={12} sm={6}>
+        <Grid item container xs={12} sm={6} alignItems='center'>
           <Grid
             item
             container
@@ -32,27 +32,18 @@ const WatchstatisticsSubHeader = () => {
             md={4}
             justifyContent={mobile ? "center" : "flex-end"}
           >
-            <Avatar
+            <Styled.Avatar
               onClick={() => {
-                history.push(`/dashboard`);
+                history.push(generalEndpoints.DASHBOARD);
               }}
               sx={{
                 bgcolor: "#A91D07",
-                width: mobile ? 90 : 74,
-                height: mobile ? 90 : 74,
-                border: "solid 1.5px",
-                borderColor: "#ffffff66",
-              }}
-              style={{
-                float: mobile ? null : "right",
-
-                cursor: "pointer",
               }}
             >
-              <Typography style={{ fontSize: "40px", color: "white" }}>
+              <Styled.AvatarTypography>
                 {avatarLetter()}
-              </Typography>
-            </Avatar>
+              </Styled.AvatarTypography>
+            </Styled.Avatar>
           </Grid>
           <Grid
             item

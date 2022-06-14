@@ -1,5 +1,6 @@
 export const generalEndpoints = {
   BROWSE: "/browse",
   PRODUCT: '/product/:productID',
-  WATCH_LABORATORY: "/watchlaboratory"
+  WATCH_LABORATORY: "/watchlaboratory",
+  DASHBOARD: "/dashboard"
 }
