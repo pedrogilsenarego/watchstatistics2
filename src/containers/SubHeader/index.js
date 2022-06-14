@@ -1,10 +1,9 @@
 import { Box, Grid, Typography } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-
 import Divider from "@mui/material/Divider";
 import { generalEndpoints } from "src/constants/endpoints";
 import useSubHeader from "./useSubHeader";
 import * as Styled from "./styles";
+import * as GeneralStyled from "src/styles/styles";
 
 // eslint-disable-next-line
 const WatchstatisticsSubHeader = () => {
@@ -98,7 +97,7 @@ const WatchstatisticsSubHeader = () => {
             justifyContent='center'
             alignItems='center'
           >
-            <Box
+            <Styled.PointsBox
               display='flex'
               alignItems='center'
               justifyContent='center'
@@ -106,76 +105,61 @@ const WatchstatisticsSubHeader = () => {
               onClick={() => {
                 history.push(generalEndpoints.WATCH_LABORATORY);
               }}
-              style={{
-                backgroundColor: "#2874A6",
-                height: "100px",
-                width: "150px",
-                borderRadius: "20px",
-                cursor: "pointer",
-              }}
             >
-              <Typography
-                style={{
-                  fontSize: "40px",
-                  fontWeight: 800,
-                  fontFamily: "Open Sans Condensed,sans-serif",
-                }}
+              <GeneralStyled.BasicTypography
+                fontSize='40px'
+                fontWeight={800}
+                fontFamily='Open Sans Condensed,sans-serif'
               >
                 {currentUser.points}
-              </Typography>
-              <Typography
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  fontFamily: "Open Sans Condensed,sans-serif",
-                }}
+              </GeneralStyled.BasicTypography>
+              <GeneralStyled.BasicTypography
+                fontSize='14px'
+                fontWeight={500}
+                fontFamily='Open Sans Condensed,sans-serif'
               >
                 Points
-              </Typography>
-            </Box>
+              </GeneralStyled.BasicTypography>
+            </Styled.PointsBox>
           </Grid>
           <Grid item xs={12} md={6}>
-            <Typography
-              variant='h6'
-              style={{
-                color: "#ffffffB3",
-                fontFamily: "Open Sans Condensed,sans-serif",
-              }}
-            >
-              Watches Voted: {numberVotes}
-            </Typography>
-            <Typography
-              variant='h6'
-              style={{
-                color: "#ffffffB3",
-                fontFamily: "Open Sans Condensed,sans-serif",
-              }}
-            >
-              Watches Submited: {watchesSubmited}
-            </Typography>
-            <Typography
-              variant='h6'
-              style={{
-                color: getRank?.color,
-                fontFamily: "Open Sans Condensed,sans-serif",
-              }}
-            >
-              Rank: {getRank?.color}
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                paddingTop: "5px",
-              }}
-            >
-              <Styled.BorderLinearProgress
-                getRank={getRank}
-                style={{ width: "50%" }}
-                variant='determinate'
-                value={progress}
-              />
-            </Box>
+            <Styled.InfoBox alignItems='center' justifyContent='center'>
+              <GeneralStyled.BasicTypography
+                fontFamily='Open Sans Condensed,sans-serif'
+                fontSize='12px'
+                color='#ffffffB3'
+              >
+                <b style={{ fontSize: "20px" }}>{numberVotes}</b> Watches Voted
+              </GeneralStyled.BasicTypography>
+              <GeneralStyled.BasicTypography
+                fontFamily='Open Sans Condensed,sans-serif'
+                fontSize='12px'
+                color='#ffffffB3'
+              >
+                <b style={{ fontSize: "20px" }}>{watchesSubmited}</b> Watches
+                Submited
+              </GeneralStyled.BasicTypography>
+              <GeneralStyled.BasicTypography
+                fontFamily='Open Sans Condensed,sans-serif'
+                fontSize='12px'
+                color='#ffffffB3'
+              >
+                <b style={{ fontSize: "20px" }}>{getRank?.rank}</b> Rank
+              </GeneralStyled.BasicTypography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Styled.BorderLinearProgress
+                  getRank={getRank}
+                  style={{ width: "50%" }}
+                  variant='determinate'
+                  value={progress}
+                />
+              </Box>
+            </Styled.InfoBox>
           </Grid>
         </Grid>
       </Grid>

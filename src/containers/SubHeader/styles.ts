@@ -3,6 +3,7 @@ import {
   Container as MuiContainer,
   Avatar as MuiAvatar,
   Typography,
+  Box
 } from "@mui/material";
 import LinearProgress, {
   linearProgressClasses,
@@ -44,9 +45,25 @@ export const Avatar = styled(MuiAvatar)((mobile: boolean) => ({
   float: mobile ? "none" : "right",
 }));
 
-export const AvatarTypography = styled(Typography) (()=>({
+export const AvatarTypography = styled(Typography)(() => ({
   fontSize: "60px",
   fontWeight: 500,
   color: "white",
   fontFamily: "Open Sans Condensed,sans-serif",
+}))
+
+export const PointsBox = styled(Box)(() => ({
+  backgroundColor: "#2874A6",
+  height: "100px",
+  width: "150px",
+  borderRadius: "20px",
+  cursor: "pointer",
+}))
+
+export const InfoBox = styled(Box)(() => ({
+  backgroundColor: "#2874A6",
+  height: "100px",
+  width: "250px",
+  borderRadius: "20px",
+  cursor: "pointer",
 }))
