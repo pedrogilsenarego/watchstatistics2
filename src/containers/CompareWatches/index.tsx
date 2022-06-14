@@ -4,10 +4,11 @@ import TableList from "src/components/TableList";
 import { tableColumns } from "./constants";
 import { mapCartItems } from "./mapper";
 import useCompareWatches from "./useCompareWatches";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import Button3 from "src/components/Buttons/Button3";
 import { i18n } from "src/translations/i18n";
 import { generalEndpoints } from "src/constants/endpoints";
+import * as Styled from "./styles";
 
 const CompareWatches = () => {
   const {
@@ -22,15 +23,11 @@ const CompareWatches = () => {
   } = useCompareWatches();
 
   return (
-    <Container
+    <Styled.Container
       disableGutters={mobile ? true : false}
-      style={{ marginTop: mobile ? "100px" : "140px" }}
+      mobile={mobile}
     >
-      <Grid
-        container
-        spacing={2}
-        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-      >
+      <Styled.MainGrid container spacing={2}>
         <Grid item xs={12} md={7}>
           <GeneralStyled.Card>
             <GeneralStyled.BasicTypography>
@@ -88,8 +85,8 @@ const CompareWatches = () => {
             </GeneralStyled.BasicTypography>
           </GeneralStyled.Card>
         </Grid>
-      </Grid>
-    </Container>
+      </Styled.MainGrid>
+    </Styled.Container>
   );
 };
 
