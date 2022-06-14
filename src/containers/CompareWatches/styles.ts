@@ -5,6 +5,14 @@ export const MainGrid = styled(Grid)(() => ({
   paddingRight: "10px",
 }));
 
+export const ButtonGrid = styled(Grid)(() => ({
+  marginTop: "20px" 
+}));
+
+export const GraphTextGrid = styled(Grid)(() => ({
+  marginTop: "10px" 
+}));
+
 interface ContainerProps {
   mobile: boolean;
 }

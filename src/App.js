@@ -46,6 +46,7 @@ import { useSelector } from "react-redux";
 import HomePage from "./pages/Homepage";
 import SubmitFeedback from "./pages/SubmitFeedback";
 import Snackbar from "./components/SnackBar";
+import { generalEndpoints } from "./constants/endpoints";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -135,7 +136,7 @@ const App = () => {
               />
               <Route
                 exact
-                path='/watchstatistics/watchlaboratory'
+                path={generalEndpoints.WATCH_LABORATORY}
                 render={() => (
                   <WithAuth>
                     <WatchLab>

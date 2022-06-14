@@ -23,10 +23,7 @@ const CompareWatches = () => {
   } = useCompareWatches();
 
   return (
-    <Styled.Container
-      disableGutters={mobile ? true : false}
-      mobile={mobile}
-    >
+    <Styled.Container disableGutters={mobile ? true : false} mobile={mobile}>
       <Styled.MainGrid container spacing={2}>
         <Grid item xs={12} md={7}>
           <GeneralStyled.Card>
@@ -45,11 +42,10 @@ const CompareWatches = () => {
               </GeneralStyled.BasicTypography>
             )}
 
-            <Grid
+            <Styled.ButtonGrid
               container
               columnGap={2}
               justifyContent={mobile ? "center" : "end"}
-              style={{ marginTop: "20px" }}
             >
               {showSearchWatches() && (
                 <Grid item>
@@ -71,20 +67,17 @@ const CompareWatches = () => {
                   />
                 </Grid>
               )}
-            </Grid>
+            </Styled.ButtonGrid>
           </GeneralStyled.Card>
         </Grid>
-        <Grid item xs={12} md={5} textAlign='center'>
+        <Styled.GraphTextGrid item xs={12} md={5} textAlign='center'>
           <GeneralStyled.Card>
             <RadarChart {...configRadarChart} />
-            <GeneralStyled.BasicTypography
-              fontSize='14px'
-              style={{ marginTop: "10px" }}
-            >
+            <GeneralStyled.BasicTypography fontSize='14px'>
               {i18n.t("text.compareWatches.graphDescription")}
             </GeneralStyled.BasicTypography>
           </GeneralStyled.Card>
-        </Grid>
+        </Styled.GraphTextGrid>
       </Styled.MainGrid>
     </Styled.Container>
   );

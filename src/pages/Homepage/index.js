@@ -1,5 +1,5 @@
 import React from "react";
-import WatchstatisticsSubHeader from "../../containers/watchstatisticsRooster/WatchstatisticsSubHeader";
+import WatchstatisticsSubHeader from "../../containers/SubHeader";
 
 import { useSelector } from "react-redux";
 import HomePageComponent from "../../containers/Homepage";
