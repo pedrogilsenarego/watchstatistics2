@@ -100,7 +100,7 @@ const Sugested2Vote = () => {
   if (filterData()[0].length === 0) return null;
 
   return (
-    <Container>
+    <Container maxWidth={"xl"}>
       <Grid container style={{ marginTop: "50px" }} alignItems='center'>
         <Grid item>
           <Typography variant={"h6"}>Sugested for you to vote</Typography>

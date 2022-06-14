@@ -18,7 +18,7 @@ const Intro = () => {
   };
 
   return (
-    <Container disableGutters>
+    <Container disableGutters maxWidth={"xxl"}>
       <Box style={{ height: "70vh", overflow: "hidden" }}>
         <Grid
           container

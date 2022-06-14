@@ -28,6 +28,7 @@ import RightIconsNoUser from "./RightIconsNoUser";
 import RightIconsUser from "./RightIconsUser";
 import LeftIcons from "./LeftIcons";
 import RightIconsBigUser from "./RightIconsBigUser";
+import { generalEndpoints } from "src/constants/endpoints";
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
@@ -209,7 +210,7 @@ const Header = (props) => {
               </Grid>
             </>
           ) : (
-            <Container>
+            <Container maxWidth={"xxl"}>
               <Grid container justifyContent='space-between'>
                 <Grid item>
                   <LeftIcons {...configLeftIcons} />
@@ -308,10 +309,9 @@ const Header = (props) => {
         open={Boolean(anchorSupport)}
       >
         <MenuItem
-          disabled
           onClick={() => {
             handleCloseWatchstatisticsMenu();
-            history.push("/watchstatistics/watchlaboratory");
+            history.push(generalEndpoints.WATCH_LABORATORY);
           }}
         >
           Watch Laboratory

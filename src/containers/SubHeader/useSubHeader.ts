@@ -14,9 +14,10 @@ const useSubHeader = () => {
   const history = useHistory();
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { experience, displayName } = currentUser;
+  const { experience, displayName, userVotes } = currentUser;
   const [progress, setProgress] = useState<number | undefined>();
   const getRank = rank(experience || 0)
+  const numberVotes = userVotes?.length > 0 ? userVotes?.length - 1 : 0;
 
   useEffect(() => {
    setProgress(getRank?.progress)
@@ -31,7 +32,7 @@ const useSubHeader = () => {
     } else return null;
   };
  
-  return { history, mobile, currentUser, theme, progress, avatarLetter, getRank}
+  return { history, mobile, currentUser, theme, progress, avatarLetter, getRank, numberVotes}
 }
 
 export default useSubHeader

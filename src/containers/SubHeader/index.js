@@ -15,13 +15,13 @@ const WatchstatisticsSubHeader = () => {
     progress,
     avatarLetter,
     getRank,
+    numberVotes,
   } = useSubHeader();
 
-  const { userVotes, displayName, watchesSubmited } = currentUser;
-  const numberVotes = userVotes ? userVotes.length - 1 : 0;
+  const { displayName, watchesSubmited } = currentUser;
 
   return (
-    <Styled.Container>
+    <Styled.Container maxWidth={"xl"}>
       <Grid container textAlign='center' justifyContent='center'>
         <Grid item container xs={12} sm={6} alignItems='center'>
           <Grid
@@ -85,6 +85,7 @@ const WatchstatisticsSubHeader = () => {
           xs={12}
           sm={6}
           alignItems='center'
+          rowGap={2}
           style={{
             marginTop: mobile ? "10px" : "0px",
           }}
@@ -111,7 +112,7 @@ const WatchstatisticsSubHeader = () => {
                 fontWeight={800}
                 fontFamily='Open Sans Condensed,sans-serif'
               >
-                {currentUser.points}
+                {currentUser?.points || 0}
               </GeneralStyled.BasicTypography>
               <GeneralStyled.BasicTypography
                 fontSize='14px'
@@ -122,7 +123,14 @@ const WatchstatisticsSubHeader = () => {
               </GeneralStyled.BasicTypography>
             </Styled.PointsBox>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid
+            container
+            item
+            xs={12}
+            md={6}
+            justifyContent='center'
+            alignItems='center'
+          >
             <Styled.InfoBox alignItems='center' justifyContent='center'>
               <GeneralStyled.BasicTypography
                 fontFamily='Open Sans Condensed,sans-serif'
@@ -144,7 +152,7 @@ const WatchstatisticsSubHeader = () => {
                 fontSize='12px'
                 color='#ffffffB3'
               >
-                <b style={{ fontSize: "20px" }}>{getRank?.rank}</b> Rank
+                <b style={{ fontSize: "20px" }}>{getRank?.rank}</b>
               </GeneralStyled.BasicTypography>
               <Box
                 sx={{
