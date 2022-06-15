@@ -77,7 +77,9 @@ export const openBoxParts = (typeOfBox: TypeOfBox): any => {
     case "whiteBox":
       return {
         MAIN_PART: "grey",
+        MAIN_FRAGMENTS: "blueBoxFragments",
         SECONDARY_PART: "white",
+        SECONDARY_FRAGMENTS: "purpleBoxFragments",
         THIRD_PART: "lightGreen",
         MAIN_PART_STRING: "Grey",
         SECONDARY_PART_STRING: "White",
@@ -88,7 +90,9 @@ export const openBoxParts = (typeOfBox: TypeOfBox): any => {
     case "blueBox":
       return {
         MAIN_PART: "white",
+        MAIN_FRAGMENTS: "purpleBoxFragments",
         SECONDARY_PART: "lightGreen",
+        SECONDARY_FRAGMENTS: "orangeBoxFragments",
         THIRD_PART: "darkGreen",
         MAIN_PART_STRING: "White",
         SECONDARY_PART_STRING: "Light Green",

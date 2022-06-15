@@ -106,14 +106,14 @@ export const handleUpdateBoxStatus = (product) => {
         purpleBoxFragments: firebase.firestore.FieldValue.increment(-10),
       });
 
-    if (product.flag === "openWhitebox")
+    if (product.flag === "openWhiteBox")
       ref.update({
         whiteBox: firebase.firestore.FieldValue.increment(-1),
         blueBoxFragments: blueBoxFragments,
         purpleBoxFragments: purpleBoxFragments,
         watchParts: watchParts,
       });
-    if (product.flag === "openBluebox")
+    if (product.flag === "openBlueBox")
       ref.update({
         blueBox: firebase.firestore.FieldValue.increment(-1),
         purpleBoxFragments: purpleBoxFragments,

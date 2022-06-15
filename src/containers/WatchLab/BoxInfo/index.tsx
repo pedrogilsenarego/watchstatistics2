@@ -23,7 +23,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
   const {
     checkmark,
     handleGetBox,
-    handleOpenWhiteBox,
+    handleOpenBox,
     openBoxPopUp,
     setOpenBoxPopUp,
     popUpInf,
@@ -98,7 +98,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
           <Button
             disabled={openBoxDisabled()}
             size='small'
-            onClick={() => handleOpenWhiteBox()}
+            onClick={() => handleOpenBox()}
             style={{
               color: openBoxDisabled() ? "grey" : "#ffffffBF",
               borderColor: "#ffffff40",
