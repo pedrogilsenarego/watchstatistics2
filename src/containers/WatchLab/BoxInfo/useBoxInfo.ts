@@ -37,16 +37,22 @@ const useBoxInfo = ({typeOfBox}:Props) => {
     }
   }
 
+  const handleFlagGetBox = () => {
+    switch(typeOfBox) {
+      case "whiteBox": return "getWhiteBox"
+    }
+  }
+
   const handleGetWhiteBox = () => {
     const configData = {
       ...currentUser,
-      flag: "getWhitebox",
+      flag: handleFlagGetBox(),
       points: currentUser?.points - 4,
       whiteBox: currentUser?.whiteBox + 1,
       userID: currentUser.id,
     };
     dispatch(updateBoxStatus(configData));
-    dispatch(updateSuccessNotification("You added a WhiteBox to your collection"))
+    dispatch(updateSuccessNotification(`You added a ${returnTypeOfBoxString()} to your collection`))
   };
 
 
