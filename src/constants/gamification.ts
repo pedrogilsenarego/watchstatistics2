@@ -85,6 +85,17 @@ export const openBoxParts = (typeOfBox: TypeOfBox): any => {
         SECONDARY_FRAGMENT_STRING: "Blue",
         THIRD_FRAGMENTS_STRING: "Purple"
       };
+    case "blueBox":
+      return {
+        MAIN_PART: "white",
+        SECONDARY_PART: "lightGreen",
+        THIRD_PART: "darkGreen",
+        MAIN_PART_STRING: "White",
+        SECONDARY_PART_STRING: "Light Green",
+        THIRD_PART_STRING: "Dark Green",
+        SECONDARY_FRAGMENT_STRING: "Purple",
+        THIRD_FRAGMENTS_STRING: "Orange"
+      };
     default: return {}
   }
 };

@@ -10,6 +10,7 @@ import {
   openBoxParts,
   openBoxPartsPercentage,
   openBoxFragmentsPercentage,
+  getBox,
 } from "src/constants/gamification";
 import { TypeOfBox } from "src/containers/WatchLab/types"
 import { FaPuzzlePiece, FaCoins } from "react-icons/fa";
@@ -43,6 +44,7 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
   const handleFlagGetBox = () => {
     switch (typeOfBox) {
       case "whiteBox": return "getWhiteBox"
+      case "blueBox": return "getBlueBox"
     }
   }
   const getIcon = () => {
@@ -52,12 +54,20 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
     }
   }
 
-  const handleGetWhiteBox = () => {
+  const getFieldToWithdraw = () => {
+    switch (typeOfBox) {
+      case "whiteBox": return "points"
+      case "blueBox": return "blueBoxFragments"
+      default: return "points"
+    }
+  }
+
+  const handleGetBox = () => {
     const configData = {
       ...currentUser,
       flag: handleFlagGetBox(),
-      points: currentUser?.points - 4,
-      whiteBox: currentUser?.whiteBox + 1,
+      [getFieldToWithdraw()]: currentUser?.[getFieldToWithdraw()] - getBox(typeOfBox),
+      [typeOfBox]: currentUser?.[typeOfBox] + 1,
       userID: currentUser.id,
     };
     dispatch(updateBoxStatus(configData));
@@ -129,7 +139,7 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
   return {
     checkmark,
     handleOpenWhiteBox,
-    handleGetWhiteBox,
+    handleGetBox,
     openBoxPopUp,
     setOpenBoxPopUp,
     popUpInf,

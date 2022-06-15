@@ -22,7 +22,7 @@ interface Props {
 const BoxInfo = ({ typeOfBox }: Props) => {
   const {
     checkmark,
-    handleGetWhiteBox,
+    handleGetBox,
     handleOpenWhiteBox,
     openBoxPopUp,
     setOpenBoxPopUp,
@@ -68,7 +68,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
         <Typography style={{ color: "#ffffffBF" }}>
           {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MIN}-
           {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MAX} Fragments of{" "}
-          {openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING}
+          {openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING}{" "}
           Box
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
@@ -86,7 +86,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
           <Button
             disabled={getBoxDisabled()}
             size='small'
-            onClick={() => handleGetWhiteBox()}
+            onClick={() => handleGetBox()}
             style={{
               color: getBoxDisabled() ? "grey" : "#ffffffBF",
               borderColor: "#ffffff40",
