@@ -1,1 +1,2 @@
-export type TypeOfBox = "whiteBox" 
+export type TypeOfBox = "whiteBox" | "blueBox"
+

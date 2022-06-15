@@ -12,18 +12,20 @@ import {
   openBoxFragmentsPercentage,
 } from "src/constants/gamification";
 import { TypeOfBox } from "src/containers/WatchLab/types"
+import { FaPuzzlePiece, FaCoins } from "react-icons/fa";
+
 
 
 
 interface Props {
-typeOfBox: TypeOfBox
+  typeOfBox: TypeOfBox
 }
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
 });
 
-const useBoxInfo = ({typeOfBox}:Props) => {
+const useBoxInfo = ({ typeOfBox }: Props) => {
   const { currentUser } = useSelector(mapState);
   const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
   const [popUpInf, setPopUpInfo] = useState<string | null>(null);
@@ -33,13 +35,20 @@ const useBoxInfo = ({typeOfBox}:Props) => {
   const returnTypeOfBoxString = () => {
     switch (typeOfBox) {
       case "whiteBox": return "White Box"
+      case "blueBox": return "Blue Box"
       default: return "White Box"
     }
   }
 
   const handleFlagGetBox = () => {
-    switch(typeOfBox) {
+    switch (typeOfBox) {
       case "whiteBox": return "getWhiteBox"
+    }
+  }
+  const getIcon = () => {
+    switch (typeOfBox) {
+      case "whiteBox": return (<FaCoins size='2.5vh' color='orange' />)
+      case "blueBox": return (<FaPuzzlePiece size='3vh' color='lightBlue' />)
     }
   }
 
@@ -91,13 +100,13 @@ const useBoxInfo = ({typeOfBox}:Props) => {
     setOpenBoxPopUp(true);
     setPopUpInfo(
       "You received: " +
-        Number(configData.blueBoxFragments - currentUser?.blueBoxFragments) +
-        " Blue Box Fragments, " +
-        Number(
-          configData.purpleBoxFragments - currentUser?.purpleBoxFragments
-        ) +
-        " Purple Box Fragments, " +
-        c
+      Number(configData.blueBoxFragments - currentUser?.blueBoxFragments) +
+      " Blue Box Fragments, " +
+      Number(
+        configData.purpleBoxFragments - currentUser?.purpleBoxFragments
+      ) +
+      " Purple Box Fragments, " +
+      c
     );
   };
 
@@ -126,7 +135,8 @@ const useBoxInfo = ({typeOfBox}:Props) => {
     popUpInf,
     getBoxDisabled,
     openBoxDisabled,
-    returnTypeOfBoxString
+    returnTypeOfBoxString,
+    getIcon
   };
 };
 

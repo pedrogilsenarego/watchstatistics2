@@ -72,7 +72,7 @@ export const bagSize = {
   GOD: 25,
 };
 
-export const openBoxParts = (typeOfBox: TypeOfBox):any => {
+export const openBoxParts = (typeOfBox: TypeOfBox): any => {
   switch (typeOfBox) {
     case "whiteBox":
       return {
@@ -100,8 +100,10 @@ export const openBoxFragmentsPercentage = {
   THIRD_FRAGMENTS: 5, //percentage
 };
 
-export const getBox = (typeOfBox:TypeOfBox) => {
-  switch(typeOfBox){
+export const getBox = (typeOfBox: TypeOfBox) => {
+  switch (typeOfBox) {
     case "whiteBox": return 4;
-  default: return 4}
+    case "blueBox": return 10;
+    default: return 4
+  }
 }

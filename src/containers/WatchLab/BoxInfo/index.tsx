@@ -10,7 +10,7 @@ import {
   openBoxParts,
 } from "src/constants/gamification";
 import Popup from "../../../components/Popup";
-import { FaCoins } from "react-icons/fa";
+
 import useBoxInfo from "./useBoxInfo";
 import { TypeOfBox } from "src/containers/WatchLab/types";
 import * as Styled from "./styles";
@@ -30,6 +30,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
     getBoxDisabled,
     openBoxDisabled,
     returnTypeOfBoxString,
+    getIcon
   } = useBoxInfo({ typeOfBox });
 
   return (
@@ -48,7 +49,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
                 color: "#ffffffE6",
               }}
             >
-              {getBox(typeOfBox)} <FaCoins size='2.5vh' color='orange' />
+              {getBox(typeOfBox)} {getIcon()}
             </Typography>
           </Grid>
         </Grid>

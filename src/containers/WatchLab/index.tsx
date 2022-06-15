@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import CentralButtons from "./CentralButtons";
 import BoxInfo from "./BoxInfo";
-import BoxInfo2 from "./BoxInfo2";
 import BoxInfo3 from "./BoxInfo3";
 import Currencies from "./Currencies";
 import WatchParts from "./WatchParts";
@@ -27,8 +26,8 @@ const WatchLab = () => {
             <CentralButtons {...configCentralButtons} />
           </Grid>
           <Grid item xs={4} justifyContent='center'>
-            {boxInfoMenu === "whiteBox" && <BoxInfo typeOfBox="whiteBox" />}
-            {boxInfoMenu === "blueBox" && <BoxInfo2 />}
+            {boxInfoMenu === "whiteBox" && <BoxInfo typeOfBox={boxInfoMenu} />}
+            {boxInfoMenu === "blueBox" && <BoxInfo typeOfBox={boxInfoMenu} />}
             {boxInfoMenu === "purpleBox" && <BoxInfo3 />}
           </Grid>
         </Grid>
