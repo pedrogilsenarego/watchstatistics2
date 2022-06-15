@@ -32,7 +32,7 @@ const mapState = (state) => ({
   cartBoosters: state.cartData.cartBoosters,
 });
 
-const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
+const WatchParts = ({ data, collectionFull, setBagFull }) => {
   const dispatch = useDispatch();
   const [list, setList] = useState(data);
 
@@ -567,6 +567,6 @@ const WatchParts = ({ data, collectionFull, setBagFull, setWatchCase }) => {
         </Grid>
       </div>
     );
-  }
+  } else return <></>;
 };
 export default WatchParts;

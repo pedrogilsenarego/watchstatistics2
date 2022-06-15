@@ -11,7 +11,6 @@ const WatchstatisticsSubHeader = () => {
     history,
     mobile,
     currentUser,
-    theme,
     progress,
     avatarLetter,
     getRank,
@@ -32,6 +31,7 @@ const WatchstatisticsSubHeader = () => {
             justifyContent={mobile ? "center" : "flex-end"}
           >
             <Styled.Avatar
+              mobile={mobile}
               onClick={() => {
                 history.push(generalEndpoints.DASHBOARD);
               }}
@@ -73,7 +73,7 @@ const WatchstatisticsSubHeader = () => {
           <Divider
             style={{
               width: "100%",
-              background: theme.palette.text.faded3,
+              background: "#ffffff66",
               marginTop: "10px",
             }}
           />
@@ -155,6 +155,7 @@ const WatchstatisticsSubHeader = () => {
                 <b style={{ fontSize: "20px" }}>{getRank?.rank}</b>
               </GeneralStyled.BasicTypography>
               <Box
+                component="div"
                 sx={{
                   display: "flex",
                   justifyContent: "center",

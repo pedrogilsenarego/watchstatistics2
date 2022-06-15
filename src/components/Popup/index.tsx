@@ -8,17 +8,28 @@ import {
 
 interface Props {
   children: JSX.Element;
-  title: string,
+  title: string;
   openPopup: boolean;
-  setOpenPopup?: (openPopup: boolean) => void
+  setOpenPopup?: (openPopup: boolean) => void;
+  clickToClose?: boolean;
 }
 
-const Popup = ({ title, children, openPopup }: Props) => {
-
-
+const Popup = ({
+  title,
+  children,
+  openPopup,
+  setOpenPopup,
+  clickToClose,
+}: Props) => {
   return (
     <div>
-      <Dialog open={openPopup} style={{ color: "black" }}>
+      <Dialog
+        open={openPopup}
+        style={{ color: "black" }}
+        onClick={() => {
+          if (clickToClose && setOpenPopup) setOpenPopup(false);
+        }}
+      >
         <DialogTitle>
           <div style={{ textAlign: "center" }}>
             <Typography variant='h6' component='div' style={{ color: "black" }}>

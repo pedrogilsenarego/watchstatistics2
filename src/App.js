@@ -17,7 +17,7 @@ import ProductDetails from "./pages/ProductDetails";
 import FAQ from "./pages/FAQ";
 import Watchstatistics from "./pages/Watchstatistics";
 import CompareWatches from "./pages/CompareWatches";
-import WatchLaboratory2 from "./containers/WatchLab2";
+import WatchLaboratory2 from "./containers/WatchLab";
 import Market from "./pages/Market";
 import Messages from "./pages/Messages";
 import Browse from "./containers/Browse";

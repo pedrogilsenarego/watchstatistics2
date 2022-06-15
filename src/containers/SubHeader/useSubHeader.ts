@@ -32,7 +32,7 @@ const useSubHeader = () => {
     } else return null;
   };
  
-  return { history, mobile, currentUser, theme, progress, avatarLetter, getRank, numberVotes}
+  return { history, mobile, currentUser, progress, avatarLetter, getRank, numberVotes}
 }
 
 export default useSubHeader

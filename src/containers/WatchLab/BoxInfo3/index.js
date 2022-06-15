@@ -9,14 +9,14 @@ import Button from "@mui/material/Button";
 import { updateBoxStatus } from "../../../redux/User/user.actions";
 import Popup from "../../../components/Popup";
 import { useSelector, useDispatch } from "react-redux";
-import { FaCoins } from "react-icons/fa";
+import { FaPuzzlePiece } from "react-icons/fa";
 import { getRandomInt, getRandomPart, percentageLoot } from "../helpers.js";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
 });
 
-const BoxInfo = () => {
+const BoxInfo3 = () => {
   const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
@@ -38,65 +38,58 @@ const BoxInfo = () => {
     else return currentUser.watchParts;
   };
 
-  function points() {
-    if (currentUser) return currentUser.points ? currentUser.points : 0;
-    else return 0;
-  }
-
-  function whiteBox() {
-    if (currentUser) return currentUser.whiteBox ? currentUser.whiteBox : 0;
-    else return 0;
-  }
-
-  const whiteboxDisabled = () => {
-    if (points() < 4) {
+  const purpleboxDisabled = () => {
+    if (
+      !currentUser.purpleBoxFragments ||
+      currentUser.purpleBoxFragments < 10
+    ) {
       return true;
     } else return false;
   };
 
-  const whiteboxDisabled2 = () => {
+  const purpleboxDisabled2 = () => {
     if (
-      whiteBox() < 1 ||
+      !currentUser.purpleBox ||
+      currentUser.purpleBox < 1 ||
       (currentUser.watchParts && currentUser.watchParts.length >= bagSize())
     ) {
       return true;
     } else return false;
   };
 
-  const whiteBoxes = () => {
-    if (!currentUser.whiteBox) return 0;
-    else return currentUser.whiteBox;
+  const PurpleBoxes = () => {
+    if (!currentUser.purpleBox) return 0;
+    else return currentUser.purpleBox;
   };
 
-  const handleGetWhiteBox = () => {
+  const handleGetPurpleBox = () => {
     const configData = {
       ...currentUser,
-      flag: "getWhitebox",
-      points: currentUser.points - 4,
-      whiteBox: whiteBoxes() + 1,
+      flag: "getPurplebox",
+      purpleBoxFragments: currentUser.purpleBoxFragments - 10,
+      purpleBox: PurpleBoxes() + 1,
       userID: currentUser.id,
     };
     dispatch(updateBoxStatus(configData));
   };
 
-  const blueBoxFragments = () => {
-    if (!currentUser.blueBoxFragments) return 0;
-    else return currentUser.blueBoxFragments;
+  const orangeBoxFragments = () => {
+    if (!currentUser.orangeBoxFragments) return 0;
+    else return currentUser.orangeBoxFragments;
   };
 
-  const purpleBoxFragments = () => {
-    if (!currentUser.purpleBoxFragments) return 0;
-    else return currentUser.purpleBoxFragments;
+  const Boosters = () => {
+    if (!currentUser.boosters) return 0;
+    else return currentUser.boosters;
   };
 
-  const handleOpenWhiteBox = () => {
-    const a = [getRandomPart("grey")];
-
+  const handleOpenPurpleBox = () => {
+    const a = [getRandomPart("lightGreen")];
     if (percentageLoot(20) === 1) {
-      a.push(getRandomPart("white"));
+      a.push(getRandomPart("darkGreen"));
     }
     if (percentageLoot(1) === 1) {
-      a.push(getRandomPart("lightGreen"));
+      a.push(getRandomPart("lightBlue"));
     }
     let b = [...a];
     var c = b.map((s) => s.slice(1));
@@ -106,21 +99,21 @@ const BoxInfo = () => {
     }
     const configData = {
       ...currentUser,
-      flag: "openWhitebox",
-      whiteBox: whiteBoxes() - 1,
-      blueBoxFragments: blueBoxFragments() + getRandomInt(1, 3),
-      purpleBoxFragments: purpleBoxFragments() + percentageLoot(5),
+      flag: "openPurplebox",
+      purpleBox: PurpleBoxes() - 1,
+      orangeBoxFragments: orangeBoxFragments() + getRandomInt(1, 3),
+      boosters: Boosters() + percentageLoot(5),
       watchParts: a,
       userID: currentUser.id,
     };
     dispatch(updateBoxStatus(configData));
     setOpenBoxPopUp(true);
     setPopUpInfo(
-      "You received: " +
-        Number(configData.blueBoxFragments - blueBoxFragments()) +
-        " Blue Box Fragments, " +
-        Number(configData.purpleBoxFragments - purpleBoxFragments()) +
-        " Purple Box Fragments, " +
+      "You just received: " +
+        Number(configData.orangeBoxFragments - orangeBoxFragments()) +
+        " Orange Box Fragments, " +
+        Number(configData.boosters - Boosters()) +
+        " Boosters, " +
         c
     );
   };
@@ -137,17 +130,17 @@ const BoxInfo = () => {
       >
         <div style={{ display: "flex", alignItems: "center" }}>
           <Typography variant='h5' style={{ color: "#ffffffE6" }}>
-            White box {checkmark}
+            Purple box {checkmark}
           </Typography>
           <Typography
             variant='subtitle 2'
             style={{
               color: "#ffffffE6",
-              marginLeft: "140px",
+              marginLeft: "110px",
               marginTop: "4px",
             }}
           >
-            4 <FaCoins size='3vh' color='orange' />
+            10 <FaPuzzlePiece size='3vh' color='purple' />
           </Typography>
         </div>
         <Divider
@@ -157,18 +150,20 @@ const BoxInfo = () => {
             background: "#ffffff66",
           }}
         />
-        <Typography style={{ color: "#ffffffBF" }}>Grey Watch Part</Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          20% Chance of a White Watch Part
+          Light Green Watch Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          1% Chance of a Light Green Part
+          20% Chance of a Dark Green Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          1-3 Fragments of Blue Box
+          1% Chance of a Light Blue Watch Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          5% Chance of Fragment of Purple Box
+          1-3 Fragments of Orange Box
+        </Typography>
+        <Typography style={{ color: "#ffffffBF" }}>
+          5% Chance of Fragment of Booster
         </Typography>
         <Divider
           style={{
@@ -179,11 +174,11 @@ const BoxInfo = () => {
         />
         <ButtonGroup style={{ marginTop: "10px" }}>
           <Button
-            disabled={whiteboxDisabled()}
+            disabled={purpleboxDisabled()}
             size='small'
-            onClick={() => handleGetWhiteBox()}
+            onClick={() => handleGetPurpleBox()}
             style={{
-              color: whiteboxDisabled() ? "grey" : "#ffffffBF",
+              color: purpleboxDisabled() ? "grey" : "#ffffffBF",
               borderColor: "#ffffff40",
               border: "solid 1.5px",
             }}
@@ -191,11 +186,11 @@ const BoxInfo = () => {
             Get
           </Button>
           <Button
-            disabled={whiteboxDisabled2()}
+            disabled={purpleboxDisabled2()}
             size='small'
-            onClick={() => handleOpenWhiteBox()}
+            onClick={() => handleOpenPurpleBox()}
             style={{
-              color: whiteboxDisabled2() ? "grey" : "#ffffffBF",
+              color: purpleboxDisabled2() ? "grey" : "#ffffffBF",
               borderColor: "#ffffff40",
               border: "solid 1.5px",
             }}
@@ -208,6 +203,7 @@ const BoxInfo = () => {
         title='You just opened a Box!!'
         openPopup={openBoxPopUp}
         setOpenPopup={setOpenBoxPopUp}
+        clickToClose
       >
         <Typography style={{ color: "black" }}>{popUpInf}</Typography>
       </Popup>
@@ -215,4 +211,4 @@ const BoxInfo = () => {
   );
 };
 
-export default BoxInfo;
+export default BoxInfo3;

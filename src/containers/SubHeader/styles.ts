@@ -21,7 +21,7 @@ export const Container = styled(MuiContainer)(() => ({
 }));
 
 interface BorderLineProps {
-  getRank: Rank;
+  getRank: Rank | undefined;
 }
 
 export const BorderLinearProgress = styled(LinearProgress)(
@@ -38,7 +38,11 @@ export const BorderLinearProgress = styled(LinearProgress)(
   })
 );
 
-export const Avatar = styled(MuiAvatar)((mobile: boolean) => ({
+interface AvatarProps {
+  mobile: boolean;
+}
+
+export const Avatar = styled(MuiAvatar)(({mobile}:AvatarProps) => ({
   cursor: "pointer",
   width: mobile ? 90 : 74,
   height: mobile ? 90 : 74,

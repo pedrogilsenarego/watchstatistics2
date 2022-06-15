@@ -40,3 +40,55 @@ export const maxPointsNewProduct =
 
 export const maxPointsNewWatchBonusFull = 10
 
+//rank calculations
+export const experienceCap= {
+  NOOB:20,
+  BEGGINNER:100,
+  ENTHUSIAST:200,
+  MATURE:500,
+  CONNOISSEUR:1500,
+  GEEK_LEGEND:5000,
+}
+
+export const rankColors= {
+  NOOB:"#ffffff66",
+  BEGGINNER: "white",
+  ENTHUSIAST:"green",
+  MATURE:"blue",
+  CONOISSEUR:"puple",
+  GEEK_LEGEND:"orange",
+  GOD:"red"
+}
+
+export const bagSize= {
+  NOOB:10,
+  BEGGINNER:12,
+  ENTHUSIAST:14,
+  MATURE:16,
+  CONOISSEUR:18,
+  GEEK_LEGEND:20,
+  GOD:25
+
+}
+
+export const openBoxParts = {
+ MAIN_PART_WHITE_BOX: "grey",
+ SECONDARY_PART_WHITE_BOX: "white",
+ THIRD_PART_WHITE_BOX: "lightGreen"
+}
+
+export const openBoxPartsPercentage = {
+  SECONDARY_PART: 20,
+  THIRD_PART:1
+}
+
+export const openBoxFragmentsPercentage = {
+  SECONDARY_FRAGMENTS_MIN: 1,
+  SECONDARY_FRAGMENTS_MAX: 3,
+  THIRD_FRAGMENTS:5 //percentage
+}
+
+export const getBox = {
+  WHITE_BOX:4 //points
+}
+
