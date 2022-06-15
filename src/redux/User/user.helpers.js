@@ -1,7 +1,7 @@
 import { auth } from "./../../firebase/utils";
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
-import {getBox} from "src/constants/gamification"
+import { getBox } from "src/constants/gamification";
 
 export const handleResetPasswordAPI = (email) => {
   const config = {
@@ -98,9 +98,11 @@ export const handleUpdateBoxStatus = (product) => {
     if (product.flag === "getBlueBox")
       ref.update({
         blueBox: firebase.firestore.FieldValue.increment(1),
-        blueBoxFragments: firebase.firestore.FieldValue.increment(-getBox("blueBox")),
+        blueBoxFragments: firebase.firestore.FieldValue.increment(
+          -getBox("blueBox")
+        ),
       });
-    if (product.flag === "getPurplebox")
+    if (product.flag === "getPurpleBox")
       ref.update({
         purpleBox: firebase.firestore.FieldValue.increment(1),
         purpleBoxFragments: firebase.firestore.FieldValue.increment(-10),
@@ -120,7 +122,7 @@ export const handleUpdateBoxStatus = (product) => {
         orangeBoxFragments: orangeBoxFragments,
         watchParts: watchParts,
       });
-    if (product.flag === "openPurplebox")
+    if (product.flag === "openPurpleBox")
       ref.update({
         purpleBox: firebase.firestore.FieldValue.increment(-1),
         orangeBoxFragments: orangeBoxFragments,

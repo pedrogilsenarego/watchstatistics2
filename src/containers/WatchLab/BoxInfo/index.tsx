@@ -30,7 +30,7 @@ const BoxInfo = ({ typeOfBox }: Props) => {
     getBoxDisabled,
     openBoxDisabled,
     returnTypeOfBoxString,
-    getIcon
+    getIcon,
   } = useBoxInfo({ typeOfBox });
 
   return (
@@ -68,12 +68,14 @@ const BoxInfo = ({ typeOfBox }: Props) => {
         <Typography style={{ color: "#ffffffBF" }}>
           {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MIN}-
           {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MAX} Fragments of{" "}
-          {openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING}{" "}
-          Box
+          {openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING} Box
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          {openBoxFragmentsPercentage.THIRD_FRAGMENTS}% Chance of Fragment of{" "}
-          {openBoxParts(typeOfBox).THIRD_FRAGMENTS_STRING} Box
+          {openBoxFragmentsPercentage.THIRD_FRAGMENTS}% Chance{" "}
+          {(typeOfBox === "whiteBox" || typeOfBox === "blueBox") &&
+            "of Fragment"}{" "}
+          of {openBoxParts(typeOfBox).THIRD_FRAGMENTS_STRING} {(typeOfBox === "whiteBox" || typeOfBox === "blueBox") &&
+            "Box"}
         </Typography>
         <Divider
           style={{

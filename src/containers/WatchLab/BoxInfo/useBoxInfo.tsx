@@ -36,6 +36,8 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
         return "White Box";
       case "blueBox":
         return "Blue Box";
+      case "purpleBox":
+        return "Purple Box";
       default:
         return "White Box";
     }
@@ -47,6 +49,8 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
         return "getWhiteBox";
       case "blueBox":
         return "getBlueBox";
+      case "purpleBox":
+        return "getPurpleBox";
     }
   };
   const handleFlagOpenBox = () => {
@@ -55,6 +59,8 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
         return "openWhiteBox";
       case "blueBox":
         return "openBlueBox";
+      case "purpleBox":
+        return "openPurpleBox";
     }
   };
   const getIcon = () => {
@@ -63,6 +69,8 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
         return <FaCoins size='2.5vh' color='orange' />;
       case "blueBox":
         return <FaPuzzlePiece size='3vh' color='lightBlue' />;
+      case "purpleBox":
+        return <FaPuzzlePiece size='3vh' color='purple' />;
     }
   };
 
@@ -72,6 +80,8 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
         return "points";
       case "blueBox":
         return "blueBoxFragments";
+      case "purpleBox":
+        return "purpleBoxFragments";
       default:
         return "points";
     }
@@ -145,14 +155,14 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
   };
 
   const getBoxDisabled = () => {
-    if (currentUser?.points < 4) {
+    if (currentUser?.[getFieldToWithdraw()] < getBox(typeOfBox)) {
       return true;
     } else return false;
   };
 
   const openBoxDisabled = () => {
     if (
-      currentUser?.whiteBox < 1 ||
+      currentUser?.[typeOfBox] < 1 ||
       (currentUser.watchParts &&
         currentUser.watchParts.length >= bagSizeHelper(currentUser?.experience))
     ) {
