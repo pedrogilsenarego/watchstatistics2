@@ -7,7 +7,7 @@ import {
   getBox,
   openBoxPartsPercentage,
   openBoxFragmentsPercentage,
-  openBoxPartsString,
+  openBoxParts,
 } from "src/constants/gamification";
 import Popup from "../../../components/Popup";
 import { FaCoins } from "react-icons/fa";
@@ -48,30 +48,31 @@ const BoxInfo = ({ typeOfBox }: Props) => {
                 color: "#ffffffE6",
               }}
             >
-              {getBox.WHITE_BOX} <FaCoins size='2.5vh' color='orange' />
+              {getBox(typeOfBox)} <FaCoins size='2.5vh' color='orange' />
             </Typography>
           </Grid>
         </Grid>
         <Styled.Divider />
         <Typography style={{ color: "#ffffffBF" }}>
-          {openBoxPartsString(typeOfBox).MAIN_PART} Watch Part
+          {openBoxParts(typeOfBox).MAIN_PART_STRING} Watch Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
           {openBoxPartsPercentage.SECONDARY_PART}% Chance of a{" "}
-          {openBoxPartsString(typeOfBox).SECONDARY_PART} Watch Part
+          {openBoxParts(typeOfBox).SECONDARY_PART_STRING} Watch Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
           {openBoxPartsPercentage.THIRD_PART}% Chance of a{" "}
-          {openBoxPartsString(typeOfBox).THIRD_PART} Part
+          {openBoxParts(typeOfBox).THIRD_PART_STRING} Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
           {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MIN}-
-          {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MAX} Fragments of Blue
+          {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MAX} Fragments of{" "}
+          {openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING}
           Box
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          {openBoxFragmentsPercentage.THIRD_FRAGMENTS}% Chance of Fragment of
-          Purple Box
+          {openBoxFragmentsPercentage.THIRD_FRAGMENTS}% Chance of Fragment of{" "}
+          {openBoxParts(typeOfBox).THIRD_FRAGMENTS_STRING} Box
         </Typography>
         <Divider
           style={{

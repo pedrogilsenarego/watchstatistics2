@@ -72,25 +72,20 @@ export const bagSize = {
   GOD: 25,
 };
 
-export const openBoxParts = (typeOfBox: TypeOfBox) => {
+export const openBoxParts = (typeOfBox: TypeOfBox):any => {
   switch (typeOfBox) {
     case "whiteBox":
       return {
         MAIN_PART: "grey",
         SECONDARY_PART: "white",
         THIRD_PART: "lightGreen",
+        MAIN_PART_STRING: "Grey",
+        SECONDARY_PART_STRING: "White",
+        THIRD_PART_STRING: "Light Green",
+        SECONDARY_FRAGMENT_STRING: "Blue",
+        THIRD_FRAGMENTS_STRING: "Purple"
       };
-  }
-};
-
-export const openBoxPartsString = (typeOfBox: TypeOfBox) => {
-  switch (typeOfBox) {
-    case "whiteBox":
-      return {
-        MAIN_PART: "Grey",
-        SECONDARY_PART: "White",
-        THIRD_PART: "Light Green",
-      };
+    default: return {}
   }
 };
 
@@ -105,6 +100,8 @@ export const openBoxFragmentsPercentage = {
   THIRD_FRAGMENTS: 5, //percentage
 };
 
-export const getBox = {
-  WHITE_BOX: 4, //points
-};
+export const getBox = (typeOfBox:TypeOfBox) => {
+  switch(typeOfBox){
+    case "whiteBox": return 4;
+  default: return 4}
+}
