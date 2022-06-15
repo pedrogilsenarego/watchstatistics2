@@ -1,5 +1,4 @@
 import Divider from "@mui/material/Divider";
-import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -8,12 +7,19 @@ import {
   getBox,
   openBoxPartsPercentage,
   openBoxFragmentsPercentage,
+  openBoxPartsString,
 } from "src/constants/gamification";
 import Popup from "../../../components/Popup";
 import { FaCoins } from "react-icons/fa";
 import useBoxInfo from "./useBoxInfo";
+import { TypeOfBox } from "src/containers/WatchLab/types";
+import * as Styled from "./styles";
 
-const BoxInfo = () => {
+interface Props {
+  typeOfBox: TypeOfBox;
+}
+
+const BoxInfo = ({ typeOfBox }: Props) => {
   const {
     checkmark,
     handleGetWhiteBox,
@@ -23,17 +29,16 @@ const BoxInfo = () => {
     popUpInf,
     getBoxDisabled,
     openBoxDisabled,
-  } = useBoxInfo();
+    returnTypeOfBoxString,
+  } = useBoxInfo({ typeOfBox });
 
   return (
-    <Container justifyContent='center'>
-      <Paper
-        style={{ background: "#0000001C", width: "350px", padding: "20px" }}
-      >
+    <Container>
+      <Styled.Paper>
         <Grid container alignItems='center' justifyContent='space-between'>
           <Grid item>
             <Typography variant='h5' style={{ color: "#ffffffE6" }}>
-              White box {checkmark}
+              {returnTypeOfBoxString()} {checkmark}
             </Typography>
           </Grid>
           <Grid item>
@@ -47,19 +52,17 @@ const BoxInfo = () => {
             </Typography>
           </Grid>
         </Grid>
-        <Divider
-          style={{
-            width: "100%",
-            marginTop: "3px",
-            background: "#ffffff66",
-          }}
-        />
-        <Typography style={{ color: "#ffffffBF" }}>Grey Watch Part</Typography>
+        <Styled.Divider />
         <Typography style={{ color: "#ffffffBF" }}>
-          {openBoxPartsPercentage.SECONDARY_PART}% Chance of a White Watch Part
+          {openBoxPartsString(typeOfBox).MAIN_PART} Watch Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
-          {openBoxPartsPercentage.THIRD_PART}% Chance of a Light Green Part
+          {openBoxPartsPercentage.SECONDARY_PART}% Chance of a{" "}
+          {openBoxPartsString(typeOfBox).SECONDARY_PART} Watch Part
+        </Typography>
+        <Typography style={{ color: "#ffffffBF" }}>
+          {openBoxPartsPercentage.THIRD_PART}% Chance of a{" "}
+          {openBoxPartsString(typeOfBox).THIRD_PART} Part
         </Typography>
         <Typography style={{ color: "#ffffffBF" }}>
           {openBoxFragmentsPercentage.SECONDARY_FRAGMENTS_MIN}-
@@ -103,7 +106,7 @@ const BoxInfo = () => {
             Open
           </Button>
         </ButtonGroup>
-      </Paper>
+      </Styled.Paper>
       <Popup
         title='You just opened a Box!!'
         openPopup={openBoxPopUp}

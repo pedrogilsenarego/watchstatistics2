@@ -5,22 +5,37 @@ import { updateBoxStatus } from "../../../redux/User/user.actions";
 import { getRandomPart } from "src/Utils/gamyfication";
 import { percentageLoot, getRandomInt } from "src/Utils/math";
 import { bagSizeHelper } from "src/Utils/gamyfication";
+import { updateSuccessNotification } from "src/redux/general/general.actions";
 import {
   openBoxParts,
   openBoxPartsPercentage,
   openBoxFragmentsPercentage,
 } from "src/constants/gamification";
+import { TypeOfBox } from "src/containers/WatchLab/types"
+
+
+
+interface Props {
+typeOfBox: TypeOfBox
+}
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
 });
 
-const useBoxInfo = () => {
+const useBoxInfo = ({typeOfBox}:Props) => {
   const { currentUser } = useSelector(mapState);
   const [openBoxPopUp, setOpenBoxPopUp] = useState(false);
   const [popUpInf, setPopUpInfo] = useState<string | null>(null);
   const dispatch = useDispatch();
   var checkmark = "\u00BB";
+
+  const returnTypeOfBoxString = () => {
+    switch (typeOfBox) {
+      case "whiteBox": return "White Box"
+      default: return "White Box"
+    }
+  }
 
   const handleGetWhiteBox = () => {
     const configData = {
@@ -31,16 +46,18 @@ const useBoxInfo = () => {
       userID: currentUser.id,
     };
     dispatch(updateBoxStatus(configData));
+    dispatch(updateSuccessNotification("You added a WhiteBox to your collection"))
   };
 
+
   const handleOpenWhiteBox = () => {
-    const a = [getRandomPart(openBoxParts.MAIN_PART_WHITE_BOX)];
+    const a = [getRandomPart(openBoxParts(typeOfBox).MAIN_PART)];
 
     if (percentageLoot(openBoxPartsPercentage.SECONDARY_PART) === 1) {
-      a.push(getRandomPart(openBoxParts.SECONDARY_PART_WHITE_BOX));
+      a.push(getRandomPart(openBoxParts(typeOfBox).SECONDARY_PART));
     }
     if (percentageLoot(openBoxPartsPercentage.THIRD_PART) === 1) {
-      a.push(getRandomPart(openBoxParts.THIRD_PART_WHITE_BOX));
+      a.push(getRandomPart(openBoxParts(typeOfBox).THIRD_PART));
     }
     let b = [...a];
     var c = b.map((s) => s?.slice(1));
@@ -103,6 +120,7 @@ const useBoxInfo = () => {
     popUpInf,
     getBoxDisabled,
     openBoxDisabled,
+    returnTypeOfBoxString
   };
 };
 

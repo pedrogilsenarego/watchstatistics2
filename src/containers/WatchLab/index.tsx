@@ -27,7 +27,7 @@ const WatchLab = () => {
             <CentralButtons {...configCentralButtons} />
           </Grid>
           <Grid item xs={4} justifyContent='center'>
-            {boxInfoMenu === "whiteBox" && <BoxInfo />}
+            {boxInfoMenu === "whiteBox" && <BoxInfo typeOfBox="whiteBox" />}
             {boxInfoMenu === "blueBox" && <BoxInfo2 />}
             {boxInfoMenu === "purpleBox" && <BoxInfo3 />}
           </Grid>
