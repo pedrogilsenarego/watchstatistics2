@@ -64,7 +64,11 @@ export const rank = (experience: number): Rank | undefined => {
     case experience >= experienceCap.GEEK_LEGEND:
       return { rank: rankColors.GOD, color: "red", progress: 100 };
     default:
-      return;
+      return {
+        rank: "Noob",
+        color: rankColors.NOOB,
+        progress: (experience / experienceCap.NOOB) * 100,
+      };
   }
 };
 
@@ -77,7 +81,7 @@ export const bagSizeHelper = (experience:number) => {
     case experience < experienceCap.CONNOISSEUR: return bagSize.CONOISSEUR
     case experience < experienceCap.GEEK_LEGEND: return bagSize.GEEK_LEGEND
     case experience >= experienceCap.GEEK_LEGEND: return bagSize.GOD
-    default: return 0
+    default: return bagSize.NOOB
   }}
 
   export function getRandomWatchPart() {
