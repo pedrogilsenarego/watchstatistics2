@@ -4,13 +4,16 @@ import { useHistory } from "react-router-dom";
 import { signUpUserStart } from "../../../redux/User/user.actions";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import { Grid } from "@material-ui/core";
+import { Grid, useTheme, useMediaQuery } from "@mui/material";
 import TextField from "../../forms/InputMUI";
 import CheckBox from "../../forms/checkBoxMUI";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { clearApiRequest } from "src/redux/general/general.actions";
+import Alert from "src/components/Alert";
 import Button3Formik from "src/components/Buttons/Button3Formik";
+
 const useStyles = makeStyles((theme) => ({
   textField: {
     "& .MuiOutlinedInput-input": { color: "white" },
@@ -56,8 +59,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const mapState = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+  general: state.general,
 });
 
 const INITIAL_FORM_STATE = {
@@ -93,9 +97,11 @@ const Signup = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
-
+  const theme = useTheme();
+  const [triggerAlert, setTriggerAlert] = useState(false);
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [terms, setTerms] = useState(false);
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, general } = useSelector(mapState);
 
   useEffect(
     () => {
@@ -117,6 +123,7 @@ const Signup = (props) => {
         confirmPassword,
       })
     );
+    setTriggerAlert(true);
     return false;
   };
 
@@ -142,6 +149,7 @@ const Signup = (props) => {
                     padding: "0px",
                     marginTop: "10px",
                     borderRadius: "4px",
+                    width: "500px",
                   }}
                 >
                   <TextField
@@ -152,7 +160,11 @@ const Signup = (props) => {
                   ></TextField>
                 </Container>
               </Grid>
-              <Grid item xs={12}>
+              <Grid
+                item
+                xs={12}
+                style={{ marginTop: mobile ? "20px" : "30px" }}
+              >
                 <Container
                   style={{
                     backgroundColor: "#ffffff",
@@ -160,6 +172,7 @@ const Signup = (props) => {
                     padding: "0px",
                     marginTop: "10px",
                     borderRadius: "4px",
+                    width: "500px",
                   }}
                 >
                   <TextField
@@ -170,7 +183,11 @@ const Signup = (props) => {
                   ></TextField>
                 </Container>
               </Grid>
-              <Grid item xs={12}>
+              <Grid
+                item
+                xs={12}
+                style={{ marginTop: mobile ? "20px" : "30px" }}
+              >
                 <Container
                   style={{
                     backgroundColor: "#ffffff",
@@ -178,6 +195,7 @@ const Signup = (props) => {
                     padding: "0px",
                     marginTop: "10px",
                     borderRadius: "4px",
+                    width: "500px",
                   }}
                 >
                   <TextField
@@ -189,7 +207,11 @@ const Signup = (props) => {
                   />
                 </Container>
               </Grid>
-              <Grid item xs={12}>
+              <Grid
+                item
+                xs={12}
+                style={{ marginTop: mobile ? "20px" : "30px" }}
+              >
                 <Container
                   style={{
                     backgroundColor: "#ffffff",
@@ -197,6 +219,7 @@ const Signup = (props) => {
                     padding: "0px",
                     marginTop: "10px",
                     borderRadius: "4px",
+                    width: "500px",
                   }}
                 >
                   <TextField
@@ -208,7 +231,12 @@ const Signup = (props) => {
                   />
                 </Container>
               </Grid>
-              <Grid item xs={12} style={{ paddingTop: "20px" }}>
+              <Grid
+                item
+                textAlign='center'
+                xs={12}
+                style={{ paddingTop: "20px" }}
+              >
                 <Typography
                   onClick={() => {
                     setTerms(!terms);
@@ -230,12 +258,32 @@ const Signup = (props) => {
                 )}
 
                 <CheckBox
-                  style={{ color: "white" }}
+                  style={{ color: "white !important" }}
                   name='termsOfService'
                   label='I, agree'
                 />
               </Grid>
-              <Grid item xs={12} style={{ paddingTop: "15px" }}>
+              <Grid
+                item
+                xs={12}
+                textAlign='center'
+                style={{ paddingTop: "30px" }}
+              >
+                <Alert
+                  onClose={() => dispatch(clearApiRequest())}
+                  severity='error'
+                  maxWidth='500px'
+                  message={general.apiRequestMessage}
+                  trigger={triggerAlert}
+                  setTrigger={setTriggerAlert}
+                />
+              </Grid>
+              <Grid
+                item
+                textAlign='center'
+                xs={12}
+                style={{ paddingTop: "15px" }}
+              >
                 <Button3Formik title='Submit' />
               </Grid>
             </Grid>

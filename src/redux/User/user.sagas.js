@@ -122,8 +122,9 @@ export function* signUpUser({
     //yield auth.currentUser.sendEmailVerification();
     const additionalData = { displayName };
     yield getSnapshotFromUserAuth(user, additionalData);
+    yield put(updateSuccessApiRequest(""));
   } catch (err) {
-    console.log(err);
+    yield put(updateFailApiRequest(err.message));
   }
 }
 

@@ -25,6 +25,7 @@ const SignIn = ({ handleCloseLoginMenu }) => {
         />
       </Grid>
       <Grid
+        container
         xs={12}
         justifyContent='center'
         alignItems='center'

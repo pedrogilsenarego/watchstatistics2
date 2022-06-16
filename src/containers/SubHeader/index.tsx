@@ -104,7 +104,7 @@ const WatchstatisticsSubHeader = () => {
               justifyContent='center'
               columnGap={1}
               onClick={() => {
-                history.push(generalEndpoints.WATCH_LABORATORY);
+                if (!mobile) { history.push(generalEndpoints.WATCH_LABORATORY); }
               }}
             >
               <GeneralStyled.BasicTypography

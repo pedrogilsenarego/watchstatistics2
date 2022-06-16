@@ -121,7 +121,7 @@ const Main = ({ handleCloseLoginMenu }) => {
               padding: "0px",
               marginTop: "10px",
               borderRadius: "4px",
-              maxWidth: "500px",
+              width: "500px",
             }}
           >
             <TextField
@@ -153,10 +153,11 @@ const Main = ({ handleCloseLoginMenu }) => {
             ></TextField>
           </Container>
         </Grid>
-        <Grid item xs={12} style={{ paddingTop: "30px" }}>
+        <Grid item xs={12} textAlign='center' style={{ paddingTop: "30px" }}>
           <Alert
             onClose={() => dispatch(clearApiRequest())}
             severity='error'
+            maxWidth='500px'
             message={general.apiRequestMessage}
             trigger={triggerAlert}
             setTrigger={setTriggerAlert}
