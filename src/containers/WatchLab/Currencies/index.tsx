@@ -16,33 +16,40 @@ const Currencies = () => {
   const { currentUser } = useSelector(mapState);
 
   return (
-    <Grid container justifyContent="center" columnGap={1}>
-      <Paper
-        style={{
-          background: "#0000001C",
-          position: "fixed",
-          zIndex: "1000",
-          marginTop: "90vh",
-          padding: "10px",
-          paddingRight: "10px",
-          color: "#ffffffBE"
-        }}
-      >
 
-        <BsFillInboxFill
-          size='3vh'
-          color={
-            (currentUser?.collection?.length || 0) >=
-              bagSizeHelper(currentUser?.experience)
-              ? "red"
-              : "white"
-          }
-        />
-        {currentUser?.collection?.length || 0} /
-        {bagSizeHelper(currentUser?.experience)}{" "}
-
-
-
+    <Paper
+      style={{
+        background: "#0000001C",
+        position: "fixed",
+        zIndex: "1000",
+        marginTop: "90vh",
+        padding: "10px",
+        paddingRight: "10px",
+        color: "#ffffffBE",
+        left: 0,
+        right: 0,
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
+      <Grid container justifyContent="center" alignItems="center" columnGap={1}>
+        <Tooltip title="Watches on the collection" placement="top" arrow>
+          <Grid item columnGap={0.5} style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
+            <BsFillInboxFill
+              size='3vh'
+              color={
+                (currentUser?.collection?.length || 0) >=
+                  bagSizeHelper(currentUser?.experience)
+                  ? "red"
+                  : "white"
+              }
+            />
+            <Typography>
+              {currentUser?.collection?.length || 0} /
+              {bagSizeHelper(currentUser?.experience)}{" "}
+            </Typography>
+          </Grid>
+        </Tooltip>
 
         <GiGears
 
@@ -116,9 +123,9 @@ const Currencies = () => {
           color='red'
         />{" "}
         {currentUser?.orangeBox || 0}
+      </Grid>
+    </Paper >
 
-      </Paper>
-    </Grid>
   );
 };
 
