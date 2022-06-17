@@ -1,4 +1,4 @@
-import { Paper, Grid, Tooltip, Box } from "@mui/material";
+import { Paper, Grid, Tooltip, Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BsFillInboxFill } from "react-icons/bs";
 import { FaCoins, FaPuzzlePiece } from "react-icons/fa";
@@ -16,131 +16,107 @@ const Currencies = () => {
   const { currentUser } = useSelector(mapState);
 
   return (
-    <Grid container direction='column' alignItems='center'>
+    <Grid container justifyContent="center" columnGap={1}>
       <Paper
         style={{
           background: "#0000001C",
           position: "fixed",
           zIndex: "1000",
-          marginTop: "91vh",
+          marginTop: "90vh",
           padding: "10px",
           paddingRight: "10px",
-          display: "flex",
-          alignItems: "center",
+          color: "#ffffffBE"
         }}
       >
-        <Box component='div' style={{ color: "#ffffffBF", display: "flex" }}>
-          <Tooltip title='Collection of watches' arrow placement='top'>
-            <Grid
-              container
-              alignItems='center'
-              columnGap={1}
-              style={{ cursor: "pointer" }}
-            >
-              <Grid item>
-                <BsFillInboxFill
-                  size='3vh'
-                  color={
-                    (currentUser?.collection?.length || 0) >=
-                      bagSizeHelper(currentUser?.experience)
-                      ? "red"
-                      : "white"
-                  }
-                />
-              </Grid>
-              <Grid item>
-                {" "}
-                {currentUser?.collection?.length || 0} /
-                {bagSizeHelper(currentUser?.experience)}{" "}
-              </Grid>
-            </Grid>
-          </Tooltip>
-          <Tooltip title='Parts of watches' arrow placement='top'>
-            <Grid
-              container
-              alignItems='center'
-              columnGap={1}
-              style={{ cursor: "pointer" }}
-            >
-              <Grid item>
-                <GiGears
-                  style={{ marginLeft: "5px" }}
-                  size='3vh'
-                  color={
-                    (currentUser?.watchParts?.length || 0) >=
-                      bagSizeHelper(currentUser?.experience)
-                      ? "red"
-                      : "white"
-                  }
-                />
-              </Grid>
-              <Grid item>
-                {" "}
-                {currentUser?.watchParts?.length || 0}/
-                {bagSizeHelper(currentUser?.experience)} {"     "}{" "}
-              </Grid>
-            </Grid>
-          </Tooltip>
-          <GoRocket style={{ marginLeft: "5px" }} size='3vh' color='white' />{" "}
-          {currentUser?.boosters || 0}
-        </Box>
 
-        <Box
-          component='div'
-          style={{ color: "#ffffffBF", paddingLeft: "30px" }}
-        >
-          <FaCoins size='3vh' color='orange' /> {currentUser?.points || 0}
-          {"  "}
-          <FaPuzzlePiece
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color='lightBlue'
-          />{" "}
-          {currentUser?.blueBoxFragments || 0}
-          {"  "}
-          <FaPuzzlePiece
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color='purple'
-          />{" "}
-          {currentUser?.purpleBoxFragments || 0}
-          {"  "}
-          <FaPuzzlePiece
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color='red'
-          />{" "}
-          {currentUser?.orangeBoxFragments || 0}
-        </Box>
+        <BsFillInboxFill
+          size='3vh'
+          color={
+            (currentUser?.collection?.length || 0) >=
+              bagSizeHelper(currentUser?.experience)
+              ? "red"
+              : "white"
+          }
+        />
+        {currentUser?.collection?.length || 0} /
+        {bagSizeHelper(currentUser?.experience)}{" "}
 
-        <Box
-          component='div'
-          style={{ color: "#ffffffBF", paddingLeft: "30px" }}
-        >
-          <AiOutlineCodeSandbox size='3vh' color='white' />{" "}
-          {currentUser?.whiteBox || 0}
-          {"  "}
-          <AiOutlineCodeSandbox
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color='lightBlue'
-          />{" "}
-          {currentUser?.blueBox || 0}
-          {"  "}
-          <AiOutlineCodeSandbox
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color='purple'
-          />{" "}
-          {currentUser?.purpleBox || 0}
-          {"  "}
-          <AiOutlineCodeSandbox
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color='red'
-          />{" "}
-          {currentUser?.orangeBox || 0}
-        </Box>
+
+
+
+        <GiGears
+
+          size='3vh'
+          color={
+            (currentUser?.watchParts?.length || 0) >=
+              bagSizeHelper(currentUser?.experience)
+              ? "red"
+              : "white"
+          }
+        />
+
+
+        {" "}
+        {currentUser?.watchParts?.length || 0}/
+        {bagSizeHelper(currentUser?.experience)} {"     "}{" "}
+
+
+
+        <GoRocket size='3vh' color='white' />{" "}
+        {currentUser?.boosters || 0}
+
+
+
+
+        <FaCoins size='3vh' color='orange' /> {currentUser?.points || 0}
+        {"  "}
+        <FaPuzzlePiece
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='lightBlue'
+        />{" "}
+        {currentUser?.blueBoxFragments || 0}
+        {"  "}
+        <FaPuzzlePiece
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='purple'
+        />{" "}
+        {currentUser?.purpleBoxFragments || 0}
+        {"  "}
+        <FaPuzzlePiece
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='red'
+        />{" "}
+        {currentUser?.orangeBoxFragments || 0}
+
+
+
+        <AiOutlineCodeSandbox size='3vh' color='white' />{" "}
+        {currentUser?.whiteBox || 0}
+        {"  "}
+        <AiOutlineCodeSandbox
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='lightBlue'
+        />{" "}
+        {currentUser?.blueBox || 0}
+        {"  "}
+        <AiOutlineCodeSandbox
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='purple'
+        />{" "}
+        {currentUser?.purpleBox || 0}
+        {"  "}
+        <AiOutlineCodeSandbox
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='red'
+        />{" "}
+        {currentUser?.orangeBox || 0}
+
       </Paper>
     </Grid>
   );
