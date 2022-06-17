@@ -1,4 +1,4 @@
-import { Paper, Grid, Tooltip, Typography } from "@mui/material";
+import { Paper, Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BsFillInboxFill } from "react-icons/bs";
 import { FaCoins, FaPuzzlePiece } from "react-icons/fa";
@@ -57,12 +57,69 @@ const Currencies = () => {
         <Typography>{currentUser?.boosters || 0}</Typography>
       </>
     </Item>,
+    <GoRocket size='2vh' color='transparent' />,
     <Item title='Points'>
       <>
         <FaCoins size='3vh' color='orange' />
         <Typography>{currentUser?.points || 0}</Typography>
       </>
     </Item>,
+    <Item title='Blue Box Fragments'>
+      <>
+        <FaPuzzlePiece
+          style={{ marginLeft: "5px" }}
+          size='3vh'
+          color='lightBlue'
+        />
+        <Typography>{currentUser?.blueBoxFragments || 0}</Typography>
+      </>
+    </Item>,
+    <Item title='Purple Box Fragments'>
+      <>
+        <FaPuzzlePiece
+
+          size='3vh'
+          color='purple'
+        />
+        <Typography>{currentUser?.purpleBoxFragments || 0}</Typography>
+      </>
+    </Item>,
+    <Item title='Orange Box Fragments'>
+      <>
+        <FaPuzzlePiece
+
+          size='3vh'
+          color='orangeRed'
+        />
+        <Typography>{currentUser?.orangeBoxFragments || 0}</Typography>
+      </>
+    </Item>,
+    <GoRocket size='2vh' color='transparent' />,
+    <Item title='White Box'>
+      <>
+        <AiOutlineCodeSandbox size='3vh' color='white' />
+        <Typography>{currentUser?.whiteBox || 0}</Typography>
+      </>
+    </Item>,
+    <Item title='Blue Box'>
+      <>
+        <AiOutlineCodeSandbox size='3vh' color='lightBlue' />
+        <Typography>{currentUser?.blueBox || 0}</Typography>
+      </>
+    </Item>,
+    <Item title='Purple Box'>
+      <>
+        <AiOutlineCodeSandbox size='3vh' color='purple' />
+        <Typography> {currentUser?.purpleBox || 0}</Typography>
+      </>
+    </Item>,
+    <Item title='Orange Box'>
+      <>
+        <AiOutlineCodeSandbox size='3vh' color='orangeRed' />
+        <Typography> {currentUser?.orangeBox || 0}</Typography>
+      </>
+    </Item>
+
   ];
 
   return (
@@ -83,51 +140,6 @@ const Currencies = () => {
     >
       <Grid container justifyContent='center' alignItems='center' columnGap={1}>
         {ListElements.map((item) => item)}
-
-        {"  "}
-        <FaPuzzlePiece
-          style={{ marginLeft: "5px" }}
-          size='3vh'
-          color='lightBlue'
-        />{" "}
-        {currentUser?.blueBoxFragments || 0}
-        {"  "}
-        <FaPuzzlePiece
-          style={{ marginLeft: "5px" }}
-          size='3vh'
-          color='purple'
-        />{" "}
-        {currentUser?.purpleBoxFragments || 0}
-        {"  "}
-        <FaPuzzlePiece
-          style={{ marginLeft: "5px" }}
-          size='3vh'
-          color='red'
-        />{" "}
-        {currentUser?.orangeBoxFragments || 0}
-        <AiOutlineCodeSandbox size='3vh' color='white' />{" "}
-        {currentUser?.whiteBox || 0}
-        {"  "}
-        <AiOutlineCodeSandbox
-          style={{ marginLeft: "5px" }}
-          size='3vh'
-          color='lightBlue'
-        />{" "}
-        {currentUser?.blueBox || 0}
-        {"  "}
-        <AiOutlineCodeSandbox
-          style={{ marginLeft: "5px" }}
-          size='3vh'
-          color='purple'
-        />{" "}
-        {currentUser?.purpleBox || 0}
-        {"  "}
-        <AiOutlineCodeSandbox
-          style={{ marginLeft: "5px" }}
-          size='3vh'
-          color='red'
-        />{" "}
-        {currentUser?.orangeBox || 0}
       </Grid>
     </Paper>
   );
