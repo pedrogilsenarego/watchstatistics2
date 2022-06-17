@@ -1,4 +1,3 @@
-import React from "react"
 import { Paper, Grid, Tooltip, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BsFillInboxFill } from "react-icons/bs";
@@ -16,20 +15,6 @@ const mapState = (state: Redux) => ({
 const Currencies = () => {
   const { currentUser } = useSelector(mapState);
 
-  const MyComponent = React.forwardRef(function MyComponent(props: any, ref: any) {
-    //  Spread the props to the underlying DOM element.
-    return <div {...props} ref={ref}><BsFillInboxFill
-      size='3vh'
-      style={{ cursor: "pointer" }}
-      color={
-        (currentUser?.collection?.length ||
-          0) >= bagSizeHelper(currentUser?.experience)
-          ? "red"
-          : "white"
-      }
-    /></div>
-  });
-
   return (
     <Grid container direction='column' alignItems='center'>
       <Paper
@@ -42,32 +27,68 @@ const Currencies = () => {
           paddingRight: "10px",
           display: "flex",
           alignItems: "center",
-
         }}
       >
-        <Box component="div" style={{ color: "#ffffffBF" }}>
-          <Tooltip title="add" arrow >
-            <MyComponent />
-          </Tooltip>{" "}
-          {currentUser?.collection?.length || 0} /
-          {bagSizeHelper(currentUser?.experience)}{" "}
-          <GiGears
-            style={{ marginLeft: "5px" }}
-            size='3vh'
-            color={
-              (currentUser?.watchParts?.length ||
-                0) >= bagSizeHelper(currentUser?.experience)
-                ? "red"
-                : "white"
-            }
-          />{" "}
-          {currentUser?.watchParts?.length || 0}/
-          {bagSizeHelper(currentUser?.experience)} {"     "}{" "}
+        <Box component='div' style={{ color: "#ffffffBF", display: "flex" }}>
+          <Tooltip title='Collection of watches' arrow placement='top'>
+            <Grid
+              container
+              alignItems='center'
+              columnGap={1}
+              style={{ cursor: "pointer" }}
+            >
+              <Grid item>
+                <BsFillInboxFill
+                  size='3vh'
+                  color={
+                    (currentUser?.collection?.length || 0) >=
+                      bagSizeHelper(currentUser?.experience)
+                      ? "red"
+                      : "white"
+                  }
+                />
+              </Grid>
+              <Grid item>
+                {" "}
+                {currentUser?.collection?.length || 0} /
+                {bagSizeHelper(currentUser?.experience)}{" "}
+              </Grid>
+            </Grid>
+          </Tooltip>
+          <Tooltip title='Parts of watches' arrow placement='top'>
+            <Grid
+              container
+              alignItems='center'
+              columnGap={1}
+              style={{ cursor: "pointer" }}
+            >
+              <Grid item>
+                <GiGears
+                  style={{ marginLeft: "5px" }}
+                  size='3vh'
+                  color={
+                    (currentUser?.watchParts?.length || 0) >=
+                      bagSizeHelper(currentUser?.experience)
+                      ? "red"
+                      : "white"
+                  }
+                />
+              </Grid>
+              <Grid item>
+                {" "}
+                {currentUser?.watchParts?.length || 0}/
+                {bagSizeHelper(currentUser?.experience)} {"     "}{" "}
+              </Grid>
+            </Grid>
+          </Tooltip>
           <GoRocket style={{ marginLeft: "5px" }} size='3vh' color='white' />{" "}
           {currentUser?.boosters || 0}
         </Box>
 
-        <Box component="div" style={{ color: "#ffffffBF", paddingLeft: "30px" }}>
+        <Box
+          component='div'
+          style={{ color: "#ffffffBF", paddingLeft: "30px" }}
+        >
           <FaCoins size='3vh' color='orange' /> {currentUser?.points || 0}
           {"  "}
           <FaPuzzlePiece
@@ -92,7 +113,10 @@ const Currencies = () => {
           {currentUser?.orangeBoxFragments || 0}
         </Box>
 
-        <Box component="div" style={{ color: "#ffffffBF", paddingLeft: "30px" }}>
+        <Box
+          component='div'
+          style={{ color: "#ffffffBF", paddingLeft: "30px" }}
+        >
           <AiOutlineCodeSandbox size='3vh' color='white' />{" "}
           {currentUser?.whiteBox || 0}
           {"  "}
