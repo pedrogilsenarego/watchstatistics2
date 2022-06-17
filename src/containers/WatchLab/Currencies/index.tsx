@@ -1,4 +1,4 @@
-import { Paper, Grid, Tooltip, Box, Typography } from "@mui/material";
+import { Paper, Grid, Tooltip, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BsFillInboxFill } from "react-icons/bs";
 import { FaCoins, FaPuzzlePiece } from "react-icons/fa";
@@ -7,6 +7,7 @@ import { GoRocket } from "react-icons/go";
 import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { bagSizeHelper } from "src/Utils/gamyfication";
 import { Redux } from "src/redux/types";
+import Item from "./item";
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
@@ -15,8 +16,56 @@ const mapState = (state: Redux) => ({
 const Currencies = () => {
   const { currentUser } = useSelector(mapState);
 
-  return (
+  const ListElements = [
+    <Item title='Watches on the Collection'>
+      <>
+        <BsFillInboxFill
+          size='3vh'
+          color={
+            (currentUser?.collection?.length || 0) >=
+              bagSizeHelper(currentUser?.experience)
+              ? "red"
+              : "white"
+          }
+        />
+        <Typography>
+          {currentUser?.collection?.length || 0}/
+          {bagSizeHelper(currentUser?.experience)}{" "}
+        </Typography>
+      </>
+    </Item>,
+    <Item title='Watch Parts'>
+      <>
+        <GiGears
+          size='3vh'
+          color={
+            (currentUser?.watchParts?.length || 0) >=
+              bagSizeHelper(currentUser?.experience)
+              ? "red"
+              : "white"
+          }
+        />
+        <Typography>
+          {currentUser?.watchParts?.length || 0}/
+          {bagSizeHelper(currentUser?.experience)} {"     "}{" "}
+        </Typography>
+      </>
+    </Item>,
+    <Item title='Boosters'>
+      <>
+        <GoRocket size='3vh' color='white' />
+        <Typography>{currentUser?.boosters || 0}</Typography>
+      </>
+    </Item>,
+    <Item title='Points'>
+      <>
+        <FaCoins size='3vh' color='orange' />
+        <Typography>{currentUser?.points || 0}</Typography>
+      </>
+    </Item>,
+  ];
 
+  return (
     <Paper
       style={{
         background: "#0000001C",
@@ -32,50 +81,9 @@ const Currencies = () => {
         marginRight: "auto",
       }}
     >
-      <Grid container justifyContent="center" alignItems="center" columnGap={1}>
-        <Tooltip title="Watches on the collection" placement="top" arrow>
-          <Grid item columnGap={0.5} style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-            <BsFillInboxFill
-              size='3vh'
-              color={
-                (currentUser?.collection?.length || 0) >=
-                  bagSizeHelper(currentUser?.experience)
-                  ? "red"
-                  : "white"
-              }
-            />
-            <Typography>
-              {currentUser?.collection?.length || 0} /
-              {bagSizeHelper(currentUser?.experience)}{" "}
-            </Typography>
-          </Grid>
-        </Tooltip>
+      <Grid container justifyContent='center' alignItems='center' columnGap={1}>
+        {ListElements.map((item) => item)}
 
-        <GiGears
-
-          size='3vh'
-          color={
-            (currentUser?.watchParts?.length || 0) >=
-              bagSizeHelper(currentUser?.experience)
-              ? "red"
-              : "white"
-          }
-        />
-
-
-        {" "}
-        {currentUser?.watchParts?.length || 0}/
-        {bagSizeHelper(currentUser?.experience)} {"     "}{" "}
-
-
-
-        <GoRocket size='3vh' color='white' />{" "}
-        {currentUser?.boosters || 0}
-
-
-
-
-        <FaCoins size='3vh' color='orange' /> {currentUser?.points || 0}
         {"  "}
         <FaPuzzlePiece
           style={{ marginLeft: "5px" }}
@@ -97,9 +105,6 @@ const Currencies = () => {
           color='red'
         />{" "}
         {currentUser?.orangeBoxFragments || 0}
-
-
-
         <AiOutlineCodeSandbox size='3vh' color='white' />{" "}
         {currentUser?.whiteBox || 0}
         {"  "}
@@ -124,8 +129,7 @@ const Currencies = () => {
         />{" "}
         {currentUser?.orangeBox || 0}
       </Grid>
-    </Paper >
-
+    </Paper>
   );
 };
 
