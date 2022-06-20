@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
 import Case from "../../../assets/Case.svg";
 import Bracelet from "../../../assets/Bracelet.svg";
@@ -54,10 +53,10 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     fusionMovement,
     setNumberBoosters,
     list,
-    handleDragEnter,
-    handleDragStart,
     fusionMatchParts,
     setFusionPrice,
+    handleDragStart,
+    handleDragEnter,
     getStyles,
   } = useWatchParts({ setBagFull, data });
 

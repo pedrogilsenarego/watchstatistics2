@@ -1,23 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redux } from "src/redux/types";
 import { percentageLoot } from "src/Utils/math";
-import { getRandomPart } from "src/Utils/gamyfication"
+import { getRandomPart } from "src/Utils/gamyfication";
 import { updateBoxStatus } from "src/redux/User/user.actions";
+import { colorWatchParts } from "src/Utils/gamyfication";
 
-const mapState = (state: Redux) => ({
+const mapState = (state) => ({
   randomProduct: state.productsData.randomNewProduct,
   currentUser: state.user.currentUser,
   cartBoosters: state.cartData.cartBoosters,
 });
 
-interface Props {
-  setBagFull: (bafFull: boolean) => void
-  data: any;
-}
-
-const useWatchParts = ({ setBagFull, data }: Props) => {
-  const [list, setList] = useState<any>(data);
+const useWatchParts = ({ setBagFull, data }) => {
+  const [list, setList] = useState(data);
   const [fusionGlass, setFusionGlass] = useState(false);
   const [fusionCrown, setFusionCrown] = useState(false);
   const [fusionMovement, setFusionMovement] = useState(false);
@@ -63,13 +58,13 @@ const useWatchParts = ({ setBagFull, data }: Props) => {
       const b = list[1].items[i].slice(0, 1);
       a.push(b);
     }
-    const allEqual = (a: any) => a.every((val: any) => val === a[0]);
+    const allEqual = (a) => a.every((val) => val === a[0]);
     if (!allEqual(a)) {
       setFusionMatchParts(false);
     } else setFusionMatchParts(true);
   }, [list]);
 
-  const itemsBagDeleted = (pos: any) => {
+  const itemsBagDeleted = (pos) => {
     var a = currentUser.watchParts;
     for (var i = 0; i < pos.length; i++) {
       a.splice(a.indexOf(pos[i]), 1);
@@ -77,7 +72,7 @@ const useWatchParts = ({ setBagFull, data }: Props) => {
     return a;
   };
 
-  const handleDeleteWatchParts = (pos: any, color: string, percentage: number, color2: string) => {
+  const handleDeleteWatchParts = (pos, color, percentage, color2) => {
     const a = itemsBagDeleted(pos);
 
     if (percentage && color && percentageLoot(percentage) === 1) {
@@ -100,7 +95,7 @@ const useWatchParts = ({ setBagFull, data }: Props) => {
     setBagFull(false);
   };
 
-  const shredderMeter = (data: any) => {
+  const shredderMeter = (data) => {
     var a = 0;
     for (var i = 0; i < data.length; i++) {
       a = a + 1 + parseInt(data[i][0]);
@@ -111,7 +106,7 @@ const useWatchParts = ({ setBagFull, data }: Props) => {
   const dragItem = useRef();
   const dragItemNode = useRef();
 
-  const handleDragStart = (e: any, item: any) => {
+  const handleDragStart = (e, item) => {
     dragItemNode.current = e.target;
     dragItemNode.current.addEventListener("dragend", handleDragEnd);
     dragItem.current = item;
@@ -183,12 +178,12 @@ const useWatchParts = ({ setBagFull, data }: Props) => {
     fusionCrown,
     fusionMovement,
     list,
-    handleDragEnd,
-    handleDragEnter,
-    handleDragStart,
+    setList,
     fusionMatchParts,
+    setFusionPrice,
+    handleDragStart,
+    handleDragEnter,
     getStyles,
-    setFusionPrice
   };
 };
 
