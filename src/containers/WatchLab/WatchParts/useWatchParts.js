@@ -154,6 +154,8 @@ const useWatchParts = ({ setBagFull, data }) => {
     return colorWatchParts(item.item);
   };
 
+  console.log(boostStatus);
+
   const handleFusionNewWatch = () => {
     const numbers = [
       1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
@@ -185,7 +187,6 @@ const useWatchParts = ({ setBagFull, data }) => {
       dispatch(fetchRandomProduct(configData));
     }
     if (boostStatus === "true") {
-      const baby = boosterValue(fusionPrice, cartBoosters);
       const configData = {
         ...currentUser,
         userID: currentUser.id,
@@ -194,7 +195,8 @@ const useWatchParts = ({ setBagFull, data }) => {
           ? currentUser.boosters - numberBoosters
           : 0,
         fusionPrice,
-        randomValue: baby.avgTotal,
+        randomValue: "boosted",
+        boosted: boosterValue(fusionPrice, cartBoosters),
       };
       dispatch(fetchRandomProduct(configData));
     }

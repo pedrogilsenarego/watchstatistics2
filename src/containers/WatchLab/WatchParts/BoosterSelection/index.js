@@ -63,6 +63,8 @@ const BoosterSelection = ({
     }
   }
 
+  console.log(boostPercentage());
+
   const handleIncrementBooster = () => {
     setNumberBoosters(numberBoosters + 1);
     setDecreaseDisable(false);

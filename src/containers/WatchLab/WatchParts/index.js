@@ -12,7 +12,6 @@ import {
   LinearProgressBarFormat,
   colorWatchParts,
   priceWatchParts,
-  boosterValue,
 } from "src/Utils/gamyfication";
 import * as GeneralStyled from "src/styles/styles";
 import * as Styled from "./styles";
@@ -270,6 +269,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
           </Styled.Paper>
           {randomProduct && (
             <Popup
+              clickToClose
               openPopup={openPopupNewWatch}
               setOpenPopup={setOpenPopupNewWatch}
               title={"New Watch Alert!!"}

@@ -65,7 +65,7 @@ export function* addProduct({ payload }) {
       yield handleAddProduct({
         ...payload,
         createdDate: timestamp,
-        mode: "orders"
+        mode: "orders",
       });
       yield put(
         updateInformationNotification(
@@ -186,13 +186,21 @@ export function* fetchRandomProduct({ payload }) {
       product = yield handleFetchRandomProduct(differentPayload);
     }
     const newCollection = payload.collection;
-    newCollection.push(product.data[0].documentID);
+    newCollection.push(
+      payload.randomValue === "boosted"
+        ? payload.boosted.productID
+        : product.data[0].documentID
+    );
     const configData = {
       ...payload,
       collection: newCollection,
     };
     yield put(updateCollectionStatus(configData));
-    yield put(setRandomProduct(product));
+    yield put(
+      setRandomProduct(
+        payload.randomValue === "boosted" ? payload.boosted : product
+      )
+    );
   } catch (err) {
     // console.log(err);
   }

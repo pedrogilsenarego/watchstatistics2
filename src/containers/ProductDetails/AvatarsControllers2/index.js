@@ -52,7 +52,7 @@ const AvatarsControllers = ({
         }}
       >
         <>
-          <AddToBoost product={product} />
+          <AddToBoost product={product} productID={productID} />
           <AddToCompare {...configAddToCompare} />
           <FacebookShare {...configShareButtons} />
           <WhatsappShareButton {...configShareButtons} />

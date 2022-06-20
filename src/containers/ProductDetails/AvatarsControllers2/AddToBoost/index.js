@@ -7,14 +7,16 @@ import { AiFillFire } from "react-icons/ai";
 import Popover from "../../../../components/Popover";
 import { generalEndpoints } from "src/constants/endpoints";
 
-const AddToBoost = ({ product }) => {
+const AddToBoost = ({ product, productID }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [anchor, setAnchor] = useState(null);
 
-  const handleAddToBoost = (product) => {
+  const handleAddToBoost = () => {
     if (!product) return;
-    dispatch(addBooster(product));
+    const newProduct = product;
+    newProduct.productID = productID;
+    dispatch(addBooster(newProduct));
     history.push(generalEndpoints.WATCH_LABORATORY);
   };
 
@@ -36,7 +38,7 @@ const AddToBoost = ({ product }) => {
           setAnchor(null);
         }}
         onClick={() => {
-          handleAddToBoost(product);
+          handleAddToBoost();
         }}
       >
         <AiFillFire size='4vh' color='#ffffff66' />
