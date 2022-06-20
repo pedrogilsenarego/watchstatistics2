@@ -1,7 +1,7 @@
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-import { styled, Paper as MuiPaper } from "@mui/material";
+import { styled, Paper as MuiPaper, Box } from "@mui/material";
 
 interface Props {
   backColor: string;
@@ -27,4 +27,14 @@ export const Paper = styled(MuiPaper)(() => ({
   marginRight: "20px",
   padding: "15px",
   backgroundColor: "#3C393900 !important",
+}));
+
+export const PartsBox = styled(Box)(() => ({
+  backgroundColor: "#00000066",
+  marginTop: "5px",
+  padding: "10px",
+  borderRadius: "5px",
+  display: "flex",
+  justifyContent: "center",
+  minHeight: "50px",
 }));

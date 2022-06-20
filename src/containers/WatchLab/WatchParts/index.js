@@ -101,15 +101,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                   <Typography style={{ color: "#ffffffBE" }}>
                     {grp.title}
                   </Typography>
-                  <Box
-                    style={{
-                      backgroundColor: "black",
-                      marginTop: "5px",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
+                  <Styled.PartsBox
                     key={grp.title}
                     onDragEnter={
                       dragging && !grp.items.length
@@ -118,9 +110,6 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                     }
                   >
                     <Grid container>
-                      <Grid xs={12}>
-                        <Typography>{grp.title}</Typography>
-                      </Grid>
                       <Grid xs={12} style={{ display: "flex" }}>
                         {grp.items.map((item, itemI) => (
                           <Box
@@ -135,8 +124,8 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                             draggable={true}
                             key={item.id}
                             style={{
-                              width: "45px",
-                              height: "45px",
+                              width: "50px",
+                              height: "50px",
                               cursor: "pointer",
                               backgroundColor: dragging
                                 ? getStyles({ grpI, itemI, item })
@@ -144,7 +133,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                               margin: "5px",
                               border: "solid 2px",
                               borderColor: colorWatchParts(item),
-                              padding: "5px",
+                              padding: "0px",
                               borderRadius: "8px",
                               display: "flex",
                               justifyContent: "center",
@@ -166,7 +155,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                         ))}
                       </Grid>
                     </Grid>
-                  </Box>
+                  </Styled.PartsBox>
                 </Grid>
               ))}
             </Grid>
