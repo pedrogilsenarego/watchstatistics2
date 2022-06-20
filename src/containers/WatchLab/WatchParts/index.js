@@ -5,14 +5,7 @@ import Movement from "../../../assets/Movement.svg";
 import Crown from "../../../assets/Crown.svg";
 import Glass from "../../../assets/Glass.svg";
 import Watch from "../WatchSolid";
-import {
-  Grid,
-  Typography,
-  Box,
-  Paper,
-  Button,
-  CardMedia,
-} from "@material-ui/core";
+import { Grid, Typography, Box, Button, CardMedia } from "@mui/material";
 import {
   LinearProgressBarColor,
   LinearProgressBarColor2,
@@ -102,73 +95,81 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
         </Grid>
         <Grid item xs={7}>
           <Styled.Paper>
-            {list.map((grp, grpI) => (
-              <Box
-                style={{
-                  backgroundColor: "black",
-                  margin: "10px",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                key={grp.title}
-                onDragEnter={
-                  dragging && !grp.items.length
-                    ? (e) => handleDragEnter(e, { grpI, itemI: 0 })
-                    : null
-                }
-              >
-                <Grid container>
-                  <Grid xs={12}>
-                    <Typography>{grp.title}</Typography>
-                  </Grid>
-                  <Grid xs={12} style={{ display: "flex" }}>
-                    {grp.items.map((item, itemI) => (
-                      <Box
-                        onDragStart={(e) => {
-                          handleDragStart(e, { grpI, itemI });
-                        }}
-                        onDragEnter={
-                          dragging
-                            ? (e) => handleDragEnter(e, { grpI, itemI })
-                            : null
-                        }
-                        draggable={true}
-                        key={item.id}
-                        style={{
-                          width: "45px",
-                          height: "45px",
-                          cursor: "pointer",
-                          backgroundColor: dragging
-                            ? getStyles({ grpI, itemI, item })
-                            : colorWatchParts(item),
-                          margin: "5px",
-                          border: "solid 2px",
-                          borderColor: colorWatchParts(item),
-                          padding: "5px",
-                          borderRadius: "8px",
-                          display: "flex",
-                          justifyContent: "center",
-                          filter: "opacity(1) drop-shadow(2px 2px 5px red)",
-                        }}
-                      >
-                        <img
-                          src={whatImage(item.toString().slice(1))}
-                          style={{
-                            maxWidth: "100%",
-                            maxHeight: "100%",
-                            padding: "5px",
-                            filter: "opacity(1) drop-shadow(2px 2px 5px red)",
-                          }}
-                          alt=''
-                        />
-                      </Box>
-                    ))}
-                  </Grid>
+            <Grid container rowGap={2}>
+              {list.map((grp, grpI) => (
+                <Grid item xs={12}>
+                  <Typography style={{ color: "#ffffffBE" }}>
+                    {grp.title}
+                  </Typography>
+                  <Box
+                    style={{
+                      backgroundColor: "black",
+                      marginTop: "5px",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                    key={grp.title}
+                    onDragEnter={
+                      dragging && !grp.items.length
+                        ? (e) => handleDragEnter(e, { grpI, itemI: 0 })
+                        : null
+                    }
+                  >
+                    <Grid container>
+                      <Grid xs={12}>
+                        <Typography>{grp.title}</Typography>
+                      </Grid>
+                      <Grid xs={12} style={{ display: "flex" }}>
+                        {grp.items.map((item, itemI) => (
+                          <Box
+                            onDragStart={(e) => {
+                              handleDragStart(e, { grpI, itemI });
+                            }}
+                            onDragEnter={
+                              dragging
+                                ? (e) => handleDragEnter(e, { grpI, itemI })
+                                : null
+                            }
+                            draggable={true}
+                            key={item.id}
+                            style={{
+                              width: "45px",
+                              height: "45px",
+                              cursor: "pointer",
+                              backgroundColor: dragging
+                                ? getStyles({ grpI, itemI, item })
+                                : colorWatchParts(item),
+                              margin: "5px",
+                              border: "solid 2px",
+                              borderColor: colorWatchParts(item),
+                              padding: "5px",
+                              borderRadius: "8px",
+                              display: "flex",
+                              justifyContent: "center",
+                              filter: "opacity(1) drop-shadow(2px 2px 5px red)",
+                            }}
+                          >
+                            <img
+                              src={whatImage(item.toString().slice(1))}
+                              style={{
+                                maxWidth: "100%",
+                                maxHeight: "100%",
+                                padding: "5px",
+                                filter:
+                                  "opacity(1) drop-shadow(2px 2px 5px red)",
+                              }}
+                              alt=''
+                            />
+                          </Box>
+                        ))}
+                      </Grid>
+                    </Grid>
+                  </Box>
                 </Grid>
-              </Box>
-            ))}
+              ))}
+            </Grid>
             <Grid container style={{ display: "flex" }}>
               <Grid item xs={12} md={6}>
                 <Typography>

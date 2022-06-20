@@ -24,8 +24,7 @@ export const BorderLinearProgress = styled(LinearProgress)(
 );
 
 export const Paper = styled(MuiPaper)(() => ({
-  
-  marginRight: "10px",
-  padding: "3px",
+  marginRight: "20px",
+  padding: "15px",
   backgroundColor: "#3C393900 !important",
 }));
