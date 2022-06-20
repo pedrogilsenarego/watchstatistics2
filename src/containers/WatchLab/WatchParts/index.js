@@ -101,14 +101,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
           <Watch {...configWatch} />
         </Grid>
         <Grid item xs={7}>
-          <Paper
-            style={{
-              marginTop: "20px",
-              marginRight: "10px",
-              padding: "3px",
-              backgroundColor: "#3C393900",
-            }}
-          >
+          <Styled.Paper>
             {list.map((grp, grpI) => (
               <Box
                 style={{
@@ -281,7 +274,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                 )}
               </Grid>
             </Grid>
-          </Paper>
+          </Styled.Paper>
           {randomProduct && (
             <Popup
               openPopup={openPopupNewWatch}
