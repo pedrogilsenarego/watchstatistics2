@@ -95,9 +95,9 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
         </Grid>
         <Grid item xs={7}>
           <Styled.Paper>
-            <Grid container rowGap={2}>
+            <Grid container rowGap={2} columnSpacing={1}>
               {list.map((grp, grpI) => (
-                <Grid item xs={12}>
+                <Grid item xs={grpI > 0 ? 6 : 12}>
                   <Typography style={{ color: "#ffffffBE" }}>
                     {grp.title}
                   </Typography>
@@ -160,7 +160,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
               ))}
             </Grid>
             <Grid container style={{ display: "flex" }}>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={6}>
                 <Typography>
                   FUSION MACHINE - New watch to be obtained: {fusionPrice}{" "}
                 </Typography>
@@ -207,7 +207,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                   </Button>,
                 ]}
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={6}>
                 {list[2].items.length > 0 && (
                   <Typography style={{ fusionPrice: "orange" }}>
                     Shredded Parts are gone!
