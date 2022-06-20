@@ -28,8 +28,13 @@ const useWatchParts = ({ setBagFull, data }) => {
   const [boostStatus, setBoostStatus] = useState("false");
   const [openPopupNewWatch, setOpenPopupNewWatch] = useState(false);
   const [numberBoosters, setNumberBoosters] = useState(0);
+  const [modalProduct, setModalProduct] = useState({});
   const { randomProduct, currentUser, cartBoosters } = useSelector(mapState);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setModalProduct(randomProduct);
+  }, [randomProduct]);
 
   useEffect(() => {
     setList(data);
@@ -154,8 +159,6 @@ const useWatchParts = ({ setBagFull, data }) => {
     return colorWatchParts(item.item);
   };
 
-  console.log(boostStatus);
-
   const handleFusionNewWatch = () => {
     const numbers = [
       1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
@@ -213,7 +216,7 @@ const useWatchParts = ({ setBagFull, data }) => {
     setBoostStatus,
     openPopupNewWatch,
     setOpenPopupNewWatch,
-    randomProduct,
+    modalProduct,
     handleDeleteWatchParts,
     shredderMeter,
     fusionPrice,

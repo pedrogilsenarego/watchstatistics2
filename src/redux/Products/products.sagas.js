@@ -196,9 +196,11 @@ export function* fetchRandomProduct({ payload }) {
       collection: newCollection,
     };
     yield put(updateCollectionStatus(configData));
+    console.log(payload.boosted);
+    console.log(product);
     yield put(
       setRandomProduct(
-        payload.randomValue === "boosted" ? payload.boosted : product
+        payload.randomValue === "boosted" ? payload.boosted : product.data[0]
       )
     );
   } catch (err) {

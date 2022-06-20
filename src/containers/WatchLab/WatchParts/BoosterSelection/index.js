@@ -63,8 +63,6 @@ const BoosterSelection = ({
     }
   }
 
-  console.log(boostPercentage());
-
   const handleIncrementBooster = () => {
     setNumberBoosters(numberBoosters + 1);
     setDecreaseDisable(false);
@@ -86,101 +84,82 @@ const BoosterSelection = ({
     // eslint-disable-next-line
   }, [numberBoosters]);
 
-  if (!cartBoosters)
-    return (
-      <div>
-        <Typography>
-          You have no assigned any prefered watch for this price brackets click
-          here to choose it if you want
-        </Typography>
-        <Button
-          onClick={() => {
-            history.push(`/search`);
-          }}
-        >
-          Here
-        </Button>
-      </div>
-    );
-  else
-    return (
-      <Box sx={{ display: "flex", alignContent: "center" }}>
-        {boosterValue(fusionPrice, cartBoosters) ? (
-          <Grid container>
-            <Grid item xs={6}>
-              <Typography>
-                For this price Bracket you have selected a{" "}
-                {boosterValue(fusionPrice, cartBoosters)?.productBrand}{" "}
-                {boosterValue(fusionPrice, cartBoosters)?.productName} you have{" "}
-                {currentUser.boosters
-                  ? currentUser.boosters - numberBoosters
-                  : 0}{" "}
-                Boosters, select the number to use.
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <CardMedia
-                style={{ width: "80px", height: "80px" }}
-                image={
-                  boosterValue(fusionPrice, cartBoosters)?.productThumbnail[0]
-                }
-              ></CardMedia>
-            </Grid>
-            <ButtonGroup>
-              <Button
-                disabled={decreaseDisable}
-                onClick={() => {
-                  handleDecreaseBooster();
-                }}
-              >
-                -
-              </Button>
-              <Button>{numberBoosters}</Button>
-              <Button
-                disabled={increaseDisable}
-                onClick={() => {
-                  handleIncrementBooster();
-                }}
-              >
-                +
-              </Button>
-            </ButtonGroup>
-            <Typography>Boost this watch by: {boostPercentage()}%</Typography>
-            {!confirmBoost && boostBeingUsed && (
-              <Button
-                onClick={() => {
-                  doBoost();
-                  setConfirmBoost(true);
-                }}
-              >
-                I do wanna Boost
-              </Button>
-            )}
-            {confirmBoost &&
-              boostBeingUsed && [
-                <Typography>
-                  You will use {numberBoosters} boosters are you sure?
-                </Typography>,
-                <Button
-                  onClick={() => {
-                    boostStatusFalse();
-                    setConfirmBoost(false);
-                  }}
-                >
-                  Cancel
-                </Button>,
-              ]}
+  return (
+    <Box sx={{ display: "flex", alignContent: "center" }}>
+      {boosterValue(fusionPrice, cartBoosters) ? (
+        <Grid container>
+          <Grid item xs={6}>
+            <Typography>
+              For this price Bracket you have selected a{" "}
+              {boosterValue(fusionPrice, cartBoosters)?.productBrand}{" "}
+              {boosterValue(fusionPrice, cartBoosters)?.productName} you have{" "}
+              {currentUser.boosters ? currentUser.boosters - numberBoosters : 0}{" "}
+              Boosters, select the number to use.
+            </Typography>
           </Grid>
-        ) : (
-          <Typography>
-            You do not have a watch selected to be boosted in this watch range,
-            click{" "}
-            <b onClick={() => history.push(generalEndpoints.BROWSE)}>here</b> to
-            choose one
-          </Typography>
-        )}
-      </Box>
-    );
+          <Grid item xs={6}>
+            <CardMedia
+              style={{ width: "80px", height: "80px" }}
+              image={
+                boosterValue(fusionPrice, cartBoosters)?.productThumbnail[0]
+              }
+            ></CardMedia>
+          </Grid>
+          <ButtonGroup>
+            <Button
+              disabled={decreaseDisable}
+              onClick={() => {
+                handleDecreaseBooster();
+              }}
+            >
+              -
+            </Button>
+            <Button>{numberBoosters}</Button>
+            <Button
+              disabled={increaseDisable}
+              onClick={() => {
+                handleIncrementBooster();
+              }}
+            >
+              +
+            </Button>
+          </ButtonGroup>
+          <Typography>Boost this watch by: {boostPercentage()}%</Typography>
+          {!confirmBoost && boostBeingUsed && (
+            <Button
+              onClick={() => {
+                doBoost();
+                setConfirmBoost(true);
+              }}
+            >
+              I do wanna Boost
+            </Button>
+          )}
+          {confirmBoost &&
+            boostBeingUsed && [
+              <Typography>
+                You will use {numberBoosters} boosters are you sure?
+              </Typography>,
+              <Button
+                onClick={() => {
+                  boostStatusFalse();
+                  setConfirmBoost(false);
+                }}
+              >
+                Cancel
+              </Button>,
+            ]}
+        </Grid>
+      ) : (
+        <Typography>
+          You do not have a watch selected to be boosted in this watch range,
+          click{" "}
+          <b onClick={() => history.push(generalEndpoints.BROWSE)}>here</b> to
+          choose one
+        </Typography>
+      )}
+    </Box>
+  );
 };
 
 export default BoosterSelection;

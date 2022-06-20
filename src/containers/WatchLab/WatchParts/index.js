@@ -19,7 +19,7 @@ import Popup from "../../../components/Popup";
 import BoosterSelection from "./BoosterSelection";
 import useWatchParts from "./useWatchParts";
 
-const WatchParts = ({ data, collectionFull, setBagFull }) => {
+const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
   const {
     dragging,
     ready,
@@ -29,7 +29,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     setBoostStatus,
     openPopupNewWatch,
     setOpenPopupNewWatch,
-    randomProduct,
+    modalProduct,
     handleDeleteWatchParts,
     shredderMeter,
     numberBoosters,
@@ -183,8 +183,8 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                   fusionCrown &&
                   fusionMovement &&
                   fusionMatchParts &&
-                  !collectionFull &&
-                  list[1].items.length === 5 && (
+                  list[1].items.length === 5 &&
+                  (!collectionFull ? (
                     <Button
                       onClick={() => {
                         setFusionPrice(
@@ -195,7 +195,9 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                     >
                       Are you ready!
                     </Button>
-                  )}
+                  ) : (
+                    <Typography>The collection is full</Typography>
+                  ))}
                 {ready && [
                   <BoosterSelection {...configBoosterSelection} />,
                   <Button
@@ -267,34 +269,33 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
               </Grid>
             </Grid>
           </Styled.Paper>
-          {randomProduct && (
-            <Popup
-              clickToClose
-              openPopup={openPopupNewWatch}
-              setOpenPopup={setOpenPopupNewWatch}
-              title={"New Watch Alert!!"}
+
+          <Popup
+            clickToClose
+            openPopup={openPopupNewWatch}
+            setOpenPopup={setOpenPopupNewWatch}
+            title={"New Watch Alert!!"}
+          >
+            <CardMedia
+              style={{ height: "30vh" }}
+              image={
+                modalProduct.productThumbnail
+                  ? modalProduct.productThumbnail[0]
+                  : null
+              }
+            ></CardMedia>
+            <Typography
+              style={{
+                color: "black",
+                fontSize: "12px",
+                marginTop: "10px",
+              }}
             >
-              <CardMedia
-                style={{ height: "30vh" }}
-                image={
-                  randomProduct.productThumbnail
-                    ? randomProduct.productThumbnail[0]
-                    : null
-                }
-              ></CardMedia>
-              <Typography
-                style={{
-                  color: "black",
-                  fontSize: "12px",
-                  marginTop: "10px",
-                }}
-              >
-                Congratulations you added to your collection a:{" "}
-                {randomProduct.productBrand} {randomProduct.productName} Ref:{" "}
-                {randomProduct.reference}
-              </Typography>
-            </Popup>
-          )}
+              Congratulations you added to your collection a:{" "}
+              {modalProduct.productBrand || ""} {modalProduct.productName || ""}{" "}
+              Ref: {modalProduct.reference || ""}
+            </Typography>
+          </Popup>
         </Grid>
       </Grid>
     );

@@ -44,7 +44,7 @@ const productsReducer = (state = INITIAL_STATE, action) => {
     case productsTypes.SET_RANDOM_PRODUCT:
       return {
         ...state,
-        randomNewProduct: action.payload.data[0],
+        randomNewProduct: action.payload,
       };
     case productTypes.SET_MY_COLLECTION:
       return {

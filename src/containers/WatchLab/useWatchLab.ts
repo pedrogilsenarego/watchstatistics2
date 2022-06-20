@@ -26,13 +26,6 @@ const useWatchLab = () => {
     else return 0
   }
 
-  function collection() {
-    if (currentUser)
-      return currentUser?.collection || [];
-    else return [];
-  }
-
-
   useEffect(
     () => {
       if (watchParts() >= bagSizeHelper(getExperience())) {
@@ -43,14 +36,16 @@ const useWatchLab = () => {
     [watchParts()]
   );
 
+  
   useEffect(
     () => {
-      if (collection() && collection() >= bagSizeHelper(getExperience())) {
+      if ((currentUser?.collection?.length || 0) >=
+      bagSizeHelper(currentUser?.experience)) {
         setCollectionFull(true);
       } else setCollectionFull(false);
     },
     // eslint-disable-next-line
-    [collection()]
+    [currentUser.collection]
   );
 
   const data = [
