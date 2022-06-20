@@ -186,3 +186,15 @@ export const priceWatchParts = (watchParts: string[]) => {
   if (fusionPrice === "7") return "50.000-100.000€";
   if (fusionPrice === "8") return "100.000€+";
 };
+
+export const boosterValue = (fusionPrice:string, cartBoosters:any) => {
+  if (fusionPrice === "0-200€") return cartBoosters.a;
+  if (fusionPrice === "200-500€") return cartBoosters.b;
+  if (fusionPrice === "500-1000€") return cartBoosters.c;
+  if (fusionPrice === "1000-5000€") return cartBoosters.d;
+  if (fusionPrice === "5000-10.000€") return cartBoosters.e;
+  if (fusionPrice === "10.000-30.000€") return cartBoosters.f;
+  if (fusionPrice === "30.000-50.000€") return cartBoosters.g;
+  if (fusionPrice === "50.000-100.000€") return cartBoosters.h;
+  if (fusionPrice === "100.000€+") return cartBoosters.i;
+};

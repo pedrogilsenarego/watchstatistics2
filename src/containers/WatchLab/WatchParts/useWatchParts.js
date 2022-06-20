@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { percentageLoot } from "src/Utils/math";
 import { getRandomPart } from "src/Utils/gamyfication";
 import { updateBoxStatus } from "src/redux/User/user.actions";
-import { colorWatchParts } from "src/Utils/gamyfication";
+import { colorWatchParts, boosterValue } from "src/Utils/gamyfication";
+import { randomWeightedNumber } from "src/Utils/math";
+import { fetchRandomProduct } from "src/redux/Products/products.actions";
 
 const mapState = (state) => ({
   randomProduct: state.productsData.randomNewProduct,
@@ -152,21 +154,64 @@ const useWatchParts = ({ setBagFull, data }) => {
     return colorWatchParts(item.item);
   };
 
+  const handleFusionNewWatch = () => {
+    const numbers = [
+      1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
+      8, 9,
+    ];
+    if (boostStatus === "false") {
+      const randomValue = randomWeightedNumber(numbers);
+      const configData = {
+        ...currentUser,
+        userID: currentUser.id,
+        collection: currentUser.collection ? currentUser.collection : [],
+        randomValue,
+        fusionPrice,
+      };
+      dispatch(fetchRandomProduct(configData));
+    }
+    if (boostStatus === "fail") {
+      const randomValue = randomWeightedNumber();
+      const configData = {
+        ...currentUser,
+        userID: currentUser.id,
+        collection: currentUser.collection ? currentUser.collection : [],
+        boosters: currentUser.boosters
+          ? currentUser.boosters - numberBoosters
+          : 0,
+        randomValue,
+        fusionPrice,
+      };
+      dispatch(fetchRandomProduct(configData));
+    }
+    if (boostStatus === "true") {
+      const baby = boosterValue(fusionPrice, cartBoosters);
+      const configData = {
+        ...currentUser,
+        userID: currentUser.id,
+        collection: currentUser.collection ? currentUser.collection : [],
+        boosters: currentUser.boosters
+          ? currentUser.boosters - numberBoosters
+          : 0,
+        fusionPrice,
+        randomValue: baby.avgTotal,
+      };
+      dispatch(fetchRandomProduct(configData));
+    }
+    setOpenPopupNewWatch(true);
+  };
+
   return {
     dragging,
     setDragging,
-    dispatch,
     ready,
     setReady,
     openConfirmDelete,
     setOpenConfirmDelete,
-    boostStatus,
     setBoostStatus,
     openPopupNewWatch,
     setOpenPopupNewWatch,
     randomProduct,
-    currentUser,
-    cartBoosters,
     handleDeleteWatchParts,
     shredderMeter,
     fusionPrice,
@@ -184,6 +229,7 @@ const useWatchParts = ({ setBagFull, data }) => {
     handleDragStart,
     handleDragEnter,
     getStyles,
+    handleFusionNewWatch,
   };
 };
 
