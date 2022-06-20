@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TiDelete } from "react-icons/ti";
-import { useDispatch } from "react-redux";
 import Case from "../../../assets/Case.svg";
 import Bracelet from "../../../assets/Bracelet.svg";
 import Movement from "../../../assets/Movement.svg";
 import Crown from "../../../assets/Crown.svg";
 import Glass from "../../../assets/Glass.svg";
-import { useSelector } from "react-redux";
 import Watch from "../WatchSolid";
 import {
   Grid,
@@ -16,27 +14,41 @@ import {
   Button,
   CardMedia,
 } from "@material-ui/core";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
+import {
+  LinearProgressBarColor,
+  LinearProgressBarColor2,
+  LinearProgressBarFormat,
+  colorWatchParts,
+  priceWatchParts,
+} from "src/Utils/gamyfication";
+import { randomWeightedNumber } from "src/Utils/math";
 import { fetchRandomProduct } from "../../../redux/Products/products.actions";
-import { styled } from "@mui/material/styles";
+import * as Styled from "./styles";
 import Popup from "../../../components/Popup";
 import BoosterSelection from "./BoosterSelection";
-import { percentageLoot, getRandomPart } from "../helpers";
-import { updateBoxStatus } from "../../../redux/User/user.actions";
-
-const mapState = (state) => ({
-  randomProduct: state.productsData.randomNewProduct,
-  currentUser: state.user.currentUser,
-  cartBoosters: state.cartData.cartBoosters,
-});
+import useWatchParts from "./useWatchParts";
 
 const WatchParts = ({ data, collectionFull, setBagFull }) => {
-  const dispatch = useDispatch();
+  const {
+    dragging,
+    setDragging,
+    dispatch,
+    ready,
+    setReady,
+    openConfirmDelete,
+    setOpenConfirmDelete,
+    boostStatus,
+    setBoostStatus,
+    openPopupNewWatch,
+    setOpenPopupNewWatch,
+    randomProduct,
+    currentUser,
+    cartBoosters,
+    handleDeleteWatchParts,
+  } = useWatchParts({ setBagFull });
+
   const [list, setList] = useState(data);
 
-  const [dragging, setDragging] = useState(false);
   const [fusionGlass, setFusionGlass] = useState(false);
   const [fusionCrown, setFusionCrown] = useState(false);
   const [fusionMovement, setFusionMovement] = useState(false);
@@ -44,57 +56,8 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
   const [fusionCase, setFusionCase] = useState(false);
   const [fusionMatchParts, setFusionMatchParts] = useState(true);
   const [fusionPrice, setFusionPrice] = useState("");
-  const [ready, setReady] = useState(false);
-  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
-  const [boostStatus, setBoostStatus] = useState("false");
-  const [openPopupNewWatch, setOpenPopupNewWatch] = useState(false);
-  const { randomProduct, currentUser, cartBoosters } = useSelector(mapState);
 
   const [numberBoosters, setNumberBoosters] = useState(0);
-
-  const itemsBagDeleted = (pos) => {
-    var a = currentUser.watchParts;
-    for (var i = 0; i < pos.length; i++) {
-      a.splice(a.indexOf(pos[i]), 1);
-    }
-    return a;
-  };
-
-  const handleDeleteWatchParts = (pos, color, percentage, color2) => {
-    const a = itemsBagDeleted(pos);
-
-    if (percentage && color && percentageLoot(percentage) === 1) {
-      const b = getRandomPart(color);
-      a.push(b);
-    } else {
-      if (color2 && color2 !== "black") {
-        const b = getRandomPart(color2);
-        a.push(b);
-      }
-    }
-
-    const configData = {
-      ...currentUser,
-      flag: "deleteWatchPart",
-      watchParts: a,
-      userID: currentUser.id,
-    };
-    dispatch(updateBoxStatus(configData));
-    setBagFull(false);
-  };
-
-  const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-    height: 20,
-    width: 100,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: LinearProgressBarColor2(shredderMeter(list[2].items)),
-    },
-    [`& .${linearProgressClasses.bar}`]: {
-      borderRadius: 5,
-      backgroundColor: LinearProgressBarColor(shredderMeter(list[2].items)),
-    },
-  }));
 
   const shredderMeter = (data) => {
     var a = 0;
@@ -102,41 +65,6 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
       a = a + 1 + parseInt(data[i][0]);
     }
     return a;
-  };
-  const LinearProgressBarFormat = (value) => {
-    if (value < 2) return value * 50;
-    if (value < 4) return (value - 1) * 20;
-    if (value < 7) return (value - 3) * 34;
-    if (value < 10) return (value - 6) * 34;
-    if (value < 14) return (value - 9) * 25;
-    if (value < 18) return (value - 13) * 25;
-    if (value < 22) return (value - 17) * 25;
-    if (value < 27) return (value - 21) * 20;
-    if (value < 33) return (value - 26) * 17;
-  };
-
-  const LinearProgressBarColor = (value) => {
-    if (value < 2) return "grey";
-    if (value < 4) return "white";
-    if (value < 7) return "lightGreen";
-    if (value < 10) return "darkGreen";
-    if (value < 14) return "lightBlue";
-    if (value < 18) return "darkBlue";
-    if (value < 22) return "purple";
-    if (value < 27) return "orange";
-    if (value < 33) return "red";
-  };
-
-  const LinearProgressBarColor2 = (value) => {
-    if (value < 2) return "black";
-    if (value < 4) return "grey";
-    if (value < 7) return "white";
-    if (value < 10) return "lightGreen";
-    if (value < 14) return "darkGreen";
-    if (value < 18) return "lightBlue";
-    if (value < 22) return "darkBlue";
-    if (value < 27) return "purple";
-    if (value < 33) return "orange";
   };
 
   useEffect(() => {
@@ -223,43 +151,6 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     return colorWatchParts(item.item);
   };
 
-  const colorWatchParts = (watchParts) => {
-    let fusionPrice = watchParts.charAt(0);
-    if (fusionPrice === "0") return "#ffffff66";
-    if (fusionPrice === "1") return "#ffffff";
-    if (fusionPrice === "2") return "lightGreen";
-    if (fusionPrice === "3") return "darkGreen";
-    if (fusionPrice === "4") return "lightBlue";
-    if (fusionPrice === "5") return "darkBlue";
-    if (fusionPrice === "6") return "purple";
-    if (fusionPrice === "7") return "orange";
-    if (fusionPrice === "8") return "red";
-  };
-
-  const randomWeightedNumber = () => {
-    const numbers = [
-      1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
-      8, 9,
-    ];
-    const rnd = Math.floor(Math.random() * numbers.length);
-    const rnd2 = Math.floor(Math.random() * 10) + 1;
-    return numbers[rnd] + rnd2 / 10;
-  };
-
-  const priceWatchParts = (watchParts) => {
-    let newArray = watchParts;
-    let fusionPrice = newArray[0];
-    if (fusionPrice === "0") return "0-200€";
-    if (fusionPrice === "1") return "200-500€";
-    if (fusionPrice === "2") return "500-1000€";
-    if (fusionPrice === "3") return "1000-5000€";
-    if (fusionPrice === "4") return "5000-10.000€";
-    if (fusionPrice === "5") return "10.000-30.000€";
-    if (fusionPrice === "6") return "30.000-50.000€";
-    if (fusionPrice === "7") return "50.000-100.000€";
-    if (fusionPrice === "8") return "100.000€+";
-  };
-
   const boosterValue = () => {
     if (fusionPrice === "0-200€") return cartBoosters.a;
     if (fusionPrice === "200-500€") return cartBoosters.b;
@@ -282,8 +173,12 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
   };
 
   const handleFusionNewWatch = () => {
+    const numbers = [
+      1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
+      8, 9,
+    ];
     if (boostStatus === "false") {
-      const randomValue = randomWeightedNumber();
+      const randomValue = randomWeightedNumber(numbers);
       const configData = {
         ...currentUser,
         userID: currentUser.id,
@@ -500,7 +395,13 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                       paddingTop: "5px",
                     }}
                   >
-                    <BorderLinearProgress
+                    <Styled.BorderLinearProgress
+                      backColor={LinearProgressBarColor2(
+                        shredderMeter(list[2].items)
+                      )}
+                      barColor={LinearProgressBarColor(
+                        shredderMeter(list[2].items)
+                      )}
                       variant='determinate'
                       value={LinearProgressBarFormat(
                         shredderMeter(list[2].items)

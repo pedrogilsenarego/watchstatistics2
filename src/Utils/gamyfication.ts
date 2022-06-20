@@ -123,5 +123,66 @@ export const bagSizeHelper = (experience:number) => {
       return "8" + a;
     }
   }
+
+  export const LinearProgressBarColor = (value:number) => {
+    if (value < 2) return "grey";
+    if (value < 4) return "white";
+    if (value < 7) return "lightGreen";
+    if (value < 10) return "darkGreen";
+    if (value < 14) return "lightBlue";
+    if (value < 18) return "darkBlue";
+    if (value < 22) return "purple";
+    if (value < 27) return "orange";
+    if (value < 33) return "red";
+  };
+
+  export const colorWatchParts = (watchParts: string) => {
+    let fusionPrice = watchParts.charAt(0);
+    if (fusionPrice === "0") return "#ffffff66";
+    if (fusionPrice === "1") return "#ffffff";
+    if (fusionPrice === "2") return "lightGreen";
+    if (fusionPrice === "3") return "darkGreen";
+    if (fusionPrice === "4") return "lightBlue";
+    if (fusionPrice === "5") return "darkBlue";
+    if (fusionPrice === "6") return "purple";
+    if (fusionPrice === "7") return "orange";
+    if (fusionPrice === "8") return "red";
+  };
+
+  export const LinearProgressBarColor2 = (value: number) => {
+    if (value < 2) return "black";
+    if (value < 4) return "grey";
+    if (value < 7) return "white";
+    if (value < 10) return "lightGreen";
+    if (value < 14) return "darkGreen";
+    if (value < 18) return "lightBlue";
+    if (value < 22) return "darkBlue";
+    if (value < 27) return "purple";
+    if (value < 33) return "orange";
+  };
   
- 
+ export const LinearProgressBarFormat = (value: number) => {
+  if (value < 2) return value * 50;
+  if (value < 4) return (value - 1) * 20;
+  if (value < 7) return (value - 3) * 34;
+  if (value < 10) return (value - 6) * 34;
+  if (value < 14) return (value - 9) * 25;
+  if (value < 18) return (value - 13) * 25;
+  if (value < 22) return (value - 17) * 25;
+  if (value < 27) return (value - 21) * 20;
+  if (value < 33) return (value - 26) * 17;
+};
+
+export const priceWatchParts = (watchParts: string[]) => {
+  let newArray = watchParts;
+  let fusionPrice = newArray[0];
+  if (fusionPrice === "0") return "0-200€";
+  if (fusionPrice === "1") return "200-500€";
+  if (fusionPrice === "2") return "500-1000€";
+  if (fusionPrice === "3") return "1000-5000€";
+  if (fusionPrice === "4") return "5000-10.000€";
+  if (fusionPrice === "5") return "10.000-30.000€";
+  if (fusionPrice === "6") return "30.000-50.000€";
+  if (fusionPrice === "7") return "50.000-100.000€";
+  if (fusionPrice === "8") return "100.000€+";
+};

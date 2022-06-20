@@ -18,3 +18,10 @@ export function percentageLoot(percentage:number) {
 	if (getRandomInt(1, 100) <= percentage) return 1;
 	else return 0;
 }
+
+export const randomWeightedNumber = (numbers: number[]) => {
+  
+  const rnd = Math.floor(Math.random() * numbers.length);
+  const rnd2 = Math.floor(Math.random() * 10) + 1;
+  return numbers[rnd] + rnd2 / 10;
+};
