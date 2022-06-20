@@ -31,7 +31,6 @@ import useWatchParts from "./useWatchParts";
 const WatchParts = ({ data, collectionFull, setBagFull }) => {
   const {
     dragging,
-    setDragging,
     dispatch,
     ready,
     setReady,
@@ -45,111 +44,22 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     currentUser,
     cartBoosters,
     handleDeleteWatchParts,
-  } = useWatchParts({ setBagFull });
-
-  const [list, setList] = useState(data);
-
-  const [fusionGlass, setFusionGlass] = useState(false);
-  const [fusionCrown, setFusionCrown] = useState(false);
-  const [fusionMovement, setFusionMovement] = useState(false);
-  const [fusionBracelet, setFusionBracelet] = useState(false);
-  const [fusionCase, setFusionCase] = useState(false);
-  const [fusionMatchParts, setFusionMatchParts] = useState(true);
-  const [fusionPrice, setFusionPrice] = useState("");
-
-  const [numberBoosters, setNumberBoosters] = useState(0);
-
-  const shredderMeter = (data) => {
-    var a = 0;
-    for (var i = 0; i < data.length; i++) {
-      a = a + 1 + parseInt(data[i][0]);
-    }
-    return a;
-  };
-
-  useEffect(() => {
-    setList(data);
-  }, [setList, data]);
-
-  useEffect(() => {
-    if (list[1].items.join("").includes("Crown")) {
-      setFusionCrown(true);
-    } else setFusionCrown(false);
-    if (list[1].items.join("").includes("Case")) {
-      setFusionCase(true);
-    } else {
-      setFusionCase(false);
-    }
-
-    if (list[1].items.join("").includes("Bracelet")) {
-      setFusionBracelet(true);
-    } else setFusionBracelet(false);
-    if (list[1].items.join("").includes("Glass")) {
-      setFusionGlass(true);
-    } else setFusionGlass(false);
-    if (list[1].items.join("").includes("Movement")) {
-      setFusionMovement(true);
-    } else setFusionMovement(false);
-
-    const a = [];
-    for (var i = 0; i < list[1].items.length; i++) {
-      const b = list[1].items[i].slice(0, 1);
-      a.push(b);
-    }
-    const allEqual = (a) => a.every((val) => val === a[0]);
-    if (!allEqual(a)) {
-      setFusionMatchParts(false);
-    } else setFusionMatchParts(true);
-  }, [list]);
-
-  const dragItem = useRef();
-  const dragItemNode = useRef();
-
-  const handleDragStart = (e, item) => {
-    dragItemNode.current = e.target;
-    dragItemNode.current.addEventListener("dragend", handleDragEnd);
-    dragItem.current = item;
-
-    setTimeout(() => {
-      setDragging(true);
-    }, 0);
-  };
-
-  const handleDragEnd = (e) => {
-    setDragging(false);
-    dragItem.current = null;
-    dragItemNode.current.removeEventListener("dragend", handleDragEnd);
-    dragItemNode.current = null;
-  };
-
-  const handleDragEnter = (e, targetItem) => {
-    if (dragItemNode.current !== e.target) {
-      setList((oldList) => {
-        let newList = JSON.parse(JSON.stringify(oldList));
-        newList[targetItem.grpI].items.splice(
-          targetItem.itemI,
-          0,
-          newList[dragItem.current.grpI].items.splice(
-            dragItem.current.itemI,
-            1
-          )[0]
-        );
-        dragItem.current = targetItem;
-        localStorage.setItem("List", JSON.stringify(newList));
-        return newList;
-      });
-    }
-  };
-
-  const getStyles = (item) => {
-    if (
-      dragItem.current.grpI === item.grpI &&
-      dragItem.current.itemI === item.itemI
-    ) {
-      return "#3C3939";
-    }
-    return colorWatchParts(item.item);
-  };
+    shredderMeter,
+    numberBoosters,
+    fusionPrice,
+    fusionGlass,
+    fusionBracelet,
+    fusionCase,
+    fusionCrown,
+    fusionMovement,
+    setNumberBoosters,
+    list,
+    handleDragEnter,
+    handleDragStart,
+    fusionMatchParts,
+    setFusionPrice,
+    getStyles,
+  } = useWatchParts({ setBagFull, data });
 
   const boosterValue = () => {
     if (fusionPrice === "0-200€") return cartBoosters.a;
