@@ -1,4 +1,4 @@
-import { Paper, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BsFillInboxFill } from "react-icons/bs";
 import { FaCoins, FaPuzzlePiece } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { bagSizeHelper } from "src/Utils/gamyfication";
 import { Redux } from "src/redux/types";
 import Item from "./item";
+import * as Styled from "./styles"
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
@@ -67,7 +68,6 @@ const Currencies = () => {
     <Item title='Blue Box Fragments'>
       <>
         <FaPuzzlePiece
-          style={{ marginLeft: "5px" }}
           size='3vh'
           color='lightBlue'
         />
@@ -123,25 +123,11 @@ const Currencies = () => {
   ];
 
   return (
-    <Paper
-      style={{
-        background: "#0000001C",
-        position: "fixed",
-        zIndex: "1000",
-        marginTop: "90vh",
-        padding: "10px",
-        paddingRight: "10px",
-        color: "#ffffffBE",
-        left: 0,
-        right: 0,
-        marginLeft: "auto",
-        marginRight: "auto",
-      }}
-    >
+    <Styled.Paper>
       <Grid container justifyContent='center' alignItems='center' columnGap={1}>
         {ListElements.map((item) => item)}
       </Grid>
-    </Paper>
+    </Styled.Paper>
   );
 };
 
