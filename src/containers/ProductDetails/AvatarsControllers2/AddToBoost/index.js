@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { AiFillFire } from "react-icons/ai";
 import Popover from "../../../../components/Popover";
+import { generalEndpoints } from "src/constants/endpoints";
 
 const AddToBoost = ({ product }) => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const AddToBoost = ({ product }) => {
   const handleAddToBoost = (product) => {
     if (!product) return;
     dispatch(addBooster(product));
-    history.push("/watchstatistics/watchlaboratory");
+    history.push(generalEndpoints.WATCH_LABORATORY);
   };
 
   return (
@@ -38,7 +39,7 @@ const AddToBoost = ({ product }) => {
           handleAddToBoost(product);
         }}
       >
-        <AiFillFire size="4vh" color="#ffffff66" />
+        <AiFillFire size='4vh' color='#ffffff66' />
       </Avatar>
       <Popover
         anchor={anchor}

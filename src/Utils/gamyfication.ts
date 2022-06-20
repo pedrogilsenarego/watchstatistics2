@@ -185,6 +185,7 @@ export const priceWatchParts = (watchParts: string[]) => {
   if (fusionPrice === "6") return "30.000-50.000€";
   if (fusionPrice === "7") return "50.000-100.000€";
   if (fusionPrice === "8") return "100.000€+";
+  else return ""
 };
 
 export const boosterValue = (fusionPrice:string, cartBoosters:any) => {

@@ -1,7 +1,6 @@
 import FacebookShare from "../../forms/socialShare/Facebook";
 import WhatsappShareButton from "../../forms/socialShare/Whatsapp";
-
-//import AddToBoost from "./AddToBoost";
+import AddToBoost from "./AddToBoost";
 
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import AddToCompare from "./AddToCompare";
@@ -53,9 +52,8 @@ const AvatarsControllers = ({
         }}
       >
         <>
-          {/* <AddToBoost product={product} />*/}
+          <AddToBoost product={product} />
           <AddToCompare {...configAddToCompare} />
-
           <FacebookShare {...configShareButtons} />
           <WhatsappShareButton {...configShareButtons} />
         </>

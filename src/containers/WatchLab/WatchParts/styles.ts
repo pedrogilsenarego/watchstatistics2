@@ -31,7 +31,7 @@ export const Paper = styled(MuiPaper)(() => ({
 
 export const PartsBox = styled(Box)(() => ({
   backgroundColor: "#00000066",
-  marginTop: "5px",
+  marginTop: "2px",
   padding: "10px",
   borderRadius: "5px",
   display: "flex",

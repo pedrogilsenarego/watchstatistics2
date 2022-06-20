@@ -12,8 +12,9 @@ import {
   LinearProgressBarFormat,
   colorWatchParts,
   priceWatchParts,
+  boosterValue,
 } from "src/Utils/gamyfication";
-
+import * as GeneralStyled from "src/styles/styles";
 import * as Styled from "./styles";
 import Popup from "../../../components/Popup";
 import BoosterSelection from "./BoosterSelection";
@@ -95,12 +96,12 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
         </Grid>
         <Grid item xs={7}>
           <Styled.Paper>
-            <Grid container rowGap={2} columnSpacing={1}>
+            <Grid container rowGap={2} columnSpacing={2}>
               {list.map((grp, grpI) => (
                 <Grid item xs={grpI > 0 ? 6 : 12}>
-                  <Typography style={{ color: "#ffffffBE" }}>
+                  <GeneralStyled.BasicTypography>
                     {grp.title}
-                  </Typography>
+                  </GeneralStyled.BasicTypography>
                   <Styled.PartsBox
                     key={grp.title}
                     onDragEnter={
@@ -162,7 +163,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
             <Grid container style={{ display: "flex" }}>
               <Grid item xs={6}>
                 <Typography>
-                  FUSION MACHINE - New watch to be obtained: {fusionPrice}{" "}
+                  New watch to be obtained: {fusionPrice}{" "}
                 </Typography>
 
                 {list[1].items.length > 5 && (
@@ -187,7 +188,9 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
                   list[1].items.length === 5 && (
                     <Button
                       onClick={() => {
-                        setFusionPrice(priceWatchParts(list[1].items[0]));
+                        setFusionPrice(
+                          priceWatchParts(list[1].items?.[0] || "")
+                        );
                         setReady(true);
                       }}
                     >
