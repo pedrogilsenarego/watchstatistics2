@@ -6,6 +6,7 @@ import {
   LinearProgressBarFormat,
 } from "src/Utils/gamyfication";
 import { TiDelete } from "react-icons/ti";
+import Button3 from "src/components/Buttons/Button3"
 
 interface Props {
   setBagFull: any
@@ -45,14 +46,12 @@ const Shredder = ({ setBagFull, data, shredderMeter,
         />
       </Box>
       {!openConfirmDelete && (
-        <Button
+        <Button3
+          title="Shred parts"
           onClick={() => {
             setOpenConfirmDelete(true);
           }}
-        >
-          <TiDelete fontSize='3.5em' />
-          Shred Parts
-        </Button>
+        />
       )}
       {openConfirmDelete && (
         <Button
