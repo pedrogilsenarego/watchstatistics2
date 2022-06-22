@@ -5,24 +5,27 @@ import {
   LinearProgressBarColor2,
   LinearProgressBarFormat,
 } from "src/Utils/gamyfication";
-import useWatchParts from "src/containers/WatchLab/WatchParts/useWatchParts";
 import { TiDelete } from "react-icons/ti";
 
 interface Props {
+  setBagFull: any
+  data: any;
+  shredderMeter: any;
+  openConfirmDelete: any;
+  setOpenConfirmDelete: any;
+  handleDeleteWatchParts: any;
   list: any;
 }
 
-const Shredder = ({ list }: Props) => {
-  const {
-    shredderMeter,
-    openConfirmDelete,
-    setOpenConfirmDelete,
-    handleDeleteWatchParts,
-  } = useWatchParts();
+const Shredder = ({ setBagFull, data, shredderMeter,
+  openConfirmDelete,
+  setOpenConfirmDelete,
+  handleDeleteWatchParts,
+  list }: Props) => {
 
   return (
     <>
-      {list[2].items.length > 0 && (
+      {list[2]?.items?.length > 0 && (
         <Typography>Shredded Parts are gone!</Typography>
       )}
       <Typography>SHREDDING - New part that will be obtained:</Typography>

@@ -134,6 +134,7 @@ export const bagSizeHelper = (experience:number) => {
     if (value < 22) return "purple";
     if (value < 27) return "orange";
     if (value < 33) return "red";
+    else return "grey"
   };
 
   export const colorWatchParts = (watchParts: string) => {
@@ -159,6 +160,7 @@ export const bagSizeHelper = (experience:number) => {
     if (value < 22) return "darkBlue";
     if (value < 27) return "purple";
     if (value < 33) return "orange";
+    else return "black"
   };
   
  export const LinearProgressBarFormat = (value: number) => {

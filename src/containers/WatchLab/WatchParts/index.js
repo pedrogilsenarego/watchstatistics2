@@ -1,4 +1,3 @@
-import { TiDelete } from "react-icons/ti";
 import Case from "../../../assets/Case.svg";
 import Bracelet from "../../../assets/Bracelet.svg";
 import Movement from "../../../assets/Movement.svg";
@@ -6,32 +5,24 @@ import Crown from "../../../assets/Crown.svg";
 import Glass from "../../../assets/Glass.svg";
 import Watch from "../WatchSolid";
 import { Grid, Typography, Box, Button, CardMedia } from "@mui/material";
-import {
-  LinearProgressBarColor,
-  LinearProgressBarColor2,
-  LinearProgressBarFormat,
-  colorWatchParts,
-  priceWatchParts,
-} from "src/Utils/gamyfication";
+import { colorWatchParts, priceWatchParts } from "src/Utils/gamyfication";
 import * as GeneralStyled from "src/styles/styles";
 import * as Styled from "./styles";
 import Popup from "../../../components/Popup";
 import BoosterSelection from "./BoosterSelection";
 import useWatchParts from "./useWatchParts";
+import Shredder from "./Shredder";
 
 const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
   const {
     dragging,
     ready,
     setReady,
-    openConfirmDelete,
-    setOpenConfirmDelete,
     setBoostStatus,
     openPopupNewWatch,
     setOpenPopupNewWatch,
     modalProduct,
     handleDeleteWatchParts,
-    shredderMeter,
     numberBoosters,
     fusionPrice,
     fusionGlass,
@@ -45,6 +36,9 @@ const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
     setFusionPrice,
     handleDragStart,
     handleDragEnter,
+    shredderMeter,
+    openConfirmDelete,
+    setOpenConfirmDelete,
     getStyles,
     handleFusionNewWatch,
   } = useWatchParts({ setBagFull, data });
@@ -85,6 +79,16 @@ const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
     movementColor: fusionMovement,
     crownColor: fusionCrown,
     braceletColor: fusionBracelet,
+  };
+
+  const configShredder = {
+    setBagFull,
+    data,
+    shredderMeter,
+    openConfirmDelete,
+    setOpenConfirmDelete,
+    handleDeleteWatchParts,
+    list,
   };
 
   if (list) {
@@ -212,60 +216,7 @@ const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
                 ]}
               </Grid>
               <Grid item xs={6}>
-                {list[2].items.length > 0 && (
-                  <Typography style={{ fusionPrice: "orange" }}>
-                    Shredded Parts are gone!
-                  </Typography>
-                )}
-                <Typography>
-                  SHREDDING - New part that will be obtained:
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    paddingTop: "5px",
-                  }}
-                >
-                  <Styled.BorderLinearProgress
-                    backColor={LinearProgressBarColor2(
-                      shredderMeter(list[2].items)
-                    )}
-                    barColor={LinearProgressBarColor(
-                      shredderMeter(list[2].items)
-                    )}
-                    variant='determinate'
-                    value={LinearProgressBarFormat(
-                      shredderMeter(list[2].items)
-                    )}
-                  />
-                </Box>
-                {!openConfirmDelete && (
-                  <Button
-                    onClick={() => {
-                      setOpenConfirmDelete(true);
-                    }}
-                  >
-                    <TiDelete fusionPrice='red' fontSize='3.5em' />
-                    Shred Parts
-                  </Button>
-                )}
-                {openConfirmDelete && (
-                  <Button
-                    onClick={() => {
-                      setOpenConfirmDelete(false);
-                      handleDeleteWatchParts(
-                        list[2].items,
-                        LinearProgressBarColor(shredderMeter(list[2].items)),
-                        LinearProgressBarFormat(shredderMeter(list[2].items)),
-                        LinearProgressBarColor2(shredderMeter(list[2].items))
-                      );
-                    }}
-                  >
-                    <TiDelete fusionPrice='red' fontSize='3.5em' />
-                    I, Confirm
-                  </Button>
-                )}
+                <Shredder {...configShredder} />
               </Grid>
             </Grid>
           </Styled.Paper>

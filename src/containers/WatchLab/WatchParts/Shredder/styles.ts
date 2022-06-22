@@ -4,7 +4,7 @@ import LinearProgress, {
 import { styled } from "@mui/material";
 
 interface Props {
-  backColor?: string;
+  backColor: string;
   barColor: string;
 }
 
