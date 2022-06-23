@@ -55,8 +55,8 @@ const Item = ({ item, pos, relativePos, products }) => {
 
   const handleWatch4SellConfirm = (values) => {
     const { price } = values;
-    const oldArray = collection;
-    oldArray.splice(posWatch, 1);
+    const oldArray = [...collection];
+    oldArray.splice(positionOnCollection(), 1);
     const configData = {
       ...currentUser,
       flag: "sell",
@@ -65,12 +65,16 @@ const Item = ({ item, pos, relativePos, products }) => {
     };
     dispatch(updateCollectionStatus(configData));
     const configOrder = {
-      productBrand: products[relativePos[pos]].productBrand,
-      productName: products[relativePos[pos]].productName,
-      productID: item,
-      reference: products[relativePos[pos]].reference,
+      productBrand: item.productBrand,
+      productName: item.productName,
+      id: item.documentID,
+      reference: item.reference,
+      generalState: item.generalState,
+      polishState: item.polishState,
+      movementState: item.movementState,
       price: price,
     };
+    console.log(configOrder);
     dispatch(setToAuction(configOrder));
     setOpenSellWatchPopup(false);
   };
@@ -90,13 +94,15 @@ const Item = ({ item, pos, relativePos, products }) => {
     setOpenDeleteWatchPopup(false);
   };
 
-  const handleWatch4SellPopup = (pos, item) => {
+  const handleWatch4SellPopup = () => {
     setWatch(
-      products[relativePos[pos]].productBrand +
+      item.productBrand +
         " " +
-        products[relativePos[pos]].productName
+        item.productName +
+        " " +
+        "with a value of " +
+        totalValue
     );
-    setPosWatch(pos);
     setOpenSellWatchPopup(true);
   };
 
@@ -205,12 +211,11 @@ const Item = ({ item, pos, relativePos, products }) => {
               Trade for Boosters
             </Button>
             <Button
-              disabled
               style={{
                 color: "white",
               }}
               onClick={() => {
-                handleWatch4SellPopup(pos, item);
+                handleWatch4SellPopup();
               }}
             >
               Sell

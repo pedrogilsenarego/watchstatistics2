@@ -317,7 +317,6 @@ const Header = (props) => {
           Watch Laboratory
         </MenuItem>
         <MenuItem
-          disabled
           onClick={() => {
             handleCloseWatchstatisticsMenu();
             history.push("/watchstatistics/market");
