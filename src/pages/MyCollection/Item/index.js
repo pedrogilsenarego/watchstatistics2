@@ -33,6 +33,14 @@ const Item = ({ item, pos, relativePos, products }) => {
   const [openSellWatchPopup, setOpenSellWatchPopup] = useState();
   const { collection, boosters } = currentUser;
 
+  const positionOnCollection = () => {
+    var value = null;
+    for (let i = 0; i < collection.length; i++) {
+      if (collection[i].id === item.documentID) value = i;
+    }
+    return value;
+  };
+
   const handleWatch4BoosterPopup = () => {
     setWatch(
       item.productBrand +
@@ -70,7 +78,7 @@ const Item = ({ item, pos, relativePos, products }) => {
   const handleWatch4BoosterConfirm = () => {
     const oldArray = [...collection];
     const boostersIncreased = boosters ? boosters + 1 : 1;
-    oldArray.splice(pos, 1);
+    oldArray.splice(positionOnCollection(), 1);
     const configData = {
       ...currentUser,
       flag: "boosters",
@@ -174,7 +182,6 @@ const Item = ({ item, pos, relativePos, products }) => {
         <CardActions disableSpacing>
           <ButtonGroup>
             <Button
-              disabled
               style={{
                 color: "white",
               }}

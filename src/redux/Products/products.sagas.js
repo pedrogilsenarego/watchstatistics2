@@ -213,7 +213,11 @@ export function* onFetchRandomProductStart() {
 //
 export function* fetchMyCollection({ payload }) {
   try {
-    const myCollection = yield handleFetchMyCollection(payload);
+    const myCollection =
+      payload.myCollection.length > 0
+        ? yield handleFetchMyCollection(payload)
+        : [];
+
     yield put(setMyCollection(myCollection));
   } catch (err) {
     // console.log(err);

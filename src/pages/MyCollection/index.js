@@ -28,16 +28,6 @@ const MyCollection = () => {
     []
   );
 
-  if (!Array.isArray(products)) return null;
-
-  if (products.length < 1) {
-    return (
-      <div>
-        <p>No search Results</p>
-      </div>
-    );
-  }
-
   const getCollection = () => {
     if (currentUser)
       return currentUser.collection ? currentUser.collection.length : 0;
@@ -85,7 +75,7 @@ const MyCollection = () => {
             style={{ marginTop: "20px" }}
           >
             {currentUser.collection &&
-              products.map((item, pos) => {
+              products?.map((item, pos) => {
                 const configItem = { item, pos, relativePos, products };
                 return <Item item={item} key={pos} {...configItem} />;
               })}

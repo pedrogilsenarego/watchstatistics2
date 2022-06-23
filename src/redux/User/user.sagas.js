@@ -201,13 +201,12 @@ export function* onUpdateBoxStatus() {
 
 //implementations
 export function* updateCollectionState({ payload }) {
-  console.log(payload);
   try {
+    yield put(fetchMyCollectionStart({ myCollection: payload.collection }));
+    yield put(updateSuccessNotification("Your collection was updated"));
     yield handleUpdateCollectionStatus({
       ...payload,
     });
-    // yield put(fetchMyCollectionStart(payload.collection));
-    yield put(updateSuccessNotification("Your collection was updated"));
   } catch (err) {
     // console.log(err);
   }
