@@ -201,3 +201,15 @@ export const boosterValue = (fusionPrice:string, cartBoosters:any) => {
   if (fusionPrice === "50.000-100.000€") return cartBoosters.h;
   if (fusionPrice === "100.000€+") return cartBoosters.i;
 };
+
+export const boosterPercentage = (fusionPrice:string) => {
+  if (fusionPrice === "0-200€") return 50;
+  if (fusionPrice === "200-500€") return 40;
+  if (fusionPrice === "500-1000€") return 25;
+  if (fusionPrice === "1000-5000€") return 20;
+  if (fusionPrice === "5000-10.000€") return 10;
+  if (fusionPrice === "10.000-30.000€") return 5;
+  if (fusionPrice === "30.000-50.000€") return 4;
+  if (fusionPrice === "50.000-100.000€") return 2;
+  if (fusionPrice === "100.000€+") return 1;
+};

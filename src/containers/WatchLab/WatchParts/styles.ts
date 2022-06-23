@@ -2,7 +2,7 @@
 import { styled, Paper as MuiPaper, Box } from "@mui/material";
 
 export const Paper = styled(MuiPaper)(() => ({
-  marginRight: "20px",
+  
   padding: "15px",
   backgroundColor: "#3C393900 !important",
 }));

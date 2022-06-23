@@ -7,8 +7,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
-import { boosterValue } from "src/Utils/gamyfication";
+import { boosterValue, boosterPercentage } from "src/Utils/gamyfication";
+import { getRandomInt } from "src/containers/WatchLab/helpers";
 import { generalEndpoints } from "src/constants/endpoints";
+import * as GeneralStyles from "src/styles/styles";
 
 const mapState = (state) => ({
   cartBoosters: state.cartData.cartBoosters,
@@ -31,26 +33,8 @@ const BoosterSelection = ({
   const [confirmBoost, setConfirmBoost] = useState(false);
   const [boostBeingUsed, setBoostBeingUsed] = useState(false);
 
-  const boosterPercentage = () => {
-    if (fusionPrice === "0-200€") return 50;
-    if (fusionPrice === "200-500€") return 40;
-    if (fusionPrice === "500-1000€") return 25;
-    if (fusionPrice === "1000-5000€") return 20;
-    if (fusionPrice === "5000-10.000€") return 10;
-    if (fusionPrice === "10.000-30.000€") return 5;
-    if (fusionPrice === "30.000-50.000€") return 4;
-    if (fusionPrice === "50.000-100.000€") return 2;
-    if (fusionPrice === "100.000€+") return 1;
-  };
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   function boostPercentage() {
-    const value = boosterPercentage() * numberBoosters;
+    const value = boosterPercentage(fusionPrice) * numberBoosters;
     if (value <= 100) return value;
     else return 100;
   }
@@ -85,21 +69,34 @@ const BoosterSelection = ({
   }, [numberBoosters]);
 
   return (
-    <Box sx={{ display: "flex", alignContent: "center" }}>
+    <GeneralStyles.DashedGrid>
       {boosterValue(fusionPrice, cartBoosters) ? (
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography>
-              For this price Bracket you have selected a{" "}
-              {boosterValue(fusionPrice, cartBoosters)?.productBrand}{" "}
-              {boosterValue(fusionPrice, cartBoosters)?.productName} you have{" "}
-              {currentUser.boosters ? currentUser.boosters - numberBoosters : 0}{" "}
-              Boosters, select the number to use.
-            </Typography>
+        <Grid
+          container
+          columnSpacing={1}
+          justifyContent='center'
+          alignContent='center'
+        >
+          <Grid item xs={9}>
+            <GeneralStyles.BasicTypography>
+              For this price Bracket you have selected to boost a{" "}
+              <b style={{ color: "orange" }}>
+                {boosterValue(fusionPrice, cartBoosters)?.productBrand}{" "}
+                {boosterValue(fusionPrice, cartBoosters)?.productName}
+              </b>{" "}
+              you have{" "}
+              <b style={{ color: "orange" }}>
+                {currentUser.boosters
+                  ? currentUser.boosters - numberBoosters
+                  : 0}{" "}
+                Boosters
+              </b>
+              , select how many to use.
+            </GeneralStyles.BasicTypography>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={3}>
             <CardMedia
-              style={{ width: "80px", height: "80px" }}
+              style={{ width: "80px", height: "80px", borderRadius: "5px" }}
               image={
                 boosterValue(fusionPrice, cartBoosters)?.productThumbnail[0]
               }
@@ -158,7 +155,7 @@ const BoosterSelection = ({
           choose one
         </Typography>
       )}
-    </Box>
+    </GeneralStyles.DashedGrid>
   );
 };
 

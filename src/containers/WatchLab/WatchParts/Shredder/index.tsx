@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import * as Styled from "./styles";
 import {
@@ -8,8 +7,7 @@ import {
 } from "src/Utils/gamyfication";
 import Button3 from "src/components/Buttons/Button3";
 import * as GeneralStyles from "src/styles/styles";
-import { useDispatch } from "react-redux"
-import { updateSuccessNotification } from "src/redux/general/general.actions"
+import useShredder from "./useShredder";
 
 interface Props {
   setBagFull: any;
@@ -28,45 +26,22 @@ const Shredder = ({
   handleDeleteWatchParts,
   list,
 }: Props) => {
-  const valueFromPart = shredderMeter(list[2].items);
-  const [loadingButton, setLoadingButton] = useState(false);
-  const [noPartsError, setNoPartsError] = useState(false);
-  const dispatch = useDispatch()
-  const handleShredPart = async () => {
-    setLoadingButton(true);
-    try {
-      await handleDeleteWatchParts(
-        list[2].items,
-        LinearProgressBarColor(valueFromPart),
-        LinearProgressBarFormat(valueFromPart),
-        LinearProgressBarColor2(valueFromPart)
-      );
-      dispatch(updateSuccessNotification("The parts were shredded into new parts"))
-    }
-    catch (error) {
-      console.log(error)
-    }
-    finally {
-      setLoadingButton(false);
-      setOpenConfirmDelete(false);
-    }
-
-  };
-
-  useEffect(() => {
-    if (list[2]?.items?.length > 0) setNoPartsError(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [list[2]?.items]);
+  const {
+    noPartsError,
+    valueFromPart,
+    setNoPartsError,
+    loadingButton,
+    handleShredPart,
+  } = useShredder({
+    shredderMeter,
+    handleDeleteWatchParts,
+    list,
+    setOpenConfirmDelete,
+  });
 
   return (
-    <Grid container style={{ paddingRight: "15px" }} rowGap={4}>
-      {list[2]?.items?.length > 0 && (
-        <Grid item xs={12} style={{ marginTop: "5px" }}>
-          <GeneralStyles.BasicTypography fontSize='14px' textAlign='end'>
-            Attention!: These parts will be lost
-          </GeneralStyles.BasicTypography>
-        </Grid>
-      )}
+    <Grid container rowGap={3}>
+
       {noPartsError && (
         <Grid item xs={12} style={{ marginTop: "5px" }}>
           <GeneralStyles.BasicTypography fontSize='14px' textAlign='end'>
@@ -74,7 +49,7 @@ const Shredder = ({
           </GeneralStyles.BasicTypography>
         </Grid>
       )}
-      <Grid item container xs={12}>
+      <Grid item container xs={12} style={{ marginTop: "20px" }}>
         <GeneralStyles.DashedGrid
           justifyContent='space-between'
           alignContent='center'
@@ -101,7 +76,7 @@ const Shredder = ({
         </GeneralStyles.DashedGrid>
       </Grid>
 
-      {!openConfirmDelete && (
+      {!openConfirmDelete && list[2]?.items?.length > 0 && (
         <Grid item xs={12} textAlign='end'>
           <Button3
             title='Shred parts'
@@ -121,6 +96,13 @@ const Shredder = ({
             title='Confirm'
             onClick={handleShredPart}
           />
+        </Grid>
+      )}
+      {list[2]?.items?.length > 0 && (
+        <Grid item xs={12}>
+          <GeneralStyles.BasicTypography fontSize='14px' textAlign='end' color="orange">
+            Attention!: These parts will be lost
+          </GeneralStyles.BasicTypography>
         </Grid>
       )}
     </Grid>

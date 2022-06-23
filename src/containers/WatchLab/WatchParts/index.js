@@ -4,16 +4,16 @@ import Movement from "../../../assets/Movement.svg";
 import Crown from "../../../assets/Crown.svg";
 import Glass from "../../../assets/Glass.svg";
 import Watch from "../WatchSolid";
-import { Grid, Typography, Box, Button, CardMedia } from "@mui/material";
-import { colorWatchParts, priceWatchParts } from "src/Utils/gamyfication";
+import { Grid, Typography, Box, CardMedia } from "@mui/material";
+import { colorWatchParts } from "src/Utils/gamyfication";
 import * as GeneralStyled from "src/styles/styles";
 import * as Styled from "./styles";
 import Popup from "../../../components/Popup";
-import BoosterSelection from "./BoosterSelection";
 import useWatchParts from "./useWatchParts";
 import Shredder from "./Shredder";
+import Fusion from "./Fusion";
 
-const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
+const WatchParts = ({ data, collectionFull, setBagFull }) => {
   const {
     dragging,
     ready,
@@ -64,15 +64,6 @@ const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
     setBoostStatus("fail");
   };
 
-  const configBoosterSelection = {
-    boostStatusFalse,
-    boostStatusTrue,
-    boostStatusFail,
-    numberBoosters,
-    setNumberBoosters,
-    fusionPrice,
-  };
-
   const configWatch = {
     caseColor: fusionCase,
     glassColor: fusionGlass,
@@ -91,6 +82,28 @@ const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
     list,
   };
 
+  const configFusion = {
+    fusionPrice,
+    list,
+    fusionMatchParts,
+    ready,
+    fusionGlass,
+    fusionBracelet,
+    fusionCase,
+    fusionCrown,
+    fusionMovement,
+    collectionFull,
+    setFusionPrice,
+    setReady,
+    handleFusionNewWatch,
+    handleDeleteWatchParts,
+    boostStatusFalse,
+    boostStatusTrue,
+    boostStatusFail,
+    numberBoosters,
+    setNumberBoosters,
+  };
+
   if (list) {
     return (
       <Grid container style={{ paddingTop: "100px" }}>
@@ -98,126 +111,75 @@ const WatchParts = ({ data, collectionFull, setBagFull, bagFull }) => {
           <Watch {...configWatch} />
         </Grid>
         <Grid item xs={7}>
-          <Styled.Paper>
+          <Styled.Paper style={{ marginRight: "20px" }}>
             <Grid container rowGap={2} columnSpacing={2}>
               {list.map((grp, grpI) => (
                 <Grid item xs={grpI > 0 ? 6 : 12}>
                   <GeneralStyled.BasicTypography>
                     {grp.title}
                   </GeneralStyled.BasicTypography>
-                  <Styled.PartsBox
-                    key={grp.title}
-                    onDragEnter={
-                      dragging && !grp.items.length
-                        ? (e) => handleDragEnter(e, { grpI, itemI: 0 })
-                        : null
-                    }
-                  >
-                    <Grid container>
-                      <Grid xs={12} style={{ display: "flex" }}>
-                        {grp.items.map((item, itemI) => (
-                          <Box
-                            onDragStart={(e) => {
-                              handleDragStart(e, { grpI, itemI });
-                            }}
-                            onDragEnter={
-                              dragging
-                                ? (e) => handleDragEnter(e, { grpI, itemI })
-                                : null
-                            }
-                            draggable={true}
-                            key={item.id}
-                            style={{
-                              width: "50px",
-                              height: "50px",
-                              cursor: "pointer",
-                              backgroundColor: dragging
-                                ? getStyles({ grpI, itemI, item })
-                                : colorWatchParts(item),
-                              margin: "5px",
-                              border: "solid 2px",
-                              borderColor: colorWatchParts(item),
-                              padding: "0px",
-                              borderRadius: "8px",
-                              display: "flex",
-                              justifyContent: "center",
-                              filter: "opacity(1) drop-shadow(2px 2px 5px red)",
-                            }}
-                          >
-                            <img
-                              src={whatImage(item.toString().slice(1))}
+                  <Styled.Paper style={{ marginTop: "5px" }}>
+                    <Styled.PartsBox
+                      key={grp.title}
+                      onDragEnter={
+                        dragging && !grp.items.length
+                          ? (e) => handleDragEnter(e, { grpI, itemI: 0 })
+                          : null
+                      }
+                    >
+                      <Grid container>
+                        <Grid xs={12} style={{ display: "flex" }}>
+                          {grp.items.map((item, itemI) => (
+                            <Box
+                              onDragStart={(e) => {
+                                handleDragStart(e, { grpI, itemI });
+                              }}
+                              onDragEnter={
+                                dragging
+                                  ? (e) => handleDragEnter(e, { grpI, itemI })
+                                  : null
+                              }
+                              draggable={true}
+                              key={item.id}
                               style={{
-                                maxWidth: "100%",
-                                maxHeight: "100%",
-                                padding: "5px",
+                                width: "50px",
+                                height: "50px",
+                                cursor: "pointer",
+                                backgroundColor: dragging
+                                  ? getStyles({ grpI, itemI, item })
+                                  : colorWatchParts(item),
+                                margin: "5px",
+                                border: "solid 2px",
+                                borderColor: colorWatchParts(item),
+                                padding: "0px",
+                                borderRadius: "8px",
+                                display: "flex",
+                                justifyContent: "center",
                                 filter:
                                   "opacity(1) drop-shadow(2px 2px 5px red)",
                               }}
-                              alt=''
-                            />
-                          </Box>
-                        ))}
+                            >
+                              <img
+                                src={whatImage(item.toString().slice(1))}
+                                style={{
+                                  maxWidth: "100%",
+                                  maxHeight: "100%",
+                                  padding: "5px",
+                                  filter:
+                                    "opacity(1) drop-shadow(2px 2px 5px red)",
+                                }}
+                                alt=''
+                              />
+                            </Box>
+                          ))}
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </Styled.PartsBox>
+                    </Styled.PartsBox>
+                    {grpI === 2 && <Shredder {...configShredder} />}
+                    {grpI === 1 && <Fusion {...{ ...configFusion }} />}
+                  </Styled.Paper>
                 </Grid>
               ))}
-            </Grid>
-            <Grid container style={{ display: "flex" }}>
-              <Grid item xs={6}>
-                <Typography>
-                  New watch to be obtained: {fusionPrice}{" "}
-                </Typography>
-
-                {list[1].items.length > 5 && (
-                  <Typography style={{ color: "orange" }}>
-                    You have to many parts on the fusion machine
-                  </Typography>
-                )}
-                {!fusionMatchParts && (
-                  <Typography style={{ color: "orange" }}>
-                    You have Parts that are incompatible (different colors)
-                  </Typography>
-                )}
-
-                {!ready &&
-                  fusionBracelet &&
-                  fusionCase &&
-                  fusionGlass &&
-                  fusionCrown &&
-                  fusionMovement &&
-                  fusionMatchParts &&
-                  list[1].items.length === 5 &&
-                  (!collectionFull ? (
-                    <Button
-                      onClick={() => {
-                        setFusionPrice(
-                          priceWatchParts(list[1].items?.[0] || "")
-                        );
-                        setReady(true);
-                      }}
-                    >
-                      Are you ready!
-                    </Button>
-                  ) : (
-                    <Typography>The collection is full</Typography>
-                  ))}
-                {ready && [
-                  <BoosterSelection {...configBoosterSelection} />,
-                  <Button
-                    onClick={() => {
-                      setReady(false);
-                      handleFusionNewWatch();
-                      handleDeleteWatchParts(list[1].items);
-                    }}
-                  >
-                    Fusion!
-                  </Button>,
-                ]}
-              </Grid>
-              <Grid item xs={6}>
-                <Shredder {...configShredder} />
-              </Grid>
             </Grid>
           </Styled.Paper>
 
