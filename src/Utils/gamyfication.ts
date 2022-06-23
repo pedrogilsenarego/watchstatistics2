@@ -1,5 +1,5 @@
 import { experienceCap, rankColors, bagSize } from "src/constants/gamification";
-import { getRandomInt } from "./math";
+import { getRandomInt, randomWeightedNumber } from "./math";
 
 export interface Rank {
   rank: string;
@@ -213,3 +213,13 @@ export const boosterPercentage = (fusionPrice:string) => {
   if (fusionPrice === "50.000-100.000€") return 2;
   if (fusionPrice === "100.000€+") return 1;
 };
+
+export const newWatchProduction = (id:string) => {
+  return {
+    id,
+    polishState: randomWeightedNumber([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10]),
+    movementState: randomWeightedNumber([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10]),
+    generalState: randomWeightedNumber([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10])
+  }
+
+}

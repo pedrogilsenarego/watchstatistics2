@@ -79,7 +79,7 @@ const Fusion = ({
       {!fusionMatchParts && (
         <Grid item xs={12} textAlign='end'>
           <GeneralStyles.BasicTypography fontSize='14px' color='orange'>
-            You have Parts that are incompatible (different colors)
+            You have Parts that are incompatible (different price brackets)
           </GeneralStyles.BasicTypography>
         </Grid>
       )}

@@ -41,6 +41,7 @@ import {
   updateInformationNotification,
   updateFailNotification,
 } from "../general/general.actions";
+import { newWatchProduction } from "src/Utils/gamyfication";
 import { i18n } from "src/translations/i18n";
 
 //New Watch Submit
@@ -188,16 +189,14 @@ export function* fetchRandomProduct({ payload }) {
     const newCollection = payload.collection;
     newCollection.push(
       payload.randomValue === "boosted"
-        ? payload.boosted.productID
-        : product.data[0].documentID
+        ? newWatchProduction(payload.boosted.productID)
+        : newWatchProduction(product.data[0].documentID)
     );
     const configData = {
       ...payload,
       collection: newCollection,
     };
     yield put(updateCollectionStatus(configData));
-    console.log(payload.boosted);
-    console.log(product);
     yield put(
       setRandomProduct(
         payload.randomValue === "boosted" ? payload.boosted : product.data[0]

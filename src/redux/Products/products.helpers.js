@@ -394,10 +394,11 @@ export const handleFetchMyCollection = ({
   persistProducts = [],
 }) => {
   return new Promise((resolve, reject) => {
+    const list = myCollection.map((value) => value.id);
     let ref = firestore
       .collection("products")
 
-      .where("__name__", "in", myCollection);
+      .where("__name__", "in", list);
 
     ref
       .get()

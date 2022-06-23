@@ -95,6 +95,8 @@ const Item = ({ item, pos, relativePos, products }) => {
 
   if (!Array.isArray(products)) return;
 
+  console.log(item);
+
   return (
     <Grid item xs={3}>
       <Card style={{ backgroundColor: "#18161E" }}>
@@ -104,33 +106,18 @@ const Item = ({ item, pos, relativePos, products }) => {
           onClick={() => {
             history.push(`/product/${item}`);
           }}
-          image={products[relativePos[pos]].productThumbnail[0]}
+          image={item.productThumbnail?.[0] || ""}
           alt='Paella dish'
           style={{ cursor: "pointer" }}
         />
         <CardContent style={{ minHeight: "15vh" }}>
           <Typography style={{ fontSize: "12px", color: "white" }}>
-            {products[relativePos[pos]].productBrand}{" "}
-            {products[relativePos[pos]].productName}{" "}
-            {products[relativePos[pos]].reference}
+            {item.productBrand} {item.productName} {item.reference}
           </Typography>
         </CardContent>
+
         <CardActions disableSpacing>
           <ButtonGroup>
-            {!products[relativePos[pos]] && (
-              <Button
-                style={{
-                  color: "white",
-                }}
-                size='small'
-                onClick={() => {
-                  history.push(`/product/${item}`);
-                }}
-              >
-                {item}
-              </Button>
-            )}
-
             <Button
               style={{
                 color: "white",

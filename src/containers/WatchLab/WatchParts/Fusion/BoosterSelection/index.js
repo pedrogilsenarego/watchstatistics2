@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button3 from "src/components/Buttons/Button3";
 import { useHistory } from "react-router-dom";
@@ -113,27 +112,33 @@ const BoosterSelection = ({
               />
             </Grid>
           )}
-          {confirmBoost &&
-            boostBeingUsed && [
-              <Typography>
+          {confirmBoost && boostBeingUsed && (
+            <>
+              <GeneralStyles.BasicTypography>
                 You will use {numberBoosters} boosters are you sure?
-              </Typography>,
+              </GeneralStyles.BasicTypography>
               <Button3
                 title='Cancel'
                 onClick={() => {
                   boostStatusFalse();
                   setConfirmBoost(false);
                 }}
-              />,
-            ]}
+              />
+            </>
+          )}
         </Grid>
       ) : (
-        <Typography>
+        <GeneralStyles.BasicTypography>
           You do not have a watch selected to be boosted in this watch range,
           click{" "}
-          <b onClick={() => history.push(generalEndpoints.BROWSE)}>here</b> to
-          choose one
-        </Typography>
+          <b
+            onClick={() => history.push(generalEndpoints.BROWSE)}
+            style={{ color: "orange", cursor: "pointer" }}
+          >
+            here
+          </b>{" "}
+          to choose one
+        </GeneralStyles.BasicTypography>
       )}
     </GeneralStyles.DashedGrid>
   );
