@@ -25,9 +25,11 @@ import {
   handleRemoveMessage,
   handleAddMessage,
 } from "./user.helpers";
+import { fetchMyCollectionStart } from "src/redux/Products/products.actions";
 import {
   updateFailApiRequest,
   updateSuccessApiRequest,
+  updateSuccessNotification,
 } from "../general/general.actions";
 // import { i18n } from "src/translations/i18n";
 
@@ -199,10 +201,13 @@ export function* onUpdateBoxStatus() {
 
 //implementations
 export function* updateCollectionState({ payload }) {
+  console.log(payload);
   try {
     yield handleUpdateCollectionStatus({
       ...payload,
     });
+    // yield put(fetchMyCollectionStart(payload.collection));
+    yield put(updateSuccessNotification("Your collection was updated"));
   } catch (err) {
     // console.log(err);
   }

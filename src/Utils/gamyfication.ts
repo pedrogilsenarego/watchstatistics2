@@ -217,9 +217,14 @@ export const boosterPercentage = (fusionPrice:string) => {
 export const newWatchProduction = (id:string) => {
   return {
     id,
-    polishState: randomWeightedNumber([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10]),
-    movementState: randomWeightedNumber([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10]),
-    generalState: randomWeightedNumber([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10])
+    polishState: randomWeightedNumber([1,1,1,2,2,2,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10]),
+    movementState: randomWeightedNumber([1,1,1,2,2,2,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10]),
+    generalState: randomWeightedNumber([1,1,1,2,2,2,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,10])
   }
 
+}
+
+export const watchTotalValue = (avgTotal:number, generalState: number, polishState:number, movementState:number) => {
+
+  return ((avgTotal*4 + generalState+polishState+movementState)/7).toFixed(2)
 }

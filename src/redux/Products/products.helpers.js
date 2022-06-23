@@ -407,10 +407,13 @@ export const handleFetchMyCollection = ({
 
         const data = [
           ...persistProducts,
-          ...snapshot.docs.map((doc) => {
+          ...snapshot.docs.map((doc, pos) => {
             return {
               ...doc.data(),
               documentID: doc.id,
+              movementState: myCollection[pos].movementState,
+              generalState: myCollection[pos].generalState,
+              polishState: myCollection[pos].polishState,
             };
           }),
         ];
