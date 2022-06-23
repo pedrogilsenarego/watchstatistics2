@@ -8,7 +8,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import { Divider } from "@mui/material";
+import { Divider, Tooltip } from "@mui/material";
 import Popup from "../../../components/Popup";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
@@ -128,7 +128,7 @@ const Item = ({ item, pos, relativePos, products }) => {
           component='img'
           height='120'
           onClick={() => {
-            history.push(`/product/${item}`);
+            history.push(`/product/${item.documentID}`);
           }}
           image={item.productThumbnail?.[0] || ""}
           alt='Paella dish'
@@ -136,9 +136,21 @@ const Item = ({ item, pos, relativePos, products }) => {
         />
         <CardContent style={{ minHeight: "15vh" }}>
           <Grid container>
-            <GeneralStyled.BasicTypography fontSize='18px'>
-              {item.productBrand} {item.productName} {item.reference}
-            </GeneralStyled.BasicTypography>
+            <Tooltip
+              arrow
+              placement='top'
+              title={`${item.productBrand} ${item.productName} ${item.reference}`}
+            >
+              <Grid
+                item
+                xs={12}
+                style={{ overflow: "hidden", whiteSpace: "nowrap" }}
+              >
+                <GeneralStyled.BasicTypography fontSize='18px'>
+                  {item.productBrand} {item.productName} {item.reference}
+                </GeneralStyled.BasicTypography>
+              </Grid>
+            </Tooltip>
             <GeneralStyled.DashedGrid
               container
               columnSpacing={1}
