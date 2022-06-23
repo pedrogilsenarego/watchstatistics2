@@ -204,6 +204,7 @@ const useWatchParts = ({ setBagFull, data }) => {
       dispatch(fetchRandomProduct(configData));
     }
     setOpenPopupNewWatch(true);
+    setFusionPrice("");
   };
 
   return {
@@ -235,6 +236,7 @@ const useWatchParts = ({ setBagFull, data }) => {
     handleDragEnter,
     getStyles,
     handleFusionNewWatch,
+    boostStatus,
   };
 };
 

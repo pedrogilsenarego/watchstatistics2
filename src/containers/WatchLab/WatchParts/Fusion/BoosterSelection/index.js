@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import Box from "@mui/material/Box";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import Button3 from "src/components/Buttons/Button3";
 import { useHistory } from "react-router-dom";
 import { boosterValue, boosterPercentage } from "src/Utils/gamyfication";
 import { getRandomInt } from "src/containers/WatchLab/helpers";
 import { generalEndpoints } from "src/constants/endpoints";
 import * as GeneralStyles from "src/styles/styles";
+import IncreaseDecreaseButton from "src/components/Buttons/IncreaseDecreaseButton";
 
 const mapState = (state) => ({
   cartBoosters: state.cartData.cartBoosters,
@@ -27,11 +26,9 @@ const BoosterSelection = ({
 }) => {
   const history = useHistory();
   const { cartBoosters, currentUser } = useSelector(mapState);
-  //const [numberBoosters, setNumberBoosters] = useState(0);
-  const [decreaseDisable, setDecreaseDisable] = useState(true);
-  const [increaseDisable, setIncreaseDisable] = useState(false);
   const [confirmBoost, setConfirmBoost] = useState(false);
   const [boostBeingUsed, setBoostBeingUsed] = useState(false);
+  const [maxPercentageBoost, setMaxPercentageBoost] = useState(false);
 
   function boostPercentage() {
     const value = boosterPercentage(fusionPrice) * numberBoosters;
@@ -47,25 +44,14 @@ const BoosterSelection = ({
     }
   }
 
-  const handleIncrementBooster = () => {
-    setNumberBoosters(numberBoosters + 1);
-    setDecreaseDisable(false);
-    setBoostBeingUsed(true);
-    if (numberBoosters === currentUser.boosters) setIncreaseDisable(true);
-  };
-
-  const handleDecreaseBooster = () => {
-    setNumberBoosters(numberBoosters - 1);
-    setIncreaseDisable(false);
-  };
-
   useEffect(() => {
-    if (numberBoosters === 0) {
-      setDecreaseDisable(true);
-      setBoostBeingUsed(false);
-    }
-    if (currentUser.boosters === numberBoosters) setIncreaseDisable(true);
-    // eslint-disable-next-line
+    if (numberBoosters > 0) {
+      setBoostBeingUsed(true);
+    } else setBoostBeingUsed(false);
+    if (boostPercentage() === 100) {
+      setMaxPercentageBoost(true);
+    } else setMaxPercentageBoost(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberBoosters]);
 
   return (
@@ -74,8 +60,9 @@ const BoosterSelection = ({
         <Grid
           container
           columnSpacing={1}
+          rowGap={2}
           justifyContent='center'
-          alignContent='center'
+          alignItems='center'
         >
           <Grid item xs={9}>
             <GeneralStyles.BasicTypography>
@@ -89,12 +76,12 @@ const BoosterSelection = ({
                 {currentUser.boosters
                   ? currentUser.boosters - numberBoosters
                   : 0}{" "}
-                Boosters
+                Boosters{" "}
               </b>
-              , select how many to use.
+              left, select how many to use.
             </GeneralStyles.BasicTypography>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} textAlign='end'>
             <CardMedia
               style={{ width: "80px", height: "80px", borderRadius: "5px" }}
               image={
@@ -102,49 +89,42 @@ const BoosterSelection = ({
               }
             ></CardMedia>
           </Grid>
-          <ButtonGroup>
-            <Button
-              disabled={decreaseDisable}
-              onClick={() => {
-                handleDecreaseBooster();
-              }}
-            >
-              -
-            </Button>
-            <Button>{numberBoosters}</Button>
-            <Button
-              disabled={increaseDisable}
-              onClick={() => {
-                handleIncrementBooster();
-              }}
-            >
-              +
-            </Button>
-          </ButtonGroup>
-          <Typography>Boost this watch by: {boostPercentage()}%</Typography>
+          <Grid item xs={6}>
+            <IncreaseDecreaseButton
+              maxValue={currentUser?.boosters}
+              setValue={setNumberBoosters}
+              incDisabled={maxPercentageBoost}
+            />
+          </Grid>
+          <Grid item xs={6} textAlign='end'>
+            <GeneralStyles.BasicTypography>
+              Boost this watch by:{" "}
+              <b style={{ color: "orange" }}>{boostPercentage()}%</b>
+            </GeneralStyles.BasicTypography>
+          </Grid>
           {!confirmBoost && boostBeingUsed && (
-            <Button
-              onClick={() => {
-                doBoost();
-                setConfirmBoost(true);
-              }}
-            >
-              I do wanna Boost
-            </Button>
+            <Grid item xs={12} textAlign='end'>
+              <Button3
+                title='Confirm Use of Boosts'
+                onClick={() => {
+                  doBoost();
+                  setConfirmBoost(true);
+                }}
+              />
+            </Grid>
           )}
           {confirmBoost &&
             boostBeingUsed && [
               <Typography>
                 You will use {numberBoosters} boosters are you sure?
               </Typography>,
-              <Button
+              <Button3
+                title='Cancel'
                 onClick={() => {
                   boostStatusFalse();
                   setConfirmBoost(false);
                 }}
-              >
-                Cancel
-              </Button>,
+              />,
             ]}
         </Grid>
       ) : (

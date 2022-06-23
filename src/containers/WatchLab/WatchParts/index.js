@@ -40,6 +40,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     openConfirmDelete,
     setOpenConfirmDelete,
     getStyles,
+    boostStatus,
     handleFusionNewWatch,
   } = useWatchParts({ setBagFull, data });
 
@@ -102,6 +103,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     boostStatusFail,
     numberBoosters,
     setNumberBoosters,
+    boostStatus,
   };
 
   if (list) {

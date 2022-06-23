@@ -24,6 +24,7 @@ interface Props {
   boostStatusFail: any;
   numberBoosters: any;
   setNumberBoosters: any;
+  boostStatus: string;
 }
 
 const Fusion = ({
@@ -46,6 +47,7 @@ const Fusion = ({
   boostStatusFail,
   numberBoosters,
   setNumberBoosters,
+  boostStatus
 }: Props) => {
 
   const configBoosterSelection = {
@@ -65,7 +67,7 @@ const Fusion = ({
         style={{ display: "flex", width: "100%" }}
       >
         <GeneralStyles.BasicTypography fontSize='20px' textAlign='end'>
-          New watch to be obtained: {fusionPrice}{" "}
+          New watch to be obtained: <b style={{ color: "orange" }}>{fusionPrice}</b>
         </GeneralStyles.BasicTypography>
       </GeneralStyles.DashedGrid>
       {list[1].items.length > 5 && (
@@ -110,7 +112,7 @@ const Fusion = ({
           <BoosterSelection {...configBoosterSelection} />
           <Grid item xs={12} textAlign="end">
             <Button3
-              title='Fusion!'
+              title={boostStatus === "true" ? 'Fusion with Boost!' : "Fusion without Boost"}
               onClick={() => {
                 setReady(false);
                 handleFusionNewWatch();
