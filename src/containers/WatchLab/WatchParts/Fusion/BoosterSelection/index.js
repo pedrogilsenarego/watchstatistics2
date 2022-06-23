@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
-import Button3 from "src/components/Buttons/Button3";
 import { useHistory } from "react-router-dom";
 import { boosterValue, boosterPercentage } from "src/Utils/gamyfication";
 import { getRandomInt } from "src/containers/WatchLab/helpers";
 import { generalEndpoints } from "src/constants/endpoints";
 import * as GeneralStyles from "src/styles/styles";
 import IncreaseDecreaseButton from "src/components/Buttons/IncreaseDecreaseButton";
+import CheckBox from "src/components/Inputs/CheckBox";
 
 const mapState = (state) => ({
   cartBoosters: state.cartData.cartBoosters,
@@ -25,7 +25,6 @@ const BoosterSelection = ({
 }) => {
   const history = useHistory();
   const { cartBoosters, currentUser } = useSelector(mapState);
-  const [confirmBoost, setConfirmBoost] = useState(false);
   const [boostBeingUsed, setBoostBeingUsed] = useState(false);
   const [maxPercentageBoost, setMaxPercentageBoost] = useState(false);
 
@@ -101,30 +100,16 @@ const BoosterSelection = ({
               <b style={{ color: "orange" }}>{boostPercentage()}%</b>
             </GeneralStyles.BasicTypography>
           </Grid>
-          {!confirmBoost && boostBeingUsed && (
+          {boostBeingUsed && (
             <Grid item xs={12} textAlign='end'>
-              <Button3
-                title='Confirm Use of Boosts'
-                onClick={() => {
+              <CheckBox
+                color='green'
+                label='Confirm Boost'
+                handleChange={() => {
                   doBoost();
-                  setConfirmBoost(true);
                 }}
               />
             </Grid>
-          )}
-          {confirmBoost && boostBeingUsed && (
-            <>
-              <GeneralStyles.BasicTypography>
-                You will use {numberBoosters} boosters are you sure?
-              </GeneralStyles.BasicTypography>
-              <Button3
-                title='Cancel'
-                onClick={() => {
-                  boostStatusFalse();
-                  setConfirmBoost(false);
-                }}
-              />
-            </>
           )}
         </Grid>
       ) : (
@@ -137,7 +122,7 @@ const BoosterSelection = ({
           >
             here
           </b>{" "}
-          to choose one
+          if you want to boost
         </GeneralStyles.BasicTypography>
       )}
     </GeneralStyles.DashedGrid>

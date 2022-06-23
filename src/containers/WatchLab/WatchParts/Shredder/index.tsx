@@ -55,7 +55,7 @@ const Shredder = ({
           alignContent='center'
           style={{ display: "flex", width: "100%" }}
         >
-          <GeneralStyles.BasicTypography>
+          <GeneralStyles.BasicTypography fontSize="16px">
             New part prediction:
           </GeneralStyles.BasicTypography>
           <Box

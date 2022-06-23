@@ -60,13 +60,13 @@ const Fusion = ({
   };
 
   return (
-    <Grid item container xs={12} rowGap={3} style={{ marginTop: "20px" }}>
+    <Grid item container xs={12} rowGap={1} style={{ marginTop: "20px" }}>
       <GeneralStyles.DashedGrid
         justifyContent='space-between'
         alignContent='center'
         style={{ display: "flex", width: "100%" }}
       >
-        <GeneralStyles.BasicTypography fontSize='20px' textAlign='end'>
+        <GeneralStyles.BasicTypography fontSize='16px' textAlign='end'>
           New watch to be obtained: <b style={{ color: "orange" }}>{fusionPrice}</b>
         </GeneralStyles.BasicTypography>
       </GeneralStyles.DashedGrid>
@@ -95,7 +95,7 @@ const Fusion = ({
         (!collectionFull ? (
           <Grid item xs={12} textAlign="end">
             <Button3
-              title='Are you ready!?'
+              title='Start Fusion'
               onClick={() => {
                 setFusionPrice(priceWatchParts(list[1].items?.[0] || ""));
                 setReady(true);

@@ -23,12 +23,11 @@ const mapState = (state) => ({
   currentUser: state.user.currentUser,
 });
 
-const Item = ({ item, pos, relativePos, products }) => {
+const Item = ({ item, products }) => {
   const history = useHistory();
   const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const [watch, setWatch] = useState();
-  const [posWatch, setPosWatch] = useState();
   const [openDeleteWatchPopup, setOpenDeleteWatchPopup] = useState();
   const [openSellWatchPopup, setOpenSellWatchPopup] = useState();
   const { collection, boosters } = currentUser;

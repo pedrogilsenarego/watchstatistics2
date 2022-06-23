@@ -114,7 +114,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
         </Grid>
         <Grid item xs={7}>
           <Styled.Paper style={{ marginRight: "20px", marginBottom: "100px" }}>
-            <Grid container rowGap={2} columnSpacing={2}>
+            <Grid container rowGap={1} columnSpacing={2}>
               {list.map((grp, grpI) => (
                 <Grid item xs={grpI > 0 ? 6 : 12}>
                   <Styled.Paper style={{ marginTop: "5px" }}>

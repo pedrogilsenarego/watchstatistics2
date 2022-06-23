@@ -34,21 +34,6 @@ const MyCollection = () => {
     else return 0;
   };
 
-  const relativePosFunct2 = () => {
-    let newArray = [];
-    for (let i = 0; i < myCollection.length; i++) {
-      for (let j = 0; j < products.length; j++) {
-        if (products[j].documentID === myCollection[i]) {
-          newArray.push(j);
-          break;
-        }
-      }
-    }
-    return newArray;
-  };
-
-  const relativePos = products ? relativePosFunct2() : [];
-
   return (
     <div>
       <Grid
@@ -76,7 +61,7 @@ const MyCollection = () => {
           >
             {currentUser.collection &&
               products?.map((item, pos) => {
-                const configItem = { item, pos, relativePos, products };
+                const configItem = { item, products };
                 return <Item item={item} key={pos} {...configItem} />;
               })}
           </Grid>
