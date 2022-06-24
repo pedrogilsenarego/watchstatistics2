@@ -32,6 +32,8 @@ const useWatchParts = ({ setBagFull, data }) => {
   const { randomProduct, currentUser, cartBoosters } = useSelector(mapState);
   const dispatch = useDispatch();
 
+  console.log(boostStatus);
+
   useEffect(() => {
     setModalProduct(randomProduct);
   }, [randomProduct]);
@@ -181,9 +183,7 @@ const useWatchParts = ({ setBagFull, data }) => {
         ...currentUser,
         userID: currentUser.id,
         collection: currentUser.collection ? currentUser.collection : [],
-        boosters: currentUser.boosters
-          ? currentUser.boosters - numberBoosters
-          : 0,
+        boosters: currentUser?.boosters - numberBoosters || 0,
         randomValue,
         fusionPrice,
       };
@@ -194,9 +194,7 @@ const useWatchParts = ({ setBagFull, data }) => {
         ...currentUser,
         userID: currentUser.id,
         collection: currentUser.collection ? currentUser.collection : [],
-        boosters: currentUser.boosters
-          ? currentUser.boosters - numberBoosters
-          : 0,
+        boosters: currentUser?.boosters - numberBoosters || 0,
         fusionPrice,
         randomValue: "boosted",
         boosted: boosterValue(fusionPrice, cartBoosters),

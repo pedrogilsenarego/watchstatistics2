@@ -57,6 +57,7 @@ const Fusion = ({
     numberBoosters,
     setNumberBoosters,
     fusionPrice,
+    boostStatus
   };
 
   return (
@@ -112,7 +113,7 @@ const Fusion = ({
           <BoosterSelection {...configBoosterSelection} />
           <Grid item xs={12} textAlign="end">
             <Button3
-              title={boostStatus === "true" ? 'Fusion with Boost!' : "Fusion without Boost"}
+              title='Fusion'
               onClick={() => {
                 setReady(false);
                 handleFusionNewWatch();

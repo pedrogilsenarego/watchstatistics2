@@ -16,6 +16,7 @@ const mapState = (state) => ({
 });
 
 const BoosterSelection = ({
+  boostStatus,
   fusionPrice,
   boostStatusFalse,
   boostStatusTrue,
@@ -27,6 +28,7 @@ const BoosterSelection = ({
   const { cartBoosters, currentUser } = useSelector(mapState);
   const [boostBeingUsed, setBoostBeingUsed] = useState(false);
   const [maxPercentageBoost, setMaxPercentageBoost] = useState(false);
+  const [customChecked, setCustomChecked] = useState(false);
 
   function boostPercentage() {
     const value = boosterPercentage(fusionPrice) * numberBoosters;
@@ -35,14 +37,18 @@ const BoosterSelection = ({
   }
 
   function doBoost() {
-    if (getRandomInt(1, 100) <= boostPercentage()) {
-      boostStatusTrue();
-    } else {
-      boostStatusFail();
+    if (boostStatus === "true" || "fail") boostStatusFalse();
+    if (boostStatus === "false") {
+      if (getRandomInt(1, 100) <= boostPercentage()) {
+        boostStatusTrue();
+      } else {
+        boostStatusFail();
+      }
     }
   }
 
   useEffect(() => {
+    boostStatusFalse();
     if (numberBoosters > 0) {
       setBoostBeingUsed(true);
     } else setBoostBeingUsed(false);
@@ -51,6 +57,11 @@ const BoosterSelection = ({
     } else setMaxPercentageBoost(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberBoosters]);
+
+  useEffect(() => {
+    if (boostStatus === "false") setCustomChecked(false);
+    else setCustomChecked(true);
+  }, [boostStatus]);
 
   return (
     <GeneralStyles.DashedGrid>
@@ -103,6 +114,7 @@ const BoosterSelection = ({
           {boostBeingUsed && (
             <Grid item xs={12} textAlign='end'>
               <CheckBox
+                customChecked={customChecked}
                 color='green'
                 label='Confirm Boost'
                 handleChange={() => {

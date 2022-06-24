@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Checkbox, Grid } from "@mui/material";
 import * as GeneralStyled from "src/styles/styles"
 
@@ -6,10 +6,15 @@ interface Props {
   color?: string;
   label: string;
   handleChange: () => void;
+  customChecked?: boolean;
 }
 
-const CheckBox = ({ label, color, handleChange }: Props) => {
+const CheckBox = ({ label, color, handleChange, customChecked }: Props) => {
   const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    if (customChecked === false) setChecked(false)
+  }, [customChecked])
+
   return (
     <Grid
       container
