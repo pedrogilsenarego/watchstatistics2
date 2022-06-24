@@ -40,8 +40,6 @@ const WatchCard = ({
     numberVotesOwn,
   } = data;
 
-  console.log(imageLoading);
-
   const renderLaptop = () => (
     <>
       <Grid
