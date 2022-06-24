@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Grid,
   CardMedia,
@@ -9,6 +10,7 @@ import {
 import * as Styled from "./styles";
 import { useHistory } from "react-router-dom";
 import CircularVotes from "../../../../components/ProgressBars/CircularVotes";
+import { Ellipsis } from "react-spinners-css";
 
 const WatchCard = ({
   data,
@@ -24,6 +26,7 @@ const WatchCard = ({
   const history = useHistory();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
+  const [imageLoading, setImageLoading] = useState(true);
   const {
     productThumbnail,
     productName,
@@ -36,6 +39,8 @@ const WatchCard = ({
     numberVotesNotOwn,
     numberVotesOwn,
   } = data;
+
+  console.log(imageLoading);
 
   const renderLaptop = () => (
     <>
@@ -66,9 +71,31 @@ const WatchCard = ({
       <Grid item xs={11.5}>
         <Styled.Paper>
           <Grid container spacing={2}>
-            <Grid xs={4} item>
+            <Grid xs={4} item style={{ position: "relative" }}>
+              {imageLoading && (
+                <Ellipsis
+                  size={40}
+                  color='#ffffff66'
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    bottom: 0,
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                    left: 0,
+                    right: 0,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                />
+              )}
               <CardMedia
-                style={{ borderRadius: "4px", cursor: "pointer" }}
+                onLoad={() => setImageLoading(false)}
+                style={{
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  opacity: imageLoading ? 0 : 1,
+                }}
                 component='img'
                 height='120'
                 image={productThumbnail[0]}
@@ -204,9 +231,31 @@ const WatchCard = ({
       <Grid item xs={12}>
         <Styled.PaperMobile>
           <Grid container spacing={2}>
-            <Grid xs={4} item>
+            <Grid xs={4} item style={{ position: "relative" }}>
+              {imageLoading && (
+                <Ellipsis
+                  size={40}
+                  color='#ffffff66'
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    bottom: 0,
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                    left: 0,
+                    right: 0,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                />
+              )}
               <CardMedia
-                style={{ borderRadius: "4px", cursor: "pointer" }}
+                onLoad={() => setImageLoading(false)}
+                style={{
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  opacity: imageLoading ? 0 : 1,
+                }}
                 component='img'
                 height='120'
                 image={productThumbnail[0]}

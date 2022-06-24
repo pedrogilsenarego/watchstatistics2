@@ -19,7 +19,7 @@ const Button3 = ({ title, onClick, children, loading }: Props) => {
       {loading && <Ellipsis color='orange' size={30} style={{ position: "absolute" }} />}
 
       <>
-        <Typography style={{ color: loading ? "transparent" : "white" }}>
+        <Typography style={{ color: loading ? "transparent" : "white", fontSize: "14px" }}>
           {title}
           {children}
         </Typography>
