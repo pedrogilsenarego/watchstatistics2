@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Checkbox, Typography, Grid } from "@mui/material";
+import { Checkbox, Grid } from "@mui/material";
+import * as GeneralStyled from "src/styles/styles"
 
 interface Props {
   color?: string;
@@ -20,14 +21,14 @@ const CheckBox = ({ label, color, handleChange }: Props) => {
       }}
     >
       <Grid item>
-        <Typography style={{ color: color || "white", cursor: "pointer" }}>
+        <GeneralStyled.BasicTypography style={{ cursor: "pointer" }}>
           {label}
-        </Typography>
+        </GeneralStyled.BasicTypography>
       </Grid>
       <Grid item>
         <Checkbox
           checked={checked}
-          style={{ color: color || "red" }}
+          style={{ color: "#ffffffCE" }}
           sx={{
 
             "&.Mui-checked": {

@@ -87,14 +87,14 @@ const BoosterSelection = ({
               }
             ></CardMedia>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={4}>
             <IncreaseDecreaseButton
               maxValue={currentUser?.boosters}
               setValue={setNumberBoosters}
               incDisabled={maxPercentageBoost}
             />
           </Grid>
-          <Grid item xs={6} textAlign='end'>
+          <Grid item xs={8} textAlign='end'>
             <GeneralStyles.BasicTypography>
               Boost this watch by:{" "}
               <b style={{ color: "orange" }}>{boostPercentage()}%</b>
