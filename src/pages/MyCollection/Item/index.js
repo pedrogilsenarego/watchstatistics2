@@ -112,6 +112,16 @@ const Item = ({ item, products }) => {
     setOpenSellWatchPopup,
   };
 
+  const individualRating = useMemo(
+    () =>
+      (
+        (item?.generalState + item.polishState + item.movementState) /
+        6
+      ).toFixed(1),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
   const totalValue = useMemo(
     () =>
       watchTotalValue(
@@ -190,6 +200,9 @@ const Item = ({ item, products }) => {
                 />
                 <GeneralStyled.BasicTypography fontSize='14px'>
                   Total Score: {totalValue}
+                </GeneralStyled.BasicTypography>
+                <GeneralStyled.BasicTypography fontSize='14px'>
+                  Individual Rating: {individualRating}
                 </GeneralStyled.BasicTypography>
               </Grid>
             </GeneralStyled.DashedGrid>
