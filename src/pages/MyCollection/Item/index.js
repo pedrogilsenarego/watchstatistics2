@@ -3,12 +3,10 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
+import { Box, Card, Grid, Tooltip, Divider } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import { Divider, Tooltip } from "@mui/material";
 import Popup from "../../../components/Popup";
 import { useSelector } from "react-redux";
 import { Typography } from "@material-ui/core";
@@ -16,8 +14,9 @@ import { updateCollectionStatus } from "../../../redux/User/user.actions";
 import { setToAuction } from "../../../redux/Market/market.actions";
 import SellPopup from "./SellPopup";
 import * as GeneralStyled from "src/styles/styles";
-import { watchTotalValue } from "src/Utils/gamyfication";
+import { watchTotalValue, starRatingColor } from "src/Utils/gamyfication";
 import CircularVotes from "src/components/ProgressBars/CircularVotes";
+import StarRatings from "react-star-ratings";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -113,14 +112,19 @@ const Item = ({ item, products }) => {
   };
 
   const individualRating = useMemo(
-    () =>
-      (
+    () => {
+      const value = (
         (item?.generalState + item.polishState + item.movementState) /
         6
-      ).toFixed(1),
+      ).toFixed(1);
+      return Number(value);
+    },
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
+
+  console.log(individualRating);
 
   const totalValue = useMemo(
     () =>
@@ -201,9 +205,16 @@ const Item = ({ item, products }) => {
                 <GeneralStyled.BasicTypography fontSize='14px'>
                   Total Score: {totalValue}
                 </GeneralStyled.BasicTypography>
-                <GeneralStyled.BasicTypography fontSize='14px'>
-                  Individual Rating: {individualRating}
-                </GeneralStyled.BasicTypography>
+
+                <Box style={{ marginTop: "20px" }}>
+                  <StarRatings
+                    starDimension='15px'
+                    starSpacing='5px'
+                    rating={individualRating || 0}
+                    starRatedColor={starRatingColor(individualRating || 0)}
+                    starEmptyColor='#ffffff33'
+                  />
+                </Box>
               </Grid>
             </GeneralStyled.DashedGrid>
           </Grid>

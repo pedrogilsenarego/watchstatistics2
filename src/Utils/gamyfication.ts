@@ -228,3 +228,13 @@ export const watchTotalValue = (avgTotal:number, generalState: number, polishSta
 
   return ((avgTotal*4 + generalState*2+polishState+movementState)/8).toFixed(2)
 }
+
+export const starRatingColor = (individualValue: number) => {
+  switch (true) {
+    case individualValue >= 4.5: return "red"
+    case individualValue >= 4: return "orange"
+    case individualValue >= 3: return "green"
+    case individualValue >= 2: return "white"
+    default: return "#ffffff66"
+  }
+}
