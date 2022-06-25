@@ -114,7 +114,7 @@ const Item = ({ item, products }) => {
   const individualRating = useMemo(
     () => {
       const value = (
-        (item?.generalState + item.polishState + item.movementState) /
+        (item.generalState + item.polishState + item.movementState) /
         6
       ).toFixed(1);
       return Number(value);
@@ -123,8 +123,6 @@ const Item = ({ item, products }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
-
-  console.log(individualRating);
 
   const totalValue = useMemo(
     () =>
@@ -202,11 +200,11 @@ const Item = ({ item, products }) => {
                     marginBottom: "2px",
                   }}
                 />
-                <GeneralStyled.BasicTypography fontSize='14px'>
-                  Total Score: {totalValue}
+                <GeneralStyled.BasicTypography fontSize='14px' fontWeight={700}>
+                  Power: {totalValue}
                 </GeneralStyled.BasicTypography>
 
-                <Box style={{ marginTop: "20px" }}>
+                <Box style={{ marginTop: "40px", marginBottom: "-5px" }}>
                   <StarRatings
                     starDimension='15px'
                     starSpacing='5px'

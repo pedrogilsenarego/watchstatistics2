@@ -226,7 +226,7 @@ export const newWatchProduction = (id:string) => {
 
 export const watchTotalValue = (avgTotal:number, generalState: number, polishState:number, movementState:number) => {
 
-  return ((avgTotal*4 + generalState*2+polishState+movementState)/8).toFixed(2)
+  return ((avgTotal*4 + generalState*2+polishState+movementState)/8).toFixed(1)
 }
 
 export const starRatingColor = (individualValue: number) => {
