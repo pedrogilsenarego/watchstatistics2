@@ -1,7 +1,7 @@
-import { ImCross } from "react-icons/im";
+import { MdOutlineGetApp } from "react-icons/md";
 import { watchTotalValue } from "src/Utils/gamyfication";
 
-const deleteIcon = <ImCross fontSize='1em' color="#ffffffCE" style={{ cursor: "pointer" }} />
+const buyIcon = <MdOutlineGetApp fontSize='1em' color="#ffffffCE" style={{ cursor: "pointer" }} />
 
 const mapMarketItem = (marketItems: any, pos: number) => {
   return {
@@ -26,23 +26,21 @@ const mapMarketItem = (marketItems: any, pos: number) => {
     rating: ((marketItems.generalState + marketItems.polishState + marketItems.movementState) /
       6
     ).toFixed(1),
-    price: marketItems.price
-    // show: [
-    //   {
-    //     buttonType: "toggle",
-    //     event: "show",
-    //     label: "Show/Hide this watch",
-    //     disabled: false,
-    //   },
-    // ],
-    // delete: [
-    //   {
-    //     buttonType: "icon",
-    //     event: "delete",
-    //     icon: deleteIcon,
-    //     label: "Remove this watch",
-    //   },
-    // ],
+    price: marketItems.price,
+    buy: [
+      {
+        buttonType: "icon",
+        confirmationRequired: true,
+        event: "buy",
+        icon: buyIcon,
+        label: "Buy this watch",
+        confirmationTitle: "Confirm the purchase",
+        confirmationDescription: "Add to your collection this watch",
+        confirmationButtonLabel: "Accept",
+        declineButtonLabel: "Decline",
+      },
+
+    ],
   };
 };
 

@@ -4,6 +4,8 @@ import * as Styled from "./styles"
 import { Action } from "./Action"
 import ImagePreview from "src/components/TableList/ImagePreview"
 import { useHistory } from "react-router-dom"
+import Rating from "./Rating"
+
 
 interface Props {
   onCheckBoxChangeAll?: (checked: boolean) => void;
@@ -68,6 +70,9 @@ const useTableList = ({ onCheckBoxChangeAll, onAction, selectedOptions = [], onC
       }
       case ColumnType.Image: {
         return <ImagePreview width="50px" height="50px" src={value} />
+      }
+      case ColumnType.Rating: {
+        return <Rating individualRating={parseFloat(value)} />
       }
       case ColumnType.CheckBox: {
         return (

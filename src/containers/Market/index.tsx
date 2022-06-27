@@ -48,14 +48,7 @@ const Market = () => {
             rows={mapMarketItems(marketData).rows}
             onAction={handleAction} />
         </Grid>
-        <Grid item xs={12}>
-          <Container style={{}}>
-            {marketData.map((item: any, pos: number) => {
-              const configItem = { item, pos, marketData, currentUser };
-              return <Item key={pos} {...configItem} />;
-            })}
-          </Container>
-        </Grid>
+
       </Grid>
     </Container>
   );

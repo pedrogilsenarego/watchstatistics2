@@ -50,7 +50,7 @@ export const tableColumns =
     {
       id: "rating",
       label: "Rating",
-      type: ColumnType.Text,
+      type: ColumnType.Rating,
       sortable: false,
 
     },
@@ -58,6 +58,13 @@ export const tableColumns =
       id: "price",
       label: "Price",
       type: ColumnType.Text,
+      sortable: false,
+    },
+    {
+      id: 'buy',
+      label: 'Buy',
+      type: ColumnType.ActionComponent,
+      minWidth: 70,
       sortable: false,
     },
 
