@@ -37,6 +37,7 @@ export const Action: FunctionComponent<ActionProps> = ({
   }
 
   const handleClick = () => {
+    if (disabled) { console.log("disabled"); return }
     if (confirmationRequired) {
       if (openConfirmation) {
         handleCloseConfirmation()

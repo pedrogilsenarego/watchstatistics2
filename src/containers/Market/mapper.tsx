@@ -1,9 +1,13 @@
 import { MdOutlineGetApp } from "react-icons/md";
 import { watchTotalValue } from "src/Utils/gamyfication";
 
-const buyIcon = <MdOutlineGetApp fontSize='1em' color="#ffffffCE" style={{ cursor: "pointer" }} />
-
-const mapMarketItem = (marketItems: any, pos: number) => {
+const mapMarketItem = (marketItems: any, pos: number, bagFull: boolean, funds: number) => {
+  const handleDisabled = () => {
+    if (bagFull)
+      return true;
+    if (marketItems.price >= funds) return true;
+    else return false
+  };
   return {
     id: pos,
     preview: marketItems.image,
@@ -23,7 +27,10 @@ const mapMarketItem = (marketItems: any, pos: number) => {
       marketItems.polishState,
       marketItems.movementState
     ),
-    rating: ((marketItems.generalState + marketItems.polishState + marketItems.movementState) /
+    rating: (
+      (marketItems.generalState +
+        marketItems.polishState +
+        marketItems.movementState) /
       6
     ).toFixed(1),
     price: marketItems.price,
@@ -32,20 +39,28 @@ const mapMarketItem = (marketItems: any, pos: number) => {
         buttonType: "icon",
         confirmationRequired: true,
         event: "buy",
-        icon: buyIcon,
+        icon: (
+          <MdOutlineGetApp
+            fontSize='1.3em'
+            color={handleDisabled() ? "#ffffff66" : "#ffffffCE"}
+            style={{ cursor: "pointer" }}
+          />
+        ),
         label: "Buy this watch",
         confirmationTitle: "Confirm the purchase",
         confirmationDescription: "Add to your collection this watch",
         confirmationButtonLabel: "Accept",
         declineButtonLabel: "Decline",
+        disabled: handleDisabled(),
       },
-
     ],
   };
 };
 
-const mapMarketItems = (marketItems: any) => {
-  return { rows: marketItems.map((p: any, pos: number) => mapMarketItem(p, pos)) };
+const mapMarketItems = (marketItems: any, bagFull: boolean, funds: number) => {
+  return {
+    rows: marketItems.map((p: any, pos: number) => mapMarketItem(p, pos, bagFull, funds)),
+  };
 };
 
 export { mapMarketItems };
