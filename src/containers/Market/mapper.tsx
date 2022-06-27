@@ -7,7 +7,7 @@ const mapMarketItem = (marketItems: any, pos: number) => {
   return {
     id: pos,
     preview: marketItems.image,
-    //productID: cartItems.productID,
+    productID: marketItems.id,
     description:
       marketItems.productBrand +
       " " +
