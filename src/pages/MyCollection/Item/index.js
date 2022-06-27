@@ -4,7 +4,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { Box, Card, Grid, Tooltip, Divider } from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
+import CardMedia from "src/components/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Popup from "../../../components/Popup";
@@ -71,6 +71,8 @@ const Item = ({ item, products }) => {
       polishState: item.polishState,
       movementState: item.movementState,
       price: price,
+      avgTotal: item.avgTotal,
+      image: item.productThumbnail[0]
     };
     console.log(configOrder);
     dispatch(setToAuction(configOrder));
@@ -127,8 +129,8 @@ const Item = ({ item, products }) => {
   const totalValue = useMemo(
     () =>
       watchTotalValue(
-        Number(item?.avgTotal),
-        item?.generalState,
+        Number(item.avgTotal),
+        item.generalState,
         item.polishState,
         item.movementState
       ),
@@ -142,14 +144,11 @@ const Item = ({ item, products }) => {
     <Grid item xs={3}>
       <Card style={{ backgroundColor: "#18161E" }}>
         <CardMedia
-          component='img'
           height='120'
           onClick={() => {
             history.push(`/product/${item.documentID}`);
           }}
           image={item.productThumbnail?.[0] || ""}
-          alt='Paella dish'
-          style={{ cursor: "pointer" }}
         />
         <CardContent style={{ minHeight: "15vh" }}>
           <Grid container>
