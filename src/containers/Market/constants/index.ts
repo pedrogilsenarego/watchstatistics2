@@ -6,6 +6,13 @@ export const tableColumns =
 
   [
     {
+      id: "preview",
+      label: "Preview",
+      type: ColumnType.Image,
+      sortable: false,
+      onClick: ClickType.visitProduct
+    },
+    {
       id: "description",
       label: "Watch",
       type: ColumnType.Text,
@@ -39,6 +46,19 @@ export const tableColumns =
       type: ColumnType.Text,
       sortable: false,
 
+    },
+    {
+      id: "rating",
+      label: "Rating",
+      type: ColumnType.Text,
+      sortable: false,
+
+    },
+    {
+      id: "price",
+      label: "Price",
+      type: ColumnType.Text,
+      sortable: false,
     },
 
 

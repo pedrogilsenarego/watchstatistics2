@@ -1,12 +1,12 @@
 import { ImCross } from "react-icons/im";
+import { watchTotalValue } from "src/Utils/gamyfication";
 
 const deleteIcon = <ImCross fontSize='1em' color="#ffffffCE" style={{ cursor: "pointer" }} />
 
 const mapMarketItem = (marketItems: any, pos: number) => {
-  const power = marketItems.avgTotal
-  console.log(power)
   return {
     id: pos,
+    preview: marketItems.image,
     //productID: cartItems.productID,
     description:
       marketItems.productBrand +
@@ -17,7 +17,16 @@ const mapMarketItem = (marketItems: any, pos: number) => {
     generalState: marketItems.generalState,
     polishState: marketItems.polishState,
     movementState: marketItems.movementState,
-    power: marketItems.avgTotal
+    power: watchTotalValue(
+      marketItems.avgTotal,
+      marketItems.generalState,
+      marketItems.polishState,
+      marketItems.movementState
+    ),
+    rating: ((marketItems.generalState + marketItems.polishState + marketItems.movementState) /
+      6
+    ).toFixed(1),
+    price: marketItems.price
     // show: [
     //   {
     //     buttonType: "toggle",
