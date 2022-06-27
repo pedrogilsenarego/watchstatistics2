@@ -56,7 +56,7 @@ export const tableColumns =
     },
     {
       id: "price",
-      label: "Price",
+      label: "Price (points)",
       type: ColumnType.Text,
       sortable: false,
     },
