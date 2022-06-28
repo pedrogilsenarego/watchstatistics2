@@ -395,10 +395,7 @@ export const handleFetchMyCollection = ({
 }) => {
   return new Promise((resolve, reject) => {
     const list = myCollection.map((value) => value.id);
-    let ref = firestore
-      .collection("products")
-
-      .where("__name__", "in", list);
+    let ref = firestore.collection("products").where("__name__", "in", list);
 
     ref
       .get()
@@ -411,15 +408,19 @@ export const handleFetchMyCollection = ({
             return {
               ...doc.data(),
               documentID: doc.id,
-              movementState: myCollection[pos].movementState,
-              generalState: myCollection[pos].generalState,
-              polishState: myCollection[pos].polishState,
             };
           }),
         ];
 
+        for (let i = 0; i < myCollection?.length; i++) {
+          for (let j = 0; j < data?.length; j++) {
+            if (myCollection[i].id === data[j].documentID)
+              myCollection[i] = { ...myCollection[i], ...data[j] };
+          }
+        }
+
         resolve({
-          data,
+          data: myCollection,
           queryDoc: snapshot.docs[totalCount - 1],
           isLastPage: totalCount < 1,
         });
