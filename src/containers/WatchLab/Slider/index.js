@@ -10,9 +10,27 @@ const Slider = ({ x }) => {
   };
 
   let sliderArr = [
-    <Boxes {...configBox} color='#E5E4E1' />,
-    <Boxes2 {...configBox} />,
-    <Boxes3 {...configBox} />,
+    <Boxes
+      {...configBox}
+      color='#E5E4E1'
+      metalness='0.5'
+      roughness='0.1'
+      clearcoatRoughness='0.9'
+    />,
+    <Boxes2
+      {...configBox}
+      color='#155C9B'
+      metalness='0.9'
+      roughness='0.5'
+      clearcoatRoughness='0.1'
+    />,
+    <Boxes3
+      {...configBox}
+      color='purple'
+      metalness='0.9'
+      roughness='0.5'
+      clearcoatRoughness='0.1'
+    />,
     4,
   ];
 

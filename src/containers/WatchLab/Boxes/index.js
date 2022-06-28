@@ -2,15 +2,28 @@ import { Canvas, extend, useFrame } from "@react-three/fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import WhiteBox from "./WhiteBox";
+import Box from "../Box";
 //import test from "../../../assets/teste.jpg";
 
 import React, { useRef, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
-const MyMesh = ({ render, color }) => {
+const MyMesh = ({
+  render,
+  color,
+  metalness,
+  roughness,
+  clearcoatRoughness,
+}) => {
   const mesh = useRef();
+
+  const configWhiteBox = {
+    color,
+    metalness,
+    roughness,
+    clearcoatRoughness,
+  };
 
   useFrame(() => {
     // rotates the object
@@ -19,14 +32,20 @@ const MyMesh = ({ render, color }) => {
 
   return (
     <mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
-      {render && <WhiteBox color={color} />}
+      {render && <Box {...configWhiteBox} />}
     </mesh>
   );
 };
 
-const Boxes = ({ x, color }) => {
+const Boxes = ({ x, color, metalness, roughness, clearcoatRoughness }) => {
   const [render, setRender] = useState(true);
-  const configMesh = { render, color };
+  const configMesh = {
+    render,
+    color,
+    metalness,
+    roughness,
+    clearcoatRoughness,
+  };
 
   useEffect(() => {
     if (x === -100) {

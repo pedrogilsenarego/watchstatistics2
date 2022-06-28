@@ -8,7 +8,13 @@ import { useGLTF } from "@react-three/drei";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
 //import test from "./teste.jpg";
 
-export default function WhiteBox({ color, ...props }) {
+export default function Box({
+  color,
+  metalness,
+  roughness,
+  clearcoatRoughness,
+  ...props
+}) {
   const group = useRef();
   const { nodes } = useGLTF("/whiteBox.glb");
   //const colorMap = useLoader(TextureLoader, test);
@@ -23,9 +29,9 @@ export default function WhiteBox({ color, ...props }) {
           //map={colorMap}
           color={color}
           clearcoat='1.0'
-          metalness='0.5'
-          clearcoatRoughness='0.9'
-          roughness='0.1'
+          metalness={metalness}
+          clearcoatRoughness={clearcoatRoughness}
+          roughness={roughness}
           envMaps='reflection'
         />
       </mesh>
