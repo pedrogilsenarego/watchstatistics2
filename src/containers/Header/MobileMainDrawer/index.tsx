@@ -76,9 +76,9 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             <Grid
               item
               xs={12}
-            // onClick={() =>
-            //   handleClickOption(`/watchstatistics/watchlaboratory`)
-            // }
+              onClick={() =>
+                handleClickOption(`/watchstatistics/watchlaboratory`)
+              }
             >
               <Styled.TypographyTitleD>
                 {i18n.t("navigation.laboratory")}

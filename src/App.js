@@ -18,7 +18,7 @@ import FAQ from "./pages/FAQ";
 import Watchstatistics from "./pages/Watchstatistics";
 import CompareWatches from "./pages/CompareWatches";
 import WatchLaboratory2 from "./containers/WatchLab";
-import Market from "./pages/Market";
+import Market from "src/containers/Market";
 import Messages from "./pages/Messages";
 import Browse from "./containers/Browse";
 import Order from "./pages/Order";
@@ -34,7 +34,7 @@ import WatchLab from "./layouts/WatchLab";
 
 //components
 import CookiePolicy from "./components/CookiePolicy";
-import LoadingSpinner from "./components/LoadingSpinner";
+import { Ellipsis } from "react-spinners-css";
 
 import {
   StyledEngineProvider,
@@ -79,7 +79,25 @@ const App = () => {
         <Snackbar />
         <CookiePolicy />
         <ScrollToTop />
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense
+          fallback={
+            <Ellipsis
+              color='orange'
+              size={100}
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                marginLeft: "auto",
+                marginRight: "auto",
+                marginTop: "auto",
+                marginBottom: "auto",
+              }}
+            />
+          }
+        >
           <div className='App'>
             <Switch>
               <Route
