@@ -52,7 +52,7 @@ export const tableColumns =
       label: "Rating",
       type: ColumnType.Rating,
       sortable: false,
-
+      minWidth: 175
     },
     {
       id: "price",

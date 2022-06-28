@@ -52,7 +52,7 @@ const mapMarketItem = (
         ),
         label: handleDisabled().message,
         confirmationTitle: "Confirm the purchase",
-        confirmationDescription: "Add to your collection this watch",
+        confirmationDescription: "Add this watch to your collection",
         confirmationButtonLabel: "Accept",
         declineButtonLabel: "Decline",
         disabled: handleDisabled().status,
