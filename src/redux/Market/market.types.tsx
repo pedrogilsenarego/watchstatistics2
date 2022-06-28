@@ -13,6 +13,10 @@ export interface marketProducts {
   generalState: number;
   polishState: number;
   movementState: number;
+  productBrand: string;
+  productName: string;
+  reference: string;
+  UserUID: string;
 }
 
 export interface marketData {

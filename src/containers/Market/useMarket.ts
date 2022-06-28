@@ -4,7 +4,7 @@ import { fetchMarketProductsStart } from "src/redux/Market/market.actions";
 import { useSelector } from "react-redux";
 import { Redux } from "src/redux/types";
 import { bagSizeHelper } from "src/Utils/gamyfication";
-import { updateCollectionStatus } from "src/redux/User/user.actions";
+import { updateCollectionStatus, updateSellerStatus } from "src/redux/User/user.actions";
 import { buyMarketProduct } from "src/redux/Market/market.actions";
 
 const mapState = (state: Redux) => ({
@@ -43,29 +43,28 @@ const useMarket = () => {
       dispatch(updateCollectionStatus(configUpdateCollection));
 
       const configBuyItem = {
-      	documentID: marketData[id].documentID
+        documentID: marketData[id].documentID,
       };
       dispatch(buyMarketProduct(configBuyItem));
 
-      // const newMessage = {
-      // 	from: "watchstatistics",
-      // 	message: `Congratulation you sold your ${item.productBrand} ${item.productName} ${item.reference}, you added ${item.price} points to your currency`,
-      // 	date: new Date()
-      // };
+      const newMessage = {
+        from: "watchstatistics",
+        message: `Congratulation you sold your ${marketData[id].productBrand} ${marketData[id].productName} ${marketData[id].reference}, you added ${marketData[id].price} points to your currency`,
+        date: new Date(),
+      };
 
-      // const configSellerUpdate = {
-      // 	userID: item.UserUID,
-      // 	points: item.price,
-      // 	messages: newMessage
-      // };
-      // dispatch(updateSellerStatus(configSellerUpdate));
+      const configSellerUpdate = {
+        userID: marketData[id].UserUID,
+        points: marketData[id].price,
+        messages: newMessage,
+      };
+      dispatch(updateSellerStatus(configSellerUpdate));
     }
   };
 
   const handleAction = (type: string, id: number) => {
     switch (type) {
       case "buy": {
-        console.log("buy");
         handleBuyItem(id);
         break;
       }

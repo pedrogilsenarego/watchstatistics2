@@ -9,7 +9,7 @@ const mapMarketItem = (
 ) => {
   const handleDisabled = () => {
     if (bagFull) return { message: "Your collection is full", status: true };
-    if (marketItems.price >= funds) return { message: "You dont have enough funds", status: true };
+    if (marketItems.price > funds) return { message: "You dont have enough funds", status: true };
     else return { message: "Buy this watch", status: false }
   };
   return {
