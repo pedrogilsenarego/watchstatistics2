@@ -9,7 +9,7 @@ import React, { useRef, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
-const MyMesh = ({ render }) => {
+const MyMesh = ({ render, color }) => {
   const mesh = useRef();
 
   useFrame(() => {
@@ -19,14 +19,14 @@ const MyMesh = ({ render }) => {
 
   return (
     <mesh ref={mesh} receiveShadow castShadow position={[0, -1, 0]}>
-      {render && <WhiteBox />}
+      {render && <WhiteBox color={color} />}
     </mesh>
   );
 };
 
-const Boxes = ({ x }) => {
+const Boxes = ({ x, color }) => {
   const [render, setRender] = useState(true);
-  const configMesh = { render };
+  const configMesh = { render, color };
 
   useEffect(() => {
     if (x === -100) {
@@ -69,7 +69,3 @@ const Boxes = ({ x }) => {
   );
 };
 export default Boxes;
-
-/* <meshStandardMaterial map={colorMap} />
-			<sphereGeometry args={[1, 32, 32]} />
-const colorMap = useLoader(TextureLoader, test); */
