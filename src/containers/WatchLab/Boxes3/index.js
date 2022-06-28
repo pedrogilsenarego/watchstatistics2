@@ -3,7 +3,7 @@ import { Canvas, extend, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Box from "../Box";
 //import test from "../../../assets/teste.jpg";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
@@ -80,7 +80,6 @@ const Boxes = ({ x, color, metalness, roughness, clearcoatRoughness }) => {
         intensity={2}
         castShadow
       />
-
       <MyMesh {...configMesh} />
     </Canvas>
   );

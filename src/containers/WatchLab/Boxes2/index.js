@@ -1,11 +1,9 @@
 import { Canvas, extend, useFrame } from "@react-three/fiber";
 //import { TextureLoader } from "three/src/loaders/TextureLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-
 import Box from "../Box";
 //import test from "../../../assets/teste.jpg";
-
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 
 extend({ OrbitControls });
 
