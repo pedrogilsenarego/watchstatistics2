@@ -69,7 +69,9 @@ const Market = () => {
             <Button style={{ color: "white" }}>Market</Button>
           </Grid>
           <Grid item>
+
             <GeneralStyled.BasicTypography fontSize='14px'>
+              Funds: {currentUser.points || 0} |
               Collection: {currentUser.collection?.length || 0}/
               {bagSizeHelper(currentUser?.experience || 0)}
             </GeneralStyled.BasicTypography>

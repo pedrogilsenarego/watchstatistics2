@@ -1,12 +1,16 @@
 import { MdOutlineGetApp } from "react-icons/md";
 import { watchTotalValue } from "src/Utils/gamyfication";
 
-const mapMarketItem = (marketItems: any, pos: number, bagFull: boolean, funds: number) => {
+const mapMarketItem = (
+  marketItems: any,
+  pos: number,
+  bagFull: boolean,
+  funds: number
+) => {
   const handleDisabled = () => {
-    if (bagFull)
-      return true;
-    if (marketItems.price >= funds) return true;
-    else return false
+    if (bagFull) return { message: "Your collection is full", status: true };
+    if (marketItems.price >= funds) return { message: "You dont have enough funds", status: true };
+    else return { message: "Buy this watch", status: false }
   };
   return {
     id: pos,
@@ -42,16 +46,16 @@ const mapMarketItem = (marketItems: any, pos: number, bagFull: boolean, funds: n
         icon: (
           <MdOutlineGetApp
             fontSize='1.3em'
-            color={handleDisabled() ? "#ffffff66" : "#ffffffCE"}
+            color={handleDisabled().status ? "#ffffff66" : "#ffffffCE"}
             style={{ cursor: "pointer" }}
           />
         ),
-        label: "Buy this watch",
+        label: handleDisabled().message,
         confirmationTitle: "Confirm the purchase",
         confirmationDescription: "Add to your collection this watch",
         confirmationButtonLabel: "Accept",
         declineButtonLabel: "Decline",
-        disabled: handleDisabled(),
+        disabled: handleDisabled().status,
       },
     ],
   };
@@ -59,7 +63,9 @@ const mapMarketItem = (marketItems: any, pos: number, bagFull: boolean, funds: n
 
 const mapMarketItems = (marketItems: any, bagFull: boolean, funds: number) => {
   return {
-    rows: marketItems.map((p: any, pos: number) => mapMarketItem(p, pos, bagFull, funds)),
+    rows: marketItems.map((p: any, pos: number) =>
+      mapMarketItem(p, pos, bagFull, funds)
+    ),
   };
 };
 

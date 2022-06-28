@@ -17,7 +17,7 @@ export const tableColumns =
       label: "Watch",
       type: ColumnType.Text,
       sortable: false,
-      onClick: ClickType.visitProduct
+      onClick: ClickType.visitProduct,
     },
     {
       id: "generalState",
