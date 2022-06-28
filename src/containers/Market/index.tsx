@@ -2,20 +2,21 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import TableList from "src/components/TableList";
-import { tableColumns } from "./constants";
+import { tableColumns, topHeaderButtons, topHeaderRightEntries } from "./constants";
 import { mapMarketItems } from "./mapper";
 import { bagSizeHelper } from "src/Utils/gamyfication";
 import * as GeneralStyled from "src/styles/styles";
 import useMarket from "./useMarket";
+import TopHeader from "src/components/TopHeader"
 
 const Market = () => {
   const { handleAction, bagFull, funds, marketData, currentUser } = useMarket();
 
   return (
     <Container disableGutters style={{ marginTop: "100px" }}>
+      <TopHeader listButtons={topHeaderButtons} rightEntries={topHeaderRightEntries} />
       <Grid
         container
-
         xs={12}
         style={{ backgroundColor: "#154A6799", padding: "5px" }}
       >

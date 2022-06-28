@@ -1,0 +1,74 @@
+import { ColumnType, ClickType } from "src/components/TableList/types";
+// import { i18n } from 'src/translations/i18n'
+
+const funds = (funds: number) => (<><b>Funds: </b>{funds}&nbsp;|&nbsp;</>)
+const collection = (collection: string) => (<><b>Collection: </b>{collection}</>)
+
+export const topHeaderRightEntries = [funds(0.5), collection("4/16")];
+
+export const topHeaderButtons = [
+  {
+    name: "market",
+  },
+];
+
+export const tableColumns = [
+  {
+    id: "preview",
+    label: "Preview",
+    type: ColumnType.Image,
+    sortable: false,
+    onClick: ClickType.visitProduct,
+  },
+  {
+    id: "description",
+    label: "Watch",
+    type: ColumnType.Text,
+    sortable: false,
+    onClick: ClickType.visitProduct,
+  },
+  {
+    id: "generalState",
+    label: "General",
+    type: ColumnType.Text,
+    sortable: false,
+  },
+  {
+    id: "polishState",
+    label: "Polish",
+    type: ColumnType.Text,
+    sortable: false,
+  },
+  {
+    id: "movementState",
+    label: "Movement",
+    type: ColumnType.Text,
+    sortable: false,
+  },
+  {
+    id: "power",
+    label: "Power",
+    type: ColumnType.Text,
+    sortable: false,
+  },
+  {
+    id: "rating",
+    label: "Rating",
+    type: ColumnType.Rating,
+    sortable: false,
+    minWidth: 175,
+  },
+  {
+    id: "price",
+    label: "Price (points)",
+    type: ColumnType.Text,
+    sortable: false,
+  },
+  {
+    id: "buy",
+    label: "Buy",
+    type: ColumnType.ActionComponent,
+    minWidth: 70,
+    sortable: false,
+  },
+];
