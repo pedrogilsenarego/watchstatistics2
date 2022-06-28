@@ -7,6 +7,7 @@ import ButtonFilters from "src/components/Buttons/ButtonFilters";
 import languages from "src/constants/languages.json";
 import { i18n } from "src/translations/i18n";
 import { useSelector } from "react-redux";
+import { generalEndpoints } from "src/constants/endpoints"
 
 interface Props {
   setMobileDrawer: (mobileDrawer: boolean) => void;
@@ -77,7 +78,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
               item
               xs={12}
               onClick={() =>
-                handleClickOption(`/watchstatistics/watchlaboratory`)
+                handleClickOption(generalEndpoints.WATCH_LABORATORY)
               }
             >
               <Styled.TypographyTitleD>
