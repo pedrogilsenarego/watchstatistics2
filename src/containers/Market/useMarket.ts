@@ -81,8 +81,6 @@ const useMarket = () => {
     else return false;
   };
 
-  console.log(bagFull());
-
   return { handleAction, bagFull, funds, marketData, currentUser };
 };
 

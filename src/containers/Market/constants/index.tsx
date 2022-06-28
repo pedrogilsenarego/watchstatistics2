@@ -1,10 +1,23 @@
 import { ColumnType, ClickType } from "src/components/TableList/types";
 // import { i18n } from 'src/translations/i18n'
 
-const funds = (funds: number) => (<><b>Funds: </b>{funds}&nbsp;|&nbsp;</>)
-const collection = (collection: string) => (<><b>Collection: </b>{collection}</>)
+const funds = (funds: number) => (
+  <>
+    <b>Funds: </b>
+    {funds}&nbsp;|&nbsp;
+  </>
+);
+const collection = (collection: string) => (
+  <>
+    <b>Collection: </b>
+    {collection}
+  </>
+);
 
-export const topHeaderRightEntries = [funds(0.5), collection("4/16")];
+export const topHeaderRightEntries = (
+  fieldFunds: number,
+  collectionField: string
+) => [funds(fieldFunds), collection(collectionField)];
 
 export const topHeaderButtons = [
   {
