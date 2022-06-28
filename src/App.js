@@ -11,7 +11,7 @@ import ScrollToTop from "./hoc/ScrollToTop";
 //pages
 import Search from "./pages/Search";
 import Dashboard from "./pages/Dashboard";
-import MyCollection from "./pages/MyCollection";
+import MyCollection from "./containers/MyCollection";
 import Admin from "./pages/Admin";
 import ProductDetails from "./pages/ProductDetails";
 import FAQ from "./pages/FAQ";
@@ -188,7 +188,7 @@ const App = () => {
 
               <Route
                 exact
-                path='/watchstatistics/market'
+                path={generalEndpoints.MARKET}
                 render={() => (
                   <WithAuth>
                     <MainLayout>

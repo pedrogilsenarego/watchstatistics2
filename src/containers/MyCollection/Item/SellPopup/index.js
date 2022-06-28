@@ -5,8 +5,8 @@ import { Typography } from "@material-ui/core";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { Form, Formik } from "formik";
-import TextField from "../../../../containers/forms/InputMUI";
-import ButtonMUI from "../../../../containers/forms/ButtonMUI";
+import TextField from "../../../forms/InputMUI";
+import ButtonMUI from "../../../forms/ButtonMUI";
 import * as Yup from "yup";
 
 const INITIAL_FORM_STATE = {
@@ -27,7 +27,7 @@ const SellPopup = ({
       <Dialog open={openSellWatchPopup} style={{ color: "black" }}>
         <DialogTitle>
           <div style={{ textAlign: "center" }}>
-            <Typography variant="h6" component="div" style={{ color: "black" }}>
+            <Typography variant='h6' component='div' style={{ color: "black" }}>
               "Sell this watch"
             </Typography>
           </div>
@@ -46,7 +46,7 @@ const SellPopup = ({
               <Typography style={{ color: "black" }}>
                 You are puting: {watch} to market, this is not reversible.
               </Typography>
-              <TextField type="number" name="price" placeholder="0"></TextField>
+              <TextField type='number' name='price' placeholder='0'></TextField>
               <ButtonGroup>
                 <ButtonMUI>Accept</ButtonMUI>
                 <Button

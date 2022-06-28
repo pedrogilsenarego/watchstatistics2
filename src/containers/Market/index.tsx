@@ -12,42 +12,39 @@ const Market = () => {
   const { handleAction, bagFull, funds, marketData, currentUser } = useMarket();
 
   return (
-    <Container>
+    <Container disableGutters style={{ marginTop: "100px" }}>
       <Grid
         container
-        spacing={2}
-        rowGap={3}
-        style={{ marginTop: "100px" }}
-        justifyContent='center'
-        alignItems='center'
+
+        xs={12}
+        style={{ backgroundColor: "#154A6799", padding: "5px" }}
       >
-        <Grid
-          item
-          container
-          alignItems='center'
-          justifyContent='space-between'
-          xs={12}
-          style={{ backgroundColor: "#154A6799" }}
-        >
-          <Grid item>
-            <Button style={{ color: "white" }}>Market</Button>
+        <Container>
+          <Grid container alignItems='center'
+            justifyContent='space-between'>
+            <Grid item>
+              <Button style={{ color: "white" }}>Market</Button>
+            </Grid>
+            <Grid item>
+              <GeneralStyled.BasicTypography fontSize='14px'>
+                <b>Funds:</b> {currentUser.points || 0} | <b>Collection:</b>{" "}
+                {currentUser.collection?.length || 0}/
+                {bagSizeHelper(currentUser?.experience || 0)}
+              </GeneralStyled.BasicTypography>
+            </Grid>
           </Grid>
-          <Grid item>
-            <GeneralStyled.BasicTypography fontSize='14px'>
-              <b>Funds:</b> {currentUser.points || 0} | <b>Collection:</b>{" "}
-              {currentUser.collection?.length || 0}/
-              {bagSizeHelper(currentUser?.experience || 0)}
-            </GeneralStyled.BasicTypography>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
+        </Container>
+      </Grid>
+      <Grid item xs={12} style={{ marginTop: "20px" }}>
+        <Container>
           <TableList
             columns={tableColumns}
             rows={mapMarketItems(marketData, bagFull(), funds).rows}
             onAction={handleAction}
           />
-        </Grid>
+        </Container>
       </Grid>
+
     </Container>
   );
 };

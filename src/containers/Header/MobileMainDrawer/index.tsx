@@ -88,11 +88,11 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             <Grid
               item
               xs={12}
-            //onClick={() => handleClickOption(`/watchstatistics/market`)}
+              onClick={() => handleClickOption(generalEndpoints.MARKET)}
             >
-              <Styled.TypographyTitleD>
+              <Styled.TypographyTitle>
                 {i18n.t("navigation.market")}
-              </Styled.TypographyTitleD>
+              </Styled.TypographyTitle>
             </Grid>
           </>
         )}

@@ -55,6 +55,7 @@ const MyCollection = () => {
           <Grid
             item
             container
+            rowGap={2}
             spacing={1}
             xs={12}
             style={{ marginTop: "20px" }}

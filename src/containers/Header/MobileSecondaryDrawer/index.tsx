@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOutUserStart } from "src/redux/User/user.actions";
 import { checkUserIsAdmin } from "src/Utils";
 import Signup from "src/containers/SignIn"
+import { generalEndpoints } from "src/constants/endpoints"
 
 interface Props {
   setMobileDrawer: (mobileDrawer: boolean) => void;
@@ -44,7 +45,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          //onClick={() => handleClickOption("/mycollection")}
+          onClick={() => handleClickOption(generalEndpoints.MY_COLLECTION)}
           style={{ marginTop: "30px" }}
         >
           <Styled.TypographyTitle>

@@ -72,7 +72,7 @@ const Item = ({ item, products }) => {
       movementState: item.movementState,
       price: price,
       avgTotal: item.avgTotal,
-      image: item.productThumbnail[0]
+      image: item.productThumbnail[0],
     };
     console.log(configOrder);
     dispatch(setToAuction(configOrder));
@@ -141,7 +141,7 @@ const Item = ({ item, products }) => {
   if (!Array.isArray(products)) return;
 
   return (
-    <Grid item xs={3}>
+    <Grid item xs={12} sm={4} md={3}>
       <Card style={{ backgroundColor: "#18161E" }}>
         <CardMedia
           height='120'
