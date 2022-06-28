@@ -1,6 +1,5 @@
 import Slider from "./Slider";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import { Box, Grid } from "@mui/material";
 import CentralButtons from "./CentralButtons";
 import BoxInfo from "./BoxInfo";
 import Currencies from "./Currencies";
@@ -14,7 +13,7 @@ const WatchLab = () => {
   return (
     <>
       <Currencies />
-      <Box component="div" style={{ height: "100vh", background: "black" }}>
+      <Box component='div' style={{ height: "100vh", background: "black" }}>
         <Grid
           container
           alignItems='center'
@@ -30,8 +29,10 @@ const WatchLab = () => {
         </Grid>
         <Slider {...configSlider} />
       </Box>
-
-      <Box component="div" style={{ height: "100vh", backgroundColor: "#2d4967" }}>
+      <Box
+        component='div'
+        style={{ height: "100vh", backgroundColor: "#2d4967" }}
+      >
         <WatchParts {...configWatchParts} />
       </Box>
     </>
