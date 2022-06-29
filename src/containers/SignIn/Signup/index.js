@@ -68,8 +68,8 @@ const INITIAL_FORM_STATE = {
 };
 
 const TermsError = () => {
-  const [, termsOfServiceMeta, ,] = useField("termsOfService");
-  if (termsOfServiceMeta.error)
+  const [, termsOfServiceMeta] = useField("termsOfService");
+  if (termsOfServiceMeta.error && termsOfServiceMeta.touched)
     return (
       <GeneralStyled.StyledFormError>
         The terms must be accepted
@@ -107,7 +107,8 @@ const Signup = (props) => {
             }}
           >
             <Form>
-              <ValidationHelper />
+              {!mobile && <ValidationHelper mobile={mobile} />}
+
               <Grid container>
                 <Grid item xs={12}>
                   <Container
