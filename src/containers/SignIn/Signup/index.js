@@ -11,6 +11,7 @@ import { FORM_VALIDATION } from "./validation";
 import useSignup from "./useSignup";
 import * as GeneralStyled from "src/styles/styles";
 import TermsPopup from "./TermsPopup";
+import ValidationHelper from "./ValidationHelper";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -93,6 +94,7 @@ const Signup = (props) => {
   return (
     <>
       <TermsPopup open={terms} setOpen={setTerms} />
+
       <Grid item xs={12}>
         <div>
           <Formik
@@ -105,6 +107,7 @@ const Signup = (props) => {
             }}
           >
             <Form>
+              <ValidationHelper />
               <Grid container>
                 <Grid item xs={12}>
                   <Container
