@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import { useField, useFormikContext } from "formik";
+import * as GeneralStyled from "src/styles/styles";
 
 const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
   const { setFieldValue } = useFormikContext();
@@ -33,17 +34,22 @@ const CheckboxWrapper = ({ name, label, legend, ...otherProps }) => {
       <FormGroup>
         <FormControlLabel
           control={
-            <Checkbox
-              sx={{
-                color: "#ffffffB3 !important",
-                "&.Mui-checked": {
-                  color: "white !important",
-                },
-              }}
-              {...configCheckbox}
-            />
+            <>
+              <GeneralStyled.BasicTypography style={{ cursor: "pointer" }}>
+                {label}
+              </GeneralStyled.BasicTypography>
+              <Checkbox
+                style={{ color: "#ffffffCE" }}
+                sx={{
+                  color: "#ffffffB3 !important",
+                  "&.Mui-checked": {
+                    color: "white !important",
+                  },
+                }}
+                {...configCheckbox}
+              />
+            </>
           }
-          label={label}
         />
       </FormGroup>
     </FormControl>

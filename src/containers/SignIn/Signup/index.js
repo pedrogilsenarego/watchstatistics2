@@ -4,12 +4,13 @@ import TextField from "../../forms/InputMUI";
 import CheckBox from "../../forms/checkBoxMUI";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
 import { clearApiRequest } from "src/redux/general/general.actions";
 import Alert from "src/components/Alert";
 import Button3Formik from "src/components/Buttons/Button3Formik";
 import { FORM_VALIDATION } from "./validation";
 import useSignup from "./useSignup";
+import * as GeneralStyled from "src/styles/styles";
+import TermsPopup from "./TermsPopup";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -79,169 +80,160 @@ const Signup = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12}>
-      <div>
-        <Formik
-          initialValues={{
-            ...INITIAL_FORM_STATE,
-          }}
-          validationSchema={FORM_VALIDATION}
-          onSubmit={(values) => {
-            handleFormSubmit(values);
-          }}
-        >
-          <Form>
-            <Grid container>
-              <Grid item xs={12}>
-                <Container
-                  style={{
-                    backgroundColor: "#ffffff",
-                    height: "40px",
-                    padding: "0px",
-                    marginTop: "10px",
-                    borderRadius: "4px",
-                    width: "500px",
-                  }}
-                >
-                  <TextField
-                    className={classes.textField}
-                    name='displayName'
-                    size='small'
-                    placeholder='Full name'
-                  ></TextField>
-                </Container>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                style={{ marginTop: mobile ? "20px" : "20px" }}
-              >
-                <Container
-                  style={{
-                    backgroundColor: "#ffffff",
-                    height: "40px",
-                    padding: "0px",
-                    marginTop: "10px",
-                    borderRadius: "4px",
-                    width: "500px",
-                  }}
-                >
-                  <TextField
-                    className={classes.textField}
-                    size='small'
-                    name='email'
-                    placeholder='Email'
-                  ></TextField>
-                </Container>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                style={{ marginTop: mobile ? "20px" : "20px" }}
-              >
-                <Container
-                  style={{
-                    backgroundColor: "#ffffff",
-                    height: "40px",
-                    padding: "0px",
-                    marginTop: "10px",
-                    borderRadius: "4px",
-                    width: "500px",
-                  }}
-                >
-                  <TextField
-                    className={classes.textField}
-                    size='small'
-                    type='password'
-                    name='password'
-                    placeholder='Password'
-                  />
-                </Container>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                style={{ marginTop: mobile ? "20px" : "20px" }}
-              >
-                <Container
-                  style={{
-                    backgroundColor: "#ffffff",
-                    height: "40px",
-                    padding: "0px",
-                    marginTop: "10px",
-                    borderRadius: "4px",
-                    width: "500px",
-                  }}
-                >
-                  <TextField
-                    className={classes.textField}
-                    size='small'
-                    type='password'
-                    name='confirmPassword'
-                    placeholder='ConfirmPassword'
-                  />
-                </Container>
-              </Grid>
-              <Grid
-                item
-                textAlign='center'
-                xs={12}
-                style={{ paddingTop: "20px" }}
-              >
-                <Typography
-                  onClick={() => {
-                    setTerms(!terms);
-                  }}
-                  style={{ color: "#ffffffCC" }}
-                >
-                  Terms of service
-                </Typography>
-                {terms && (
-                  <Typography
+    <>
+      <TermsPopup open={terms} setOpen={setTerms} />
+      <Grid item xs={12}>
+        <div>
+          <Formik
+            initialValues={{
+              ...INITIAL_FORM_STATE,
+            }}
+            validationSchema={FORM_VALIDATION}
+            onSubmit={(values) => {
+              handleFormSubmit(values);
+            }}
+          >
+            <Form>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Container
                     style={{
-                      fontSize: "12px",
-                      color: "#ffffffCC",
-                      wordWrap: "break-word",
+                      backgroundColor: "#ffffff",
+                      height: "40px",
+                      padding: "0px",
+                      marginTop: "10px",
+                      borderRadius: "4px",
+                      width: "500px",
                     }}
                   >
-                    This is an app
-                  </Typography>
-                )}
+                    <TextField
+                      className={classes.textField}
+                      name='displayName'
+                      size='small'
+                      placeholder='Full name'
+                    ></TextField>
+                  </Container>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: mobile ? "20px" : "20px" }}
+                >
+                  <Container
+                    style={{
+                      backgroundColor: "#ffffff",
+                      height: "40px",
+                      padding: "0px",
+                      marginTop: "10px",
+                      borderRadius: "4px",
+                      width: "500px",
+                    }}
+                  >
+                    <TextField
+                      className={classes.textField}
+                      size='small'
+                      name='email'
+                      placeholder='Email'
+                    ></TextField>
+                  </Container>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: mobile ? "20px" : "20px" }}
+                >
+                  <Container
+                    style={{
+                      backgroundColor: "#ffffff",
+                      height: "40px",
+                      padding: "0px",
+                      marginTop: "10px",
+                      borderRadius: "4px",
+                      width: "500px",
+                    }}
+                  >
+                    <TextField
+                      className={classes.textField}
+                      size='small'
+                      type='password'
+                      name='password'
+                      placeholder='Password'
+                    />
+                  </Container>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: mobile ? "20px" : "20px" }}
+                >
+                  <Container
+                    style={{
+                      backgroundColor: "#ffffff",
+                      height: "40px",
+                      padding: "0px",
+                      marginTop: "10px",
+                      borderRadius: "4px",
+                      width: "500px",
+                    }}
+                  >
+                    <TextField
+                      className={classes.textField}
+                      size='small'
+                      type='password'
+                      name='confirmPassword'
+                      placeholder='ConfirmPassword'
+                    />
+                  </Container>
+                </Grid>
+                <Grid
+                  item
+                  textAlign='center'
+                  xs={12}
+                  style={{ paddingTop: "20px" }}
+                >
+                  <GeneralStyled.BasicTypography
+                    style={{ textDecoration: "underline", cursor: "pointer" }}
+                    onClick={() => {
+                      setTerms(!terms);
+                    }}
+                  >
+                    Terms of service
+                  </GeneralStyled.BasicTypography>
 
-                <CheckBox
-                  style={{ color: "white !important" }}
-                  name='termsOfService'
-                  label='I, agree'
-                />
+                  <CheckBox
+                    style={{ color: "white !important" }}
+                    name='termsOfService'
+                    label='I, read and agree with the terms presented&nbsp; '
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{ marginTop: "10px", backgroundColor: "blue" }}
+                >
+                  <Alert
+                    onClose={() => dispatch(clearApiRequest())}
+                    severity='error'
+                    maxWidth='500px'
+                    message={general?.apiRequestMessage}
+                    trigger={triggerAlert}
+                    setTrigger={setTriggerAlert}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  textAlign='center'
+                  xs={12}
+                  style={{ paddingTop: "15px" }}
+                >
+                  <Button3Formik title='Submit' />
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                textAlign='center'
-                style={{ paddingTop: "30px" }}
-              >
-                <Alert
-                  onClose={() => dispatch(clearApiRequest())}
-                  severity='error'
-                  maxWidth='500px'
-                  message={general?.apiRequestMessage}
-                  trigger={triggerAlert}
-                  setTrigger={setTriggerAlert}
-                />
-              </Grid>
-              <Grid
-                item
-                textAlign='center'
-                xs={12}
-                style={{ paddingTop: "15px" }}
-              >
-                <Button3Formik title='Submit' />
-              </Grid>
-            </Grid>
-          </Form>
-        </Formik>
-      </div>
-    </Grid>
+            </Form>
+          </Formik>
+        </div>
+      </Grid>
+    </>
   );
 };
 
