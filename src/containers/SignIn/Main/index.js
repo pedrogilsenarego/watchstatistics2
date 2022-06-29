@@ -121,7 +121,7 @@ const Main = ({ handleCloseLoginMenu }) => {
               padding: "0px",
               marginTop: "10px",
               borderRadius: "4px",
-              width: "500px",
+              width: mobile ? "95vw" : "500px",
             }}
           >
             <TextField

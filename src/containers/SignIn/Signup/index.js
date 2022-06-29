@@ -1,4 +1,4 @@
-import { Form, Formik } from "formik";
+import { Form, Formik, useField } from "formik";
 import { Grid } from "@mui/material";
 import TextField from "../../forms/InputMUI";
 import CheckBox from "../../forms/checkBoxMUI";
@@ -66,6 +66,17 @@ const INITIAL_FORM_STATE = {
   termsOfService: false,
 };
 
+const TermsError = () => {
+  const [, termsOfServiceMeta, ,] = useField("termsOfService");
+  if (termsOfServiceMeta.error)
+    return (
+      <GeneralStyled.StyledFormError>
+        The terms must be accepted
+      </GeneralStyled.StyledFormError>
+    );
+  return null;
+};
+
 const Signup = (props) => {
   const {
     handleFormSubmit,
@@ -103,7 +114,7 @@ const Signup = (props) => {
                       padding: "0px",
                       marginTop: "10px",
                       borderRadius: "4px",
-                      width: "500px",
+                      width: mobile ? "95vw" : "500px",
                     }}
                   >
                     <TextField
@@ -126,7 +137,7 @@ const Signup = (props) => {
                       padding: "0px",
                       marginTop: "10px",
                       borderRadius: "4px",
-                      width: "500px",
+                      width: mobile ? "95vw" : "500px",
                     }}
                   >
                     <TextField
@@ -149,7 +160,7 @@ const Signup = (props) => {
                       padding: "0px",
                       marginTop: "10px",
                       borderRadius: "4px",
-                      width: "500px",
+                      width: mobile ? "95vw" : "500px",
                     }}
                   >
                     <TextField
@@ -173,7 +184,7 @@ const Signup = (props) => {
                       padding: "0px",
                       marginTop: "10px",
                       borderRadius: "4px",
-                      width: "500px",
+                      width: mobile ? "95vw" : "500px",
                     }}
                   >
                     <TextField
@@ -189,7 +200,7 @@ const Signup = (props) => {
                   item
                   textAlign='center'
                   xs={12}
-                  style={{ paddingTop: "20px" }}
+                  style={{ paddingTop: mobile ? "40px" : "20px" }}
                 >
                   <GeneralStyled.BasicTypography
                     style={{ textDecoration: "underline", cursor: "pointer" }}
@@ -205,6 +216,7 @@ const Signup = (props) => {
                     name='termsOfService'
                     label='I, read and agree with the terms presented&nbsp; '
                   />
+                  <TermsError />
                 </Grid>
                 <Grid
                   item
