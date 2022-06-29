@@ -32,8 +32,6 @@ const useWatchParts = ({ setBagFull, data }) => {
   const { randomProduct, currentUser, cartBoosters } = useSelector(mapState);
   const dispatch = useDispatch();
 
-  console.log(boostStatus);
-
   useEffect(() => {
     setModalProduct(randomProduct);
   }, [randomProduct]);

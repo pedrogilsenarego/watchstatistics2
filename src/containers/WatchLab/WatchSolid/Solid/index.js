@@ -12,6 +12,7 @@ export default function Model({
   movementColor,
   crownColor,
   braceletColor,
+  fusionPrice,
 }) {
   const group = useRef();
   const { nodes } = useGLTF("/watch.glb");
@@ -22,7 +23,7 @@ export default function Model({
       <Html
         scale={0.15}
         rotation={[Math.PI / 2, 0, 0]}
-        position={[1, 0, 0]}
+        position={[0.8, 0, 0.8]}
         transform
         occlude
       >
@@ -35,7 +36,7 @@ export default function Model({
           onClick={() => setColorText("red")}
         >
           <Typography style={{ fontSize: "20px", color: colorText }}>
-            New watch
+            {fusionPrice || "New Watch"}
           </Typography>
         </Box>
       </Html>

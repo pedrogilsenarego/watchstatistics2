@@ -35,56 +35,69 @@ const SignIn = ({ handleCloseLoginMenu }) => {
         {whichMenu === "recover" && <RecoverPwd {...configMain} />}
         {whichMenu === "register" && <Signup {...configMain} />}
       </Grid>
-      <Divider
+      <div
         style={{
+          position: "absolute",
+          bottom: "3vh",
           width: "100%",
-          background: "white",
-          marginTop: "20vh",
         }}
-      />
-      <Grid container alignItems='center' justifyContent='center' columnGap={2}>
-        <Typography
+      >
+        <Divider
           style={{
-            fontSize: "13px",
-            color: whichMenu === "main" ? "white" : "#ffffff80",
-            paddingTop: "5px",
-            cursor: "pointer",
+            width: "100%",
+            background: "white",
           }}
-          onClick={() => {
-            setWhichMenu("main");
-          }}
+        />
+        <Grid
+          style={{ marginTop: "10px" }}
+          container
+          alignItems='center'
+          justifyContent='center'
+          columnGap={2}
         >
-          Login
-        </Typography>
+          <Typography
+            style={{
+              fontSize: "13px",
+              color: whichMenu === "main" ? "white" : "#ffffff80",
+              paddingTop: "5px",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              setWhichMenu("main");
+            }}
+          >
+            Login
+          </Typography>
 
-        <Typography
-          style={{
-            fontSize: "13px",
-            color: whichMenu === "register" ? "white" : "#ffffff80",
-            paddingTop: "5px",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            setWhichMenu("register");
-          }}
-        >
-          Register
-        </Typography>
+          <Typography
+            style={{
+              fontSize: "13px",
+              color: whichMenu === "register" ? "white" : "#ffffff80",
+              paddingTop: "5px",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              setWhichMenu("register");
+            }}
+          >
+            Register
+          </Typography>
 
-        <Typography
-          style={{
-            fontSize: "13px",
-            color: whichMenu === "recover" ? "white" : "#ffffff80",
-            paddingTop: "5px",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            setWhichMenu("recover");
-          }}
-        >
-          Reset Password
-        </Typography>
-      </Grid>
+          <Typography
+            style={{
+              fontSize: "13px",
+              color: whichMenu === "recover" ? "white" : "#ffffff80",
+              paddingTop: "5px",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              setWhichMenu("recover");
+            }}
+          >
+            Reset Password
+          </Typography>
+        </Grid>
+      </div>
     </Grid>
   );
 };

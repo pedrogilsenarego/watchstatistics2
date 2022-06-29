@@ -5,4 +5,5 @@ export interface Redux {
   productsData: any;
   cartData: any;
   marketData: marketData;
+  general: any;
 }

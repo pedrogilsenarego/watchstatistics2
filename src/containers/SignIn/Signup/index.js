@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { signUpUserStart } from "../../../redux/User/user.actions";
 import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import { Grid, useTheme, useMediaQuery } from "@mui/material";
+import { Grid } from "@mui/material";
 import TextField from "../../forms/InputMUI";
 import CheckBox from "../../forms/checkBoxMUI";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import { clearApiRequest } from "src/redux/general/general.actions";
 import Alert from "src/components/Alert";
 import Button3Formik from "src/components/Buttons/Button3Formik";
+import { FORM_VALIDATION } from "./validation";
+import useSignup from "./useSignup";
 
 const useStyles = makeStyles((theme) => ({
   textField: {
@@ -59,10 +56,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const mapState = (state) => ({
-  currentUser: state.user.currentUser,
-  general: state.general,
-});
 
 const INITIAL_FORM_STATE = {
   displayName: "",
@@ -72,60 +65,18 @@ const INITIAL_FORM_STATE = {
   termsOfService: false,
 };
 
-const FORM_VALIDATION = Yup.object().shape({
-  displayName: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .required("Required")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-    ),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), ""], "Passwords must Match")
-    .required("Required")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-    ),
-  termsOfService: Yup.boolean()
-    .oneOf([true], "The terms and conditions must be accepted")
-    .required("The terms and conditions must be accepted"),
-});
-
 const Signup = (props) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const {
+    handleFormSubmit,
+    mobile,
+    setTerms,
+    terms,
+    dispatch,
+    general,
+    triggerAlert,
+    setTriggerAlert,
+  } = useSignup();
   const classes = useStyles();
-  const theme = useTheme();
-  const [triggerAlert, setTriggerAlert] = useState(false);
-  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [terms, setTerms] = useState(false);
-  const { currentUser, general } = useSelector(mapState);
-
-  useEffect(
-    () => {
-      if (currentUser) {
-        history.goBack();
-      }
-    },
-    // eslint-disable-next-line
-    [currentUser]
-  );
-
-  const handleFormSubmit = (event) => {
-    const { displayName, email, password, confirmPassword } = event;
-    dispatch(
-      signUpUserStart({
-        displayName,
-        email,
-        password,
-        confirmPassword,
-      })
-    );
-    setTriggerAlert(true);
-    return false;
-  };
 
   return (
     <Grid item xs={12}>
@@ -163,7 +114,7 @@ const Signup = (props) => {
               <Grid
                 item
                 xs={12}
-                style={{ marginTop: mobile ? "20px" : "30px" }}
+                style={{ marginTop: mobile ? "20px" : "20px" }}
               >
                 <Container
                   style={{
@@ -186,7 +137,7 @@ const Signup = (props) => {
               <Grid
                 item
                 xs={12}
-                style={{ marginTop: mobile ? "20px" : "30px" }}
+                style={{ marginTop: mobile ? "20px" : "20px" }}
               >
                 <Container
                   style={{
@@ -210,7 +161,7 @@ const Signup = (props) => {
               <Grid
                 item
                 xs={12}
-                style={{ marginTop: mobile ? "20px" : "30px" }}
+                style={{ marginTop: mobile ? "20px" : "20px" }}
               >
                 <Container
                   style={{
@@ -273,7 +224,7 @@ const Signup = (props) => {
                   onClose={() => dispatch(clearApiRequest())}
                   severity='error'
                   maxWidth='500px'
-                  message={general.apiRequestMessage}
+                  message={general?.apiRequestMessage}
                   trigger={triggerAlert}
                   setTrigger={setTriggerAlert}
                 />

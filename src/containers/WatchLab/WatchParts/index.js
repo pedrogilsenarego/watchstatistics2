@@ -71,6 +71,7 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     movementColor: fusionMovement,
     crownColor: fusionCrown,
     braceletColor: fusionBracelet,
+    fusionPrice,
   };
 
   const configShredder = {
@@ -109,10 +110,10 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
   if (list) {
     return (
       <Grid container style={{ paddingTop: "100px" }}>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Watch {...configWatch} />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <Styled.Paper style={{ marginRight: "20px", marginBottom: "100px" }}>
             <Grid container rowGap={1} columnSpacing={2}>
               {list.map((grp, grpI) => (

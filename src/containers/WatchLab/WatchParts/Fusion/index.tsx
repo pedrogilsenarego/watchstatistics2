@@ -3,6 +3,7 @@ import Button3 from "src/components/Buttons/Button3";
 import { priceWatchParts } from "src/Utils/gamyfication";
 import BoosterSelection from "./BoosterSelection";
 import { Grid } from "@mui/material";
+import { useEffect } from "react";
 
 interface Props {
   fusionPrice: string;
@@ -47,9 +48,8 @@ const Fusion = ({
   boostStatusFail,
   numberBoosters,
   setNumberBoosters,
-  boostStatus
+  boostStatus,
 }: Props) => {
-
   const configBoosterSelection = {
     boostStatusFalse,
     boostStatusTrue,
@@ -57,8 +57,15 @@ const Fusion = ({
     numberBoosters,
     setNumberBoosters,
     fusionPrice,
-    boostStatus
+    boostStatus,
   };
+
+  useEffect(() => {
+    if (fusionMatchParts)
+      setFusionPrice(priceWatchParts(list[1].items?.[0] || ""));
+    else setFusionPrice("Parts dont Match")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [list, fusionMatchParts]);
 
   return (
     <Grid item container xs={12} rowGap={1} style={{ marginTop: "20px" }}>
@@ -68,14 +75,16 @@ const Fusion = ({
         style={{ display: "flex", width: "100%" }}
       >
         <GeneralStyles.BasicTypography fontSize='16px' textAlign='end'>
-          New watch to be obtained: <b style={{ color: "orange" }}>{fusionPrice}</b>
+          New watch to be obtained:{" "}
+          <b style={{ color: "orange" }}>{fusionPrice}</b>
         </GeneralStyles.BasicTypography>
       </GeneralStyles.DashedGrid>
       {list[1].items.length > 5 && (
         <Grid item xs={12} textAlign='end'>
-          <GeneralStyles.BasicTypography color="orange" fontSize="14px">
+          <GeneralStyles.BasicTypography color='orange' fontSize='14px'>
             You have to many parts on the fusion machine
-          </GeneralStyles.BasicTypography></Grid>
+          </GeneralStyles.BasicTypography>
+        </Grid>
       )}
       {!fusionMatchParts && (
         <Grid item xs={12} textAlign='end'>
@@ -94,24 +103,25 @@ const Fusion = ({
         fusionMatchParts &&
         list[1].items.length === 5 &&
         (!collectionFull ? (
-          <Grid item xs={12} textAlign="end">
+          <Grid item xs={12} textAlign='end'>
             <Button3
               title='Start Fusion'
               onClick={() => {
-                setFusionPrice(priceWatchParts(list[1].items?.[0] || ""));
                 setReady(true);
               }}
-            /></Grid>
+            />
+          </Grid>
         ) : (
-          <Grid item xs={12} textAlign="end">
-            <GeneralStyles.BasicTypography color="orange" fontSize="14px">
+          <Grid item xs={12} textAlign='end'>
+            <GeneralStyles.BasicTypography color='orange' fontSize='14px'>
               Your collection is full!
-            </GeneralStyles.BasicTypography></Grid>
+            </GeneralStyles.BasicTypography>
+          </Grid>
         ))}
       {ready && (
         <>
           <BoosterSelection {...configBoosterSelection} />
-          <Grid item xs={12} textAlign="end">
+          <Grid item xs={12} textAlign='end'>
             <Button3
               title='Fusion'
               onClick={() => {
@@ -119,7 +129,8 @@ const Fusion = ({
                 handleFusionNewWatch();
                 handleDeleteWatchParts(list[1].items);
               }}
-            /></Grid>
+            />
+          </Grid>
         </>
       )}
     </Grid>
