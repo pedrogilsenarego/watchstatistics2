@@ -73,7 +73,7 @@ const Next = () => {
   return (
     <Container maxWidth='xl'>
       <Box>
-        <Grid container spacing={2} style={{ marginTop: "-2px" }}>
+        <Grid container spacing={2} style={{ marginTop: "0px" }}>
           {nextItems().map((item, pos) => {
             return (
               <Grid item key={pos}>
