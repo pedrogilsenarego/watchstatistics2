@@ -5,7 +5,8 @@ import { getBox } from "src/constants/gamification";
 
 export const handleResetPasswordAPI = (email) => {
   const config = {
-    url: "http://localhost:3000/login",
+    //url: "http://localhost:3000",
+    url: "https://watch-statistics.com",
   };
 
   return new Promise((resolve, reject) => {

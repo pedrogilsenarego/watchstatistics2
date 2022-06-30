@@ -138,7 +138,9 @@ export function* resetPassword({ payload: { email } }) {
   try {
     yield call(handleResetPasswordAPI, email);
     yield put(resetPasswordSuccess());
+    yield put(updateSuccessApiRequest(""));
   } catch (err) {
+    yield put(updateFailApiRequest(err.message));
     yield put(userError(err));
   }
 }

@@ -18,6 +18,7 @@ const SignIn = ({ handleCloseLoginMenu }: Props) => {
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const configMain = {
     handleCloseLoginMenu,
+    mobile
   };
 
   return (
