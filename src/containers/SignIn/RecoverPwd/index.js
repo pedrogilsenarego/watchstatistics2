@@ -53,15 +53,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 const mapState = (state) => ({
   resetPasswordSuccess: state.user.resetPasswordSuccess,
-  userErr: state.user.userErr,
   general: state.general,
 });
 
 const RecoverPwd = ({ handleCloseLoginMenu, mobile }) => {
-  const { resetPasswordSuccess, userErr, general } = useSelector(mapState);
+  const { resetPasswordSuccess, general } = useSelector(mapState);
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [errors, setErrors] = useState([]);
   const [triggerAlert, setTriggerAlert] = useState(false);
 
   useEffect(
@@ -75,26 +73,14 @@ const RecoverPwd = ({ handleCloseLoginMenu, mobile }) => {
     [resetPasswordSuccess]
   );
 
-  useEffect(() => {
-    if (Array.isArray(userErr) && userErr.length > 0) {
-      setErrors(userErr);
-    }
-  }, [userErr]);
-
   const handleSubmit = (e) => {
     const { email } = e;
     dispatch(resetPasswordStart({ email }));
+    setTriggerAlert(true);
   };
 
   return (
     <>
-      {errors.length > 0 && (
-        <ul>
-          {errors.map((e, index) => {
-            return <li key={index}>{e}</li>;
-          })}
-        </ul>
-      )}
       <Formik
         initialValues={{
           ...INITIAL_FORM_STATE,
