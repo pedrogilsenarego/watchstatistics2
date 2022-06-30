@@ -7,10 +7,11 @@ interface Props {
   alt?: string;
   height?: string;
   onClick?: () => void
+  borderRadius?: string;
 }
 
 
-const CardMedia = ({ image, alt, onClick, height }: Props) => {
+const CardMedia = ({ image, alt, onClick, height, borderRadius }: Props) => {
   const [imageLoading, setImageLoading] = useState(true);
   const handleClick = () => {
     if (onClick) onClick()
@@ -37,7 +38,7 @@ const CardMedia = ({ image, alt, onClick, height }: Props) => {
       <MuiCardMedia
         onLoad={() => setImageLoading(false)}
         style={{
-          borderRadius: "4px",
+          borderRadius: borderRadius ?? "4px",
           cursor: "pointer",
           opacity: imageLoading ? 0 : 1,
         }}

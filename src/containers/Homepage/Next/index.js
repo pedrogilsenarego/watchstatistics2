@@ -46,10 +46,11 @@ const Next = () => {
   const openBoxes = () => {
     const openBoxes = {
       title: `Open Boxes: ${
-        currentUser?.whiteBox +
-        currentUser?.blueBox +
-        currentUser?.purpleBox +
-        currentUser?.orangeBox
+        currentUser?.whiteBox ||
+        0 + currentUser?.blueBox ||
+        0 + currentUser?.purpleBox ||
+        0 + currentUser?.orangeBox ||
+        0
       }`,
       link: generalEndpoints.WATCH_LABORATORY,
     };

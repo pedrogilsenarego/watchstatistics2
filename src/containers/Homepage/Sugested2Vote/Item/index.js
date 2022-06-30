@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router";
-import CardMedia from "@mui/material/CardMedia";
+import CardMedia from "src/components/CardMedia";
 
 const Item = ({ item }) => {
   const history = useHistory();
@@ -10,7 +10,7 @@ const Item = ({ item }) => {
     <>
       <CardMedia
         style={{ cursor: "pointer" }}
-        component='img'
+        borderRadius='0px'
         height='90vh'
         image={item.productThumbnail?.[0] ?? ""}
         alt={item.productName}
