@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBooster } from "../../../../redux/Cart/cart.actions";
 import { useHistory } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
+import { Avatar, Tooltip } from "@mui/material";
 import { AiFillFire } from "react-icons/ai";
-import Popover from "../../../../components/Popover";
 import { generalEndpoints } from "src/constants/endpoints";
 
 const AddToBoost = ({ product, productID }) => {
@@ -20,38 +19,27 @@ const AddToBoost = ({ product, productID }) => {
     history.push(generalEndpoints.WATCH_LABORATORY);
   };
 
+  const label = "Select this watch for boosting";
+
   return (
     <>
-      <Avatar
-        sx={{
-          bgcolor: "#00000000",
-          border: "solid 3px",
-          borderColor: "#ffffff66",
-          width: "5vh",
-          height: "5vh",
-          cursor: "pointer",
-        }}
-        onMouseOver={(e) => {
-          setAnchor(e.currentTarget);
-        }}
-        onMouseOut={() => {
-          setAnchor(null);
-        }}
-        onClick={() => {
-          handleAddToBoost();
-        }}
-      >
-        <AiFillFire size='4vh' color='#ffffff66' />
-      </Avatar>
-      <Popover
-        anchor={anchor}
-        setAnchor={setAnchor}
-        message={[
-          " Select this watch for boosting,",
-          <br />,
-          "check FAQ for more information",
-        ]}
-      />
+      <Tooltip arrow placement='top' title={label}>
+        <Avatar
+          sx={{
+            bgcolor: "#00000000",
+            border: "solid 3px",
+            borderColor: "#ffffff66",
+            width: "5vh",
+            height: "5vh",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            handleAddToBoost();
+          }}
+        >
+          <AiFillFire size='3.5vh' color='#ffffff66' />
+        </Avatar>
+      </Tooltip>
     </>
   );
 };

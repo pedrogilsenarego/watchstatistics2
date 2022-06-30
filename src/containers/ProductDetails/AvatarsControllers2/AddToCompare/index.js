@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../../../redux/Cart/cart.actions";
 import { useHistory } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
+import { Typography, Avatar, Tooltip } from "@mui/material";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
-import Popover from "../../../../components/Popover";
 
 const AddToCompare = ({ product, cartItems, productID, compareWatches }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [anchor, setAnchor] = useState(null);
 
   const handleAddToCart = (product, cartItems, productID) => {
     if (!product) return;
@@ -22,49 +19,43 @@ const AddToCompare = ({ product, cartItems, productID, compareWatches }) => {
       history.push("/watchstatistics/comparewatches");
     }
   };
+
+  const label = compareWatches
+    ? [" This watch is already selected, for comparison"]
+    : ["Select this watch to compare with other watches"];
+
   return (
     <>
-      <Avatar
-        sx={{
-          bgcolor: "#00000000",
-          border: "solid 3px",
-          borderColor: "#ffffff66",
-          width: "5vh",
-          height: "5vh",
-          cursor: "pointer",
-        }}
-        onClick={() => {
-          handleAddToCart(product, cartItems, productID);
-        }}
-        onMouseOver={(e) => {
-          setAnchor(e.currentTarget);
-        }}
-        onMouseOut={() => {
-          setAnchor(null);
-        }}
-        size="small"
-      >
-        {compareWatches && (
-          <Typography
-            style={{
-              color: "#ffffff66",
-              fontWeight: "800",
-            }}
-          >
-            X
-          </Typography>
-        )}
-        {!compareWatches && <BsFillGrid1X2Fill size="3vh" color="#ffffff66" />}
-      </Avatar>
-      <Popover
-        anchor={anchor}
-        setAnchor={setAnchor}
-        message={
-          compareWatches
-            ? [" This watch is already selected,", <br />, "for comparison"]
-            : ["Select this watch to compare", <br />, "with other watches"]
-        }
-      />
+      <Tooltip arrow placement='top' title={label}>
+        <Avatar
+          sx={{
+            bgcolor: "#00000000",
+            border: "solid 3px",
+            borderColor: "#ffffff66",
+            width: "5vh",
+            height: "5vh",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            handleAddToCart(product, cartItems, productID);
+          }}
+          size='small'
+        >
+          {compareWatches && (
+            <Typography
+              style={{
+                color: "#ffffff66",
+                fontWeight: "800",
+              }}
+            >
+              X
+            </Typography>
+          )}
+          {!compareWatches && (
+            <BsFillGrid1X2Fill size='2.5vh' color='#ffffff66' />
+          )}
+        </Avatar>
+      </Tooltip>
     </>
   );
 };
