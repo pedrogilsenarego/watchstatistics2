@@ -3,30 +3,32 @@ import * as GeneralStyled from "src/styles/styles";
 
 type ButtonProps = {
   name: string;
-  onClick?: () => void;
+  onClick?: any;
 };
 
 interface Props {
   listButtons?: ButtonProps[];
   rightEntries?: any;
+  marginTop?: string;
+  justifyContent?: string;
 }
 
-const TopHeader = ({ listButtons, rightEntries }: Props) => {
+const TopHeader = ({ listButtons, rightEntries, marginTop, justifyContent }: Props) => {
   return (
     <Grid
       container
       xs={12}
       style={{
         backgroundColor: "#154A6799",
-        marginTop: "100px",
+        marginTop: marginTop || "100px",
         padding: "5px",
       }}
     >
       <Container>
-        <Grid container alignItems='center' justifyContent='space-between'>
+        <Grid container alignItems='center' justifyContent={justifyContent || 'space-between'}>
           <Grid item>
             {listButtons?.map((button: ButtonProps, pos: number) => (
-              <Button key={pos} style={{ color: "white" }}>
+              <Button key={pos} style={{ color: "white" }} onClick={button.onClick}>
                 {button.name}
               </Button>
             ))}
