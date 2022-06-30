@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBooster } from "../../../../redux/Cart/cart.actions";
 import { useHistory } from "react-router-dom";
@@ -9,7 +8,6 @@ import { generalEndpoints } from "src/constants/endpoints";
 const AddToBoost = ({ product, productID }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [anchor, setAnchor] = useState(null);
 
   const handleAddToBoost = () => {
     if (!product) return;

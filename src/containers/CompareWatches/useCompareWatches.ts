@@ -15,6 +15,7 @@ const useCompareWatches = () => {
   const [hide1, setHide1] = useState(false);
   const [hide2, setHide2] = useState(false);
   const [hide3, setHide3] = useState(false);
+  const [openPopup,setOpenPopup] = useState(false)
   const { cartItems } = useSelector(mapState);
   const history = useHistory();
 
@@ -220,6 +221,8 @@ const useCompareWatches = () => {
     configRadarChart,
     showClearWatches,
     showSearchWatches,
+    openPopup, 
+    setOpenPopup
   };
 };
 

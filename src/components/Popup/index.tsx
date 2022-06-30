@@ -38,7 +38,7 @@ const Popup = ({
             </Typography>
           </div>
         </DialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
+        <DialogContent dividers style={{ color: "white" }}>{children}</DialogContent>
       </Dialog>
     </div>
   );
