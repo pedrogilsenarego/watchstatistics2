@@ -6,7 +6,8 @@ export const MainGrid = styled(Grid)(() => ({
 }));
 
 export const ButtonGrid = styled(Grid)(() => ({
-  marginTop: "20px" 
+  marginTop: "20px" ,
+  marginBottom:"10px"
 }));
 
 export const GraphTextGrid = styled(Grid)(() => ({

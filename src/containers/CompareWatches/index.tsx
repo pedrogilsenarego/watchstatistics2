@@ -10,6 +10,7 @@ import { i18n } from "src/translations/i18n";
 import { generalEndpoints } from "src/constants/endpoints";
 import * as Styled from "./styles";
 import HelpPopup from "./HelpPopup";
+import { BsQuestionCircle } from "react-icons/bs"
 
 const CompareWatches = () => {
   const {
@@ -32,9 +33,9 @@ const CompareWatches = () => {
         <Styled.MainGrid container spacing={2}>
           <Grid item xs={12} md={7}>
             <GeneralStyled.Card>
-              <GeneralStyled.BasicTypography>
+              <GeneralStyled.TitleTypography>
                 {i18n.t("text.compareWatches.title")}
-              </GeneralStyled.BasicTypography>
+              </GeneralStyled.TitleTypography>
               {showClearWatches() ? (
                 <TableList
                   columns={tableColumns}
@@ -42,13 +43,12 @@ const CompareWatches = () => {
                   onAction={handleAction}
                 />
               ) : (
-                <>
+                <Grid container columnGap={1} style={{ marginTop: "20px", marginBottom: mobile ? "30px" : "100px" }}>
                   <GeneralStyled.BasicTypography fontSize='16px'>
                     {i18n.t("text.compareWatches.noWatches")}
                   </GeneralStyled.BasicTypography>
-                  <GeneralStyled.BasicTypography fontSize='16px' onClick={() => setOpenPopup(true)}>
-                    Teste
-                  </GeneralStyled.BasicTypography></>
+                  <BsQuestionCircle size="1.5em" color="orange" style={{ cursor: "pointer" }} onClick={() => setOpenPopup(true)} />
+                </Grid>
               )}
 
               <Styled.ButtonGrid
