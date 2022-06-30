@@ -286,7 +286,7 @@ const Header = (props) => {
           disabled={watchstatistics}
           onClick={() => {
             handleCloseWatchstatisticsMenu();
-            history.push("/submit-new-watch");
+            history.push(generalEndpoints.SUBMIT_WATCHES);
           }}
         >
           Submit New Watch

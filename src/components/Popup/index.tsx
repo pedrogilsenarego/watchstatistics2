@@ -25,14 +25,15 @@ const Popup = ({
     <div>
       <Dialog
         open={openPopup}
-        style={{ color: "black" }}
+        style={{ color: "white" }}
+        PaperProps={{ style: { backgroundColor: '#2874A6' } }}
         onClick={() => {
           if (clickToClose && setOpenPopup) setOpenPopup(false);
         }}
       >
         <DialogTitle>
           <div style={{ textAlign: "center" }}>
-            <Typography variant='h6' component='div' style={{ color: "black" }}>
+            <Typography variant='h6' component='div' style={{ color: "white" }}>
               {title}
             </Typography>
           </div>

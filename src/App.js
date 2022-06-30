@@ -176,7 +176,7 @@ const App = () => {
               />
               <Route
                 exact
-                path='/submit-new-watch'
+                path={generalEndpoints.SUBMIT_WATCHES}
                 render={() => (
                   <WithAuth>
                     <MainLayout>

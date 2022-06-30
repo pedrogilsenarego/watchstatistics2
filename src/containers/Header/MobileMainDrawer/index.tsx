@@ -67,7 +67,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
             <Grid
               item
               xs={12}
-              onClick={() => handleClickOption(`/submit-new-watch`)}
+              onClick={() => handleClickOption(generalEndpoints.SUBMIT_WATCHES)}
             >
               <Styled.TypographyTitle>{i18n.t("drawer.main.addWatch")}</Styled.TypographyTitle>
             </Grid>

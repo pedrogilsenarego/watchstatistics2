@@ -4,5 +4,6 @@ export const generalEndpoints = {
   WATCH_LABORATORY: "/watchlaboratory",
   DASHBOARD: "/dashboard",
   MY_COLLECTION: "/mycollection",
-  MARKET: "/market"
+  MARKET: "/market",
+  SUBMIT_WATCHES: "/submit-watch"
 }

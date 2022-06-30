@@ -63,13 +63,13 @@ export const rankColors = {
 };
 
 export const bagSize = {
-  NOOB: 10,
-  BEGGINNER: 12,
-  ENTHUSIAST: 14,
-  MATURE: 16,
-  CONOISSEUR: 18,
-  GEEK_LEGEND: 20,
-  GOD: 25,
+  NOOB: 8,
+  BEGGINNER: 10,
+  ENTHUSIAST: 11,
+  MATURE: 12,
+  CONOISSEUR: 12,
+  GEEK_LEGEND: 12,
+  GOD: 13,
 };
 
 export const openBoxParts = (typeOfBox: TypeOfBox): any => {

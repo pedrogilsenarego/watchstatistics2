@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Typography, Button, ButtonGroup, Grid } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptCookiePolicy } from "../../redux/User/user.actions";
+import Popup from "../Popup";
 
 const mapState = ({ user }) => ({
   user: user,
@@ -29,52 +24,54 @@ const CookiePolicy = () => {
   );
 
   return (
-    <div>
-      <Dialog open={open} style={{ color: "black" }}>
-        <DialogTitle>
-          <div style={{ textAlign: "center" }}>
-            <Typography variant='h6' component='div' style={{ color: "black" }}>
-              This Website uses Cookies
-            </Typography>
-          </div>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Typography style={{ color: "black" }}>
-            The use of cookies on this website has only the finality of
-            improving the user experience.
-          </Typography>
-          <Typography style={{ color: "black", marginTop: "20px" }}>
+    <Popup
+      title='This Website uses Cookies'
+      openPopup={open}
+      setOpenPopup={setOpen}
+    >
+      <Grid container justifyContent='center'>
+        <Typography style={{ color: "white" }}>
+          The use of cookies on this website has only the finality of improving
+          the user experience.
+        </Typography>
+        <Grid item xs={12}>
+          <Typography style={{ color: "white", marginTop: "20px" }}>
             If you want to know more read our{" "}
             <b
               onClick={() => setPrivacyPolicy(!privacyPolicy)}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", color: "orange" }}
             >
               Privacy policy
             </b>
           </Typography>
-          {privacyPolicy && (
-            <Typography
-              style={{ color: "black", marginTop: "20px", fontSize: "13px" }}
-            >
-              This website stores some user preferences that are stored on the
-              cache from the browser, the goal is strictly for better user
-              experience.
-              <br />
-              <br />
-              When registering the website, additional information is also
-              stored, the information is not shared with any other entities and
-              is safely secured with encryptation. The goal of that information
-              is strictly for user experience.
-              <br />
-              <br />
-              All passwords are never saved on the Database and instead are
-              runed through a authentication process from google firebase.
-              <br />
-              <br />
-              For more information please visit the <b>Submit Feedback</b> tab.
-            </Typography>
-          )}
-
+        </Grid>
+        {privacyPolicy && (
+          <Typography
+            style={{
+              color: "white",
+              marginTop: "20px",
+              fontSize: "13px",
+            }}
+          >
+            This website stores some user preferences that are stored on the
+            cache from the browser, the goal is strictly for better user
+            experience.
+            <br />
+            <br />
+            When registering the website, additional information is also stored,
+            the information is not shared with any other entities and is safely
+            secured with encryptation. The goal of that information is strictly
+            for user experience.
+            <br />
+            <br />
+            All passwords are never saved on the Database and instead are runed
+            through a authentication process from google firebase.
+            <br />
+            <br />
+            For more information please visit the <b>Submit Feedback</b> tab.
+          </Typography>
+        )}
+        <ButtonGroup>
           <Button
             onClick={() => {
               dispatch(acceptCookiePolicy(true));
@@ -83,16 +80,31 @@ const CookiePolicy = () => {
             style={{
               float: "right",
               fontSize: "17px",
-              color: "darkBlue",
+              color: "white",
               fontWeight: "500",
               marginTop: "40px",
             }}
           >
-            Accept Terms
+            Accept
           </Button>
-        </DialogContent>
-      </Dialog>
-    </div>
+          <Button
+            onClick={() => {
+              dispatch(acceptCookiePolicy(true));
+              setOpen(false);
+            }}
+            style={{
+              float: "right",
+              fontSize: "17px",
+              color: "white",
+              fontWeight: "500",
+              marginTop: "40px",
+            }}
+          >
+            Decline
+          </Button>
+        </ButtonGroup>
+      </Grid>
+    </Popup>
   );
 };
 

@@ -101,7 +101,7 @@ const Sugested2Vote = () => {
 
   return (
     <Container maxWidth={"xl"}>
-      <Grid container style={{ marginTop: "50px" }} alignItems='center'>
+      <Grid container style={{ marginTop: "20px" }} alignItems='center'>
         <Grid item>
           <Typography variant={"h6"}>Sugested for you to vote</Typography>
         </Grid>

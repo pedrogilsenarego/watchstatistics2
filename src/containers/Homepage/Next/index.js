@@ -1,8 +1,9 @@
-import {Box, Container, Grid, Button} from "@mui/material";
+import { Box, Container, Grid, Button } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Typography from "@mui/material/Typography";
+import { generalEndpoints } from "src/constants/endpoints";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -26,74 +27,50 @@ const Next = () => {
   const history = useHistory();
   const { currentUser } = useSelector(mapState);
 
-  const getWhiteBoxes = () => {
-    if (!currentUser.whiteBox) return 0;
-    else return currentUser.whiteBox;
-  };
-
-  const getBlueBoxes = () => {
-    if (!currentUser.blueBox) return 0;
-    else return currentUser.blueBox;
-  };
-
-  const getPurpleBoxes = () => {
-    if (!currentUser.purpleBox) return 0;
-    else return currentUser.purpleBox;
-  };
-  const getOrangeBoxes = () => {
-    if (!currentUser.orangeBox) return 0;
-    else return currentUser.orangeBox;
-  };
-
-  const getWatchesSubmited = () => {
-    if (!currentUser.watchesSubmited) return 0;
-    else return currentUser.watchesSubmited;
-  };
-
   const userPoints = () => {
     const userPoints = {
-      title: `Spend Points: ${currentUser.points}`,
-      link: "watchstatistics/watchlaboratory",
+      title: `Spend Points: ${currentUser?.points}`,
+      link: generalEndpoints.WATCH_LABORATORY,
     };
-    if (currentUser.points > 4) return userPoints;
-    else return 0;
+    return userPoints;
   };
 
   const submitNewWatch = () => {
     const newWatch = {
       title: "Submit New Watch",
-      link: "submit-new-watch",
+      link: generalEndpoints.SUBMIT_WATCHES,
     };
-    if (getWatchesSubmited() < 10) return newWatch;
-    else return 0;
+    return newWatch;
   };
 
   const openBoxes = () => {
     const openBoxes = {
       title: `Open Boxes: ${
-        getWhiteBoxes() + getBlueBoxes() + getPurpleBoxes() + getOrangeBoxes()
+        currentUser?.whiteBox +
+        currentUser?.blueBox +
+        currentUser?.purpleBox +
+        currentUser?.orangeBox
       }`,
-      link: "watchstatistics/watchlaboratory",
+      link: generalEndpoints.WATCH_LABORATORY,
     };
-    if (
-      getWhiteBoxes() > 0 ||
-      getBlueBoxes() > 0 ||
-      getPurpleBoxes() > 0 ||
-      getOrangeBoxes() > 0
-    )
-      return openBoxes;
-    else return 0;
+    return openBoxes;
   };
 
   const nextItems = () => {
     const initialArray = [];
-    if (userPoints() !== 0) initialArray.push(userPoints());
-    if (openBoxes() !== 0) initialArray.push(openBoxes());
-    if (submitNewWatch() !== 0) initialArray.push(submitNewWatch());
+    if (currentUser?.points > 4) initialArray.push(userPoints());
+    if (
+      currentUser?.whiteBox > 0 ||
+      currentUser?.blueBox > 0 ||
+      currentUser?.purpleBox > 0 ||
+      currentUser?.orangeBox > 0
+    )
+      initialArray.push(openBoxes());
+    if (currentUser?.watchesSubmited < 10) initialArray.push(submitNewWatch());
     return initialArray;
   };
   return (
-    <Container>
+    <Container maxWidth='xl'>
       <Box>
         <Grid container spacing={2} style={{ marginTop: "-2px" }}>
           {nextItems().map((item, pos) => {
