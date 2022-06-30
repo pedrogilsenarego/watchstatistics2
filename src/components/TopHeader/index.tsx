@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Grid, Container, Button } from "@mui/material";
 import * as GeneralStyled from "src/styles/styles";
 
@@ -13,7 +14,13 @@ interface Props {
   justifyContent?: string;
 }
 
-const TopHeader = ({ listButtons, rightEntries, marginTop, justifyContent }: Props) => {
+const TopHeader = ({
+  listButtons,
+  rightEntries,
+  marginTop,
+  justifyContent,
+}: Props) => {
+  const [buttonSelected, setButtonSelected] = useState(0);
   return (
     <Grid
       container
@@ -25,10 +32,18 @@ const TopHeader = ({ listButtons, rightEntries, marginTop, justifyContent }: Pro
       }}
     >
       <Container>
-        <Grid container alignItems='center' justifyContent={justifyContent || 'space-between'}>
+        <Grid
+          container
+          alignItems='center'
+          justifyContent={justifyContent || "space-between"}
+        >
           <Grid item>
             {listButtons?.map((button: ButtonProps, pos: number) => (
-              <Button key={pos} style={{ color: "white" }} onClick={button.onClick}>
+              <Button
+                key={pos}
+                style={{ color: pos === buttonSelected ? "orange" : "white" }}
+                onClick={() => { button.onClick(); setButtonSelected(pos) }}
+              >
                 {button.name}
               </Button>
             ))}

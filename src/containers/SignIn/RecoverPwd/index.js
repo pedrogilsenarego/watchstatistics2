@@ -91,7 +91,7 @@ const RecoverPwd = ({ handleCloseLoginMenu, mobile }) => {
         }}
       >
         <Form>
-          <Grid container>
+          <Grid item xs={12}>
             <Grid item xs={12}>
               <Container
                 style={{
