@@ -5,7 +5,7 @@ import { generalEndpoints } from "src/constants/endpoints";
 import { useHistory } from "react-router-dom";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
 
-const LAPTOP_IMAGE = "https://i.imgur.com/fPuv6GA.png";
+const LAPTOP_IMAGE = "https://i.imgur.com/Vdt6aXo.png";
 const LAPTOP_IMAGE1 = "https://i.imgur.com/cdnT5Su.png";
 
 interface Props {
@@ -86,7 +86,7 @@ const HelpPopup = ({ open, setOpen }: Props) => {
           </Grid>
         </Grid>
         <Grid item>
-          <CardMedia height='300px' image={LAPTOP_IMAGE} />
+          <CardMedia height='250px' image={LAPTOP_IMAGE} />
         </Grid>
         <Grid item>
           <Typography>
