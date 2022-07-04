@@ -138,8 +138,6 @@ const Item = ({ item, products }) => {
     []
   );
 
-  if (!Array.isArray(products)) return;
-
   return (
     <Grid item xs={12} sm={4} md={3}>
       <Card style={{ backgroundColor: "#18161E" }}>
