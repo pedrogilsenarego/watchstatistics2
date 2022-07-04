@@ -2,6 +2,7 @@ import { } from "@mui/material"
 import useAvatarDashboard from "./useAvatarDashboard"
 import * as Styled from "./styles"
 import AddToBoost from "./AddToBoost"
+import AddToCompare from "./AddToCompare"
 
 interface Props {
   productID: string;
@@ -16,7 +17,9 @@ const AvatarDashboard = ({ productID, product, avatarSize }: Props) => {
       direction='row'
       spacing={1}
       mobile={mobile}
-    ><AddToBoost product={product} productID={productID} avatarSize={avatarSize} /></Styled.Stack></>
+    ><AddToBoost product={product} productID={productID} avatarSize={avatarSize} />
+      <AddToCompare product={product} productID={productID} avatarSize={avatarSize} />
+    </Styled.Stack></>
   )
 }
 

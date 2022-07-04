@@ -20,7 +20,7 @@ const AddToBoost = ({ productID, product, avatarSize }: Props) => {
         <Avatar
           sx={{
             bgcolor: "#00000000",
-            border: "solid 3px",
+            border: "solid 2px",
             borderColor: "#ffffff66",
             width: avatarSize ?? "5vh",
             height: avatarSize ?? "5vh",

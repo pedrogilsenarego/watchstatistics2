@@ -8,10 +8,14 @@ interface Props {
   productID:string;
   product: any
 }
-const useAddToBoost = ({productID, product}:Props) => {
 
+
+const useAddToBoost = ({productID, product}:Props) => {
+  
   const dispatch = useDispatch();
   const history = useHistory();
+
+  
 
   const handleAddToBoost = () => {
     if (!product) return;
@@ -22,7 +26,8 @@ const useAddToBoost = ({productID, product}:Props) => {
     dispatch(updateSuccessNotification(`${product.productBrand} ${product.productName} was added for boosting`))
   };
   return {
-handleAddToBoost
+handleAddToBoost,
+
   }
 }
 
