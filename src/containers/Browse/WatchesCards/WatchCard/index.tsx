@@ -9,6 +9,7 @@ import * as Styled from "./styles";
 import { useHistory } from "react-router-dom";
 import CircularVotes from "../../../../components/ProgressBars/CircularVotes";
 import CardMedia from "src/components/CardMedia";
+import AvatarDashboard from "src/componentsMixed/AvatarDashBoard";
 
 const WatchCard = ({
   data,
@@ -74,17 +75,18 @@ const WatchCard = ({
             <Grid item container xs={8}>
               <Grid item container xs={12}>
                 <Grid item container xs={8} spacing={1}>
-                  <Grid container item spacing={1}>
+                  <Grid container item spacing={1} justifyContent="space-between" alignItems="center">
+
                     <Grid item>
                       <Typography style={{ color: "#ffffff66" }}>
-                        {productName}
+                        {productName}&nbsp;{reference}
                       </Typography>
                     </Grid>
-                    <Grid item>
-                      <Typography style={{ color: "#ffffff66" }}>
-                        {reference}
-                      </Typography>
+
+                    <Grid item >
+                      <AvatarDashboard productID={documentID} product={data} avatarSize="3.5vh" />
                     </Grid>
+
                   </Grid>
                   <Grid item>
                     <Typography>
@@ -175,6 +177,7 @@ const WatchCard = ({
               </Grid>
             </Grid>
           </Grid>
+
         </Styled.Paper>
       </Grid>
     </>
