@@ -129,6 +129,9 @@ const WatchCard = ({
                       userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.Button
+                            onClick={() => {
+                              history.push(`/product/${documentID}`);
+                            }}
                             bColor='green'
                             style={{
                               textTransform: "none",
@@ -145,6 +148,9 @@ const WatchCard = ({
                       !userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.Button
+                            onClick={() => {
+                              history.push(`/product/${documentID}`);
+                            }}
                             bColor='red'
                             style={{
                               textTransform: "none",
@@ -237,6 +243,9 @@ const WatchCard = ({
                       userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.ButtonMobile
+                            onClick={() => {
+                              history.push(`/product/${documentID}`);
+                            }}
                             bColor='green'
                             style={{
                               textTransform: "none",
@@ -253,6 +262,9 @@ const WatchCard = ({
                       !userVotes.includes(documentID) && (
                         <Grid item>
                           <Styled.ButtonMobile
+                            onClick={() => {
+                              history.push(`/product/${documentID}`);
+                            }}
                             bColor='red'
                             style={{
                               textTransform: "none",
