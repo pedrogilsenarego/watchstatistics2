@@ -68,7 +68,7 @@ const WatchCard = ({
         <Styled.Paper>
           <Grid container spacing={2}>
             <Grid xs={4} item>
-              <CardMedia height="120" image={productThumbnail[0]} onClick={() => {
+              <CardMedia borderRadius="2px" height="120" image={productThumbnail[0]} onClick={() => {
                 history.push(`/product/${documentID}`);
               }} />
             </Grid>
