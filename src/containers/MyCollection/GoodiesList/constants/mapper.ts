@@ -1,9 +1,11 @@
+import { whatImage } from "src/Utils/gamyfication";
+
 const Parts = ( p: any,
   pos: number,) => {
   return{
     id: pos,
-    name:p,
-
+    name:p.substring(1),
+    preview: whatImage(p.substring(1))
   }
 }
 

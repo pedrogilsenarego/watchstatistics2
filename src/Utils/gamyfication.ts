@@ -1,5 +1,10 @@
 import { experienceCap, rankColors, bagSize } from "src/constants/gamification";
 import { getRandomInt, randomWeightedNumber } from "./math";
+import Case from "src/assets/Case.svg";
+import Bracelet from "src/assets/Bracelet.svg";
+import Movement from "src/assets/Movement.svg";
+import Crown from "src/assets/Crown.svg";
+import Glass from "src/assets/Glass.svg";
 
 export interface Rank {
   rank: string;
@@ -148,6 +153,15 @@ export const bagSizeHelper = (experience:number) => {
     if (fusionPrice === "6") return "purple";
     if (fusionPrice === "7") return "orange";
     if (fusionPrice === "8") return "red";
+  };
+
+  export const whatImage = (item:string) => {
+    if (item === "Case") return Case;
+    if (item === "Glass") return Glass;
+    if (item === "Bracelet") return Bracelet;
+    if (item === "Movement") return Movement;
+    if (item === "Crown") return Crown;
+    else return null;
   };
 
   export const LinearProgressBarColor2 = (value: number) => {

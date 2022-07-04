@@ -28,7 +28,9 @@ export interface Column {
   format?: (value: number) => string;
   hoverMapper?: Mapper<any>[];
   colorMapper?: Mapper<any>[];
+  color?: any;
   onClick?: any
+  cutChar?:boolean;
 }
 
 export interface TableListAction {

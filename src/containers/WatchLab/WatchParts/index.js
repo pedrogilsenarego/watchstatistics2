@@ -1,8 +1,3 @@
-import Case from "../../../assets/Case.svg";
-import Bracelet from "../../../assets/Bracelet.svg";
-import Movement from "../../../assets/Movement.svg";
-import Crown from "../../../assets/Crown.svg";
-import Glass from "../../../assets/Glass.svg";
 import Watch from "../WatchSolid";
 import { Grid, Typography, Box, CardMedia, Tooltip } from "@mui/material";
 import { colorWatchParts } from "src/Utils/gamyfication";
@@ -12,6 +7,7 @@ import Popup from "../../../components/Popup";
 import useWatchParts from "./useWatchParts";
 import Shredder from "./Shredder";
 import Fusion from "./Fusion";
+import { whatImage } from "src/Utils/gamyfication";
 
 const WatchParts = ({ data, collectionFull, setBagFull }) => {
   const {
@@ -43,15 +39,6 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     boostStatus,
     handleFusionNewWatch,
   } = useWatchParts({ setBagFull, data });
-
-  const whatImage = (item) => {
-    if (item === "Case") return Case;
-    if (item === "Glass") return Glass;
-    if (item === "Bracelet") return Bracelet;
-    if (item === "Movement") return Movement;
-    if (item === "Crown") return Crown;
-    else return null;
-  };
 
   const boostStatusFalse = () => {
     setBoostStatus("false");
