@@ -198,9 +198,7 @@ const WatchCard = ({
             <Grid item container xs={8}>
               <Grid item container xs={12}>
                 <Grid item container xs={8} spacing={1}>
-
                   <Grid item container spacing={1}>
-
                     {!pCategory && (
                       <Grid item>
                         <Styled.ButtonMobile
@@ -264,7 +262,6 @@ const WatchCard = ({
                           >
                             Not voted ({numberVotesNotOwn + numberVotesOwn})
                           </Styled.ButtonMobile>
-
                         </Grid>
                       )}
                   </Grid>
