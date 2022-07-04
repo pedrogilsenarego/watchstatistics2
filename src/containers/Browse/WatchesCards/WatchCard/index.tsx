@@ -2,7 +2,6 @@
 import {
   Grid,
   Typography,
-  Divider,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
@@ -161,6 +160,7 @@ const WatchCard = ({
 
                 </Grid>
                 <Grid item container xs={2} justifyContent='center'>
+
                   <CircularVotes avgTotal={avgTotal} />
                 </Grid>
               </Grid>
@@ -198,13 +198,9 @@ const WatchCard = ({
             <Grid item container xs={8}>
               <Grid item container xs={12}>
                 <Grid item container xs={8} spacing={1}>
-                  <Grid item>
-                    <Typography>
-                      Votes: {numberVotesNotOwn + numberVotesOwn}
-                    </Typography>
-                  </Grid>
 
                   <Grid item container spacing={1}>
+
                     {!pCategory && (
                       <Grid item>
                         <Styled.ButtonMobile
@@ -250,7 +246,7 @@ const WatchCard = ({
                               fontSize: "12px",
                             }}
                           >
-                            AlreadyVoted
+                            AlreadyVoted ({numberVotesNotOwn + numberVotesOwn})
                           </Styled.ButtonMobile>
                         </Grid>
                       )}
@@ -266,13 +262,17 @@ const WatchCard = ({
                               fontSize: "12px",
                             }}
                           >
-                            Not voted
+                            Not voted ({numberVotesNotOwn + numberVotesOwn})
                           </Styled.ButtonMobile>
+
                         </Grid>
                       )}
                   </Grid>
                 </Grid>
                 <Grid item container xs={4} justifyContent='flex-end'>
+                  <Grid item >
+                    <AvatarDashboard productID={documentID} product={data} avatarSize="3.5vh" />
+                  </Grid>
                   <CircularVotes customSize={60} avgTotal={avgTotal} />
                 </Grid>
               </Grid>
