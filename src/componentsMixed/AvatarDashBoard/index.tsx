@@ -19,42 +19,47 @@ const AvatarDashboard = ({ productID, product, avatarSize }: Props) => {
   });
   return (
     <>
+      <Styled.Stack
+        direction='row'
+        spacing={1}
+        mobile={mobile}
+      >
+        <Avatar
+          sx={{
+            bgcolor: "#ffffff1A",
 
-
-
-      <Styled.Stack direction='row' spacing={1} mobile={mobile}>
-        {show && (<>
-          <AddToBoost
-            product={product}
-            productID={productID}
-            avatarSize={avatarSize}
-          />
-          <AddToCompare
-            product={product}
-            productID={productID}
-            avatarSize={avatarSize}
-          />
-          <FacebookShare {...configShareButtons} avatarSize={avatarSize} />
-          <WhatsappShareButton
-            {...configShareButtons}
-            avatarSize={avatarSize}
-          /></>)}
-        <Avatar sx={{
-          bgcolor: "#ffffff1A",
-
-          borderColor: "#ffffff66",
-          width: avatarSize ?? "5vh",
-          height: avatarSize ?? "5vh",
-          cursor: "pointer",
-        }}>
+            borderColor: "#ffffff66",
+            width: avatarSize ?? "5vh",
+            height: avatarSize ?? "5vh",
+            cursor: "pointer",
+          }}
+        >
           <BiDotsHorizontalRounded
             onClick={() => setShow(!show)}
             size='2em'
             color='#ffffffCE'
           />
         </Avatar>
+        {show && (
+          <>
+            <AddToBoost
+              product={product}
+              productID={productID}
+              avatarSize={avatarSize}
+            />
+            <AddToCompare
+              product={product}
+              productID={productID}
+              avatarSize={avatarSize}
+            />
+            <FacebookShare {...configShareButtons} avatarSize={avatarSize} />
+            <WhatsappShareButton
+              {...configShareButtons}
+              avatarSize={avatarSize}
+            />
+          </>
+        )}
       </Styled.Stack>
-
     </>
   );
 };

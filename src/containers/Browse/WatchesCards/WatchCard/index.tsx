@@ -75,8 +75,8 @@ const WatchCard = ({
             </Grid>
             <Grid item container xs={8}>
               <Grid item container xs={12}>
-                <Grid item container xs={8} spacing={1}>
-                  <Grid container item spacing={1} justifyContent="space-between" alignItems="center">
+                <Grid item container xs={10}>
+                  <Grid container item spacing={1} alignItems="center">
 
                     <Grid item>
                       <Typography style={{ color: "#ffffff66" }}>
@@ -89,11 +89,7 @@ const WatchCard = ({
                     </Grid>
 
                   </Grid>
-                  <Grid item>
-                    <Typography>
-                      Votes: {numberVotesNotOwn + numberVotesOwn}
-                    </Typography>
-                  </Grid>
+
 
                   <Grid item container spacing={1}>
                     {!pCategory && (
@@ -141,7 +137,7 @@ const WatchCard = ({
                               fontSize: "14px",
                             }}
                           >
-                            AlreadyVoted
+                            AlreadyVoted ({numberVotesNotOwn + numberVotesOwn})
                           </Styled.Button>
                         </Grid>
                       )}
@@ -157,25 +153,18 @@ const WatchCard = ({
                               fontSize: "14px",
                             }}
                           >
-                            Not voted
+                            Not voted ({numberVotesNotOwn + numberVotesOwn})
                           </Styled.Button>
                         </Grid>
                       )}
                   </Grid>
+
                 </Grid>
-                <Grid item container xs={4} justifyContent='flex-end'>
+                <Grid item container xs={2} justifyContent='center'>
                   <CircularVotes avgTotal={avgTotal} />
                 </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <Divider
-                  style={{
-                    width: "75%",
-                    background: "#ffffff66",
-                    marginTop: "5px",
-                  }}
-                />
-              </Grid>
+
             </Grid>
           </Grid>
 

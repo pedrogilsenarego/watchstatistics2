@@ -6,7 +6,8 @@ interface PropsStack {
 export const Stack = styled(MuiStacked)(({mobile}:PropsStack)=>({
   display: "flex",
         flexDirection: "row",
+        backgroundColor: "#ffffff1A",
+        borderRadius: "24px",
         alignItems: "center",
-        height: mobile ? "5vh" : "6.5vh",
         justifyContent: "flex-end",
 }))
