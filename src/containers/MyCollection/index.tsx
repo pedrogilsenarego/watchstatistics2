@@ -56,8 +56,10 @@ const MyCollection = () => {
     <Container style={{ marginTop: "100px" }}>
       <TopHeader
         listButtons={menuButtons(setTab)}
-        rightEntries={topHeaderRightEntries(
+        rightEntries={topHeaderRightEntries(tab,
           `${currentUser.collection?.length || 0}/${bagSizeHelper(
+            currentUser?.experience || 0
+          )}`, `${currentUser.watchParts?.length || 0}/${bagSizeHelper(
             currentUser?.experience || 0
           )}`
         )}

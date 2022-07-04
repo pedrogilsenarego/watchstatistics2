@@ -1,3 +1,5 @@
+import { tabs } from "../types"
+
 export const menuButtons = (setWhichMenu: any) => [
   {
     name: "My Watches",
@@ -18,6 +20,19 @@ const collection = (collection: string) => (
   </>
 );
 
-export const topHeaderRightEntries = (
-  collectionField: string
-) => [collection(collectionField)];
+const watchParts = (parts: string) => (
+  <>
+    <b>Watch Parts: </b>
+    {parts}
+  </>
+);
+
+export const topHeaderRightEntries = (tab: string,
+  collectionField: string, partsField: string
+) => {
+  switch (tab) {
+    case tabs.MY_COLLECTION: return [collection(collectionField)]
+    case tabs.GOODIES: return [watchParts(partsField)]
+    default: return [collection(collectionField)]
+  }
+};
