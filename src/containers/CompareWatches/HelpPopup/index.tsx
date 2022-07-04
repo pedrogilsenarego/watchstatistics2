@@ -4,9 +4,12 @@ import { Typography, Grid, Tooltip, Avatar } from "@mui/material";
 import { generalEndpoints } from "src/constants/endpoints";
 import { useHistory } from "react-router-dom";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
+import { useTheme, useMediaQuery } from "@mui/material"
 
 const LAPTOP_IMAGE = "https://i.imgur.com/Vdt6aXo.png";
 const LAPTOP_IMAGE1 = "https://i.imgur.com/cdnT5Su.png";
+const MOBILE_IMAGE = "https://i.imgur.com/bd44c8Z.png"
+const MOBILE_IMAGE1 = "https://i.imgur.com/gHT6OV8.png";
 
 interface Props {
   open: boolean;
@@ -14,6 +17,8 @@ interface Props {
 }
 
 const HelpPopup = ({ open, setOpen }: Props) => {
+  const theme = useTheme()
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"))
   const Icon = () => {
     const label = "Select this watch to compare with other watches";
     return (
@@ -27,6 +32,7 @@ const HelpPopup = ({ open, setOpen }: Props) => {
             height: "3vh",
             cursor: "pointer",
           }}
+
         >
           <BsFillGrid1X2Fill size='1.5vh' color='#ffffffCE' />
         </Avatar>
@@ -43,50 +49,36 @@ const HelpPopup = ({ open, setOpen }: Props) => {
       title='How to add watches for Comparisson'
     >
       <Grid container rowGap={2} justifyContent='center'>
-        <Grid item container columnGap={1}>
+        <Grid item container columnGap={1} >
           <Grid item>
-            <Typography>
-              On the{" "}
+            <Typography component="div">
+              On the&nbsp;
               <b
                 onClick={() => history.push(generalEndpoints.BROWSE)}
                 style={{ color: "orange" }}
               >
                 Browsing Page
-              </b>{" "}
-              every watch has an option{" "}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Icon />
-          </Grid>
-          <Grid item>
-            <Typography>
-              to select it for comparisson, this will add the watch to
+              </b>&nbsp;
+              every watch has a &nbsp; {<Icon />}&nbsp; option to select it for comparison, this will add the watch to
               the list of watches that are currently being compared.
             </Typography>
           </Grid>
+
         </Grid>
         <Grid item>
-          <CardMedia height='250px' image={LAPTOP_IMAGE1} />
+          <CardMedia height={mobile ? '350px' : "250px"} image={mobile ? MOBILE_IMAGE : LAPTOP_IMAGE1} />
         </Grid>
         <Grid item container columnGap={1}>
           <Grid item>
-            <Typography>
-              Also, when exploring the watch details, the option
+            <Typography component="div" style={{ display: "flex" }}>
+              Also, when exploring the watch details, the option {<Icon />} to add the watch for the compare list is present.
             </Typography>
           </Grid>
-          <Grid item>
-            <Icon />
-          </Grid>
-          <Grid item>
-            <Typography>
-              {" "}
-              to add the watch for the compare list is present.
-            </Typography>
-          </Grid>
+
+
         </Grid>
         <Grid item>
-          <CardMedia height='250px' image={LAPTOP_IMAGE} />
+          <CardMedia height={mobile ? '350px' : "250px"} image={mobile ? MOBILE_IMAGE1 : LAPTOP_IMAGE} />
         </Grid>
         <Grid item>
           <Typography>
