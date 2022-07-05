@@ -17,6 +17,7 @@ export interface marketProducts {
   productName: string;
   reference: string;
   UserUID: string;
+  image: string;
 }
 
 export interface marketData {
