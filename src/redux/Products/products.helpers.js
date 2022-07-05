@@ -1,5 +1,6 @@
 import { firestore } from "./../../firebase/utils";
 import firebase from "firebase/app";
+import { priceBrackets } from "src/Utils/parsers";
 
 export const handleAddProduct = (payload) => {
   return new Promise((resolve, reject) => {
@@ -19,14 +20,19 @@ export const handleAddProduct = (payload) => {
 };
 
 export const handleIncrementProductsCounter = (product) => {
-  const admin = product.admin;
-  if (!admin) return;
+  const priceBracketsP = priceBrackets(product.productPriceBrackets);
   return new Promise((resolve, reject) => {
     firestore
       .collection("watch-statistics")
       .doc("counters")
       .update({
         products: firebase.firestore.FieldValue.increment(1),
+        [`category.${product.productCategory}`]:
+          firebase.firestore.FieldValue.increment(1),
+        [`pricesBrackets.${priceBracketsP}`]:
+          firebase.firestore.FieldValue.increment(1),
+        [`brands.${product.productBrand}`]:
+          firebase.firestore.FieldValue.increment(1),
       })
       .then(() => {
         resolve();
