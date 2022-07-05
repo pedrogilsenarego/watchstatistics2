@@ -15,5 +15,18 @@ export const tableColumns = [
     sortable: false,
    
   },
+  {
+    id: "priceBracket",
+    label: "Price Bracket",
+    type: ColumnType.Text,
+    sortable: false,
+  },
+  {
+    id: "sell",
+    label: "Sell",
+    type: ColumnType.ActionComponent,
+    minWidth: 70,
+    sortable: false,
+  },
   
 ]

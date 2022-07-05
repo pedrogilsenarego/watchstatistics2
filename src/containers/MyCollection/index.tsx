@@ -66,7 +66,7 @@ const MyCollection = () => {
       />
       <Container>
         {tab === "myWatches" && renderMyWatches()}
-        {tab === "goodies" && <GoodiesList parts={currentUser?.watchParts || []} />}
+        {tab === "goodies" && <GoodiesList />}
       </Container>
     </Container>
   );

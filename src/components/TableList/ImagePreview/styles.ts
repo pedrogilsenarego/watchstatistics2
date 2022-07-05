@@ -8,6 +8,6 @@ export const Container = styled(Box)(() => ({
 
 export const CardMedia = styled(MuiCardMedia)(() => ({
   height: "50px",
-  width: "80px",
+  width: "50px",
   borderRadius: "3px",
 }))

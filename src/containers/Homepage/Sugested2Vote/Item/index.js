@@ -2,8 +2,11 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router";
 import CardMedia from "src/components/CardMedia";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 const Item = ({ item }) => {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const history = useHistory();
 
   return (
@@ -11,7 +14,7 @@ const Item = ({ item }) => {
       <CardMedia
         style={{ cursor: "pointer" }}
         borderRadius='0px'
-        height='90vh'
+        height={mobile ? "90px" : "100px"}
         image={item.productThumbnail?.[0] ?? ""}
         alt={item.productName}
         onClick={() => history.push(`/product/${item.documentID}`)}
