@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { Grid, Container } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -20,6 +20,10 @@ const Carrousell = ({ data, title }: Props) => {
   const [buttonRight, setButtonRight] = useState(true);
   const [x, setX] = useState(0);
 
+  useEffect(() => {
+    if (!data[1]) setButtonRight(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const goLeft = () => {
     setX(x + 200);
@@ -29,12 +33,12 @@ const Carrousell = ({ data, title }: Props) => {
   };
 
   const handleGoRight = () => {
-    if (data[1].length === 0) return;
+    if (!data[1]) return;
     if (x !== -400) {
       if (x === 0) {
         goRight();
         setButtonLeft(true);
-        if (data[2].length === 0) setButtonRight(false);
+        if (!data[2]) setButtonRight(false);
       }
       if (x === -200) {
         goRight();
