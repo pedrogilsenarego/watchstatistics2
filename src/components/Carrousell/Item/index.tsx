@@ -1,8 +1,9 @@
 import CardMedia from "src/components/CardMedia";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
+import { ItemP } from "../types"
 
 interface Props {
-  item: any
+  item: ItemP
 }
 
 const Item = ({ item }: Props) => {
@@ -13,23 +14,23 @@ const Item = ({ item }: Props) => {
       <CardMedia
         borderRadius='0px'
         height={mobile ? "90px" : "100px"}
-        image={item.productThumbnail?.[0] ?? ""}
-        alt={item.productName}
+        image={item.image ?? ""}
+        alt=""
       />
 
       <Typography
         fontSize={"12px"}
         style={{ marginTop: "5px", fontWeight: "500" }}
       >
-        {item.productBrand} {item.productName}: {item.reference}
+        {item.main || ""}
       </Typography>
-      <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
+      {/* <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
         Votes: {item.numberVotesOwn + item.numberVotesNotOwn} . Score:{" "}
         {item.avgTotal}
-      </Typography>
-      <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
+      </Typography> */}
+      {/* <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
         {item.userID}
-      </Typography>
+      </Typography> */}
     </>
   );
 }

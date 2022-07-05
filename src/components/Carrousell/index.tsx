@@ -5,6 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import { useMediaQuery, useTheme } from "@material-ui/core";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Item from "./Item"
+import { ItemP } from "./types"
 
 interface Props {
   data: any;
@@ -114,7 +115,7 @@ const Carrousell = ({ data, title }: Props) => {
               transform: `translateX(${x}%)`,
             }}
           >
-            {item.map((item: any, pos: number) => {
+            {item.map((item: ItemP, pos: number) => {
               return (
                 <Grid item key={pos} xs={6} md={3}>
                   <Item item={item} />
