@@ -24,10 +24,9 @@ const Item = ({ item }: Props) => {
       >
         {item.main || ""}
       </Typography>
-      {/* <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
-        Votes: {item.numberVotesOwn + item.numberVotesNotOwn} . Score:{" "}
-        {item.avgTotal}
-      </Typography> */}
+      <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
+        {item.second}
+      </Typography>
       {/* <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
         {item.userID}
       </Typography> */}
