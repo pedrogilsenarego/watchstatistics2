@@ -90,6 +90,11 @@ export const setCounters = (counters) => ({
 
 //Update Products
 
+export const updateCollectedValue = (payload) => ({
+  type: productsTypes.UPDATE_COLLECTED_VALUE,
+  payload,
+});
+
 export const addProductDescription = (payload) => ({
   type: productsTypes.ADD_PRODUCT_DESCRIPTION,
   payload,

@@ -13,6 +13,7 @@ import {
   setProductAdditionalData,
   setProductPicture,
   setProductListDetail,
+  updateCollectedValue,
 } from "./products.actions";
 import {
   handleAddProduct,
@@ -31,6 +32,7 @@ import {
   handleGetCounters,
   handleAddProductUpdateAdmin,
   handleAddProductUpdateUser,
+  handleUpdateCollectedValue,
 } from "./products.helpers";
 import productsTypes from "./products.types";
 import { checkUserSession, updateCollectionStatus } from "../User/user.actions";
@@ -187,16 +189,17 @@ export function* fetchRandomProduct({ payload }) {
       product = yield handleFetchRandomProduct(differentPayload);
     }
     const newCollection = payload.collection;
-    newCollection.push(
+    const newWatch =
       payload.randomValue === "boosted"
         ? newWatchProduction(payload.boosted.productID)
-        : newWatchProduction(product.data[0].documentID)
-    );
+        : newWatchProduction(product.data[0].documentID);
+    newCollection.push(newWatch);
     const configData = {
       ...payload,
       collection: newCollection,
     };
     yield put(updateCollectionStatus(configData));
+    yield put(updateCollectedValue(newWatch.id));
     yield put(
       setRandomProduct(
         payload.randomValue === "boosted" ? payload.boosted : product.data[0]
@@ -255,6 +258,19 @@ export function* onFetchCountersStart() {
 }
 
 //!!!!!!!!!!!!Update Product!!!!!!!!!!!!!!!!!
+
+function* sagaUpdateCollectedValue(payload) {
+  try {
+    yield handleUpdateCollectedValue(payload);
+  } catch (err) {}
+}
+
+export function* onUpdateProductCollectedValueStart() {
+  yield takeLatest(
+    productsTypes.UPDATE_COLLECTED_VALUE,
+    sagaUpdateCollectedValue
+  );
+}
 
 function* sagaAddDescription({ payload }) {
   const { productDesc, currentUser } = payload;
@@ -412,5 +428,6 @@ export default function* productsSagas() {
     call(onFetchCountersStart),
     call(onAddProductDescription),
     call(onAddProductAdditionalData),
+    call(onUpdateProductCollectedValueStart),
   ]);
 }

@@ -481,6 +481,24 @@ export const handleGetCounters = () => {
 };
 
 //update products
+
+export const handleUpdateCollectedValue = (product) => {
+  return new Promise((resolve, reject) => {
+    firestore
+      .collection("products")
+      .doc(product.payload)
+      .update({
+        collectedValue: firebase.firestore.FieldValue.increment(1),
+      })
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 export const handleAddProductUpdateAdmin = (payload) => {
   const {
     productDesc,
