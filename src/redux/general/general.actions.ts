@@ -42,3 +42,13 @@ export const updateFailApiRequest = (message: string) => ({
 export const clearApiRequest = () => ({
   type: generalTypes.CLEAR_API_REQUEST,
 });
+
+export const saveLastEndpoint = (endpoint:string) => ({
+  type: generalTypes.SAVE_LAST_ENDPOINT,
+  payload: endpoint
+})
+
+export const removeLastEndpoint = () => ({
+  type: generalTypes.REMOVE_LAST_ENDPOINT,
+  
+})

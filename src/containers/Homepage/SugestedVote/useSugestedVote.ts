@@ -62,8 +62,6 @@ const useSugestedVote = () => {
     TILES_SHOW
   );
 
-  console.log(data)
-
   return { data };
 };
 

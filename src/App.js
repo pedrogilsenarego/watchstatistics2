@@ -1,6 +1,6 @@
 import { useEffect, Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import "./default.scss";
 import { checkUserSession } from "./redux/User/user.actions";
 
@@ -46,6 +46,7 @@ import HomePage from "./pages/Homepage";
 import SubmitFeedback from "./pages/SubmitFeedback";
 import Snackbar from "./components/SnackBar";
 import { generalEndpoints } from "./constants/endpoints";
+import { saveLastEndpoint } from "./redux/general/general.actions";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -53,6 +54,7 @@ const mapState = (state) => ({
 
 const App = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { currentUser } = useSelector(mapState);
 
   useEffect(
@@ -62,6 +64,14 @@ const App = () => {
     // eslint-disable-next-line
     []
   );
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(saveLastEndpoint(location.pathname));
+    }, 500);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <StyledEngineProvider injectFirst>

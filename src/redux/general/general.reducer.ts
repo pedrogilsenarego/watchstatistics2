@@ -1,4 +1,5 @@
 import generalTypes from "./general.types";
+import { handleBuildHistory, handleRemoveLastEndpoint } from "./general.utils";
 
 const INITIAL_STATE = {
   loading: false,
@@ -6,6 +7,7 @@ const INITIAL_STATE = {
   notificationType: null,
   apiRequestMessage: "",
   apiRequestType: null,
+  history: ["/"]
 };
 
 interface Action {
@@ -67,6 +69,18 @@ const generalReducer = (state = INITIAL_STATE, action: Action) => {
         apiRequestMessage: "",
         apiRequestType: null,
       };
+    case generalTypes.SAVE_LAST_ENDPOINT:
+      return {
+        ...state,
+        history: handleBuildHistory(state.history,action.payload)
+      }
+      case generalTypes.REMOVE_LAST_ENDPOINT:
+        return {
+          ...state,
+          history: handleRemoveLastEndpoint(state.history)
+        }
+      
+    
     default:
       return state;
   }
