@@ -49,7 +49,8 @@ const useSugestedVote = () => {
         (p.numberVotesNotOwn || 0 + p.numberVotesOwn || 0) +
         " . Score: " +
         p.avgTotal || 0,
-      third: p.userID
+      third: p.userID,
+      documentID: p.documentID
     };
   };
 

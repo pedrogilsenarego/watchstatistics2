@@ -9,7 +9,7 @@ import { ItemP } from "./types"
 
 interface Props {
   data: any;
-  title: string
+  title: string,
 }
 
 
@@ -66,7 +66,7 @@ const Carrousell = ({ data, title }: Props) => {
     <Container maxWidth={"xl"}>
       <Grid container style={{ marginTop: "15px" }} alignItems='center' columnGap={1}>
         <Grid item>
-          <Typography variant={"h6"}>{title}</Typography>
+          <Typography style={{ letterSpacing: "2px" }} variant={"h6"}>{title}</Typography>
         </Grid>
         <Grid item>
           <Avatar

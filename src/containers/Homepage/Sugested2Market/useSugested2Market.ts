@@ -26,6 +26,7 @@ const useSugested2Market = () => {
     return {
       id: pos,
       image: p.image,
+      documentID: p.id,
       main: p.productBrand + " " + p.productName + " " + p.reference,
       second:
         "Price: " +

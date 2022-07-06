@@ -1,6 +1,7 @@
 import CardMedia from "src/components/CardMedia";
 import { useTheme, useMediaQuery, Typography } from "@mui/material";
 import { ItemP } from "../types"
+import { useHistory } from "react-router-dom"
 
 interface Props {
   item: ItemP
@@ -8,6 +9,7 @@ interface Props {
 
 const Item = ({ item }: Props) => {
   const theme = useTheme();
+  const history = useHistory()
   const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
@@ -16,6 +18,7 @@ const Item = ({ item }: Props) => {
         height={mobile ? "90px" : "100px"}
         image={item.image ?? ""}
         alt=""
+        onClick={() => history.push(`/product/${item.documentID}`)}
       />
 
       <Typography

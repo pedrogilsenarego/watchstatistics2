@@ -1,3 +1,14 @@
+input,
+textarea,
+button,
+select,
+img,
+image,
+div,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
 html,
 body {
   padding: 0;

@@ -10,7 +10,6 @@ const HomePage = () => {
       <Next />
       <Grid container rowGap={3}>
         <SugestedVote />
-
         <Sugested2Market />
       </Grid>
     </>
