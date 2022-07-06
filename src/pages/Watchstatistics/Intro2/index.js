@@ -41,12 +41,7 @@ const Intro2 = () => {
             </Typography>
           </Grid>
         )}
-        <Grid
-          item
-          xs={12}
-          md={8}
-          style={{ paddingTop: isMatch ? "2vh" : "20vh" }}
-        >
+        <Grid item xs={12} md={8}>
           <Display />
         </Grid>
         {!isMatch && (
