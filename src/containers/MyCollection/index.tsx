@@ -1,7 +1,6 @@
 import { useEffect, useState, lazy } from "react";
-import Container from "@mui/material/Container";
 import { useDispatch } from "react-redux";
-import Grid from "@mui/material/Grid";
+import { Grid, useTheme, useMediaQuery, Container } from "@mui/material";
 import { useSelector } from "react-redux";
 import { fetchMyCollectionStart } from "../../redux/Products/products.actions";
 import { bagSizeHelper } from "src/Utils/gamyfication";
@@ -20,6 +19,8 @@ const MyCollection = () => {
   const { currentUser, products } = useSelector(mapState);
   const [tab, setTab] = useState("myWatches");
   const dispatch = useDispatch();
+  const theme = useTheme()
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const GoodiesList = lazy(() => import("./GoodiesList"));
 
@@ -36,11 +37,11 @@ const MyCollection = () => {
   const renderMyWatches = () => {
     return (
       <Grid
-        item
+
         container
         rowGap={2}
         spacing={1}
-        xs={12}
+
         style={{ marginTop: "20px" }}
       >
         {currentUser.collection &&
@@ -64,7 +65,7 @@ const MyCollection = () => {
           )}`
         )}
       />
-      <Container>
+      <Container disableGutters={mobile ? true : false} >
         {tab === "myWatches" && renderMyWatches()}
         {tab === "goodies" && <GoodiesList />}
       </Container>

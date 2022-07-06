@@ -3,7 +3,15 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { Box, Card, Grid, Tooltip, Divider } from "@mui/material";
+import {
+  Box,
+  Card,
+  Grid,
+  Tooltip,
+  Divider,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import CardMedia from "src/components/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -25,11 +33,13 @@ const mapState = (state) => ({
 const Item = ({ item, products }) => {
   const history = useHistory();
   const { currentUser } = useSelector(mapState);
+  const theme = useTheme();
   const dispatch = useDispatch();
   const [watch, setWatch] = useState();
   const [openDeleteWatchPopup, setOpenDeleteWatchPopup] = useState();
   const [openSellWatchPopup, setOpenSellWatchPopup] = useState();
   const { collection, boosters } = currentUser;
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const positionOnCollection = () => {
     var value = null;
@@ -158,7 +168,10 @@ const Item = ({ item, products }) => {
               <Grid
                 item
                 xs={12}
-                style={{ overflow: "hidden", whiteSpace: "nowrap" }}
+                style={{
+                  overflow: "hidden",
+                  whiteSpace: mobile ? "normal" : "nowrap",
+                }}
               >
                 <GeneralStyled.BasicTypography fontSize='18px'>
                   {item.productBrand} {item.productName} {item.reference}
