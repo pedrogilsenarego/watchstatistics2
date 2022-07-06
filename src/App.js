@@ -26,7 +26,6 @@ import Mapper from "./containers/Mapper";
 import DevelopmentPoles from "./containers/DevelopmentPoles";
 
 // layouts
-import HomepageLayout from "./layouts/HomepageLayout";
 import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import DashBoardLayout from "./layouts/DashboardLayout";
@@ -105,9 +104,9 @@ const App = () => {
                 path='/'
                 render={() =>
                   currentUser ? (
-                    <HomepageLayout>
+                    <MainLayout>
                       <HomePage />
-                    </HomepageLayout>
+                    </MainLayout>
                   ) : (
                     <MainLayout>
                       <Watchstatistics />

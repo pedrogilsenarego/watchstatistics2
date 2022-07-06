@@ -36,7 +36,7 @@ const Footer = () => {
       <Box
         sx={{
           display: isMatch ? "block" : "flex",
-          marginTop: "30vh",
+          marginTop: isMatch ? "10vh" : "5vh",
           width: "100vw",
           padding: "30px",
           backgroundColor: "#18161E",

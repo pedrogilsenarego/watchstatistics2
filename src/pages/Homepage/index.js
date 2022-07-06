@@ -11,7 +11,7 @@ const mapState = (state) => ({
 const HomePage = () => {
   const { currentUser } = useSelector(mapState);
   return (
-    <div style={{ minHeight: "55vh" }}>
+    <div>
       <WatchstatisticsSubHeader {...currentUser} />
       <HomePageComponent />
     </div>
