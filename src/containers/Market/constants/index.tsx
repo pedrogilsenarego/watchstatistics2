@@ -21,7 +21,10 @@ export const topHeaderRightEntries = (
 
 export const topHeaderButtons = [
   {
-    name: "market",
+    name: "watches",
+  },
+  {
+    name: "goodies",
   },
 ];
 

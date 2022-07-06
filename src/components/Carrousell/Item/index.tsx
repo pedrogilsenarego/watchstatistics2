@@ -27,9 +27,9 @@ const Item = ({ item }: Props) => {
       <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
         {item.second}
       </Typography>
-      {/* <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
-        {item.userID}
-      </Typography> */}
+      <Typography fontSize={"12px"} style={{ color: "#ffffff66" }}>
+        {item.third}
+      </Typography>
     </>
   );
 }

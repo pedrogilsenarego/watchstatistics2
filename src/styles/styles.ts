@@ -12,11 +12,16 @@ export const DashedGrid = styled(Grid)(({ disableBorder }: Props) => ({
 
 }))
 
+interface PropsCard {
+  specialBorder?: boolean;
+}
 
-
-export const Card = styled(MuiCard)(() => ({
+export const Card = styled(MuiCard)(({ specialBorder }: PropsCard) => ({
+  border: "solid 2px !important",
   backgroundColor: "#18161E !important",
-  padding: "10px"
+  borderImage: specialBorder ? "linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1 !important" : "default",
+  padding: "10px",
+  borderRadius: "4px !important"
 }))
 
 // Typographies
@@ -33,14 +38,14 @@ interface BasicTypographyProps {
 }
 
 export const BasicTypography = styled(Typography)(({ fontSize, fontWeight, fontFamily, color }: BasicTypographyProps) => ({
-  color: color|| "#ffffffCE !important",
+  color: color || "#ffffffCE !important",
   fontSize: fontSize ?? "20px",
   fontWeight: fontWeight || 500,
   fontFamily: fontFamily ?? "inherit"
 }))
 
 export const TitleTypography = styled(Typography)(({ fontSize, fontWeight, fontFamily, color }: BasicTypographyProps) => ({
-  color: color|| "#ffffffCE",
+  color: color || "#ffffffCE",
   fontSize: fontSize ?? "24px !important",
   fontWeight: fontWeight || "bold !important",
   fontFamily: fontFamily ?? "inherit"

@@ -18,7 +18,7 @@ const GoodiesList = () => {
         />
       </Grid>
       <Grid item xs={12} sm={6} textAlign="end">
-        <GeneralStyled.Card>
+        <GeneralStyled.Card specialBorder>
           <GeneralStyled.BasicTypography>
             Boosters: {currentUser?.boosters || 0}
           </GeneralStyled.BasicTypography>

@@ -16,7 +16,7 @@ interface Props {
 const Carrousell = ({ data, title }: Props) => {
   const [buttonLeft, setButtonLeft] = useState(false);
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [buttonRight, setButtonRight] = useState(true);
   const [x, setX] = useState(0);
 
@@ -60,16 +60,19 @@ const Carrousell = ({ data, title }: Props) => {
     }
   };
 
+  if (data.length <= 0) return (<></>)
+
   return (
     <Container maxWidth={"xl"}>
-      <Grid container style={{ marginTop: "20px" }} alignItems='center'>
+      <Grid container style={{ marginTop: "15px" }} alignItems='center' columnGap={1}>
         <Grid item>
           <Typography variant={"h6"}>{title}</Typography>
         </Grid>
         <Grid item>
           <Avatar
+            sx={{ height: isMatch ? "1.7em" : '1.5em', width: isMatch ? "1.7em" : '1.5em' }}
             style={{
-              backgroundColor: "#ffffff00",
+              backgroundColor: buttonLeft ? "#ffffff1A" : "transparent",
               cursor: buttonLeft ? "pointer" : "default",
             }}
             onClick={() => {
@@ -84,8 +87,9 @@ const Carrousell = ({ data, title }: Props) => {
         </Grid>
         <Grid item>
           <Avatar
+            sx={{ height: isMatch ? "1.7em" : '1.5em', width: isMatch ? "1.7em" : '1.5em' }}
             style={{
-              backgroundColor: "#ffffff00",
+              backgroundColor: buttonRight ? "#ffffff1A" : "transparent",
 
               cursor: buttonRight ? "pointer" : "default",
             }}
@@ -104,7 +108,7 @@ const Carrousell = ({ data, title }: Props) => {
         container
         wrap='nowrap'
         columnGap='100%'
-        style={{ display: "flex", marginTop: "2px" }}
+        style={{ display: "flex", marginTop: "6px" }}
       >
         {data.map((item: any, pos: number) => (
           <Grid
@@ -112,6 +116,7 @@ const Carrousell = ({ data, title }: Props) => {
             item
             key={pos}
             columnGap={0}
+            rowGap={1}
             style={{
               display: "flex",
               minWidth: "100%",
