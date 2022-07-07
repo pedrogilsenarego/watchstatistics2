@@ -103,9 +103,9 @@ const WatchstatisticsSubHeader = () => {
               alignItems='center'
               justifyContent='center'
               columnGap={1}
-              onClick={() => {
-                if (!mobile) { history.push(generalEndpoints.WATCH_LABORATORY); }
-              }}
+              onClick={() =>
+                history.push(mobile ? generalEndpoints.SHOP : generalEndpoints.WATCH_LABORATORY)
+              }
             >
               <GeneralStyled.BasicTypography
                 fontSize='40px'
@@ -172,7 +172,7 @@ const WatchstatisticsSubHeader = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Styled.Container>
+    </Styled.Container >
   );
 };
 
