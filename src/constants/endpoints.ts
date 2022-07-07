@@ -6,5 +6,6 @@ export const generalEndpoints = {
   MY_COLLECTION: "/mycollection",
   MARKET: "/market",
   SUBMIT_WATCHES: "/submit-watch",
-  COMPARE_WATCHES: "/watchstatistics/comparewatches"
+  COMPARE_WATCHES: "/comparewatches",
+  SHOP: "/shop"
 }

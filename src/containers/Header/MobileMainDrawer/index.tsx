@@ -58,7 +58,7 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
         <Grid
           item
           xs={12}
-          onClick={() => handleClickOption(`/watchstatistics/comparewatches`)}
+          onClick={() => handleClickOption(generalEndpoints.COMPARE_WATCHES)}
         >
           <Styled.TypographyTitle>Compare Watches</Styled.TypographyTitle>
         </Grid>
@@ -93,6 +93,13 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
               <Styled.TypographyTitle>
                 {i18n.t("navigation.market")}
               </Styled.TypographyTitle>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              onClick={() => handleClickOption(generalEndpoints.SHOP)}
+            >
+              <Styled.TypographyTitle>Shop</Styled.TypographyTitle>
             </Grid>
           </>
         )}

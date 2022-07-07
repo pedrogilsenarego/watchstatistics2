@@ -294,7 +294,7 @@ const Header = (props) => {
         <MenuItem
           onClick={() => {
             handleCloseWatchstatisticsMenu();
-            history.push("/watchstatistics/comparewatches");
+            history.push(generalEndpoints.COMPARE_WATCHES);
           }}
         >
           Compare Watches

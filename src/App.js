@@ -47,6 +47,7 @@ import SubmitFeedback from "./pages/SubmitFeedback";
 import Snackbar from "./components/SnackBar";
 import { generalEndpoints } from "./constants/endpoints";
 import { saveLastEndpoint } from "./redux/general/general.actions";
+import Shop from "./containers/Shop";
 
 const mapState = (state) => ({
   currentUser: state.user.currentUser,
@@ -127,10 +128,19 @@ const App = () => {
 
               <Route
                 exact
-                path='/watchstatistics/comparewatches'
+                path={generalEndpoints.COMPARE_WATCHES}
                 render={() => (
                   <MainLayout>
                     <CompareWatches />
+                  </MainLayout>
+                )}
+              />
+              <Route
+                exact
+                path={generalEndpoints.SHOP}
+                render={() => (
+                  <MainLayout>
+                    <Shop />
                   </MainLayout>
                 )}
               />

@@ -4,6 +4,7 @@ import { addProduct } from "../../../../redux/Cart/cart.actions";
 import { useHistory } from "react-router-dom";
 import { Typography, Avatar, Tooltip } from "@mui/material";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
+import { generalEndpoints } from "src/constants/endpoints";
 
 const AddToCompare = ({ product, cartItems, productID, compareWatches }) => {
   const dispatch = useDispatch();
@@ -14,9 +15,9 @@ const AddToCompare = ({ product, cartItems, productID, compareWatches }) => {
     if (cartItems.length < 4) {
       product.productID = productID;
       dispatch(addProduct(product));
-      history.push("/watchstatistics/comparewatches");
+      history.push(generalEndpoints.COMPARE_WATCHES);
     } else {
-      history.push("/watchstatistics/comparewatches");
+      history.push(generalEndpoints.COMPARE_WATCHES);
     }
   };
 
