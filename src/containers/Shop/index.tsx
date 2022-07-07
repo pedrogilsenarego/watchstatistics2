@@ -1,15 +1,15 @@
 import TopHeader from "src/components/TopHeader";
-import { menuButtons } from "./constants";
+import { menuButtons, entries } from "./constants";
 import useShop from "./useShope";
 import { menuButtonsTypes } from "./types";
 import General from "./General";
 
 const Shop = () => {
-  const { setWhichMenu, whichMenu } = useShop();
+  const { setWhichMenu, whichMenu, setCartItems, cartItems } = useShop();
   return (
     <>
-      <TopHeader listButtons={menuButtons(setWhichMenu)} />
-      {whichMenu === menuButtonsTypes.GENERAL && <General />}
+      <TopHeader listButtons={menuButtons(setWhichMenu)} rightEntries={entries(cartItems)} />
+      {whichMenu === menuButtonsTypes.GENERAL && <General setCartItems={setCartItems} />}
     </>
   );
 };

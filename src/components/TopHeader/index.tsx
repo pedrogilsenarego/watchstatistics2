@@ -9,7 +9,7 @@ type ButtonProps = {
 
 interface Props {
   listButtons?: ButtonProps[];
-  rightEntries?: any;
+  rightEntries?: any[];
   marginTop?: string;
   justifyContent?: string;
 }

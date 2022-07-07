@@ -113,7 +113,7 @@ const MobileBottomAppBar = ({
           color={
             checkUserHasVoted(productID) || !currentUser
               ? "#ffffff66"
-              : "orange"
+              : "#ffffffCE"
           }
         />
         <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
@@ -128,7 +128,7 @@ const MobileBottomAppBar = ({
         <ImPlus
           onClick={() => setShowOptions(true)}
           size='1.6em'
-          color='orange'
+          color='#ffffffCE'
         />
         <Typography style={{ marginTop: "-1px", color: "lightGrey" }}>
           {i18n.t("navigation.mobileBottomAppbar.options")}
@@ -139,7 +139,7 @@ const MobileBottomAppBar = ({
           <MdArrowForwardIos
             onClick={() => handleNextWatch()}
             size='2em'
-            color='orange'
+            color='#ffffffCE'
           />
         )}
         {!currentUser && <MdArrowForwardIos size='2em' color='grey' />}

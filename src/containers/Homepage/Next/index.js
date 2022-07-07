@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Button } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Button,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -25,12 +32,14 @@ const useStyles = makeStyles((theme) => ({
 const Next = () => {
   const classes = useStyles();
   const history = useHistory();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { currentUser } = useSelector(mapState);
 
   const userPoints = () => {
     const userPoints = {
       title: `Spend Points: ${currentUser?.points}`,
-      link: generalEndpoints.WATCH_LABORATORY,
+      link: mobile ? generalEndpoints.SHOP : generalEndpoints.WATCH_LABORATORY,
     };
     return userPoints;
   };
