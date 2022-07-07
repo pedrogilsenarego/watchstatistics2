@@ -1,28 +1,26 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Stack } from "@mui/material";
 import * as GeneralStyled from "src/styles/styles";
 import { marginStyles } from "src/styles/constants";
-import IncreaseDecreaseButton from "src/components/Buttons/IncreaseDecreaseButton";
 import useGeneral from "./useGeneral";
+import { FaCoins } from "react-icons/fa";
+import AcquireIncrementor from "src/components/AcquireIncrementor";
 
 const General = () => {
-  const { setWhiteBoxesBuy } = useGeneral();
+  const { setWhiteBoxesBuy, currentPoints, currentUser } = useGeneral();
+  const pointsIcon = <FaCoins color="white" size="1.5em" />;
   return (
     <Container style={{ marginTop: marginStyles.MOBILE_CARD_MARGIN_TOP }}>
       <GeneralStyled.Card>
         <GeneralStyled.TitleTypography>Boxes</GeneralStyled.TitleTypography>
-        <Grid
-          container
-          columnGap={2}
-          style={{
-            marginTop: marginStyles.MOBILE_BASIC_TYPO_TO_TITLE,
-
-          }}
-        >
-          <GeneralStyled.BasicTypography>
-            White Box
-          </GeneralStyled.BasicTypography>
-          <IncreaseDecreaseButton setValue={setWhiteBoxesBuy} />
-        </Grid>
+        <Stack style={{ marginTop: marginStyles.MOBILE_BASIC_TYPO_TO_TITLE }}>
+          <AcquireIncrementor
+            title='White Boxes'
+            setValue={setWhiteBoxesBuy}
+            currency={currentPoints}
+            icon={pointsIcon}
+            currentValue={currentUser?.whiteBox || 0}
+          />
+        </Stack>
       </GeneralStyled.Card>
     </Container>
   );
