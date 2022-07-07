@@ -35,7 +35,7 @@ const AcquireIncrementor = ({
     <GeneralStyled.DashedGrid>
       <Grid container columnGap={1}>
         <GeneralStyled.BasicTypography>{title}</GeneralStyled.BasicTypography>
-        {currentValue && (
+        {(currentValue || currentValue === 0) && (
           <GeneralStyled.BasicTypography>
             ({currentValue})
           </GeneralStyled.BasicTypography>
@@ -51,7 +51,7 @@ const AcquireIncrementor = ({
         <Grid item>
           <Grid container columnGap={1} alignItems='center'>
             {icon && <Grid item>{icon}</Grid>}
-            {currency && (
+            {(currency || currency === 0) && (
               <Grid item>
                 <GeneralStyled.BasicTypography>
                   {currency}

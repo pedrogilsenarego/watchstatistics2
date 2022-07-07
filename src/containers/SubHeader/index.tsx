@@ -95,7 +95,7 @@ const WatchstatisticsSubHeader = () => {
             container
             xs={12}
             md={6}
-            justifyContent={mobile ? "center" : 'end'}
+            justifyContent={mobile ? "center" : "end"}
             alignItems='center'
           >
             <Styled.PointsBox
@@ -104,7 +104,11 @@ const WatchstatisticsSubHeader = () => {
               justifyContent='center'
               columnGap={1}
               onClick={() =>
-                history.push(mobile ? generalEndpoints.SHOP : generalEndpoints.WATCH_LABORATORY)
+                history.push(
+                  mobile
+                    ? generalEndpoints.SHOP
+                    : generalEndpoints.WATCH_LABORATORY
+                )
               }
             >
               <GeneralStyled.BasicTypography
@@ -155,7 +159,7 @@ const WatchstatisticsSubHeader = () => {
                 <b style={{ fontSize: "20px" }}>{getRank?.rank}</b>
               </GeneralStyled.BasicTypography>
               <Box
-                component="div"
+                component='div'
                 sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -172,7 +176,7 @@ const WatchstatisticsSubHeader = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Styled.Container >
+    </Styled.Container>
   );
 };
 

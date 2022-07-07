@@ -32,6 +32,9 @@ const darkTheme = createTheme({
       primary: "#154A6799",
     },
     type: "dark",
+    colors: {
+      tealcBlue: "#154A6799",
+    },
   },
 });
 

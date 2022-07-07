@@ -189,13 +189,12 @@ const MobileBottomAppBar = ({
       container
       alignItems='center'
       sx={{
-        borderTop: "solid 1px",
-        borderColor: "#ffffff66",
+
         width: "100%",
         bottom: 0,
-        height: "55px",
+        height: "60px",
         position: "fixed",
-        backgroundColor: "black",
+        backgroundColor: "#154A67",
         zIndex: "1000",
       }}
     >
