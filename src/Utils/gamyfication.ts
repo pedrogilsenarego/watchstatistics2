@@ -229,13 +229,27 @@ export const boosterPercentage = (fusionPrice: string) => {
   if (fusionPrice === "0-200€") return 50;
   if (fusionPrice === "200-500€") return 40;
   if (fusionPrice === "500-1000€") return 25;
-  if (fusionPrice === "1000-5000€") return 20;
+  if (fusionPrice === "1000-5000€") return 10;
   if (fusionPrice === "5000-10.000€") return 10;
   if (fusionPrice === "10.000-30.000€") return 5;
-  if (fusionPrice === "30.000-50.000€") return 4;
+  if (fusionPrice === "30.000-50.000€") return 3;
   if (fusionPrice === "50.000-100.000€") return 2;
   if (fusionPrice === "100.000€+") return 1;
 };
+
+export const boosterCap = (fusionPrice: string) => {
+  if (fusionPrice === "0-200€") return 100;
+  if (fusionPrice === "200-500€") return 80;
+  if (fusionPrice === "500-1000€") return 50;
+  if (fusionPrice === "1000-5000€") return 40;
+  if (fusionPrice === "5000-10.000€") return 20;
+  if (fusionPrice === "10.000-30.000€") return 20;
+  if (fusionPrice === "30.000-50.000€") return 12;
+  if (fusionPrice === "50.000-100.000€") return 8;
+  if (fusionPrice === "100.000€+") return 6;
+};
+
+
 
 export const newWatchProduction = (id: string) => {
   return {

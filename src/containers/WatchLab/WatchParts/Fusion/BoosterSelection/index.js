@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
-import { boosterValue, boosterPercentage } from "src/Utils/gamyfication";
+import {
+  boosterValue,
+  boosterPercentage,
+  boosterCap,
+} from "src/Utils/gamyfication";
 import { getRandomInt } from "src/containers/WatchLab/helpers";
 import { generalEndpoints } from "src/constants/endpoints";
 import * as GeneralStyles from "src/styles/styles";
@@ -52,7 +56,7 @@ const BoosterSelection = ({
     if (numberBoosters > 0) {
       setBoostBeingUsed(true);
     } else setBoostBeingUsed(false);
-    if (boostPercentage() === 100) {
+    if (boostPercentage() >= boosterCap(fusionPrice)) {
       setMaxPercentageBoost(true);
     } else setMaxPercentageBoost(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps

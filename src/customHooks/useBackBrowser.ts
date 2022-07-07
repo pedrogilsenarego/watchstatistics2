@@ -14,7 +14,6 @@ const useBackBrowser = (
 ) => {
   const { pathHistory } = useSelector(mapState);
   const dispatch = useDispatch()
-  console.log("las",pathHistory)
   const history = useHistory();
   if (openDrawer) {
     window.history.pushState(null, "", window.location.href);

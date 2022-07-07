@@ -95,7 +95,7 @@ const WatchstatisticsSubHeader = () => {
             container
             xs={12}
             md={6}
-            justifyContent='center'
+            justifyContent={mobile ? "center" : 'end'}
             alignItems='center'
           >
             <Styled.PointsBox
