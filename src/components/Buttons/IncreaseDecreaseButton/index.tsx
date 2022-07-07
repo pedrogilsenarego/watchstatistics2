@@ -3,7 +3,7 @@ import useIncreaseDecreaseButton from "./useIncreaseDecreaseButton";
 import * as Styled from "./styles"
 
 interface Props {
-  maxValue: number;
+  maxValue?: number;
   setValue: (value: number) => void;
   incDisabled?: boolean;
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 interface Props {
   setValue: (value: number) => void;
-  maxValue: number;
+  maxValue?: number;
   incDisabled?: boolean;
 }
 
@@ -14,7 +14,7 @@ const useIncreaseDecreaseButton = ({setValue, maxValue, incDisabled}: Props) => 
   useEffect(() => {
     setValue(currentNumber)
     if (currentNumber <= 0) setDecreaseDisabled(true)
-    if (currentNumber >= maxValue) setIncreaseDisabled(true)
+    if (maxValue && currentNumber >= maxValue) setIncreaseDisabled(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentNumber])
 
