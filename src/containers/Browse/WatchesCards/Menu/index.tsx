@@ -14,6 +14,8 @@ import { AiFillCloseSquare } from "react-icons/ai";
 import DrawerMine from "../../../../components/Drawer";
 import FiltersMobile from "./FiltersMobile";
 import Chip1 from "src/components/Chips/Chip1";
+import MobileBottomAppBar from "src/components/MobileBottomAppBar"
+import { bottomMenuButtons } from "./constant"
 
 interface Props {
   dummyProductBrands: any;
@@ -126,6 +128,10 @@ const Menu = ({
     handleFetchProducts,
   };
 
+  const handleVisibleFilters = () => {
+    setFiltersVisible(true)
+  }
+
   const renderLaptop = () => {
     return (
       <>
@@ -229,62 +235,75 @@ const Menu = ({
     );
   };
 
+  const productCategoryFilter = () => {
+    if (productCategory)
+      return {
+        title: productCategory,
+
+      }
+    else return
+  }
+
+
   const renderMobile = () => {
     return (
-      <Grid container spacing={1}>
-        <Grid item xs={4}>
-          <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
-            <Grid
-              container
-              justifyContent='center'
-              alignItems='center'
-              spacing={2}
-            >
-              <Grid item>
-                <Styled.FiltersTypography>Filters</Styled.FiltersTypography>
+      <>
+        <MobileBottomAppBar listButtons={bottomMenuButtons(handleVisibleFilters, productCategoryFilter())} />
+        <Grid container spacing={1}>
+          <Grid item xs={4}>
+            <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
+              <Grid
+                container
+                justifyContent='center'
+                alignItems='center'
+                spacing={2}
+              >
+                <Grid item>
+                  <Styled.FiltersTypography>Filters</Styled.FiltersTypography>
+                </Grid>
+                <Grid item>
+                  <BsSliders size='2em' />
+                </Grid>
               </Grid>
-              <Grid item>
-                <BsSliders size='2em' />
-              </Grid>
+            </Styled.FiltersBox>
+          </Grid>
+          <Grid item container spacing={1} xs={8}>
+            <Grid item>
+              {productCategory && (
+                <Chip1
+                  title={productCategory}
+                  onClick={() => {
+                    setProductCategory(null);
+                    setDummyProductCategory(null);
+                  }}
+                />
+              )}
             </Grid>
-          </Styled.FiltersBox>
-        </Grid>
-        <Grid item container spacing={1} xs={8}>
-          <Grid item>
-            {productCategory && (
-              <Chip1
-                title={productCategory}
-                onClick={() => {
-                  setProductCategory(null);
-                  setDummyProductCategory(null);
-                }}
-              />
-            )}
-          </Grid>
-          <Grid item>
-            {productPrices && (
-              <Chip1
-                title={productPrices}
-                onClick={() => {
-                  setProductPrices(null);
-                  setDummyProductPrices(null);
-                }}
-              />
-            )}
-          </Grid>
-          <Grid item>
-            {productBrands && (
-              <Chip1
-                title={productBrands}
-                onClick={() => {
-                  setProductBrands(null);
-                  setDummyProductBrands(null);
-                }}
-              />
-            )}
+            <Grid item>
+              {productPrices && (
+                <Chip1
+                  title={productPrices}
+                  onClick={() => {
+                    setProductPrices(null);
+                    setDummyProductPrices(null);
+                  }}
+                />
+              )}
+            </Grid>
+            <Grid item>
+              {productBrands && (
+                <Chip1
+                  title={productBrands}
+                  onClick={() => {
+                    setProductBrands(null);
+                    setDummyProductBrands(null);
+                  }}
+                />
+              )}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </>
     );
   };
 
@@ -292,8 +311,8 @@ const Menu = ({
     <>
       <Grid container xs={12}>
         {!isMatch && renderLaptop()}
-        {isMatch && renderMobile()}
       </Grid>
+      {isMatch && renderMobile()}
       {isMatch && (
         <DrawerMine
           id={0}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsStart } from "../../../redux/Products/products.actions";
-import { Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Container, Grid, useMediaQuery, useTheme } from "@mui/material";
 import WatchCard from "./WatchCard";
 import * as Styled from "./styles";
 import Menu from "./Menu";
@@ -147,13 +147,15 @@ const WatchesCards = () => {
       <Grid item xs={12}>
         <Menu {...configMenu} />
       </Grid>
-      <Grid item container style={{ marginTop: "10px" }} rowSpacing={1} xs={12}>
-        {data?.map((watchData: any, index: number) => {
-          return (
-            <WatchCard key={index} data={watchData} {...configWatchCard} />
-          );
-        })}
-      </Grid>
+      <Container>
+        <Grid item container style={{ marginTop: "10px" }} rowSpacing={1} xs={12}>
+          {data?.map((watchData: any, index: number) => {
+            return (
+              <WatchCard key={index} data={watchData} {...configWatchCard} />
+            );
+          })}
+        </Grid>
+      </Container>
       <Grid xs={12} item textAlign='center'>
         <LoadingSpinner />
       </Grid>

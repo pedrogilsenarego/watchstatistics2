@@ -5,5 +5,5 @@ export const menuButtons = (setWhichMenu: any) => [
   },
 ];
 
-export const entries = (items: number) => [<><b>Cart: </b>{items}</>]
+
 

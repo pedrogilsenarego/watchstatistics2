@@ -10,9 +10,10 @@ import { menuButtons } from "./constants"
 
 interface Props {
   setCartItems: (cartItems: number) => void
+  cartItems: number;
 }
 
-const General = ({ setCartItems }: Props) => {
+const General = ({ setCartItems, cartItems }: Props) => {
   const {
     setWhiteBoxesBuy,
     currentPoints,
@@ -28,7 +29,7 @@ const General = ({ setCartItems }: Props) => {
   );
   return (
     <>
-      <MobileBottomAppBar listButtons={menuButtons} />
+      <MobileBottomAppBar listButtons={menuButtons(cartItems)} />
       <Container style={{ marginTop: "20px" }}>
         <GeneralStyled.Card>
           <GeneralStyled.TitleTypography>Boxes</GeneralStyled.TitleTypography>

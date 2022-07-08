@@ -6,8 +6,8 @@ interface GridProps {
 
 export const Grid = styled(MuiGrid)(({ mobile }: GridProps) => ({
   paddingTop: "20px",
-  paddingLeft: mobile ? "8px" : "20px",
-  paddingRight: mobile ? "8px" : "20px",
+  paddingLeft: mobile ? "0px" : "20px",
+  paddingRight: mobile ? "0px" : "20px",
 }));
 
 export const ButtonGrid = styled(MuiGrid)(() => ({
