@@ -8,10 +8,10 @@ const mapState = (state: Redux) => ({
 });
 
 interface Props {
-  setCartItems:(cartItems:number)=>void
+  setCartItems: (cartItems: number) => void
 }
 
-const useGeneral = ({setCartItems}:Props) => {
+const useGeneral = ({ setCartItems }: Props) => {
   const [whiteBoxesBuy, setWhiteBoxesBuy] = useState(0);
   const [blueBoxesBuy, setblueBoxesBuy] = useState(0);
   const [purpleBoxesBuy, setPurpleBoxesBuy] = useState(0);
@@ -20,8 +20,8 @@ const useGeneral = ({setCartItems}:Props) => {
   const [currentPurpleBoxFragments, setCurrentPurpleBoxFragments] = useState(0);
   const { currentUser } = useSelector(mapState);
 
-  useEffect(()=>{
-    setCartItems(whiteBoxesBuy+blueBoxesBuy+purpleBoxesBuy)
+  useEffect(() => {
+    setCartItems(whiteBoxesBuy + blueBoxesBuy + purpleBoxesBuy)
   })
 
   useEffect(() => {
@@ -40,14 +40,25 @@ const useGeneral = ({setCartItems}:Props) => {
     );
   }, [currentUser?.purpleBoxFragments, purpleBoxesBuy]);
 
+  const handleClearCart = () => {
+    setWhiteBoxesBuy(0);
+    setblueBoxesBuy(0);
+    setPurpleBoxesBuy(0);
+  }
+
   return {
     setWhiteBoxesBuy,
+    whiteBoxesBuy,
     currentPoints,
     currentUser,
     setblueBoxesBuy,
+    blueBoxesBuy,
     currentBlueBoxFragments,
     currentPurpleBoxFragments,
-    setPurpleBoxesBuy
+    setPurpleBoxesBuy,
+    purpleBoxesBuy,
+    handleClearCart,
+
   };
 };
 export default useGeneral;

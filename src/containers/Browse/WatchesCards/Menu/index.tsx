@@ -8,14 +8,14 @@ import pricesBracket from "../../../../assets/data/pricesBracket.json";
 import {
   BsFileArrowUpFill,
   BsFileArrowDownFill,
-  BsSliders,
+
 } from "react-icons/bs";
 import { AiFillCloseSquare } from "react-icons/ai";
 import DrawerMine from "../../../../components/Drawer";
 import FiltersMobile from "./FiltersMobile";
 import Chip1 from "src/components/Chips/Chip1";
-import MobileBottomAppBar from "src/components/MobileBottomAppBar"
-import { bottomMenuButtons } from "./constant"
+import MobileBottomAppBar from "src/components/MobileBottomAppBar";
+import { bottomMenuButtons } from "./constant";
 
 interface Props {
   dummyProductBrands: any;
@@ -129,8 +129,8 @@ const Menu = ({
   };
 
   const handleVisibleFilters = () => {
-    setFiltersVisible(true)
-  }
+    setFiltersVisible(true);
+  };
 
   const renderLaptop = () => {
     return (
@@ -238,71 +238,59 @@ const Menu = ({
   const productCategoryFilter = () => {
     if (productCategory)
       return {
-        title: productCategory,
+        onClick: () => {
+          setProductCategory(null);
+          setDummyProductCategory(null);
+        },
+        icon: (
+          <Chip1 bColor='#ffffff66' color='#ffffff' title={productCategory} />
+        ),
+      };
+    else return;
+  };
 
-      }
-    else return
-  }
+  const productPricesFilter = () => {
+    if (productPrices)
+      return {
+        onClick: () => {
+          setProductPrices(null);
+          setDummyProductPrices(null);
+        },
+        icon: (
+          <Chip1 bColor='#ffffff66' color='#ffffff' title={productPrices} />
+        ),
+      };
+    else return;
+  };
 
+  const productBrandFilter = () => {
+    if (productBrands)
+      return {
+        onClick: () => {
+          setProductBrands(null);
+          setDummyProductBrands(null);
+        },
+        icon: (
+          <Chip1 bColor='#ffffff66' color='#ffffff' title={productBrands} />
+        ),
+      };
+    else return;
+  };
 
   const renderMobile = () => {
     return (
       <>
-        <MobileBottomAppBar listButtons={bottomMenuButtons(handleVisibleFilters, productCategoryFilter())} />
-        <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <Styled.FiltersBox onClick={() => setFiltersVisible(true)}>
-              <Grid
-                container
-                justifyContent='center'
-                alignItems='center'
-                spacing={2}
-              >
-                <Grid item>
-                  <Styled.FiltersTypography>Filters</Styled.FiltersTypography>
-                </Grid>
-                <Grid item>
-                  <BsSliders size='2em' />
-                </Grid>
-              </Grid>
-            </Styled.FiltersBox>
-          </Grid>
-          <Grid item container spacing={1} xs={8}>
-            <Grid item>
-              {productCategory && (
-                <Chip1
-                  title={productCategory}
-                  onClick={() => {
-                    setProductCategory(null);
-                    setDummyProductCategory(null);
-                  }}
-                />
-              )}
-            </Grid>
-            <Grid item>
-              {productPrices && (
-                <Chip1
-                  title={productPrices}
-                  onClick={() => {
-                    setProductPrices(null);
-                    setDummyProductPrices(null);
-                  }}
-                />
-              )}
-            </Grid>
-            <Grid item>
-              {productBrands && (
-                <Chip1
-                  title={productBrands}
-                  onClick={() => {
-                    setProductBrands(null);
-                    setDummyProductBrands(null);
-                  }}
-                />
-              )}
-            </Grid>
-          </Grid>
-        </Grid>
+        <MobileBottomAppBar
+          columnGap={2}
+          paddingLeft="15px"
+          justifyContent="start"
+          listButtons={bottomMenuButtons(
+            handleVisibleFilters,
+            productCategoryFilter(),
+            productPricesFilter(),
+            productBrandFilter()
+          )}
+        />
       </>
     );
   };

@@ -5,10 +5,11 @@ import * as Styled from "./styles"
 interface Props {
   maxValue?: number;
   setValue: (value: number) => void;
+  value?: number;
   incDisabled?: boolean;
 }
 
-const IncreaseDecreaseButton = ({ maxValue, setValue, incDisabled }: Props) => {
+const IncreaseDecreaseButton = ({ maxValue, setValue, value, incDisabled }: Props) => {
   const {
     decreaseDisabled,
     handleDecrease,
@@ -22,7 +23,7 @@ const IncreaseDecreaseButton = ({ maxValue, setValue, incDisabled }: Props) => {
       <Styled.Button disabled={decreaseDisabled} onClick={handleDecrease} >
         -
       </Styled.Button>
-      <Styled.Button>{currentNumber}</Styled.Button>
+      <Styled.Button>{value ?? currentNumber}</Styled.Button>
       <Styled.Button disabled={increaseDisabled} onClick={handleIncrease}>
         +
       </Styled.Button>

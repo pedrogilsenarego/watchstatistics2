@@ -7,6 +7,7 @@ import * as GeneralStyled from "src/styles/styles";
 interface Props {
   title: string;
   setValue: (value: number) => void;
+  value?: number;
   currentValue?: number;
   currency?: number;
   icon?: JSX.Element;
@@ -16,6 +17,7 @@ interface Props {
 const AcquireIncrementor = ({
   title,
   setValue,
+  value,
   currency,
   icon,
   currentValue,
@@ -61,7 +63,7 @@ const AcquireIncrementor = ({
           </Grid>
         </Grid>
         <Grid item>
-          <IncreaseDecreaseButton setValue={setValue} incDisabled={disabled} />
+          <IncreaseDecreaseButton setValue={setValue} value={value} incDisabled={disabled} />
         </Grid>
       </Grid>
     </GeneralStyled.DashedGrid>

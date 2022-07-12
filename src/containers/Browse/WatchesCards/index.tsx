@@ -7,6 +7,7 @@ import * as Styled from "./styles";
 import Menu from "./Menu";
 import LoadingSpinner from "src/components/LoadingSpinner";
 import { useHistory } from "react-router-dom";
+import { generalEndpoints } from "src/constants/endpoints";
 
 const mapState = (state: any) => ({
   currentUser: state.user.currentUser,
@@ -148,7 +149,7 @@ const WatchesCards = () => {
         <Menu {...configMenu} />
       </Grid>
       <Container>
-        <Grid item container style={{ marginTop: "10px" }} rowSpacing={1} xs={12}>
+        <Grid item container rowSpacing={1} xs={12}>
           {data?.map((watchData: any, index: number) => {
             return (
               <WatchCard key={index} data={watchData} {...configWatchCard} />
@@ -165,17 +166,18 @@ const WatchesCards = () => {
           xs={12}
           item
           textAlign='center'
-          onClick={() => history.push(`/submit-new-watch`)}
+          onClick={() => history.push(generalEndpoints.SUBMIT_WATCHES)}
         >
           <Styled.NoMoreResultsTypography>
             There are no more results
           </Styled.NoMoreResultsTypography>
-          <Styled.NoMoreResults2Typography>
+          <Styled.NoMoreResults2Typography >
             Not finding the watch you want? add it here!
           </Styled.NoMoreResults2Typography>
         </Grid>
-      )}
-    </Styled.Grid>
+      )
+      }
+    </Styled.Grid >
   );
 };
 

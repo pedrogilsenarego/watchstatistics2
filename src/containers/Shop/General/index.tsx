@@ -16,12 +16,16 @@ interface Props {
 const General = ({ setCartItems, cartItems }: Props) => {
   const {
     setWhiteBoxesBuy,
+    whiteBoxesBuy,
     currentPoints,
     currentUser,
     currentBlueBoxFragments,
     setblueBoxesBuy,
+    blueBoxesBuy,
     setPurpleBoxesBuy,
-    currentPurpleBoxFragments
+    purpleBoxesBuy,
+    currentPurpleBoxFragments,
+    handleClearCart
   } = useGeneral({ setCartItems });
   const pointsIcon = <FaCoins color='white' size='1.5em' />;
   const pieceIcon = (color: string) => (
@@ -29,13 +33,14 @@ const General = ({ setCartItems, cartItems }: Props) => {
   );
   return (
     <>
-      <MobileBottomAppBar listButtons={menuButtons(cartItems)} />
+      <MobileBottomAppBar listButtons={menuButtons(cartItems, handleClearCart)} />
       <Container style={{ marginTop: "20px" }}>
         <GeneralStyled.Card>
           <GeneralStyled.TitleTypography>Boxes</GeneralStyled.TitleTypography>
           <Stack rowGap={1} style={{ marginTop: marginStyles.MOBILE_BASIC_TYPO_TO_TITLE }}>
             <AcquireIncrementor
               title='White Boxes'
+              value={whiteBoxesBuy}
               setValue={setWhiteBoxesBuy}
               currency={currentPoints}
               icon={pointsIcon}
@@ -45,6 +50,7 @@ const General = ({ setCartItems, cartItems }: Props) => {
             <AcquireIncrementor
               title='Blue Boxes'
               setValue={setblueBoxesBuy}
+              value={blueBoxesBuy}
               currency={currentBlueBoxFragments}
               icon={pieceIcon("lightBlue")}
               costPerUnit={getBox("blueBox")}
@@ -53,6 +59,7 @@ const General = ({ setCartItems, cartItems }: Props) => {
             <AcquireIncrementor
               title='Purple Boxes'
               setValue={setPurpleBoxesBuy}
+              value={purpleBoxesBuy}
               currency={currentPurpleBoxFragments}
               icon={pieceIcon("purple")}
               costPerUnit={getBox("purpleBox")}

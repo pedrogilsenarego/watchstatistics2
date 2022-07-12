@@ -6,7 +6,7 @@ interface Props {
   incDisabled?: boolean;
 }
 
-const useIncreaseDecreaseButton = ({setValue, maxValue, incDisabled}: Props) => {
+const useIncreaseDecreaseButton = ({ setValue, maxValue, incDisabled }: Props) => {
   const [currentNumber, setCurrentNumber] = useState(0)
   const [decreaseDisabled, setDecreaseDisabled] = useState(true)
   const [increaseDisabled, setIncreaseDisabled] = useState(false)
@@ -22,7 +22,6 @@ const useIncreaseDecreaseButton = ({setValue, maxValue, incDisabled}: Props) => 
     if (incDisabled) setIncreaseDisabled(true)
   }, [incDisabled])
 
-
   const handleDecrease = () => {
     setCurrentNumber(currentNumber - 1);
     setIncreaseDisabled(false)
@@ -35,7 +34,7 @@ const useIncreaseDecreaseButton = ({setValue, maxValue, incDisabled}: Props) => 
   };
 
 
-  return {decreaseDisabled, handleDecrease, currentNumber, increaseDisabled, handleIncrease}
+  return { decreaseDisabled, handleDecrease, currentNumber, increaseDisabled, handleIncrease }
 }
 
 export default useIncreaseDecreaseButton
