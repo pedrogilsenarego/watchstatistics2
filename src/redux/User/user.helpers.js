@@ -90,6 +90,19 @@ export const handleUpdateBoxStatus = (product) => {
 
   return new Promise((resolve, reject) => {
     let ref = firestore.collection("users").doc(userID);
+    if (product.flag === "multipleShop") console.log(product);
+    Object.keys(product.listItems).forEach((key) => {
+      ref.update({
+        [key]: firebase.firestore.FieldValue.increment(product.listItems[key]),
+      });
+    });
+    // if (product.whiteBox)
+    //   ref.update({
+    //     whiteBox: firebase.firestore.FieldValue.increment(product.whiteBox),
+    //     points: firebase.firestore.FieldValue.increment(
+    //       -getBox("whiteBox") * product.whiteBox
+    //     ),
+    //   });
 
     if (product.flag === "getWhiteBox")
       ref.update({
@@ -135,13 +148,13 @@ export const handleUpdateBoxStatus = (product) => {
         watchParts: watchParts,
       });
 
-    ref
-      .then(() => {
-        resolve();
-      })
-      .catch((err) => {
-        reject(err);
-      });
+    // ref
+    //   .then(() => {
+    //     resolve();
+    //   })
+    //   .catch((err) => {
+    //     reject(err);
+    //   });
   });
 };
 //new implementations

@@ -30,6 +30,7 @@ import {
   updateFailApiRequest,
   updateSuccessApiRequest,
   updateSuccessNotification,
+  updateFailNotification
 } from "../general/general.actions";
 // import { i18n } from "src/translations/i18n";
 
@@ -195,15 +196,16 @@ export function* updateBoxState({ payload }) {
     yield handleUpdateBoxStatus({
       ...payload,
     });
+    yield put(updateSuccessNotification("Your items were acquired"))
   } catch (err) {
     // console.log(err);
+    yield put(updateFailNotification(`Something went wrong:${err}`))
   }
 }
 export function* onUpdateBoxStatus() {
   yield takeLatest(userTypes.UPDATE_BOX_STATE, updateBoxState);
 }
 
-//implementations
 export function* updateCollectionState({ payload }) {
   try {
     yield put(fetchMyCollectionStart({ myCollection: payload.collection }));

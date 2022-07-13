@@ -25,7 +25,8 @@ const General = ({ setCartItems, cartItems }: Props) => {
     setPurpleBoxesBuy,
     purpleBoxesBuy,
     currentPurpleBoxFragments,
-    handleClearCart
+    handleClearCart,
+    handleBuyFromCart
   } = useGeneral({ setCartItems });
   const pointsIcon = <FaCoins color='white' size='1.5em' />;
   const pieceIcon = (color: string) => (
@@ -33,7 +34,7 @@ const General = ({ setCartItems, cartItems }: Props) => {
   );
   return (
     <>
-      <MobileBottomAppBar listButtons={menuButtons(cartItems, handleClearCart)} />
+      <MobileBottomAppBar listButtons={menuButtons(cartItems, handleClearCart, handleBuyFromCart)} />
       <Container style={{ marginTop: "20px" }}>
         <GeneralStyled.Card>
           <GeneralStyled.TitleTypography>Boxes</GeneralStyled.TitleTypography>

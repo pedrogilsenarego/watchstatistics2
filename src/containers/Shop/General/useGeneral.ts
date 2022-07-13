@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Redux } from "src/redux/types";
 import { useSelector } from "react-redux";
 import { getBox } from "src/constants/gamification";
+import { useDispatch } from "react-redux";
+import { updateBoxStatus } from "src/redux/User/user.actions";
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const useGeneral = ({ setCartItems }: Props) => {
+  const dispatch = useDispatch()
   const [whiteBoxesBuy, setWhiteBoxesBuy] = useState(0);
   const [blueBoxesBuy, setblueBoxesBuy] = useState(0);
   const [purpleBoxesBuy, setPurpleBoxesBuy] = useState(0);
@@ -46,6 +49,19 @@ const useGeneral = ({ setCartItems }: Props) => {
     setPurpleBoxesBuy(0);
   }
 
+  const handleBuyFromCart = () => {
+    const payload = {
+      listItems: {
+        ...(whiteBoxesBuy && {whiteBox: whiteBoxesBuy} ),
+        ...(blueBoxesBuy && {blueBox: blueBoxesBuy}),
+        ...(purpleBoxesBuy && {purpleBox: purpleBoxesBuy}),
+      },
+      userID: currentUser.id,
+      flag: "multipleShop"
+    }
+    dispatch(updateBoxStatus(payload))
+  }
+
   return {
     setWhiteBoxesBuy,
     whiteBoxesBuy,
@@ -58,7 +74,7 @@ const useGeneral = ({ setCartItems }: Props) => {
     setPurpleBoxesBuy,
     purpleBoxesBuy,
     handleClearCart,
-
+    handleBuyFromCart
   };
 };
 export default useGeneral;
