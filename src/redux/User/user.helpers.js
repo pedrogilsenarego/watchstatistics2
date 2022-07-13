@@ -147,13 +147,13 @@ export const handleUpdateBoxStatus = (product) => {
         watchParts: watchParts,
       });
 
-    // ref
-    //   .then(() => {
-    //     resolve();
-    //   })
-    //   .catch((err) => {
-    //     reject(err);
-    //   });
+    ref
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };
 //new implementations

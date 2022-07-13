@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { getBox, typeBox, typeCurrency } from "src/constants/gamification";
 import { useDispatch } from "react-redux";
 import { updateBoxStatus } from "src/redux/User/user.actions";
+import { updateSuccessNotification } from "src/redux/general/general.actions";
+
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
@@ -79,6 +81,7 @@ const useGeneral = ({ setCartItems }: Props) => {
     };
     dispatch(updateBoxStatus(payload));
     handleClearCart()
+    dispatch(updateSuccessNotification("Your items were acquired"))
   };
 
   return {
