@@ -2,39 +2,39 @@ import { useState, useEffect } from "react"
 
 interface Props {
   setValue: (value: number) => void;
+  value: number;
   maxValue?: number;
   incDisabled?: boolean;
 }
 
-const useIncreaseDecreaseButton = ({ setValue, maxValue, incDisabled }: Props) => {
-  const [currentNumber, setCurrentNumber] = useState(0)
+const useIncreaseDecreaseButton = ({ setValue, value, maxValue, incDisabled }: Props) => {
   const [decreaseDisabled, setDecreaseDisabled] = useState(true)
   const [increaseDisabled, setIncreaseDisabled] = useState(false)
 
   useEffect(() => {
-    setValue(currentNumber)
-    if (currentNumber <= 0) setDecreaseDisabled(true)
-    if (maxValue && currentNumber >= maxValue) setIncreaseDisabled(true)
+    setValue(value)
+    if (value <= 0) setDecreaseDisabled(true)
+    if (maxValue && value >= maxValue) setIncreaseDisabled(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentNumber])
+  }, [value])
 
   useEffect(() => {
     if (incDisabled) setIncreaseDisabled(true)
   }, [incDisabled])
 
   const handleDecrease = () => {
-    setCurrentNumber(currentNumber - 1);
+    setValue(value-1)
     setIncreaseDisabled(false)
 
   };
 
   const handleIncrease = () => {
-    setCurrentNumber(currentNumber + 1);
+    setValue(value+1)
     setDecreaseDisabled(false)
   };
 
 
-  return { decreaseDisabled, handleDecrease, currentNumber, increaseDisabled, handleIncrease }
+  return { decreaseDisabled, handleDecrease, increaseDisabled, handleIncrease }
 }
 
 export default useIncreaseDecreaseButton

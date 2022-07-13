@@ -7,7 +7,7 @@ import * as GeneralStyled from "src/styles/styles";
 interface Props {
   title: string;
   setValue: (value: number) => void;
-  value?: number;
+  value: number;
   currentValue?: number;
   currency?: number;
   icon?: JSX.Element;

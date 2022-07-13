@@ -78,6 +78,7 @@ const useGeneral = ({ setCartItems }: Props) => {
       flag: "multipleShop",
     };
     dispatch(updateBoxStatus(payload));
+    handleClearCart()
   };
 
   return {
