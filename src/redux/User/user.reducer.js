@@ -1,4 +1,5 @@
 import userTypes from "./user.types";
+import { handleUpdateBoxState } from "./user.utils";
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -52,7 +53,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case userTypes.UPDATE_BOX_STATE:
       return {
         ...state,
-        currentUser: action.payload,
+        currentUser:
+          action.payload.flag !== "multipleShop"
+            ? action.payload
+            : handleUpdateBoxState({
+                prevCurrentUser: state.currentUser,
+                listItems: action.payload.listItems,
+              }),
       };
     case userTypes.UPDATE_COLLECTION_STATE:
       return {

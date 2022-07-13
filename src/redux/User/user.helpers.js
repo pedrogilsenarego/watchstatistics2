@@ -90,18 +90,18 @@ export const handleUpdateBoxStatus = (product) => {
 
   return new Promise((resolve, reject) => {
     let ref = firestore.collection("users").doc(userID);
-    if (product.flag === "multipleShop") console.log(product);
-    Object.keys(product.listItems).forEach((key) => {
-      ref.update({
-        [key]: firebase.firestore.FieldValue.increment(
-          product.listItems[key].value
-        ),
-        [product.listItems[key].typeCurrency]:
-          firebase.firestore.FieldValue.increment(
-            product.listItems[key].currency
+    if (product.flag === "multipleShop")
+      Object.keys(product.listItems).forEach((key) => {
+        ref.update({
+          [key]: firebase.firestore.FieldValue.increment(
+            product.listItems[key].value
           ),
+          [product.listItems[key].typeCurrency]:
+            firebase.firestore.FieldValue.increment(
+              product.listItems[key].currency
+            ),
+        });
       });
-    });
 
     if (product.flag === "getWhiteBox")
       ref.update({

@@ -1,32 +1,40 @@
 export const existingCollectionItem = ({ prevCartItems, nextCartItem }) => {
-	return prevCartItems.find(
-		(cartItem) => cartItem.reference === nextCartItem.reference
-	);
+  return prevCartItems.find(
+    (cartItem) => cartItem.reference === nextCartItem.reference
+  );
 };
 
 export const handleAddToCollection = ({
-	prevCollectionItems,
-	nextCollectionItem
+  prevCollectionItems,
+  nextCollectionItem,
 }) => {
-	const cartItemExists = existingCollectionItem({
-		prevCollectionItems,
-		nextCollectionItem
-	});
+  const cartItemExists = existingCollectionItem({
+    prevCollectionItems,
+    nextCollectionItem,
+  });
 
-	if (cartItemExists) {
-		return prevCollectionItems.map((cartItem) =>
-			cartItem.reference === nextCollectionItem.reference
-				? {
-						...cartItem
-				  }
-				: cartItem
-		);
-	}
+  if (cartItemExists) {
+    return prevCollectionItems.map((cartItem) =>
+      cartItem.reference === nextCollectionItem.reference
+        ? {
+            ...cartItem,
+          }
+        : cartItem
+    );
+  }
 
-	return [
-		...prevCollectionItems,
-		{
-			...nextCollectionItem
-		}
-	];
+  return [
+    ...prevCollectionItems,
+    {
+      ...nextCollectionItem,
+    },
+  ];
+};
+
+export const handleUpdateBoxState = ({ prevCurrentUser, listItems }) => {
+  const currentUser = { ...prevCurrentUser };
+  Object.keys(listItems).forEach((key) => {
+    currentUser[key] = currentUser[key] + listItems[key].value;
+  });
+  return currentUser;
 };
