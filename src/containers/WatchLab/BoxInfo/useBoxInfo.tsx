@@ -12,11 +12,10 @@ import {
   openBoxFragmentsPercentage,
   getBox,
 } from "src/constants/gamification";
-import { TypeOfBox } from "src/containers/WatchLab/types";
 import { FaPuzzlePiece, FaCoins } from "react-icons/fa";
 
 interface Props {
-  typeOfBox: TypeOfBox;
+  typeOfBox: string;
 }
 
 const mapState = (state: Redux) => ({

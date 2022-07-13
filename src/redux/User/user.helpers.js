@@ -93,16 +93,15 @@ export const handleUpdateBoxStatus = (product) => {
     if (product.flag === "multipleShop") console.log(product);
     Object.keys(product.listItems).forEach((key) => {
       ref.update({
-        [key]: firebase.firestore.FieldValue.increment(product.listItems[key]),
+        [key]: firebase.firestore.FieldValue.increment(
+          product.listItems[key].value
+        ),
+        [product.listItems[key].typeCurrency]:
+          firebase.firestore.FieldValue.increment(
+            product.listItems[key].currency
+          ),
       });
     });
-    // if (product.whiteBox)
-    //   ref.update({
-    //     whiteBox: firebase.firestore.FieldValue.increment(product.whiteBox),
-    //     points: firebase.firestore.FieldValue.increment(
-    //       -getBox("whiteBox") * product.whiteBox
-    //     ),
-    //   });
 
     if (product.flag === "getWhiteBox")
       ref.update({

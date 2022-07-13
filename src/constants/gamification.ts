@@ -1,4 +1,3 @@
-import { TypeOfBox } from "src/containers/WatchLab/types";
 
 // points per entry
 export const rewards = {
@@ -72,7 +71,7 @@ export const bagSize = {
   GOD: 13,
 };
 
-export const openBoxParts = (typeOfBox: TypeOfBox): any => {
+export const openBoxParts = (typeOfBox: string): any => {
   switch (typeOfBox) {
     case "whiteBox":
       return {
@@ -128,11 +127,23 @@ export const openBoxFragmentsPercentage = {
   THIRD_FRAGMENTS: 5, //percentage
 };
 
-export const getBox = (typeOfBox: TypeOfBox) => {
+export const getBox = (typeOfBox: string) => {
   switch (typeOfBox) {
-    case "whiteBox": return 4;
-    case "blueBox": return 10;
-    case "purpleBox": return 10;
+    case typeBox.WHITE_BOX: return 4;
+    case typeBox.BLUE_BOX: return 10;
+    case typeBox.PURPLE_BOX: return 10;
     default: return 4
   }
+}
+
+export const typeCurrency = {
+  POINTS: "points",
+  BLUE_BOX_FRAGMENTS: "blueBoxFragments",
+  PURPLE_BOX_FRAGMENTS: "purpleBoxFragments"
+}
+
+export const typeBox = {
+  WHITE_BOX: "whiteBox",
+  BLUE_BOX: "blueBox",
+  PURPLE_BOX: "purpleBox"
 }

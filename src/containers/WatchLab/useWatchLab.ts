@@ -2,14 +2,13 @@ import {useState, useEffect} from "react"
 import { bagSizeHelper } from "src/Utils/gamyfication";
 import {Redux} from "src/redux/types"
 import { useSelector } from "react-redux";
-import { TypeOfBox } from "./types";
 
 const mapState = (state:Redux) => ({
   currentUser: state.user.currentUser,
 });
 
 const useWatchLab = () => {
-  const [boxInfoMenu, setBoxInfoMenu] = useState<TypeOfBox>("whiteBox");
+  const [boxInfoMenu, setBoxInfoMenu] = useState<string>("whiteBox");
   const [x, setX] = useState(0);
   const [bagFull, setBagFull] = useState(false);
   const [collectionFull, setCollectionFull] = useState(false);

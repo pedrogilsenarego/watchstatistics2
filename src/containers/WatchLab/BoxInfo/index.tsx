@@ -12,11 +12,10 @@ import {
 import Popup from "../../../components/Popup";
 
 import useBoxInfo from "./useBoxInfo";
-import { TypeOfBox } from "src/containers/WatchLab/types";
 import * as Styled from "./styles";
 
 interface Props {
-  typeOfBox: TypeOfBox;
+  typeOfBox: string;
 }
 
 const BoxInfo = ({ typeOfBox }: Props) => {
