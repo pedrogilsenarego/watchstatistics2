@@ -6,10 +6,11 @@ import { FaCoins, FaPuzzlePiece } from "react-icons/fa";
 import AcquireIncrementor from "src/components/AcquireIncrementor";
 import { getBox } from "src/constants/gamification";
 import MobileBottomAppBar from "src/components/MobileBottomAppBar";
-import { menuButtons } from "./constants"
+import { menuButtons } from "./constants";
+import CartPopup from "./CartPopup";
 
 interface Props {
-  setCartItems: (cartItems: number) => void
+  setCartItems: (cartItems: number) => void;
   cartItems: number;
 }
 
@@ -26,7 +27,10 @@ const General = ({ setCartItems, cartItems }: Props) => {
     purpleBoxesBuy,
     currentPurpleBoxFragments,
     handleClearCart,
-    handleBuyFromCart
+    handleBuyFromCart,
+    cartOpenPopup,
+    setCartOpenPopup,
+    listItems,
   } = useGeneral({ setCartItems });
   const pointsIcon = <FaCoins color='white' size='1.5em' />;
   const pieceIcon = (color: string) => (
@@ -34,11 +38,22 @@ const General = ({ setCartItems, cartItems }: Props) => {
   );
   return (
     <>
-      <MobileBottomAppBar listButtons={menuButtons(cartItems, handleClearCart, handleBuyFromCart)} />
+      <CartPopup
+        openPopup={cartOpenPopup}
+        setOpenPopup={setCartOpenPopup}
+        listItems={listItems}
+        handleClearCart={handleClearCart}
+      />
+      <MobileBottomAppBar
+        listButtons={menuButtons(cartItems, handleClearCart, handleBuyFromCart)}
+      />
       <Container style={{ marginTop: "20px" }}>
         <GeneralStyled.Card>
           <GeneralStyled.TitleTypography>Boxes</GeneralStyled.TitleTypography>
-          <Stack rowGap={1} style={{ marginTop: marginStyles.MOBILE_BASIC_TYPO_TO_TITLE }}>
+          <Stack
+            rowGap={1}
+            style={{ marginTop: marginStyles.MOBILE_BASIC_TYPO_TO_TITLE }}
+          >
             <AcquireIncrementor
               title='White Boxes'
               value={whiteBoxesBuy}

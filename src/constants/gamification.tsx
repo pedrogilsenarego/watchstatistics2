@@ -1,3 +1,4 @@
+import { FaCoins, FaPuzzlePiece } from "react-icons/fa";
 
 // points per entry
 export const rewards = {
@@ -99,7 +100,7 @@ export const openBoxParts = (typeOfBox: string): any => {
         SECONDARY_FRAGMENT_STRING: "Purple",
         THIRD_FRAGMENTS_STRING: "Orange"
       };
-      case "purpleBox":
+    case "purpleBox":
       return {
         MAIN_PART: "lightGreen",
         MAIN_FRAGMENTS: "orangeBoxFragments",
@@ -146,4 +147,22 @@ export const typeBox = {
   WHITE_BOX: "whiteBox",
   BLUE_BOX: "blueBox",
   PURPLE_BOX: "purpleBox"
+}
+
+export const getShopNames = (value: string) => {
+  switch (value) {
+    case typeBox.WHITE_BOX: return "White Box";
+    case typeBox.BLUE_BOX: return "Blue Box";
+    case typeBox.PURPLE_BOX: return "Purple Box";
+    default: return null
+  }
+}
+
+export const getShopCurrencyTypes = (value: string) => {
+  switch (value) {
+    case typeCurrency.POINTS: return <FaCoins color="orange" />;
+    case typeCurrency.BLUE_BOX_FRAGMENTS: return <FaPuzzlePiece color="lightBlue" />;
+    case typeCurrency.PURPLE_BOX_FRAGMENTS: return <FaPuzzlePiece color="purple" />;
+    default: return null
+  }
 }

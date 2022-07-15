@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import { Redux } from "src/redux/types";
 import { useSelector } from "react-redux";
 import { getBox, typeBox, typeCurrency } from "src/constants/gamification";
-import { useDispatch } from "react-redux";
-import { updateBoxStatus } from "src/redux/User/user.actions";
-import { updateSuccessNotification } from "src/redux/general/general.actions";
-
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
@@ -16,13 +12,13 @@ interface Props {
 }
 
 const useGeneral = ({ setCartItems }: Props) => {
-  const dispatch = useDispatch();
   const [whiteBoxesBuy, setWhiteBoxesBuy] = useState(0);
   const [blueBoxesBuy, setblueBoxesBuy] = useState(0);
   const [purpleBoxesBuy, setPurpleBoxesBuy] = useState(0);
   const [currentPoints, setCurrentPoints] = useState(0);
   const [currentBlueBoxFragments, setCurrentBlueBoxFragments] = useState(0);
   const [currentPurpleBoxFragments, setCurrentPurpleBoxFragments] = useState(0);
+  const [cartOpenPopup, setCartOpenPopup] = useState<boolean>(false);
   const { currentUser } = useSelector(mapState);
 
   useEffect(() => {
@@ -51,37 +47,33 @@ const useGeneral = ({ setCartItems }: Props) => {
     setPurpleBoxesBuy(0);
   };
 
+  const listItems = {
+    ...(whiteBoxesBuy && {
+            whiteBox: {
+              value: whiteBoxesBuy,
+              currency: -(whiteBoxesBuy * getBox(typeBox.WHITE_BOX)),
+              typeCurrency: typeCurrency.POINTS,
+            },
+          }),
+          ...(blueBoxesBuy && {
+            blueBox: {
+              value: blueBoxesBuy,
+              currency: -(blueBoxesBuy * getBox(typeBox.BLUE_BOX)),
+              typeCurrency: typeCurrency.BLUE_BOX_FRAGMENTS,
+            },
+          }),
+          ...(purpleBoxesBuy && {
+            purpleBox: {
+              value: purpleBoxesBuy,
+              currency: -(purpleBoxesBuy * getBox(typeBox.PURPLE_BOX)),
+              typeCurrency: typeCurrency.PURPLE_BOX_FRAGMENTS,
+            },
+          }),
+  }
+
   const handleBuyFromCart = () => {
-    const payload = {
-      listItems: {
-        ...(whiteBoxesBuy && {
-          whiteBox: {
-            value: whiteBoxesBuy,
-            currency: -(whiteBoxesBuy * getBox(typeBox.WHITE_BOX)),
-            typeCurrency: typeCurrency.POINTS,
-          },
-        }),
-        ...(blueBoxesBuy && {
-          blueBox: {
-            value: blueBoxesBuy,
-            currency: -(blueBoxesBuy * getBox(typeBox.BLUE_BOX)),
-            typeCurrency: typeCurrency.BLUE_BOX_FRAGMENTS,
-          },
-        }),
-        ...(purpleBoxesBuy && {
-          purpleBox: {
-            value: purpleBoxesBuy,
-            currency: -(purpleBoxesBuy * getBox(typeBox.PURPLE_BOX)),
-            typeCurrency: typeCurrency.PURPLE_BOX_FRAGMENTS,
-          },
-        }),
-      },
-      userID: currentUser.id,
-      flag: "multipleShop",
-    };
-    dispatch(updateBoxStatus(payload));
-    handleClearCart()
-    dispatch(updateSuccessNotification("Your items were acquired"))
+    setCartOpenPopup(true)
+    
   };
 
   return {
@@ -97,6 +89,9 @@ const useGeneral = ({ setCartItems }: Props) => {
     purpleBoxesBuy,
     handleClearCart,
     handleBuyFromCart,
+    cartOpenPopup,
+    setCartOpenPopup,
+    listItems,
   };
 };
 export default useGeneral;

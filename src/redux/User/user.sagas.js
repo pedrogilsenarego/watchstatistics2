@@ -30,7 +30,6 @@ import {
   updateFailApiRequest,
   updateSuccessApiRequest,
   updateSuccessNotification,
-  updateFailNotification,
 } from "../general/general.actions";
 // import { i18n } from "src/translations/i18n";
 

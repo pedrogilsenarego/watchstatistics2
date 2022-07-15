@@ -1,10 +1,11 @@
-import React from "react";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   Typography,
   Divider,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 
 interface Props {
@@ -22,19 +23,32 @@ const Popup = ({
   setOpenPopup,
   clickToClose,
 }: Props) => {
+
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <div>
       <Dialog
         open={openPopup}
         style={{ color: "white" }}
-        PaperProps={{ style: { backgroundColor: "#2874A6" } }}
+        PaperProps={{
+          style: {
+            backgroundColor: "#2874A6",
+            minWidth: mobile ? "90vw" : "40vw",
+          },
+        }}
         onClick={() => {
           if (clickToClose && setOpenPopup) setOpenPopup(false);
         }}
       >
         <DialogTitle>
           <div style={{ textAlign: "center" }}>
-            <Typography variant='h6' component='div' style={{ color: "white", fontWeight: 700, letterSpacing: "3px" }}>
+            <Typography
+              variant='h6'
+              component='div'
+              style={{ color: "white", fontWeight: 700, letterSpacing: "3px" }}
+            >
               {title}
             </Typography>
           </div>

@@ -1,15 +1,14 @@
-import { BsCartX } from "react-icons/bs"
-import { FaCoins } from "react-icons/fa"
+import { BsCart, BsCartX } from "react-icons/bs"
 
 export const menuButtons = (cartItems: number, handleClearCart: () => void, handleBuyFromCart: () => void) => [
   {
-    title: `Clear Cart(${cartItems})`,
+    title: `Clear Cart`,
     icon: <BsCartX size="1.5em" />,
     onClick: handleClearCart
   },
   {
-    title: "Buy",
-    icon: <FaCoins size="1.5em" />,
+    title: `Cart(${cartItems})`,
+    icon: <BsCart size="1.5em" />,
     onClick: handleBuyFromCart
   }
 
