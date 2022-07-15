@@ -1,6 +1,9 @@
+import { ListItems } from "../../types";
+
 export const actions = (
   handleBuyFromCart: any,
-  setOpenPopup: (openPopup: boolean) => void
+  setOpenPopup: (openPopup: boolean) => void,
+  listItems: ListItems
 ) => [
   {
     title: "Back",
@@ -12,5 +15,6 @@ export const actions = (
       handleBuyFromCart();
       setOpenPopup(false);
     },
+    disabled: Object.keys(listItems).length !== 0 ? false : true
   },
 ];

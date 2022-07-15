@@ -6,8 +6,10 @@ import {
   Divider,
   useTheme,
   useMediaQuery,
+  Grid
 } from "@material-ui/core";
 import { Actions } from "./types"
+import Button from "./ButtonPopup"
 
 interface Props {
   children: JSX.Element;
@@ -65,11 +67,13 @@ const Popup = ({
               marginTop: "10px",
             }}
           />
-          {actions?.map((item, pos) => {
-            return (
-              <button key={pos} onClick={item.onClick}>{item.title}</button>
-            )
-          })}
+          <Grid container justifyContent="flex-end" style={{ marginTop: "10px" }}>
+            {actions?.map((item, pos) => {
+              return (
+                <Button disabled={item.disabled} title={item.title} key={pos} onClick={item.onClick} />
+              )
+            })}
+          </Grid>
         </DialogContent>
       </Dialog>
     </div>
