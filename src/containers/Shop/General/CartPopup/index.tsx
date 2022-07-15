@@ -4,6 +4,7 @@ import { Grid } from "@mui/material"
 import * as GeneralStyles from "src/styles/styles";
 import useCartPopup from "./useCartPopup";
 import { getShopNames, getShopCurrencyTypes } from "src/constants/gamification";
+import { actions } from "./constants"
 
 interface Props {
   setOpenPopup: (openPopup: boolean) => void;
@@ -22,10 +23,10 @@ const CartPopup = ({
   return (
     <>
       <Popup
+        actions={actions(handleBuyFromCart, setOpenPopup)}
         title='Cart'
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
-        clickToClose
       >
         <>
 
@@ -43,9 +44,6 @@ const CartPopup = ({
               </Grid>
             );
           })}
-          <GeneralStyles.TitleTypography onClick={() => handleBuyFromCart()}>
-            Confirm
-          </GeneralStyles.TitleTypography>
         </>
       </Popup>
     </>

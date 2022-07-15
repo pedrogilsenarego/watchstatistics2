@@ -7,6 +7,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@material-ui/core";
+import { Actions } from "./types"
 
 interface Props {
   children: JSX.Element;
@@ -14,6 +15,7 @@ interface Props {
   openPopup: boolean;
   setOpenPopup?: (openPopup: boolean) => void;
   clickToClose?: boolean;
+  actions?: Actions[]
 }
 
 const Popup = ({
@@ -22,6 +24,7 @@ const Popup = ({
   openPopup,
   setOpenPopup,
   clickToClose,
+  actions
 }: Props) => {
 
   const theme = useTheme();
@@ -62,6 +65,11 @@ const Popup = ({
               marginTop: "10px",
             }}
           />
+          {actions?.map((item, pos) => {
+            return (
+              <button key={pos} onClick={item.onClick}>{item.title}</button>
+            )
+          })}
         </DialogContent>
       </Dialog>
     </div>
