@@ -50,7 +50,7 @@ const TopHeader = ({
           </Grid>
           <Grid item style={{ display: "flex" }}>
             {rightEntries?.map((entry: any, pos: number) => (
-              <GeneralStyled.BasicTypography fontSize='14px' key={pos}>
+              <GeneralStyled.BasicTypography fontSize='14px !important' key={pos}>
                 {entry}
               </GeneralStyled.BasicTypography>
             ))}

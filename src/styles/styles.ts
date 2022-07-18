@@ -39,7 +39,7 @@ interface BasicTypographyProps {
 
 export const BasicTypography = styled(Typography)(({ fontSize, fontWeight, fontFamily, color }: BasicTypographyProps) => ({
   color: color || "#ffffffCE !important",
-  fontSize: fontSize ?? "20px",
+  fontSize: fontSize ?? "20px !important",
   fontWeight: fontWeight || 500,
   fontFamily: fontFamily ?? "inherit"
 }))
