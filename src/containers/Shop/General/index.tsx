@@ -55,6 +55,7 @@ const General = ({ setCartItems, cartItems }: Props) => {
             style={{ marginTop: marginStyles.MOBILE_BASIC_TYPO_TO_TITLE }}
           >
             <AcquireIncrementor
+              typeOfBox="whiteBox"
               title='White Boxes'
               value={whiteBoxesBuy}
               setValue={setWhiteBoxesBuy}
@@ -64,6 +65,7 @@ const General = ({ setCartItems, cartItems }: Props) => {
               currentValue={currentUser?.whiteBox || 0}
             />
             <AcquireIncrementor
+              typeOfBox="blueBox"
               title='Blue Boxes'
               setValue={setblueBoxesBuy}
               value={blueBoxesBuy}
@@ -73,6 +75,7 @@ const General = ({ setCartItems, cartItems }: Props) => {
               currentValue={currentUser?.blueBox || 0}
             />
             <AcquireIncrementor
+              typeOfBox="purpleBox"
               title='Purple Boxes'
               setValue={setPurpleBoxesBuy}
               value={purpleBoxesBuy}

@@ -14,6 +14,7 @@ interface Props {
   currency?: number;
   icon?: JSX.Element;
   costPerUnit?: number;
+  typeOfBox: string;
 }
 
 const AcquireIncrementor = ({
@@ -23,7 +24,8 @@ const AcquireIncrementor = ({
   currency,
   icon,
   currentValue,
-  costPerUnit
+  costPerUnit,
+  typeOfBox
 }: Props) => {
 
   const { disabled, helperPopup, setHelperPopup } = useAcquireIncrementor({ currency, costPerUnit })
@@ -31,7 +33,7 @@ const AcquireIncrementor = ({
 
   return (
     <>
-      <BoxesPopup openPopup={helperPopup} setOpenPopup={setHelperPopup} />
+      <BoxesPopup openPopup={helperPopup} setOpenPopup={setHelperPopup} title={title} typeOfBox={typeOfBox} />
       <GeneralStyled.DashedGrid>
         <Grid container columnGap={1}>
           <GeneralStyled.BasicTypography onClick={() => setHelperPopup(true)}>{title}</GeneralStyled.BasicTypography>
