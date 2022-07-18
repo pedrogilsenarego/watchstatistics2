@@ -2,7 +2,7 @@ import TableList from "src/components/TableList";
 import { tableColumns } from "./constants";
 import { mapParts } from "./constants/mapper";
 import useGoodiesList from "./useGoodiesList";
-import { Grid, Container } from "@mui/material";
+import { Grid, Container, Tooltip } from "@mui/material";
 import * as GeneralStyled from "src/styles/styles";
 import BoxesPopup from "src/componentsMixed/BoxesPopup";
 import { AiOutlineCodeSandbox } from "react-icons/ai"
@@ -25,7 +25,9 @@ const GoodiesList = () => {
               {title}: {currentUser?.[typeOfBox] || 0}
             </GeneralStyled.BasicTypography>
           </Grid>
-          <Grid item><AiOutlineCodeSandbox style={{ cursor: "pointer" }} color={box ? currentUser?.[typeOfBox] > 0 ? "white" : "lightGrey" : "transparent"} size="1.5em" /></Grid>
+          <Tooltip disableHoverListener={box ? false : true} arrow placement="top" title={`open ${title}`}>
+            <Grid item><AiOutlineCodeSandbox style={{ cursor: "pointer" }} color={box ? currentUser?.[typeOfBox] > 0 ? "white" : "#ffffff66" : "transparent"} size="1.5em" /></Grid>
+          </Tooltip>
         </Grid>
       </Container>
     )
