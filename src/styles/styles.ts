@@ -13,13 +13,13 @@ export const DashedGrid = styled(Grid)(({ disableBorder }: Props) => ({
 }))
 
 interface PropsCard {
-  specialBorder?: boolean;
+  specialborder?: string;
 }
 
-export const Card = styled(MuiCard)(({ specialBorder }: PropsCard) => ({
+export const Card = styled(MuiCard)(({ specialborder }: PropsCard) => ({
   border: "solid 2px !important",
   backgroundColor: "#18161E !important",
-  borderImage: specialBorder ? "linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1 !important" : "default",
+  borderImage: specialborder==="special" ? "linear-gradient(45deg, rgb(0,143,104), rgb(250,224,66)) 1 !important" : "default",
   padding: "10px",
   borderRadius: "4px !important"
 }))

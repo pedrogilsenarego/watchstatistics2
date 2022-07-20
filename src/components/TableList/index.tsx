@@ -135,12 +135,12 @@ const TableList = <T extends BaseProps>({
 
   const renderBodyRow = (row: any) => {
     const id = columns[0].id as keyof T;
-    const isChecked =
+    const checked =
       enableCheckBox && selectedOptions.includes(row[id] as any);
     return (
       <Styled.TableRow
-        isChecked={isChecked}
-        hover={!isChecked}
+        checked={checked}
+        hover={!checked}
         role='checkbox'
         tabIndex={-1}
         key={row.id}

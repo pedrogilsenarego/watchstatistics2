@@ -161,7 +161,7 @@ const useBoxInfo = ({ typeOfBox }: Props) => {
 
   const openBoxDisabled = () => {
     if (
-      currentUser?.[typeOfBox] < 1 ||
+      currentUser?.[typeOfBox] < 1 || currentUser?.[typeOfBox] === undefined ||
       (currentUser.watchParts &&
         currentUser.watchParts.length >= bagSizeHelper(currentUser?.experience))
     ) {

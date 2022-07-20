@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Redux } from "src/redux/types";
 import { useSelector, useDispatch } from "react-redux";
-import { getRandomPart } from "src/Utils/gamyfication";
+import { bagSizeHelper, getRandomPart } from "src/Utils/gamyfication";
 import { getRandomInt, percentageLoot } from "src/Utils/math";
 import {
   openBoxParts,
@@ -100,8 +100,16 @@ const useGoodiesList = () => {
    
     
   };
-
-  console.log(openBoxPopup, popUpInfo);
+  
+  const openBoxDisabled = (typeOfBox:string) => {
+    if (
+      currentUser?.[typeOfBox] < 1 || currentUser?.[typeOfBox] === undefined ||
+      (currentUser.watchParts &&
+        currentUser.watchParts.length >= bagSizeHelper(currentUser?.experience))
+    ) {
+      return true;
+    } else return false;
+  };
 
   return {
     handleAction,
@@ -115,6 +123,7 @@ const useGoodiesList = () => {
     openBoxPopup,
     setOpenBoxPopUp,
     popUpInfo,
+    openBoxDisabled
   };
 };
 

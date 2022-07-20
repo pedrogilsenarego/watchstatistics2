@@ -11,11 +11,11 @@ export const TableContainer = styled(MuiTableContainer)(() => ({
 }))
 
 interface TableRowProps {
-  isChecked?: boolean
+  checked?: boolean
 }
 
-export const TableRow = styled(MuiTableRow)<TableRowProps>(({ isChecked }) => ({
-  background: isChecked ? '#FFF7DF' : 'transparent',
+export const TableRow = styled(MuiTableRow)(({ checked }:TableRowProps) => ({
+  background: checked ? '#FFF7DF' : 'transparent',
   color: '#333333',
 }))
 

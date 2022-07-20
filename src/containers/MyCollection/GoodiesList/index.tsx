@@ -1,3 +1,4 @@
+
 import TableList from "src/components/TableList";
 import { tableColumns } from "./constants";
 import { mapParts } from "./constants/mapper";
@@ -21,6 +22,7 @@ const GoodiesList = () => {
     openBoxPopup,
     setOpenBoxPopUp,
     popUpInfo,
+    openBoxDisabled
   } = useGoodiesList();
 
   interface ListItemProps {
@@ -30,6 +32,7 @@ const GoodiesList = () => {
   }
 
   const ListItem = ({ title, typeOfBox, box }: ListItemProps) => {
+    const openBox = openBoxDisabled(typeOfBox)
     return (
       <Container>
         <Grid container justifyContent='space-between'>
@@ -45,17 +48,17 @@ const GoodiesList = () => {
             disableHoverListener={box ? false : true}
             arrow
             placement='top'
-            title={`open ${title}`}
+            title={openBox ? `You have to many parts or no ${title}` : `open ${title}`}
           >
             <Grid item>
               <AiOutlineCodeSandbox
-                onClick={() => handleOpenBox(typeOfBox)}
+                onClick={() => openBox ? null : handleOpenBox(typeOfBox)}
                 style={{ cursor: "pointer" }}
                 color={
                   box
-                    ? currentUser?.[typeOfBox] > 0
-                      ? "white"
-                      : "#ffffff66"
+                    ? openBox
+                      ? "#ffffff66"
+                      : "white"
                     : "transparent"
                 }
                 size='1.5em'
@@ -83,7 +86,7 @@ const GoodiesList = () => {
       />
       <Grid container columnSpacing={2} rowGap={2} mt='20px'>
         <Grid item xs={12} sm={6} textAlign='end'>
-          <GeneralStyled.Card specialBorder style={{ textAlign: "center" }}>
+          <GeneralStyled.Card specialborder="special" style={{ textAlign: "center" }}>
             <ListItem title='Boosters' typeOfBox='boosters' />
             <ListItem title='White Box' typeOfBox='whiteBox' box />
             <ListItem title='Blue Box' typeOfBox='blueBox' box />
