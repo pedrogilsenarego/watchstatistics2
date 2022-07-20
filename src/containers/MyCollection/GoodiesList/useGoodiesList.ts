@@ -3,17 +3,22 @@ import { Redux } from "src/redux/types";
 import { useSelector, useDispatch } from "react-redux";
 import { getRandomPart } from "src/Utils/gamyfication";
 import { getRandomInt, percentageLoot } from "src/Utils/math";
-import { openBoxParts, openBoxPartsPercentage, flagOpenBox, openBoxFragmentsPercentage } from "src/constants/gamification";
+import {
+  openBoxParts,
+  openBoxPartsPercentage,
+  flagOpenBox,
+  openBoxFragmentsPercentage,
+} from "src/constants/gamification";
 import { updateBoxStatus } from "src/redux/User/user.actions";
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
 });
 const useGoodiesList = () => {
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState);
-  const [openBoxPopup,setOpenBoxPopUp] = useState<boolean>(false)
-  const [popUpInfo,setPopUpInfo] = useState<string>("")
+  const [openBoxPopup, setOpenBoxPopUp] = useState<boolean>(false);
+  const [popUpInfo, setPopUpInfo] = useState<string>("");
   const [helperPopup, setHelperPopup] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("");
   const [typeOfBox, setTypeOfBox] = useState<string>("");
@@ -23,27 +28,27 @@ const useGoodiesList = () => {
       case "whiteBox":
         setTitle("White Box");
         setTypeOfBox(typeOfBox);
-        setHelperPopup(true)
+        setHelperPopup(true);
         break;
       case "blueBox":
         setTitle("Blue Box");
         setTypeOfBox(typeOfBox);
-        setHelperPopup(true)
+        setHelperPopup(true);
         break;
       case "purpleBox":
         setTitle("Purple Box");
         setTypeOfBox(typeOfBox);
-        setHelperPopup(true)
+        setHelperPopup(true);
         break;
       default:
         setTitle("White Box");
         setTypeOfBox(typeOfBox);
-        setHelperPopup(true)
+        setHelperPopup(true);
         break;
     }
   };
 
-  const handleOpenBox = (typeOfBox:string) => {
+  const handleOpenBox = async (typeOfBox: string) => {
     const a = [getRandomPart(openBoxParts(typeOfBox).MAIN_PART)];
 
     if (percentageLoot(openBoxPartsPercentage.SECONDARY_PART) === 1) {
@@ -78,20 +83,25 @@ const useGoodiesList = () => {
     setOpenBoxPopUp(true);
     setPopUpInfo(
       "You received: " +
-      Number(
-        configData?.[openBoxParts(typeOfBox).MAIN_FRAGMENTS] -
-        currentUser?.[openBoxParts(typeOfBox).MAIN_FRAGMENTS]
-      ) +
-      ` ${openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING
-      } Box Fragments, ` +
-      Number(
-        configData?.[openBoxParts(typeOfBox).SECONDARY_FRAGMENTS] -
-        currentUser?.[openBoxParts(typeOfBox).SECONDARY_FRAGMENTS]
-      ) +
-      ` ${openBoxParts(typeOfBox).THIRD_FRAGMENTS_STRING} Box Fragments, ` +
-      c
+        Number(
+          configData?.[openBoxParts(typeOfBox).MAIN_FRAGMENTS] -
+            currentUser?.[openBoxParts(typeOfBox).MAIN_FRAGMENTS]
+        ) +
+        ` ${
+          openBoxParts(typeOfBox).SECONDARY_FRAGMENT_STRING
+        } Box Fragments, ` +
+        Number(
+          configData?.[openBoxParts(typeOfBox).SECONDARY_FRAGMENTS] -
+            currentUser?.[openBoxParts(typeOfBox).SECONDARY_FRAGMENTS]
+        ) +
+        ` ${openBoxParts(typeOfBox).THIRD_FRAGMENTS_STRING} Box Fragments, ` +
+        c
     );
+   
+    
   };
+
+  console.log(openBoxPopup, popUpInfo);
 
   return {
     handleAction,
@@ -104,7 +114,7 @@ const useGoodiesList = () => {
     handleOpenBox,
     openBoxPopup,
     setOpenBoxPopUp,
-    popUpInfo
+    popUpInfo,
   };
 };
 

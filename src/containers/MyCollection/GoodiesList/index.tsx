@@ -5,7 +5,7 @@ import useGoodiesList from "./useGoodiesList";
 import { Grid, Container, Tooltip } from "@mui/material";
 import * as GeneralStyled from "src/styles/styles";
 import BoxesPopup from "src/componentsMixed/BoxesPopup";
-import OpenBoxesPopup from "src/componentsMixed/OpenBoxesPopup";
+import OpenBoxesPopup from "src/componentsMixed/BoxesPopup copy";
 import { AiOutlineCodeSandbox } from "react-icons/ai";
 
 const GoodiesList = () => {

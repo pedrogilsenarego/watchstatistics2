@@ -7,22 +7,22 @@ import { bagSizeHelper } from "src/Utils/gamyfication";
 import TopHeader from "src/components/TopHeader";
 import { menuButtons, topHeaderRightEntries } from "./constants";
 import { Redux } from "src/redux/types";
-
 import Item from "./Item";
 
 const mapState = (state: Redux) => ({
   currentUser: state.user.currentUser,
   products: state.productsData.myCollection,
 });
+const GoodiesList = lazy(() => import("./GoodiesList"));
+
 
 const MyCollection = () => {
   const { currentUser, products } = useSelector(mapState);
   const [tab, setTab] = useState("myWatches");
   const dispatch = useDispatch();
-
-  const GoodiesList = lazy(() => import("./GoodiesList"));
-
   const myCollection = currentUser?.collection || [];
+
+
 
   useEffect(
     () => {
