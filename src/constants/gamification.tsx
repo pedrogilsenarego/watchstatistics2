@@ -117,6 +117,17 @@ export const openBoxParts = (typeOfBox: string): any => {
   }
 };
 
+export const flagOpenBox = (typeOfBox: string) => {
+  switch (typeOfBox) {
+    case "whiteBox":
+      return "openWhiteBox";
+    case "blueBox":
+      return "openBlueBox";
+    case "purpleBox":
+      return "openPurpleBox";
+  }
+};
+
 export const openBoxPartsPercentage = {
   SECONDARY_PART: 20,
   THIRD_PART: 1,
