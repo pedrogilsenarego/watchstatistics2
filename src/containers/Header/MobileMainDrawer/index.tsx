@@ -81,9 +81,9 @@ const MobileMainDrawer = ({ setMobileDrawer }: Props) => {
                 handleClickOption(generalEndpoints.WATCH_LABORATORY)
               }
             >
-              <Styled.TypographyTitleD>
+              <Styled.TypographyTitle>
                 {i18n.t("navigation.laboratory")}
-              </Styled.TypographyTitleD>
+              </Styled.TypographyTitle>
             </Grid>
             <Grid
               item

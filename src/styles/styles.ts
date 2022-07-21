@@ -1,4 +1,4 @@
-import { styled, Grid, Typography, Card as MuiCard } from "@mui/material"
+import { styled, Grid, Typography, Card as MuiCard, Container as MuiContainer } from "@mui/material"
 
 interface Props {
   disableBorder?: boolean;
@@ -49,4 +49,12 @@ export const TitleTypography = styled(Typography)(({ fontSize, fontWeight, fontF
   fontSize: fontSize ?? "24px !important",
   fontWeight: fontWeight || "bold !important",
   fontFamily: fontFamily ?? "inherit"
+}))
+
+interface ContainerProps {
+  mobile: boolean;
+}
+
+export const Container = styled(MuiContainer) (({mobile}:ContainerProps)=>({
+  marginTop: mobile ? "100px" : "140px" 
 }))

@@ -1,8 +1,9 @@
-import { useEffect, Suspense } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { Switch, Route, useLocation } from "react-router-dom";
 import "./default.scss";
 import { checkUserSession } from "./redux/User/user.actions";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 //hoc
 import WithAuth from "./hoc/withAuth";
@@ -53,9 +54,13 @@ const mapState = (state) => ({
   currentUser: state.user.currentUser,
 });
 
+const WatchLabMobile = lazy(() => import("./containers/WatchLabMobile"));
+
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { currentUser } = useSelector(mapState);
 
   useEffect(
@@ -174,13 +179,21 @@ const App = () => {
               <Route
                 exact
                 path={generalEndpoints.WATCH_LABORATORY}
-                render={() => (
-                  <WithAuth>
-                    <WatchLab>
-                      <WatchLaboratory2 />
-                    </WatchLab>
-                  </WithAuth>
-                )}
+                render={() =>
+                  mobile ? (
+                    <WithAuth>
+                      <MainLayout>
+                        <WatchLabMobile />
+                      </MainLayout>
+                    </WithAuth>
+                  ) : (
+                    <WithAuth>
+                      <WatchLab>
+                        <WatchLaboratory2 />
+                      </WatchLab>
+                    </WithAuth>
+                  )
+                }
               />
               <Route
                 exact
