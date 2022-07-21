@@ -1,8 +1,11 @@
+import { lazy } from "react"
 import * as GeneralStyles from "src/styles/styles";
 import { Grid } from "@mui/material";
 import { marginStyles } from "src/styles/constants";
 import DrawerMine from "src/components/Drawer";
 import useWatchMobile from "./useWatchMobile";
+
+const ShredderDrawer = lazy(() => import("./ShredderDrawer"))
 
 const WatchLabMobile = () => {
   const { openShredderDrawer, setOpenShredderDrawer } = useWatchMobile();
@@ -16,7 +19,7 @@ const WatchLabMobile = () => {
         openDrawer={openShredderDrawer}
         setOpenDrawer={setOpenShredderDrawer}
       >
-        Teste
+        <ShredderDrawer setOpenDrawer={setOpenShredderDrawer} />
       </DrawerMine>
       <GeneralStyles.Container mobile>
         <GeneralStyles.Card onClick={() => setOpenShredderDrawer(true)}>
