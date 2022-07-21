@@ -18,12 +18,16 @@ export const Typography = styled(MuiTypography)(() => ({
 
 export const BoxList = styled(MuiBox)(() => ({
   backgroundColor: "lightgray",
-  padding: "10px",
+  padding: "6px",
   borderRadius: "5px",
   cursor: "pointer",
 }));
 
-export const TypographyList = styled(MuiTypography)(() => ({
-  color: "#18161E",
+interface TypographyListProps {
+  color?:string;
+}
+
+export const TypographyList = styled(MuiTypography)(({color}:TypographyListProps) => ({
+  color: color || "#18161E",
   fontSize: "24px !important",
 }));
