@@ -16,8 +16,12 @@ export const Typography = styled(MuiTypography)(() => ({
   color: "#18161E",
 }));
 
-export const BoxList = styled(MuiBox)(() => ({
-  backgroundColor: "lightgray",
+interface BoxListProps {
+  backgroundColor?:string | null;
+}
+
+export const BoxList = styled(MuiBox)(({backgroundColor}:BoxListProps) => ({
+  backgroundColor: backgroundColor || "lightgray",
   padding: "6px",
   borderRadius: "5px",
   cursor: "pointer",
