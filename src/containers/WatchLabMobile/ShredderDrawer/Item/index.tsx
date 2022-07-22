@@ -1,20 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as DrawerStyles from "src/styles/drawerStyles";
 import { Grid, Box } from "@mui/material";
 import { colorWatchParts, whatImage } from "src/Utils/gamyfication";
 
 interface Props {
   item: string;
-  handleAddToList: (item: string, action: "add" | "remove") => void
+  handleAddToList: (item: string, action: "add" | "remove") => void;
+  listShred: string[] | [];
 }
 
-const Item = ({ item, handleAddToList }: Props) => {
+const Item = ({ item, handleAddToList, listShred }: Props) => {
   const [checked, setChecked] = useState<boolean>(false)
+  useEffect(() => {
+    if (listShred.length === 0) setChecked(false)
+  }, [listShred])
+
   return (
     <DrawerStyles.BoxList onClick={() => {
       setChecked(!checked);
       handleAddToList(item, !checked ? "add" : "remove")
-    }} backgroundColor={checked ? "darkGrey" : null}>
+    }} backgroundColor={checked ? "grey" : null}>
       <Grid
         container
         alignItems='center'
@@ -28,7 +33,7 @@ const Item = ({ item, handleAddToList }: Props) => {
           style={{
             width: "40px",
             height: "40px",
-            backgroundColor: checked ? "#00000066" : colorWatchParts(item),
+            backgroundColor: colorWatchParts(item),
             borderRadius: "8px",
             display: "flex",
             justifyContent: "center",

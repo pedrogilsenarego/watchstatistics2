@@ -13,6 +13,7 @@ type Props = {
   children: any;
   fullWidth?: boolean;
   fullHeight?: boolean;
+  noPadding?: boolean;
   id: number;
   clearBackground?: boolean;
   topRadius?: boolean;
@@ -22,6 +23,7 @@ const DrawerMine = ({
   position,
   openDrawer,
   setOpenDrawer,
+  noPadding,
   fullWidth,
   fullHeight,
   children,
@@ -57,7 +59,7 @@ const DrawerMine = ({
         width: fullWidth ? "100vw" : "auto",
         height: fullHeight ? "100vh" : "auto",
         backgroundColor: "#18161E",
-        padding: "10px",
+        padding: noPadding ? "0px" : "10px",
         overflowY: "auto",
         borderRadius: topRadius ? "20px 20px 0 0" : "0 0 0 0",
       }}

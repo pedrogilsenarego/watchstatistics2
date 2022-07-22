@@ -4,7 +4,6 @@ interface Button {
   title?: string;
   icon?: JSX.Element;
   onClick?: () => void;
-
 }
 
 interface Props {
@@ -14,12 +13,17 @@ interface Props {
   paddingLeft?: string;
 }
 
-const MobileBottomAppBar = ({ listButtons, justifyContent, columnGap, paddingLeft }: Props) => {
+const MobileBottomAppBar = ({
+  listButtons,
+  justifyContent,
+  columnGap,
+  paddingLeft,
+}: Props) => {
   return (
     <Grid
       container
-      alignItems="center"
-      justifyContent={justifyContent || 'space-around'}
+      alignItems='center'
+      justifyContent={justifyContent || "space-around"}
       sx={{
         paddingLeft: paddingLeft || "auto",
         width: "100%",

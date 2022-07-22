@@ -190,8 +190,8 @@ export const LinearProgressBarFormat = (value: number) => {
   if (value === undefined) return 0
   if (value < 2) return value * 50;
   if (value < 4) return (value - 1) * 20;
-  if (value < 7) return (value - 3) * (1/3);
-  if (value < 10) return (value - 6) * (1/3);
+  if (value < 7) return (value - 3) * 30;
+  if (value < 10) return (value - 6) * 30;
   if (value < 14) return (value - 9) * 25;
   if (value < 18) return (value - 13) * 25;
   if (value < 22) return (value - 17) * 25;

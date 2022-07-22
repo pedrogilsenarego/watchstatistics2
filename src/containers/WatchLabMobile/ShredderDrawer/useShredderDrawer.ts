@@ -16,7 +16,12 @@ const useShredderDrawer = () => {
         break;
     }
   };
-  return { handleAddToList, listShred };
+
+  const handleClearList = () => {
+    setListShred([])
+  }
+
+  return { handleAddToList, listShred, handleClearList };
 };
 
 export default useShredderDrawer;

@@ -18,6 +18,7 @@ const WatchLabMobile = () => {
         position='bottom'
         openDrawer={openShredderDrawer}
         setOpenDrawer={setOpenShredderDrawer}
+
       >
         <ShredderDrawer setOpenDrawer={setOpenShredderDrawer} />
       </DrawerMine>
