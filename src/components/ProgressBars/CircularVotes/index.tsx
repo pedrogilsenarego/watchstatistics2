@@ -5,12 +5,16 @@ import {
 } from "@mui/material";
 
 interface Props {
+  hideAvgTotal?: boolean;
   avgTotal: number;
   customSize?: number;
   customFontSize?: string;
+  color?: string;
+  secondColor?: string;
+  thickness?: number;
 }
 
-const CircularVotes = ({ avgTotal, customSize, customFontSize }: Props) => {
+const CircularVotes = ({ avgTotal, customSize, customFontSize, color, secondColor, hideAvgTotal, thickness }: Props) => {
   return (
     <Box
       component='div'
@@ -25,13 +29,15 @@ const CircularVotes = ({ avgTotal, customSize, customFontSize }: Props) => {
         variant='determinate'
         value={avgTotal * 10}
         size={customSize ? customSize : 80}
-        style={{ color: "orange", position: "relative", zIndex: 2 }}
+        style={{ color: color || "orange", position: "relative", zIndex: 2 }}
+        thickness={thickness || 4}
       />
       <MuiCircularProgress
         variant='determinate'
         value={100}
         size={customSize ? customSize : 80}
-        style={{ color: "black", position: "absolute", zIndex: 1 }}
+        style={{ color: secondColor || "black", position: "absolute", zIndex: 1 }}
+        thickness={thickness || 4}
       />
       <Box
         component='div'
@@ -46,14 +52,15 @@ const CircularVotes = ({ avgTotal, customSize, customFontSize }: Props) => {
           justifyContent: "center",
         }}
       >
-        <Typography
+        {!hideAvgTotal && (<Typography
           variant='caption'
           component='div'
           color='white'
           style={{ fontSize: customFontSize ?? "16px" }}
         >
           {avgTotal}
-        </Typography>
+        </Typography>)}
+
       </Box>
     </Box>
   );

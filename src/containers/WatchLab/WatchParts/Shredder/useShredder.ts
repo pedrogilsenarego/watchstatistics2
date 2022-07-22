@@ -24,6 +24,7 @@ const useShredder = ({
   const [loadingButton, setLoadingButton] = useState(false);
   const [noPartsError, setNoPartsError] = useState(false);
   const dispatch = useDispatch();
+  
   const handleShredPart = async () => {
     setLoadingButton(true);
     try {

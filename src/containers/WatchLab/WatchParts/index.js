@@ -8,6 +8,7 @@ import useWatchParts from "./useWatchParts";
 import Shredder from "./Shredder";
 import Fusion from "./Fusion";
 import { whatImage } from "src/Utils/gamyfication";
+import { shredderMeter } from "src/Utils/gamyfication";
 
 const WatchParts = ({ data, collectionFull, setBagFull }) => {
   const {
@@ -32,7 +33,6 @@ const WatchParts = ({ data, collectionFull, setBagFull }) => {
     setFusionPrice,
     handleDragStart,
     handleDragEnter,
-    shredderMeter,
     openConfirmDelete,
     setOpenConfirmDelete,
     getStyles,

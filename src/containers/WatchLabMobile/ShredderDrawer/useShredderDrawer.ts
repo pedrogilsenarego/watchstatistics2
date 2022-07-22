@@ -4,8 +4,6 @@ import {removeOneTimeString} from "src/Utils/arrayUtils"
 const useShredderDrawer = () => {
   const [listShred, setListShred] = useState<string[] | []>([]);
 
-  console.log(listShred)
-
   const handleAddToList = (item: string, action: "add" | "remove") => {
     switch (action) {
       case "add":
@@ -18,7 +16,7 @@ const useShredderDrawer = () => {
         break;
     }
   };
-  return { handleAddToList };
+  return { handleAddToList, listShred };
 };
 
 export default useShredderDrawer;

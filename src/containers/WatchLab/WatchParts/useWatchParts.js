@@ -102,14 +102,6 @@ const useWatchParts = ({ setBagFull, data }) => {
     setBagFull(false);
   };
 
-  const shredderMeter = (data) => {
-    var a = 0;
-    for (var i = 0; i < data.length; i++) {
-      a = a + 1 + parseInt(data[i][0]);
-    }
-    return a;
-  };
-
   const dragItem = useRef();
   const dragItemNode = useRef();
 
@@ -215,7 +207,6 @@ const useWatchParts = ({ setBagFull, data }) => {
     setOpenPopupNewWatch,
     modalProduct,
     handleDeleteWatchParts,
-    shredderMeter,
     fusionPrice,
     numberBoosters,
     setNumberBoosters,
