@@ -42,6 +42,15 @@ const WatchLabMobile = () => {
           </Grid>
         </GeneralStyles.Card>
         <GeneralStyles.Card
+          style={{ marginTop: marginStyles.MOBILE_CARD_MARGIN_TOP }}
+        >
+          <Grid container justifyContent='center'>
+            <GeneralStyles.TitleTypography>
+              Boosting Watches
+            </GeneralStyles.TitleTypography>
+          </Grid>
+        </GeneralStyles.Card>
+        <GeneralStyles.Card
           onClick={() => setOpenFusionDrawer(true)}
           style={{ marginTop: marginStyles.MOBILE_CARD_MARGIN_TOP }}
         >
