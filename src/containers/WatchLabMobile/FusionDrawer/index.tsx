@@ -16,9 +16,12 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
     (state) => state.user.currentUser.watchParts
   );
 
+  const cartBooster = useSelector<Redux, any>(
+    (state) => state.cartData.cartBoosters
+  );
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const arrangedFusion = useMemo(() => arrangeFusion(watchParts), [])
-
 
   return (
     <>
@@ -49,7 +52,7 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
           </GeneralStyles.TitleTypography>
           {arrangedFusion.map((item: string[], pos: number) => (
             <Grid item xs={12} key={pos}>
-              <Item item={item} />
+              <Item item={item} pos={pos} cartBooster={cartBooster} />
             </Grid>
           ))}
         </Grid>
