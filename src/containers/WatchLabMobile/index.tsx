@@ -6,9 +6,10 @@ import DrawerMine from "src/components/Drawer";
 import useWatchMobile from "./useWatchMobile";
 
 const ShredderDrawer = lazy(() => import("./ShredderDrawer"))
+const FusionDrawer = lazy(() => import("./FusionDrawer"))
 
 const WatchLabMobile = () => {
-  const { openShredderDrawer, setOpenShredderDrawer } = useWatchMobile();
+  const { openShredderDrawer, setOpenShredderDrawer, openFusionDrawer, setOpenFusionDrawer } = useWatchMobile();
 
   return (
     <>
@@ -22,6 +23,16 @@ const WatchLabMobile = () => {
       >
         <ShredderDrawer setOpenDrawer={setOpenShredderDrawer} />
       </DrawerMine>
+      <DrawerMine
+        id={0}
+        fullHeight
+        position='bottom'
+        openDrawer={openFusionDrawer}
+        setOpenDrawer={setOpenFusionDrawer}
+
+      >
+        <FusionDrawer setOpenDrawer={setOpenFusionDrawer} />
+      </DrawerMine>
       <GeneralStyles.Container mobile>
         <GeneralStyles.Card onClick={() => setOpenShredderDrawer(true)}>
           <Grid container justifyContent='center'>
@@ -31,6 +42,7 @@ const WatchLabMobile = () => {
           </Grid>
         </GeneralStyles.Card>
         <GeneralStyles.Card
+          onClick={() => setOpenFusionDrawer(true)}
           style={{ marginTop: marginStyles.MOBILE_CARD_MARGIN_TOP }}
         >
           <Grid container justifyContent='center'>

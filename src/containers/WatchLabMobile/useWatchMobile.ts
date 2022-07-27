@@ -1,9 +1,11 @@
-import {useState} from "react"
+import { useState } from "react"
 
 const useWatchMobile = () => {
   const [openShredderDrawer, setOpenShredderDrawer] = useState<boolean>(false)
+  const [openFusionDrawer, setOpenFusionDrawer] = useState<boolean>(false)
   return {
-    openShredderDrawer, setOpenShredderDrawer
+    openShredderDrawer, setOpenShredderDrawer,
+    openFusionDrawer, setOpenFusionDrawer
   }
 }
 

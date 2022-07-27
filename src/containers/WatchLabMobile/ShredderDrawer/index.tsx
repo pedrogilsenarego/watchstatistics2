@@ -23,13 +23,13 @@ const ShredderDrawer = ({ setOpenDrawer }: Props) => {
   const watchParts = useSelector<Redux, string[] | []>(
     (state) => state.user.currentUser.watchParts
   );
-  const { handleAddToList, listShred, handleClearList } = useShredderDrawer();
+  const { handleAddToList, listShred, handleClearList, handleShredPart } = useShredderDrawer();
   const shredValue = shredderMeter(listShred) ?? 0;
 
   return (
     <>
       <div style={{ marginLeft: "-10px" }}>
-        <MobileBottomAppBar listButtons={listButtons(handleClearList)} />
+        <MobileBottomAppBar listButtons={listButtons(handleClearList, handleShredPart)} />
       </div>
       <Grid container>
         <Grid
@@ -71,7 +71,7 @@ const ShredderDrawer = ({ setOpenDrawer }: Props) => {
             />
           </Grid>
         </Grid>
-        <Grid container rowSpacing={2} style={{ marginTop: "40px" }}>
+        <Grid container rowSpacing={2} style={{ marginTop: "40px", marginBottom: "80px" }}>
           {watchParts.map((item: string, pos: number) => (
             <Grid item xs={12} key={pos}>
               <Item item={item} handleAddToList={handleAddToList} listShred={listShred} />

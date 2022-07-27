@@ -1,7 +1,7 @@
 import { MdLayersClear } from "react-icons/md";
 import { RiFileShredFill } from "react-icons/ri"
 
-export const listButtons = (handleClearList: () => void) => [
+export const listButtons = (handleClearList: () => void, handleShredPart: () => void) => [
   {
     title: "Clear",
     icon: <MdLayersClear size="1.5em" color="lightGrey" />,
@@ -10,7 +10,7 @@ export const listButtons = (handleClearList: () => void) => [
   {
     title: "Shred",
     icon: <RiFileShredFill size="1.5em" color="lightGrey" />,
-
+    onClick: handleShredPart
   }
 
 ]
