@@ -1,8 +1,10 @@
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Redux } from "src/redux/types";
 import { Grid } from "@mui/material";
 import { RiCloseFill } from "react-icons/ri";
 import { arrangeFusion } from "src/Utils/gamyfication"
+import Item from "./Item"
 
 interface Props {
   setOpenDrawer: (openDrawer: boolean) => void;
@@ -13,9 +15,9 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
     (state) => state.user.currentUser.watchParts
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const arrangedFusion = useMemo(() => arrangeFusion(watchParts), [])
 
-
-  console.log(arrangeFusion(watchParts));
 
   return (
     <>
@@ -39,6 +41,13 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
               color='lightGrey'
             />
           </Grid>
+        </Grid>
+        <Grid container rowSpacing={2} style={{ marginTop: "40px", marginBottom: "80px" }}>
+          {arrangedFusion.map((item: string[], pos: number) => (
+            <Grid item xs={12} key={pos}>
+              <Item />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
     </>
