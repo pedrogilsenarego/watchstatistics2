@@ -14,10 +14,10 @@ const Item = ({ item }: Props) => {
     <>
       <DrawerStyles.BoxList onClick={() => setOpenInfo(!openInfo)}>
         <Grid container justifyContent='space-between'>
-          <DrawerStyles.TypographyList>
+          <DrawerStyles.TypographyList color={item.length < 5 ? "grey" : undefined}>
             {priceWatchParts(item[0])}
           </DrawerStyles.TypographyList>
-          <DrawerStyles.TypographyList>
+          <DrawerStyles.TypographyList color={item.length < 5 ? "grey" : undefined}>
             {item.length}/5
           </DrawerStyles.TypographyList>
         </Grid>
