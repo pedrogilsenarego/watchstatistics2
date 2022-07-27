@@ -199,7 +199,7 @@ export const LinearProgressBarFormat = (value: number) => {
   if (value < 33) return (value - 26) * 17;
 };
 
-export const priceWatchParts = (watchParts: string[]) => {
+export const priceWatchParts = (watchParts: string[] | string) => {
   let newArray = watchParts;
   let fusionPrice = newArray[0];
   if (fusionPrice === "0") return "0-200€";

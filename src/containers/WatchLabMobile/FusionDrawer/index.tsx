@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 import { RiCloseFill } from "react-icons/ri";
 import { arrangeFusion } from "src/Utils/gamyfication"
 import Item from "./Item"
+import * as GeneralStyles from "src/styles/styles"
 
 interface Props {
   setOpenDrawer: (openDrawer: boolean) => void;
@@ -43,9 +44,12 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
           </Grid>
         </Grid>
         <Grid container rowSpacing={2} style={{ marginTop: "40px", marginBottom: "80px" }}>
+          <GeneralStyles.TitleTypography>
+            Watch Fusion
+          </GeneralStyles.TitleTypography>
           {arrangedFusion.map((item: string[], pos: number) => (
             <Grid item xs={12} key={pos}>
-              <Item />
+              <Item item={item} />
             </Grid>
           ))}
         </Grid>

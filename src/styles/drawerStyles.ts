@@ -29,9 +29,10 @@ export const BoxList = styled(MuiBox)(({backgroundColor}:BoxListProps) => ({
 
 interface TypographyListProps {
   color?:string;
+  fontSize?:string;
 }
 
-export const TypographyList = styled(MuiTypography)(({color}:TypographyListProps) => ({
+export const TypographyList = styled(MuiTypography)(({color, fontSize}:TypographyListProps) => ({
   color: color || "#18161E",
-  fontSize: "24px !important",
+  fontSize: fontSize|| "24px !important",
 }));
