@@ -312,3 +312,22 @@ export const shredderMeter = (data:string[]) => {
   }
   return a;
 };
+
+export const arrangeFusion = (watchParts:string[]) => {
+  const oldArray = [...watchParts];
+  const newArray = Array(9) as any;
+
+  for (let i = 0; i < oldArray.length; i++) {
+    const checkIfExist = () => {
+      if (newArray[Array.from(oldArray[i])[0]]) {
+        if (!newArray[Array.from(oldArray[i])[0]].includes(oldArray[i]))
+          return [...newArray[Array.from(oldArray[i])[0]], oldArray[i]];
+        else return [...newArray[Array.from(oldArray[i])[0]]];
+      }
+      return [oldArray[i]];
+    };
+    newArray.splice(Array.from(oldArray[i])[0], 1, checkIfExist());
+  }
+
+  return newArray;
+};

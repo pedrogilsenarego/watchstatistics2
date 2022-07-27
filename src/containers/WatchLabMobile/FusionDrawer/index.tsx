@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux"
-import { Redux } from "src/redux/types"
-import { Grid } from "@mui/material"
+import { useSelector } from "react-redux";
+import { Redux } from "src/redux/types";
+import { Grid } from "@mui/material";
 import { RiCloseFill } from "react-icons/ri";
+import { arrangeFusion } from "src/Utils/gamyfication"
 
 interface Props {
   setOpenDrawer: (openDrawer: boolean) => void;
@@ -13,28 +14,8 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
   );
 
 
-  const arrangeFusion = () => {
-    const oldArray = [...watchParts]
-    const newArray = Array(9) as any
 
-
-    for (let i = 0; i < oldArray.length; i++) {
-
-      const checkIfExist = () => {
-        if (newArray[Array.from(oldArray[i])[0]]) {
-          if (!newArray[Array.from(oldArray[i])[0]].includes(oldArray[i])) return [...newArray[Array.from(oldArray[i])[0]], oldArray[i]]
-          else return [...newArray[Array.from(oldArray[i])[0]]]
-        }
-        return [oldArray[i]]
-      }
-
-      newArray.splice(Array.from(oldArray[i])[0], 1, checkIfExist())
-    }
-
-    return newArray
-  }
-
-  console.log(arrangeFusion())
+  console.log(arrangeFusion(watchParts));
 
   return (
     <>
@@ -48,7 +29,7 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
             zIndex: 20,
             backgroundColor: "#18161E",
             paddingBottom: "10px",
-            paddingTop: "10px"
+            paddingTop: "10px",
           }}
         >
           <Grid item xs={4}>
@@ -59,10 +40,9 @@ const FusionDrawer = ({ setOpenDrawer }: Props) => {
             />
           </Grid>
         </Grid>
-
       </Grid>
     </>
-  )
-}
+  );
+};
 
-export default FusionDrawer 
+export default FusionDrawer;
