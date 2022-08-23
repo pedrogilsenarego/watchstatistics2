@@ -54,6 +54,9 @@ const Item = ({ item, pos, cartBooster }: Props) => {
             <Grid item xs={6}>
               {cartBooster?.[numberParsed] ? renderBooster() : <>"No watch chosen for boosting"</>}
             </Grid>
+            <Grid item xs={12}>
+              Teste
+            </Grid>
           </Grid>
         </DrawerStyles.BoxList>
       )}

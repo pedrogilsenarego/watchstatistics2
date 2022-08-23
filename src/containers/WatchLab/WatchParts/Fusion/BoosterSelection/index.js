@@ -67,6 +67,8 @@ const BoosterSelection = ({
     else setCustomChecked(true);
   }, [boostStatus]);
 
+
+
   return (
     <GeneralStyles.DashedGrid>
       {boosterValue(fusionPrice, cartBoosters) ? (
@@ -86,9 +88,9 @@ const BoosterSelection = ({
               </b>{" "}
               you have{" "}
               <b style={{ color: "orange" }}>
-                {currentUser.boosters
-                  ? currentUser.boosters - numberBoosters
-                  : 0}{" "}
+                {
+                  currentUser?.boosters - numberBoosters
+                  || 0}{" "}
                 Boosters{" "}
               </b>
               left, select how many to use.
@@ -104,6 +106,7 @@ const BoosterSelection = ({
           </Grid>
           <Grid item xs={4}>
             <IncreaseDecreaseButton
+              value={numberBoosters}
               maxValue={currentUser?.boosters}
               setValue={setNumberBoosters}
               incDisabled={maxPercentageBoost}

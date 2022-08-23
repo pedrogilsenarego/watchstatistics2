@@ -23,13 +23,13 @@ const useIncreaseDecreaseButton = ({ setValue, value, maxValue, incDisabled }: P
   }, [incDisabled])
 
   const handleDecrease = () => {
-    setValue(value-1)
+    setValue(value - 1)
     setIncreaseDisabled(false)
 
   };
 
   const handleIncrease = () => {
-    setValue(value+1)
+    setValue(value + 1)
     setDecreaseDisabled(false)
   };
 
